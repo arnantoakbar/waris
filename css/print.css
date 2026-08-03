@@ -1,0 +1,162 @@
+/*
+ * Tampilan cetak / Simpan sebagai PDF.
+ *
+ * Yang dicetak hanya panel hasil. Wizard, navigasi, dan tombol dibuang supaya
+ * dokumennya langsung terbaca sebagai lembar pembagian waris yang bisa dibawa
+ * ke notaris, ustadz, atau Pengadilan Agama.
+ */
+
+@page {
+  size: A4 portrait;
+  margin: 16mm 14mm;
+}
+
+@media print {
+
+  html, body {
+    background: #FFFFFF !important;
+    font-size: 10.5pt;
+    color: #111111;
+  }
+
+  /* cetak warna latar kartu & segmen donut apa adanya */
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  .nav,
+  .footer,
+  .bar-aksi,
+  .no-print,
+  #wizard,
+  .skip-link,
+  .panah,
+  #pesan-galat { display: none !important; }
+
+  #hasil[hidden] { display: block !important; }
+
+  .wrap, .wrap-narrow {
+    max-width: 100% !important;
+    padding: 0 !important;
+  }
+
+  .section { padding: 0 !important; }
+
+  /* Kop dokumen */
+  #hasil::before {
+    content: "Pembagian Warisan Menurut Syariat Islam — dihitung dengan Waris by Flavida";
+    display: block;
+    font-family: var(--font-body);
+    font-size: 8pt;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #A0341A;
+    border-bottom: 1.5pt solid #E8391D;
+    padding-bottom: 6pt;
+    margin-bottom: 14pt;
+  }
+
+  .hasil-kepala-besar { padding: 0 0 14pt !important; text-align: left; }
+  .hasil-kepala-besar img { display: none; }
+  .hasil-kepala-besar h2 { font-size: 22pt; }
+
+  .blok {
+    margin-bottom: 14pt !important;
+    break-inside: avoid;
+  }
+  .blok-judul {
+    font-size: 13pt;
+    margin-bottom: 4pt;
+    border-bottom: 0.5pt solid rgba(232,57,29,0.3);
+    padding-bottom: 3pt;
+  }
+  .blok-ket { font-size: 9pt; margin-bottom: 8pt; }
+
+  /* Ledger */
+  .ledger-baris {
+    animation: none !important;
+    opacity: 1 !important;
+    padding: 4pt 0;
+    break-inside: avoid;
+  }
+  .ledger-baris.hasil .ledger-nilai { font-size: 14pt; }
+
+  /* Donut */
+  .donut-wrap { flex-direction: row !important; align-items: flex-start; gap: 14pt; }
+  .donut { width: 150pt !important; height: 150pt !important; }
+  .donut-legenda { flex: 1; }
+
+  /* Kartu */
+  .hasil-kartu {
+    break-inside: avoid;
+    border: 0.5pt solid rgba(232,57,29,0.25) !important;
+    margin-bottom: 4pt;
+  }
+  .hasil-kepala { padding: 6pt 8pt; min-height: 0; }
+  .hasil-ikon { width: 26pt; height: 26pt; }
+  .hasil-pecahan { font-size: 13pt; }
+  .hasil-detail { display: block !important; padding: 0 8pt 8pt; font-size: 8.5pt; }
+
+  .hasil-grid { gap: 4pt; }
+
+  /* Pohon keluarga.
+     Ukuran simpul sengaja TIDAK diubah di sini — garis penghubungnya digambar
+     dari posisi elemen di layar, jadi mengubah ukurannya akan membuat garis
+     meleset. Seluruh pohon diperkecil sebagai satu kesatuan lewat transform,
+     dengan skala yang dihitung di ui-pohon.js. */
+  .pohon {
+    overflow: visible !important;
+    height: var(--tinggi-cetak, auto);
+    break-inside: avoid;
+  }
+  .pohon-kanvas {
+    transform: scale(var(--skala-cetak, 1));
+    transform-origin: top left;
+  }
+  .pohon-geser,
+  .pohon-bilah,
+  .pohon-ubah,
+  .lembar { display: none !important; }
+  .pohon-legenda { font-size: 8pt; margin-top: 6pt; }
+
+  /* Peringatan wajib ikut tercetak dan tetap menonjol — lembar PDF ini akan
+     beredar lepas dari websitenya. */
+  .awas {
+    break-inside: avoid;
+    border: 1pt solid #E8391D !important;
+    padding: 8pt 10pt;
+    margin-bottom: 12pt;
+  }
+  .awas-kepala { font-size: 12pt; margin-bottom: 4pt; }
+  .awas p { font-size: 9pt; }
+  .awas .btn { display: none !important; }
+
+  /* Tautan di daftar langkah dicetak lengkap dengan alamatnya, supaya masih
+     berguna di atas kertas. */
+  .saran-tautan a::after {
+    content: " (" attr(href) ")";
+    font-weight: 400;
+    color: #555555;
+    font-size: 7.5pt;
+  }
+  .saran-poin li { font-size: 8.5pt; }
+
+  /* Dalil */
+  .dalil-arab { font-size: 14pt; line-height: 1.9; }
+  .dalil-terjemah { font-size: 8.5pt; }
+  .card { padding: 8pt !important; break-inside: avoid; margin-bottom: 5pt; }
+
+  /* Saran */
+  .saran-item { padding: 7pt 9pt; break-inside: avoid; }
+  .saran-judul { font-size: 10.5pt; }
+  .saran-teks { font-size: 8.5pt; }
+
+  .note, .pita { padding: 7pt 9pt; font-size: 8.5pt; break-inside: avoid; }
+
+  /* Kop halaman baru untuk bagian besar */
+  .blok:has(.saran) { break-before: page; }
+
+  a { text-decoration: none; color: inherit; }
+}

@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hitung pembagian waris — Waris by Flavida</title>
+<meta name="description" content="Isi kondisi keluargamu, lihat pembagian warisan sesuai Al-Qur'an dan Sunnah lengkap dengan dalilnya. Dihitung di browser, tidak ada data yang dikirim ke mana pun.">
+<meta name="theme-color" content="#FFF8F0">
+<link rel="icon" href="assets/mark-color.svg">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/app.css">
+<link rel="stylesheet" href="css/print.css" media="print">
+</head>
+<body>
+<a class="skip-link" href="#utama">Lompat ke isi</a>
+
+<script src="js/sprite.js"></script>
+
+<!-- ═══ NAV ═══ -->
+<nav class="nav">
+  <div class="wrap nav-inner">
+    <a class="nav-brand" href="index.html">
+      <img src="assets/mark-color.svg" alt="">
+      <span class="nav-brand-text">Waris<span class="nav-brand-sub">by Flavida</span></span>
+    </a>
+    <button class="btn btn-ghost btn-sm" id="btn-mulai-ulang" type="button">
+      <svg class="ic ic-sm"><use href="#i-ulang"></use></svg> Ulang
+    </button>
+  </div>
+</nav>
+
+<main id="utama">
+
+  <!-- ═══ WIZARD ═══ -->
+  <section class="section" id="wizard" style="padding-top: var(--space-8)">
+    <div class="wrap wrap-narrow">
+      <div class="progres-teks" id="progres-teks">Langkah 1 dari 5</div>
+      <div class="progres" id="progres" role="progressbar" aria-valuemin="1" aria-valuemax="5" aria-valuenow="1"></div>
+
+      <!-- 1. Pewaris -->
+      <div class="langkah aktif" data-langkah="1">
+        <h2>Siapa yang meninggal dunia?</h2>
+        <p class="langkah-ket">Kami perlu tahu ini untuk menentukan apakah yang ditinggalkan
+          seorang suami atau seorang istri. Bagian keduanya berbeda.</p>
+        <div class="pilih-grid" id="pilih-kelamin">
+          <button class="pilih" type="button" data-nilai="L" aria-pressed="false">
+            <svg class="ic" aria-hidden="true"><use href="#i-pria"></use></svg>
+            <span>Laki-laki</span>
+          </button>
+          <button class="pilih" type="button" data-nilai="P" aria-pressed="false">
+            <svg class="ic" aria-hidden="true"><use href="#i-wanita"></use></svg>
+            <span>Perempuan</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- 2. Harta -->
+      <div class="langkah" data-langkah="2">
+        <h2>Berapa total harta peninggalannya?</h2>
+        <p class="langkah-ket">Perkiraan kasar sudah cukup untuk melihat gambarannya.
+          Angkanya bisa kamu ubah kapan saja.</p>
+
+        <div class="uang-field">
+          <label class="uang-label" for="in-total">Total harta peninggalan</label>
+          <div class="uang-box besar">
+            <span class="rp">Rp</span>
+            <input id="in-total" type="text" inputmode="numeric" value="0" data-uang>
+          </div>
+          <span class="uang-ket">Rumah, tanah, tabungan, kendaraan, emas, usaha — semuanya digabung.</span>
+        </div>
+
+        <div class="lipat" id="lipat-rincian">
+          <button class="lipat-tombol" type="button" data-lipat>
+            <svg class="ic ic-sm"><use href="#i-kotak"></use></svg>
+            Rincikan jenis hartanya
+            <span class="lipat-hitung" id="hitung-rincian"></span>
+            <svg class="ic ic-sm panah"><use href="#i-chevron"></use></svg>
+          </button>
+          <div class="lipat-isi">
+            <p class="uang-ket" style="margin: 0 0 var(--space-4)">Opsional. Berguna untuk saran
+              pembagian aset yang tidak bisa dipotong seperti rumah dan tanah. Kalau diisi,
+              total di atas akan mengikuti jumlahnya.</p>
+            <div id="rincian-harta"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. Kewajiban -->
+      <div class="langkah" data-langkah="3">
+        <h2>Ada kewajiban yang harus diselesaikan?</h2>
+        <p class="langkah-ket">Warisan baru boleh dibagi setelah biaya pemakaman ditutup,
+          hutang dilunasi, dan wasiat dilaksanakan. Kosongkan saja kalau tidak ada.</p>
+
+        <div class="uang-field">
+          <label class="uang-label" for="in-biaya">Biaya pengurusan jenazah</label>
+          <div class="uang-box"><span class="rp">Rp</span>
+            <input id="in-biaya" type="text" inputmode="numeric" value="0" data-uang></div>
+        </div>
+
+        <div class="uang-field">
+          <label class="uang-label" for="in-hutang">Hutang pewaris</label>
+          <div class="uang-box"><span class="rp">Rp</span>
+            <input id="in-hutang" type="text" inputmode="numeric" value="0" data-uang></div>
+          <span class="uang-ket">Termasuk kewajiban yang tertunda seperti zakat atau biaya haji yang sudah dinazarkan.</span>
+        </div>
+
+        <div class="uang-field">
+          <label class="uang-label" for="in-wasiat">Wasiat yang ditinggalkan</label>
+          <div class="uang-box"><span class="rp">Rp</span>
+            <input id="in-wasiat" type="text" inputmode="numeric" value="0" data-uang></div>
+          <span class="uang-ket">Untuk orang di luar ahli waris. Otomatis dipotong kalau melebihi batas 1/3.</span>
+        </div>
+
+        <button class="ceklis" type="button" id="ck-harta-bersama" aria-pressed="false">
+          <span class="kotak"><svg class="ic" aria-hidden="true" style="width:14px;height:14px;stroke-width:2.6"><use href="#i-check"></use></svg></span>
+          <span>
+            <span class="ceklis-judul">Harta ini dikumpulkan bersama pasangan selama menikah</span>
+            <span class="ceklis-ket">Kalau ya, separuhnya sudah jadi milik pasangan sejak awal dan
+              bukan warisan. Yang dibagi hanya separuh milik pewaris.</span>
+          </span>
+        </button>
+      </div>
+
+      <!-- 4. Ahli waris -->
+      <div class="langkah" data-langkah="4">
+        <h2>Siapa saja keluarga yang masih hidup?</h2>
+        <p class="langkah-ket">Isi yang masih hidup saat pewaris meninggal. Yang tidak ada,
+          biarkan nol.</p>
+
+        <div class="mode-pilih" role="group" aria-label="Cara mengisi ahli waris">
+          <button type="button" data-mode="daftar" aria-pressed="true">
+            <svg class="ic ic-sm" aria-hidden="true"><use href="#i-daftar"></use></svg>
+            Daftar
+          </button>
+          <button type="button" data-mode="pohon" aria-pressed="false">
+            <svg class="ic ic-sm" aria-hidden="true"><use href="#i-pohon"></use></svg>
+            Pohon keluarga
+          </button>
+        </div>
+
+        <div id="mode-daftar">
+          <div id="grup-utama"></div>
+          <div id="grup-lain"></div>
+        </div>
+
+        <div id="mode-pohon" hidden>
+          <p class="langkah-ket">Susun keluarganya seperti aslinya. Ketuk <strong>Tambah</strong>
+            untuk menambah anggota, dan ketuk seseorang untuk mengubahnya atau menambahkan
+            anak di bawahnya.</p>
+          <div class="pita" style="margin-bottom: var(--space-5)">
+            <svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg>
+            <span>Cara ini lebih akurat untuk keluarga yang rumit. Cucu ditambahkan dari dalam
+              kartu anaknya, keponakan dari dalam kartu saudaranya — jadi hubungannya tidak
+              perlu ditebak.</span>
+          </div>
+          <div class="pohon" id="pohon-isian"></div>
+          <p class="pohon-geser">Geser ke samping untuk melihat seluruh keluarga.</p>
+          <div class="pohon-legenda">
+            <span><i class="l-pewaris"></i> Pewaris</span>
+            <span><i class="l-ada"></i> Calon ahli waris</span>
+            <span><i class="l-bukan"></i> Bukan ahli waris</span>
+            <span><i class="l-wafat"></i> Sudah wafat</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5. Kondisi khusus -->
+      <div class="langkah" data-langkah="5">
+        <h2>Ada kondisi khusus?</h2>
+        <p class="langkah-ket">Semuanya opsional. Kalau ada yang kamu centang, kami akan
+          menambahkan catatan penting di hasil nanti.</p>
+        <div id="kondisi-khusus"></div>
+        <div class="pita" style="margin-top: var(--space-6)">
+          <svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg>
+          <span>Semua isian kamu diproses di dalam browser ini saja. Tidak ada satu pun data
+            yang dikirim, disimpan, atau dicatat di mana pun.</span>
+        </div>
+      </div>
+
+      <div class="aksi-langkah">
+        <button class="btn btn-ghost" type="button" id="btn-mundur" aria-label="Kembali ke langkah sebelumnya">
+          <svg class="ic ic-sm"><use href="#i-kiri"></use></svg>
+        </button>
+        <button class="btn btn-primary" type="button" id="btn-maju">
+          Lanjut <svg class="ic ic-sm"><use href="#i-kanan"></use></svg>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ HASIL ═══ -->
+  <section id="hasil" hidden aria-live="polite"></section>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap footer-inner">
+    <div>
+      <p class="footer-note">
+        Waris adalah alat bantu hitung, <strong>bukan sumber utama</strong>. Verifikasi dan
+        validasikan hasilnya kepada ustadz atau ulama terdekat, atau ke Pengadilan Agama,
+        sebelum dipakai membagi harta yang sebenarnya.
+      </p>
+      <p style="margin-top: var(--space-4)">
+        <a href="rujukan.html">Rujukan Al-Qur'an &amp; Hadits</a>
+      </p>
+    </div>
+    <div class="footer-made">Made with 🔥 in Indonesia</div>
+  </div>
+</footer>
+
+<script src="js/faraid/fraction.js"></script>
+<script src="js/faraid/heirs.js"></script>
+<script src="js/faraid/hijab.js"></script>
+<script src="js/faraid/shares.js"></script>
+<script src="js/faraid/ashabah.js"></script>
+<script src="js/faraid/special.js"></script>
+<script src="js/faraid/estate.js"></script>
+<script src="js/faraid/solve.js"></script>
+<script src="js/dalil.js"></script>
+<script src="js/khi.js"></script>
+<script src="js/advice.js"></script>
+<script src="js/export.js"></script>
+<script src="js/keluarga.js"></script>
+<script src="js/ui-pohon.js"></script>
+<script src="js/ui-pohon-edit.js"></script>
+<script src="js/ui-result.js"></script>
+<script src="js/ui-wizard.js"></script>
+</body>
+</html>

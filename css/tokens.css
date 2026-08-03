@@ -1,0 +1,286 @@
+/*
+ * Flavida Design System — Colors & Typography
+ * v1.0 · 2026 · flavida.co
+ *
+ * Fonts: Bricolage Grotesque (display) + DM Sans (body).
+ * The @import below loads them automatically. For best performance, ALSO add a
+ * matching <link rel="preconnect"> to fonts.gstatic.com in your <head>.
+ */
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=DM+Sans:wght@300;400;500;600;700&display=swap');
+
+/* ═══════════════════════════════════════════════════
+   BASE COLOR TOKENS
+   Inspired by Delonix regia (Flame Tree) flower
+   ═══════════════════════════════════════════════════ */
+:root {
+
+  /* Primary palette */
+  --color-flame:      #E8391D;   /* Flame Red — CTAs, primary accent */
+  --color-orange:     #F5760A;   /* Fire Orange — gradient mid, hover */
+  --color-amber:      #F5A623;   /* Amber Gold — highlights, sparkles */
+
+  /* Neutrals */
+  --color-ember:      #A0341A;   /* Ember — wordmark ink on light bg (warm dark) */
+  --color-charcoal:   #111111;   /* Deep Charcoal — text, dark sections, B&W print utility */
+  --color-mid:        #555555;   /* Mid Grey — body text, secondary */
+  --color-light:      #999999;   /* Light Grey — captions, placeholders */
+
+  /* Warm backgrounds */
+  --color-cream:      #FFF8F0;   /* Warm Cream — primary bg (60%) */
+  --color-parchment:  #FFF0E0;   /* Parchment — secondary bg, cards */
+
+  /* Accent */
+  --color-green:      #1B5E3B;   /* Canopy Green — from Delonix leaves, accent only */
+
+  /* Semantic surface tokens */
+  --color-border:     rgba(232, 57, 29, 0.15);
+  --color-border-hover: rgba(232, 57, 29, 0.3);
+  --color-shadow:     rgba(232, 57, 29, 0.08);
+  --color-shadow-hover: rgba(232, 57, 29, 0.2);
+  --color-flame-tint-sm: rgba(232, 57, 29, 0.06);
+  --color-flame-tint-md: rgba(232, 57, 29, 0.12);
+  --color-flame-tint-lg: rgba(232, 57, 29, 0.2);
+
+
+  /* ═══════════════════════════════════════════════════
+     SEMANTIC COLOR ALIASES
+     ═══════════════════════════════════════════════════ */
+
+  /* Backgrounds */
+  --bg-primary:       var(--color-cream);
+  --bg-secondary:     var(--color-parchment);
+  --bg-dark:          var(--color-charcoal);
+  --bg-accent:        var(--color-flame);
+
+  /* Foregrounds */
+  --fg-logo:          var(--color-ember);     /* Wordmark / logo ink on light bg */
+  --fg1:              var(--color-charcoal);  /* Primary text */
+  --fg2:              var(--color-mid);       /* Secondary text */
+  --fg3:              var(--color-light);     /* Tertiary text / captions */
+  --fg-accent:        var(--color-flame);     /* Accent / links */
+  --fg-on-dark:       #FFF8F0;               /* Text on dark backgrounds */
+  --fg-on-dark-dim:   rgba(255, 248, 240, 0.6);
+
+  /* Borders */
+  --border-default:   var(--color-border);
+  --border-hover:     var(--color-border-hover);
+
+  /* Shadows */
+  --shadow-card:      0 4px 32px var(--color-shadow);
+  --shadow-card-hover: 0 8px 32px var(--color-shadow-hover);
+  --shadow-btn:       0 8px 24px rgba(232, 57, 29, 0.3);
+  --shadow-mascot:    drop-shadow(0 8px 24px rgba(232, 57, 29, 0.2));
+
+  /* Interactive states */
+  --color-focus:      var(--color-flame);
+  --color-success:    #22C55E;
+  --color-error:      #E8391D;
+
+
+  /* ═══════════════════════════════════════════════════
+     TYPOGRAPHY TOKENS
+     ═══════════════════════════════════════════════════ */
+
+  /* Font families */
+  --font-display:   'Bricolage Grotesque', 'Arial Black', sans-serif;
+  --font-body:      'DM Sans', 'Helvetica Neue', Arial, sans-serif;
+  --font-mono:      'Courier New', Courier, monospace;
+
+  /* Font weights */
+  --fw-light:       300;
+  --fw-regular:     400;
+  --fw-medium:      500;
+  --fw-semibold:    600;
+  --fw-bold:        700;
+  --fw-extrabold:   800;
+
+  /* Type scale — fluid where appropriate */
+  --text-display-xl: clamp(42px, 7vw, 84px);    /* Hero headline */
+  --text-display-l:  clamp(32px, 4.5vw, 52px);  /* Section titles */
+  --text-display-m:  clamp(28px, 4vw, 48px);    /* CTA banners */
+  --text-heading-l:  clamp(24px, 3vw, 36px);    /* Card/section h3 */
+  --text-heading-m:  clamp(18px, 2.5vw, 24px);  /* h4 */
+  --text-heading-s:  20px;                        /* h5 */
+  --text-body-xl:    20px;                        /* Lead paragraph */
+  --text-body:       16px;                        /* Standard body */
+  --text-body-s:     15px;                        /* Secondary body */
+  --text-body-xs:    14px;                        /* Card body */
+  --text-label:      13px;                        /* Labels, nav */
+  --text-caption:    12px;                        /* Small labels */
+  --text-micro:      11px;                        /* Tags, overlines */
+
+  /* Line heights */
+  --lh-display:     1.05;
+  --lh-heading:     1.1;
+  --lh-lead:        1.65;
+  --lh-body:        1.7;
+  --lh-ui:          1.5;
+  --lh-tight:       1.15;
+
+  /* Letter spacing */
+  --ls-tight:       -0.04em;  /* Display XL */
+  --ls-snug:        -0.025em; /* Section titles */
+  --ls-normal:      0;
+  --ls-wide:        0.04em;   /* Nav, small labels */
+  --ls-wider:       0.08em;   /* Tags */
+  --ls-widest:      0.12em;   /* Overlines */
+
+
+  /* ═══════════════════════════════════════════════════
+     SPACING SCALE (4px base)
+     ═══════════════════════════════════════════════════ */
+
+  --space-1:   4px;
+  --space-2:   8px;
+  --space-3:   12px;
+  --space-4:   16px;
+  --space-5:   20px;
+  --space-6:   24px;
+  --space-7:   28px;
+  --space-8:   32px;
+  --space-10:  40px;
+  --space-12:  48px;
+  --space-14:  56px;
+  --space-16:  64px;
+  --space-20:  80px;
+  --space-24:  96px;
+
+
+  /* ═══════════════════════════════════════════════════
+     BORDER RADIUS
+     ═══════════════════════════════════════════════════ */
+
+  --radius-pill:    100px;   /* Buttons, tags, badges */
+  --radius-card:    20px;    /* Cards */
+  --radius-cta:     28px;    /* CTA banners */
+  --radius-icon:    14px;    /* Card icon boxes */
+  --radius-input:   12px;    /* Form inputs */
+  --radius-sm:      8px;     /* Small items */
+  --radius-xs:      6px;     /* Tiny chips */
+
+
+  /* ═══════════════════════════════════════════════════
+     ANIMATION / TRANSITIONS
+     ═══════════════════════════════════════════════════ */
+
+  --ease-default:   ease;
+  --duration-fast:  0.15s;
+  --duration-base:  0.2s;
+  --duration-slow:  0.35s;
+
+  /* Standard transition shorthand */
+  --transition-base:  transform var(--duration-base) var(--ease-default),
+                      box-shadow var(--duration-base) var(--ease-default),
+                      border-color var(--duration-base) var(--ease-default),
+                      background var(--duration-base) var(--ease-default),
+                      color var(--duration-fast) var(--ease-default);
+}
+
+
+/* ═══════════════════════════════════════════════════
+   SEMANTIC TYPOGRAPHY CLASSES
+   ═══════════════════════════════════════════════════ */
+
+.flav-display-xl {
+  font-family: var(--font-display);
+  font-size: var(--text-display-xl);
+  font-weight: var(--fw-extrabold);
+  line-height: var(--lh-display);
+  letter-spacing: var(--ls-tight);
+}
+
+.flav-display-l {
+  font-family: var(--font-display);
+  font-size: var(--text-display-l);
+  font-weight: var(--fw-extrabold);
+  line-height: var(--lh-heading);
+  letter-spacing: var(--ls-snug);
+}
+
+.flav-display-m {
+  font-family: var(--font-display);
+  font-size: var(--text-display-m);
+  font-weight: var(--fw-extrabold);
+  line-height: var(--lh-heading);
+  letter-spacing: var(--ls-snug);
+}
+
+.flav-heading-l {
+  font-family: var(--font-display);
+  font-size: var(--text-heading-l);
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-heading);
+  letter-spacing: var(--ls-snug);
+}
+
+.flav-heading-m {
+  font-family: var(--font-display);
+  font-size: var(--text-heading-m);
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-tight);
+}
+
+.flav-body-lead {
+  font-family: var(--font-body);
+  font-size: var(--text-body-xl);
+  font-weight: var(--fw-light);
+  line-height: var(--lh-lead);
+  color: var(--fg2);
+}
+
+.flav-body {
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  font-weight: var(--fw-regular);
+  line-height: var(--lh-body);
+  color: var(--fg2);
+}
+
+.flav-body-sm {
+  font-family: var(--font-body);
+  font-size: var(--text-body-xs);
+  font-weight: var(--fw-regular);
+  line-height: var(--lh-body);
+  color: var(--fg2);
+}
+
+.flav-label {
+  font-family: var(--font-body);
+  font-size: var(--text-micro);
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--ls-widest);
+  text-transform: uppercase;
+  color: var(--fg-accent);
+}
+
+.flav-caption {
+  font-family: var(--font-body);
+  font-size: var(--text-caption);
+  font-weight: var(--fw-regular);
+  color: var(--fg3);
+}
+
+/* ═══════════════════════════════════════════════════
+   UTILITY GRADIENTS
+   ═══════════════════════════════════════════════════ */
+
+.flav-gradient-flame {
+  background: linear-gradient(135deg, var(--color-amber), var(--color-orange), var(--color-flame));
+}
+
+.flav-gradient-text {
+  background: linear-gradient(135deg, var(--color-amber), var(--color-flame));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.flav-glow-hero {
+  background:
+    radial-gradient(ellipse 60% 50% at 50% 100%, rgba(245,118,10,0.12), transparent 70%),
+    radial-gradient(ellipse 40% 40% at 80% 20%, rgba(232,57,29,0.06), transparent 60%);
+}
+
+.flav-glow-dark {
+  background: radial-gradient(ellipse 60% 80% at 50% 110%, rgba(232,57,29,0.35), transparent 65%);
+}

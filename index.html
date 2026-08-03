@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Waris — hitung pembagian warisan sesuai Al-Qur'an dan Sunnah</title>
+<meta name="description" content="Aturan waris dalam Islam sudah baku. Isi kondisi keluargamu, lihat pembagiannya dalam bentuk diagram lengkap dengan dalilnya. Gratis, tanpa daftar, dihitung di browser kamu sendiri.">
+<meta name="theme-color" content="#FFF8F0">
+<link rel="icon" href="assets/mark-color.svg">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+<a class="skip-link" href="#utama">Lompat ke isi</a>
+
+<script src="js/sprite.js"></script>
+
+<nav class="nav">
+  <div class="wrap nav-inner">
+    <a class="nav-brand" href="index.html">
+      <img src="assets/mark-color.svg" alt="">
+      <span class="nav-brand-text">Waris<span class="nav-brand-sub">by Flavida</span></span>
+    </a>
+    <span style="display:flex;align-items:center;gap:var(--space-4)">
+      <a href="rujukan.html" style="font-size:var(--text-label);font-weight:var(--fw-semibold);color:var(--fg2)">Rujukan</a>
+      <a class="btn btn-dark btn-sm" href="hitung.html">Mulai Hitung</a>
+    </span>
+  </div>
+</nav>
+
+<main id="utama">
+
+  <!-- ═══ HERO ═══ -->
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-grid">
+        <div>
+          <img class="hero-flav" src="assets/flav-confident.svg" alt="">
+          <span class="overline">Pembagian waris menurut syariat Islam</span>
+          <h1>Warisan itu sudah ada aturannya.</h1>
+          <p class="hero-lead">
+            Aturannya turun lengkap dalam Al-Qur'an dan dijelaskan Rasulullah, dan sejak itu
+            tidak pernah berubah. Yang sulit cuma menghitungnya. Bagian itu kami yang kerjakan.
+          </p>
+          <div class="btn-row">
+            <a class="btn btn-primary" href="hitung.html">
+              Mulai Hitung <svg class="ic ic-sm" aria-hidden="true"><use href="#i-kanan"></use></svg>
+            </a>
+            <a class="btn btn-ghost" href="#cara">Lihat cara kerjanya</a>
+          </div>
+          <p class="flav-caption" style="margin-top: var(--space-5)">
+            Gratis · Tanpa daftar · Tidak ada data yang dikirim ke mana pun
+          </p>
+        </div>
+
+        <!-- Animasi demo -->
+        <div class="demo" id="demo" aria-label="Contoh simulasi pembagian warisan">
+          <div class="demo-tahap" id="demo-tahap"></div>
+          <div id="demo-isi" style="min-height: 268px"></div>
+          <div class="demo-titik" id="demo-titik"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ MASALAHNYA ═══ -->
+  <section class="section" id="cara" style="background: var(--bg-secondary)">
+    <div class="wrap">
+      <div style="max-width: 62ch; margin-bottom: var(--space-12)">
+        <span class="overline">Kenapa kami membuat ini</span>
+        <h2 class="flav-display-l">Aturannya jelas, tapi hampir tidak ada yang berani menghitung sendiri.</h2>
+        <p class="flav-body" style="margin-top: var(--space-5)">
+          Bagiannya berupa pecahan yang harus dijumlahkan, ada aturan siapa menutup siapa, dan
+          ada belasan kasus khusus yang penyelesaiannya berbeda dari pola biasa. Akibatnya
+          keluarga menunda pembagian bertahun-tahun, atau membaginya dengan cara "yang penting
+          semua rata" — yang justru tidak sesuai aturan. Padahal jawabannya pasti, bukan
+          soal selera.
+        </p>
+      </div>
+
+      <div class="grid grid-3">
+        <div class="card card-hover">
+          <div class="card-icon"><svg class="ic" aria-hidden="true" style="color:var(--color-flame)"><use href="#i-kitab"></use></svg></div>
+          <h3 class="flav-heading-m">Satu-satunya sumber: wahyu</h3>
+          <p class="flav-body-sm" style="margin-top: var(--space-3)">
+            Setiap angka yang keluar bisa kamu telusuri ke ayat atau haditsnya, ditampilkan
+            lengkap dengan teks Arab dan terjemahannya. Kami tidak menambahkan satu aturan pun.
+          </p>
+        </div>
+        <div class="card card-hover">
+          <div class="card-icon"><svg class="ic" aria-hidden="true" style="color:var(--color-flame)"><use href="#i-hati"></use></svg></div>
+          <h3 class="flav-heading-m">Tidak ada data yang keluar</h3>
+          <p class="flav-body-sm" style="margin-top: var(--space-3)">
+            Semua perhitungan berjalan di dalam HP atau laptop kamu. Tidak ada server yang
+            menerima jumlah hartamu, tidak ada yang disimpan, tidak ada yang dicatat.
+          </p>
+        </div>
+        <div class="card card-hover">
+          <div class="card-icon"><svg class="ic" aria-hidden="true" style="color:var(--color-flame)"><use href="#i-timbangan"></use></svg></div>
+          <h3 class="flav-heading-m">Sampai kasus yang rumit</h3>
+          <p class="flav-body-sm" style="margin-top: var(--space-3)">
+            23 jenis ahli waris, aturan hijab, 'aul, radd, sampai kasus bernama seperti
+            Umariyyatain dan Akdariyyah. Diuji dengan puluhan kasus baku dari kitab faraid.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ LANGKAH ═══ -->
+  <section class="section">
+    <div class="wrap">
+      <span class="overline">Tiga langkah</span>
+      <h2 class="flav-display-l" style="max-width: 18ch">Dari bingung ke angka yang jelas dalam dua menit.</h2>
+
+      <div class="grid grid-3" style="margin-top: var(--space-10)">
+        <div class="card">
+          <span class="badge">Langkah 1</span>
+          <h3 class="flav-heading-m" style="margin-top: var(--space-4)">Isi kondisi keluarga</h3>
+          <p class="flav-body-sm" style="margin-top: var(--space-3)">
+            Siapa yang meninggal, berapa hartanya, ada hutang atau tidak, dan siapa saja
+            keluarga yang masih hidup. Cukup ketuk tombol tambah dan kurang.
+          </p>
+        </div>
+        <div class="card">
+          <span class="badge">Langkah 2</span>
+          <h3 class="flav-heading-m" style="margin-top: var(--space-4)">Lihat pembagiannya</h3>
+          <p class="flav-body-sm" style="margin-top: var(--space-3)">
+            Diagram lingkaran, pecahan, dan nominal rupiah per orang. Ketuk siapa pun untuk
+            melihat alasannya dan dalilnya. Ubah isian, hasilnya ikut berubah seketika.
+          </p>
+        </div>
+        <div class="card">
+          <span class="badge">Langkah 3</span>
+          <h3 class="flav-heading-m" style="margin-top: var(--space-4)">Bawa hasilnya</h3>
+          <p class="flav-body-sm" style="margin-top: var(--space-3)">
+            Simpan sebagai PDF atau gambar untuk dibagikan ke keluarga, atau dibawa ke ustadz,
+            notaris, dan Pengadilan Agama sebagai bahan awal.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ BATASAN — jujur di depan ═══ -->
+  <section class="section" style="padding-top: 0">
+    <div class="wrap wrap-narrow">
+      <div class="note">
+        <div class="note-title">Yang perlu kamu tahu sebelum memakai</div>
+        <p>Kalkulator ini menerapkan fiqh mazhab Syafi'i, yang dipakai mayoritas muslim
+        Indonesia. Kalau perkaranya dibawa ke Pengadilan Agama, di beberapa titik hakim bisa
+        memutuskan berbeda karena memakai Kompilasi Hukum Islam — dan bedanya kami tunjukkan
+        langsung di halaman hasil, bukan disembunyikan.</p>
+        <p style="margin-top: var(--space-3)">Beberapa keadaan sengaja tidak kami hitung
+        otomatis karena butuh penilaian manusia: anak yang masih dalam kandungan, ahli waris
+        yang hilang, dan kerabat jauh di luar 23 ahli waris utama. Untuk kasus seperti itu kami
+        akan bilang terus terang dan menyarankan kamu ke ustadz atau Pengadilan Agama, bukan
+        menebak-nebak.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ CTA ═══ -->
+  <section class="section" style="padding-top: 0">
+    <div class="wrap">
+      <div style="background: var(--bg-dark); border-radius: var(--radius-cta); padding: var(--space-12) var(--space-6); text-align: center; position: relative; overflow: hidden">
+        <div style="position:absolute; inset:0; background: radial-gradient(ellipse 60% 80% at 50% 110%, rgba(232,57,29,0.35), transparent 65%)"></div>
+        <div style="position: relative">
+          <img src="assets/flav-happy.svg" alt="" style="width: 84px; margin: 0 auto var(--space-5)">
+          <h2 class="flav-display-m" style="color: var(--fg-on-dark); max-width: 20ch; margin-inline: auto">
+            Keluarga berhak tahu haknya, bukan menebak-nebak.
+          </h2>
+          <p style="color: var(--fg-on-dark-dim); margin: var(--space-5) auto var(--space-8); max-width: 46ch">
+            Hitung sekarang, gratis. Kalau nanti perlu dibawa ke ustadz atau Pengadilan Agama,
+            hasilnya tinggal disimpan jadi PDF.
+          </p>
+          <a class="btn btn-primary" href="hitung.html">
+            Mulai Hitung <svg class="ic ic-sm" aria-hidden="true"><use href="#i-kanan"></use></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap footer-inner">
+    <div>
+      <p class="footer-note">
+        Waris adalah alat bantu hitung, <strong>bukan sumber utama</strong>. Verifikasi dan
+        validasikan hasilnya kepada ustadz atau ulama terdekat, atau ke Pengadilan Agama,
+        sebelum dipakai membagi harta yang sebenarnya.
+      </p>
+      <p style="margin-top: var(--space-4)">
+        <a href="rujukan.html">Rujukan Al-Qur'an &amp; Hadits</a>
+      </p>
+    </div>
+    <div class="footer-made">Made with 🔥 in Indonesia</div>
+  </div>
+</footer>
+
+<script src="js/faraid/fraction.js"></script>
+<script src="js/faraid/heirs.js"></script>
+<script src="js/faraid/hijab.js"></script>
+<script src="js/faraid/shares.js"></script>
+<script src="js/faraid/ashabah.js"></script>
+<script src="js/faraid/special.js"></script>
+<script src="js/faraid/estate.js"></script>
+<script src="js/faraid/solve.js"></script>
+<script src="js/ui-landing.js"></script>
+</body>
+</html>
