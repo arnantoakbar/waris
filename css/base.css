@@ -132,7 +132,7 @@ h1, h2, h3, h4 {
   align-items: center;
   justify-content: space-between;
   gap: var(--space-4);
-  height: 60px;
+  min-height: 60px;
 }
 
 .nav-brand {
@@ -141,17 +141,28 @@ h1, h2, h3, h4 {
   gap: var(--space-3);
   text-decoration: none;
   min-height: 44px;
+  flex: none;
 }
 .nav-brand:hover { text-decoration: none; }
 
-.nav-brand img { width: 30px; height: 30px; }
+.nav-brand img { width: 30px; height: 30px; flex: none; }
 
-.nav-brand-text {
+/* "Waris" dan "by Flavida" dipisah sebagai dua elemen dengan jarak sendiri.
+   Sebelumnya keduanya menempel jadi terbaca "Warisby Flavida". */
+.nav-brand-teks {
+  display: flex;
+  align-items: baseline;
+  gap: 7px;
+  white-space: nowrap;
+}
+
+.nav-brand-nama {
   font-family: var(--font-display);
   font-size: 18px;
   font-weight: var(--fw-extrabold);
   letter-spacing: var(--ls-snug);
   color: var(--fg-logo);
+  line-height: 1.1;
 }
 
 .nav-brand-sub {
@@ -160,7 +171,100 @@ h1, h2, h3, h4 {
   font-weight: var(--fw-regular);
   color: var(--fg3);
   letter-spacing: 0;
-  margin-left: 2px;
+  line-height: 1.1;
+}
+
+/* ── Tombol hamburger ─────────────────────────────── */
+
+.nav-toggle {
+  width: 44px; height: 44px;
+  display: grid;
+  place-items: center;
+  border-radius: var(--radius-sm);
+  flex: none;
+  color: var(--fg1);
+}
+.nav-toggle:hover { background: rgba(17, 17, 17, 0.05); }
+
+.nav-toggle-garis,
+.nav-toggle-garis::before,
+.nav-toggle-garis::after {
+  display: block;
+  width: 20px; height: 2px;
+  border-radius: 2px;
+  background: currentColor;
+  transition: transform var(--duration-base) var(--ease-default),
+              opacity var(--duration-fast) var(--ease-default);
+}
+.nav-toggle-garis { position: relative; }
+.nav-toggle-garis::before,
+.nav-toggle-garis::after {
+  content: "";
+  position: absolute;
+  left: 0;
+}
+.nav-toggle-garis::before { top: -6px; }
+.nav-toggle-garis::after  { top: 6px; }
+
+.nav-toggle[aria-expanded="true"] .nav-toggle-garis { background: transparent; }
+.nav-toggle[aria-expanded="true"] .nav-toggle-garis::before { transform: translateY(6px) rotate(45deg); }
+.nav-toggle[aria-expanded="true"] .nav-toggle-garis::after  { transform: translateY(-6px) rotate(-45deg); }
+
+/* ── Menu ─────────────────────────────────────────── */
+
+.nav-menu {
+  display: flex;
+  align-items: center;
+  gap: var(--space-5);
+}
+
+.nav-menu a:not(.btn),
+.nav-menu button:not(.btn) {
+  font-size: var(--text-label);
+  font-weight: var(--fw-semibold);
+  color: var(--fg2);
+  text-decoration: none;
+  white-space: nowrap;
+}
+.nav-menu a:not(.btn):hover { color: var(--color-flame); text-decoration: none; }
+.nav-menu a[aria-current="page"] { color: var(--color-flame); }
+
+/* Di layar sempit menu disembunyikan di balik hamburger, supaya logo punya
+   ruang penuh dan tidak terpotong. */
+@media (max-width: 767px) {
+  .nav-menu {
+    position: absolute;
+    left: 0; right: 0;
+    top: 100%;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 2px;
+    padding: var(--space-3) var(--space-5) var(--space-5);
+    background: var(--bg-primary);
+    border-bottom: 1px solid var(--border-default);
+    box-shadow: 0 12px 24px rgba(17, 17, 17, 0.06);
+  }
+  .nav-menu[hidden] { display: none; }
+  .nav-menu a:not(.btn),
+  .nav-menu button:not(.btn) {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    min-height: 48px;
+    padding: 0 var(--space-2);
+    border-radius: var(--radius-sm);
+    font-size: var(--text-body-s);
+    text-align: left;
+    width: 100%;
+  }
+  .nav-menu .btn { margin-top: var(--space-3); width: 100%; }
+  .nav { position: relative; }
+}
+
+@media (min-width: 768px) {
+  .nav-toggle { display: none; }
+  .nav-menu[hidden] { display: flex; }
+  .nav-brand-nama { font-size: 20px; }
 }
 
 /* ═══════════════════════════════════════════════════

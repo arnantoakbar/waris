@@ -203,6 +203,28 @@
     return data.tinggi * skala;
   }
 
+  /** Judul bagian bergaya overline. */
+  function judulBagian(ctx, teks, y) {
+    ctx.fillStyle = FLAME;
+    ctx.font = '700 17px "DM Sans", sans-serif';
+    ctx.fillText(teks.toUpperCase(), PAD, y);
+    return y + 30;
+  }
+
+  /** Paragraf biasa, otomatis dibungkus. */
+  function paragraf(ctx, teks, y, opsi) {
+    opsi = opsi || {};
+    ctx.fillStyle = opsi.warna || MID;
+    ctx.font = (opsi.font || '400 17px "DM Sans", sans-serif');
+    var lebar = opsi.lebar || (W - PAD * 2);
+    var kiri = opsi.kiri || PAD;
+    pecahBaris(ctx, teks, lebar).forEach(function (b) {
+      ctx.fillText(b, kiri, y);
+      y += opsi.jarak || 25;
+    });
+    return y;
+  }
+
   /** Bungkus teks ke beberapa baris sesuai lebar maksimum. */
   function pecahBaris(ctx, teks, lebarMaks) {
     var kata = teks.split(' ');
@@ -238,8 +260,20 @@
       : 0;
 
     var tinggiDonut = penerima.length ? 500 : 0;
-    var tinggi = 340 + tinggiDonut + tinggiPohon + penerima.length * 78 +
-      (terhalang.length ? 70 + terhalang.length * 42 : 0) + 520;
+    var saran = root.Advice ? root.Advice.langkah(hasil) : [];
+    var catatanKHI = root.KHI ? root.KHI.catatan(hasil) : [];
+    var dalilDipakai = root.Dalil ? root.Dalil.kumpulkan(hasil) : [];
+
+    // Tingginya dilebihkan lalu dipotong ke isi sebenarnya di akhir fungsi.
+    var tinggi = 340 + tinggiDonut + tinggiPohon +
+      hasil.harta.langkah.length * 46 + 160 +
+      penerima.length * 78 +
+      (terhalang.length ? 70 + terhalang.length * 42 : 0) +
+      (hasil.perhitungan.langkah.length + 2) * 90 +
+      catatanKHI.length * 190 +
+      saran.reduce(function (t, x) { return t + 120 + (x.poin || []).length * 62 +
+        (x.tautan || []).length * 26; }, 0) +
+      dalilDipakai.length * 60 + 900;
 
     var skala = 2; // untuk layar beresolusi tinggi
     var kanvas = document.createElement('canvas');
@@ -276,6 +310,36 @@
     ctx.font = '400 22px "DM Sans", sans-serif';
     ctx.fillText('Harta siap dibagi: ' + rp(hasil.harta.tirkah) + '   ·   ' + tanggalHariIni(), PAD, y);
     y += 56;
+
+    // ── Rincian harta ────────────────────────────────────────────
+    y = judulBagian(ctx, 'Harta yang boleh dibagi', y);
+    hasil.harta.langkah.forEach(function (l) {
+      var akhir = l.tipe === 'hasil';
+      ctx.fillStyle = akhir ? CHARCOAL : MID;
+      ctx.font = (akhir ? '700 19px' : '400 18px') + ' "DM Sans", sans-serif';
+      ctx.fillText(l.label, PAD, y);
+
+      ctx.textAlign = 'right';
+      if (akhir) {
+        ctx.fillStyle = FLAME;
+        ctx.font = '800 24px "Bricolage Grotesque", "Arial Black", sans-serif';
+      } else {
+        ctx.fillStyle = l.nilai < 0 ? FLAME : CHARCOAL;
+        ctx.font = '600 18px "DM Sans", sans-serif';
+      }
+      ctx.fillText((l.nilai < 0 ? '\u2212 ' : '') + rp(Math.abs(l.nilai)), W - PAD, y);
+      ctx.textAlign = 'left';
+
+      y += 12;
+      ctx.strokeStyle = akhir ? 'rgba(17,17,17,0.55)' : 'rgba(232,57,29,0.15)';
+      ctx.lineWidth = akhir ? 2 : 1;
+      ctx.beginPath();
+      ctx.moveTo(PAD, y);
+      ctx.lineTo(W - PAD, y);
+      ctx.stroke();
+      y += 28;
+    });
+    y += 24;
 
     // ── Donut ────────────────────────────────────────────────────
     if (penerima.length) {
@@ -372,6 +436,107 @@
         ctx.fillText(a.label + (a.jumlah > 1 ? ' ×' + a.jumlah : '') + ' — terhalang oleh ' + oleh, PAD, y);
         y += 42;
       });
+    }
+
+    // ── Cara menghitungnya ───────────────────────────────────────
+    if (penerima.length && hasil.perhitungan.asalMasalahAkhir) {
+      y += 24;
+      y = judulBagian(ctx, 'Cara menghitungnya', y);
+      y = paragraf(ctx, 'Harta dibayangkan dipotong menjadi ' +
+        hasil.perhitungan.asalMasalahAkhir + ' bagian sama besar, lalu dibagikan begini:', y);
+      y += 8;
+      ctx.fillStyle = CHARCOAL;
+      ctx.font = '600 17px "DM Sans", sans-serif';
+      y = paragraf(ctx, penerima.map(function (a) {
+        return a.label + ' = ' + a.siham + '/' + hasil.perhitungan.asalMasalahAkhir;
+      }).join('   \u00b7   '), y, { font: '600 17px "DM Sans", sans-serif', warna: CHARCOAL });
+      hasil.perhitungan.langkah.forEach(function (l) {
+        y += 12;
+        y = paragraf(ctx, l, y);
+      });
+      y += 30;
+    }
+
+    // ── Peringatan & catatan dari perhitungan ────────────────────
+    var semuaCatatan = (hasil.peringatan || []).concat(hasil.catatan || []);
+    if (semuaCatatan.length) {
+      y = judulBagian(ctx, 'Yang perlu diperhatikan', y);
+      semuaCatatan.forEach(function (c) {
+        ctx.fillStyle = FLAME;
+        ctx.font = '700 20px "DM Sans", sans-serif';
+        ctx.fillText('\u2022', PAD, y);
+        y = paragraf(ctx, c.teks, y, { kiri: PAD + 22, lebar: W - PAD * 2 - 22 });
+        y += 14;
+      });
+      y += 16;
+    }
+
+    // ── Catatan Pengadilan Agama ─────────────────────────────────
+    if (catatanKHI.length) {
+      y = judulBagian(ctx, 'Kalau dibawa ke Pengadilan Agama', y);
+      catatanKHI.forEach(function (c) {
+        ctx.fillStyle = CHARCOAL;
+        ctx.font = '700 19px "DM Sans", sans-serif';
+        ctx.fillText(c.judul, PAD, y);
+        y += 26;
+        y = paragraf(ctx, c.teks, y);
+        ctx.fillStyle = LIGHT;
+        ctx.font = '400 15px "DM Sans", sans-serif';
+        ctx.fillText(c.pasal, PAD, y);
+        y += 34;
+      });
+      y += 12;
+    }
+
+    // ── Langkah selanjutnya ──────────────────────────────────────
+    if (saran.length) {
+      y = judulBagian(ctx, 'Langkah selanjutnya', y);
+      saran.forEach(function (s2, i) {
+        ctx.fillStyle = CHARCOAL;
+        ctx.font = '700 20px "DM Sans", sans-serif';
+        ctx.fillText((i + 1) + '. ' + s2.judul, PAD, y);
+        y += 28;
+        y = paragraf(ctx, s2.teks, y, { kiri: PAD + 26, lebar: W - PAD * 2 - 26 });
+        (s2.poin || []).forEach(function (p) {
+          y += 6;
+          ctx.strokeStyle = 'rgba(232,57,29,0.4)';
+          ctx.lineWidth = 1.4;
+          ctx.strokeRect(PAD + 26, y - 12, 13, 13);
+          y = paragraf(ctx, p.teks, y, {
+            kiri: PAD + 50, lebar: W - PAD * 2 - 50,
+            font: '400 16px "DM Sans", sans-serif', jarak: 23
+          });
+        });
+        (s2.tautan || []).forEach(function (t) {
+          y += 4;
+          ctx.fillStyle = '#A0341A';
+          ctx.font = '600 15px "DM Sans", sans-serif';
+          ctx.fillText(t.label + ' \u2014 ' + t.url, PAD + 26, y);
+          y += 22;
+        });
+        y += 22;
+      });
+    }
+
+    // ── Sumber rujukan ───────────────────────────────────────────
+    if (dalilDipakai.length) {
+      y = judulBagian(ctx, 'Sumber aturannya', y);
+      dalilDipakai.forEach(function (d) {
+        ctx.fillStyle = CHARCOAL;
+        ctx.font = '600 16px "DM Sans", sans-serif';
+        ctx.fillText('\u2022 ' + d.rujukan, PAD, y);
+        y += 23;
+        if (d.ringkas) {
+          y = paragraf(ctx, d.ringkas, y, {
+            kiri: PAD + 20, lebar: W - PAD * 2 - 20,
+            font: '400 15px "DM Sans", sans-serif', jarak: 21, warna: LIGHT
+          });
+        }
+        y += 10;
+      });
+      y = paragraf(ctx, 'Teks Arab dan terjemahan lengkapnya ada di halaman Rujukan ' +
+        '(rujukan.html) pada situs ini.', y, { font: '400 15px "DM Sans", sans-serif', warna: LIGHT });
+      y += 20;
     }
 
     // ── Kaki ─────────────────────────────────────────────────────

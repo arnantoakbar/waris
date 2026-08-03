@@ -22,9 +22,23 @@
   <div class="wrap nav-inner">
     <a class="nav-brand" href="index.html">
       <img src="assets/mark-color.svg" alt="">
-      <span class="nav-brand-text">Waris<span class="nav-brand-sub">by Flavida</span></span>
+      <span class="nav-brand-teks">
+        <span class="nav-brand-nama">Waris</span>
+        <span class="nav-brand-sub">by Flavida</span>
+      </span>
     </a>
-    <a class="btn btn-dark btn-sm" href="hitung.html">Mulai Hitung</a>
+
+    <button class="nav-toggle" type="button" id="nav-toggle"
+            aria-expanded="false" aria-controls="nav-menu" aria-label="Buka menu">
+      <span class="nav-toggle-garis"></span>
+    </button>
+
+    <div class="nav-menu" id="nav-menu">
+      <a href="index.html">Beranda</a>
+      <a href="hitung.html">Hitung</a>
+      <a href="rujukan.html">Rujukan</a>
+      <a class="btn btn-dark btn-sm" href="hitung.html">Mulai Hitung</a>
+    </div>
   </div>
 </nav>
 
@@ -188,5 +202,6 @@
   document.getElementById('daftar-rujukan').innerHTML = html;
 })();
 </script>
+<script src="js/ui-nav.js"></script>
 </body>
 </html>

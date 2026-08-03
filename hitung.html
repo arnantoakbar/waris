@@ -23,11 +23,25 @@
   <div class="wrap nav-inner">
     <a class="nav-brand" href="index.html">
       <img src="assets/mark-color.svg" alt="">
-      <span class="nav-brand-text">Waris<span class="nav-brand-sub">by Flavida</span></span>
+      <span class="nav-brand-teks">
+        <span class="nav-brand-nama">Waris</span>
+        <span class="nav-brand-sub">by Flavida</span>
+      </span>
     </a>
-    <button class="btn btn-ghost btn-sm" id="btn-mulai-ulang" type="button">
-      <svg class="ic ic-sm"><use href="#i-ulang"></use></svg> Ulang
+
+    <button class="nav-toggle" type="button" id="nav-toggle"
+            aria-expanded="false" aria-controls="nav-menu" aria-label="Buka menu">
+      <span class="nav-toggle-garis"></span>
     </button>
+
+    <div class="nav-menu" id="nav-menu">
+      <a href="index.html">Beranda</a>
+      <a href="hitung.html">Hitung</a>
+      <a href="rujukan.html">Rujukan</a>
+      <button class="btn btn-ghost btn-sm" id="btn-mulai-ulang" type="button">
+        <svg class="ic ic-sm" aria-hidden="true"><use href="#i-ulang"></use></svg> Ulangi dari awal
+      </button>
+    </div>
   </div>
 </nav>
 
@@ -58,31 +72,41 @@
 
       <!-- 2. Harta -->
       <div class="langkah" data-langkah="2">
-        <h2>Berapa total harta peninggalannya?</h2>
+        <h2>Berapa harta peninggalannya?</h2>
         <p class="langkah-ket">Perkiraan kasar sudah cukup untuk melihat gambarannya.
           Angkanya bisa kamu ubah kapan saja.</p>
 
-        <div class="uang-field">
-          <label class="uang-label" for="in-total">Total harta peninggalan</label>
-          <div class="uang-box besar">
-            <span class="rp">Rp</span>
-            <input id="in-total" type="text" inputmode="numeric" value="0" data-uang>
-          </div>
-          <span class="uang-ket">Rumah, tanah, tabungan, kendaraan, emas, usaha — semuanya digabung.</span>
+        <div class="mode-pilih" role="group" aria-label="Cara mengisi harta">
+          <button type="button" data-mode-harta="total" aria-pressed="true">
+            <svg class="ic ic-sm" aria-hidden="true"><use href="#i-dompet"></use></svg>
+            Total saja
+          </button>
+          <button type="button" data-mode-harta="rincian" aria-pressed="false">
+            <svg class="ic ic-sm" aria-hidden="true"><use href="#i-kotak"></use></svg>
+            Rincikan per jenis
+          </button>
         </div>
 
-        <div class="lipat" id="lipat-rincian">
-          <button class="lipat-tombol" type="button" data-lipat>
-            <svg class="ic ic-sm"><use href="#i-kotak"></use></svg>
-            Rincikan jenis hartanya
-            <span class="lipat-hitung" id="hitung-rincian"></span>
-            <svg class="ic ic-sm panah"><use href="#i-chevron"></use></svg>
-          </button>
-          <div class="lipat-isi">
-            <p class="uang-ket" style="margin: 0 0 var(--space-4)">Opsional. Berguna untuk saran
-              pembagian aset yang tidak bisa dipotong seperti rumah dan tanah. Kalau diisi,
-              total di atas akan mengikuti jumlahnya.</p>
-            <div id="rincian-harta"></div>
+        <div id="harta-total">
+          <div class="uang-field">
+            <label class="uang-label" for="in-total">Total harta peninggalan</label>
+            <div class="uang-box besar">
+              <span class="rp">Rp</span>
+              <input id="in-total" type="text" inputmode="numeric" value="0" data-uang>
+            </div>
+            <span class="uang-ket">Rumah, tanah, tabungan, kendaraan, emas, usaha — semuanya
+              digabung jadi satu angka.</span>
+          </div>
+        </div>
+
+        <div id="harta-rincian" hidden>
+          <p class="langkah-ket">Isi yang ada saja. Totalnya dijumlahkan otomatis, dan rincian
+            ini dipakai untuk memberi saran soal aset yang tidak bisa dipotong seperti rumah
+            dan tanah.</p>
+          <div id="rincian-harta"></div>
+          <div class="rincian-total">
+            <span>Total harta peninggalan</span>
+            <strong id="rincian-jumlah">Rp 0</strong>
           </div>
         </div>
       </div>
@@ -155,14 +179,14 @@
               kartu anaknya, keponakan dari dalam kartu saudaranya — jadi hubungannya tidak
               perlu ditebak.</span>
           </div>
-          <div class="pohon" id="pohon-isian"></div>
-          <p class="pohon-geser">Geser ke samping untuk melihat seluruh keluarga.</p>
           <div class="pohon-legenda">
             <span><i class="l-pewaris"></i> Pewaris</span>
             <span><i class="l-ada"></i> Calon ahli waris</span>
             <span><i class="l-bukan"></i> Bukan ahli waris</span>
             <span><i class="l-wafat"></i> Sudah wafat</span>
           </div>
+          <div class="pohon" id="pohon-isian"></div>
+          <p class="pohon-geser">Geser ke samping untuk melihat seluruh keluarga.</p>
         </div>
       </div>
 
@@ -180,8 +204,11 @@
       </div>
 
       <div class="aksi-langkah">
+        <a class="btn btn-ghost" id="btn-beranda" href="index.html" aria-label="Kembali ke beranda">
+          <svg class="ic ic-sm" aria-hidden="true"><use href="#i-kiri"></use></svg>
+        </a>
         <button class="btn btn-ghost" type="button" id="btn-mundur" aria-label="Kembali ke langkah sebelumnya">
-          <svg class="ic ic-sm"><use href="#i-kiri"></use></svg>
+          <svg class="ic ic-sm" aria-hidden="true"><use href="#i-kiri"></use></svg>
         </button>
         <button class="btn btn-primary" type="button" id="btn-maju">
           Lanjut <svg class="ic ic-sm"><use href="#i-kanan"></use></svg>
@@ -228,5 +255,6 @@
 <script src="js/ui-pohon-edit.js"></script>
 <script src="js/ui-result.js"></script>
 <script src="js/ui-wizard.js"></script>
+<script src="js/ui-nav.js"></script>
 </body>
 </html>

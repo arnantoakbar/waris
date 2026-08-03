@@ -20,13 +20,14 @@
 
   var state = {
     keluarga: K.baru(null),
-    harta: { total: 0, rincian: {}, biayaJenazah: 0, hutang: 0, wasiat: 0, hartaBersama: false },
+    harta: { total: 0, totalManual: 0, rincian: {}, biayaJenazah: 0, hutang: 0, wasiat: 0, hartaBersama: false },
     kondisi: {}
   };
 
   var langkahKini = 1;
   var sudahAdaHasil = false;
   var modeIsian = 'daftar';   // 'daftar' | 'pohon'
+  var modeHarta = 'total';    // 'total'  | 'rincian'
 
   var $ = function (s, r) { return (r || document).querySelector(s); };
   var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
@@ -94,29 +95,57 @@
     });
   }
 
-  function sinkronTotal() {
-    var jml = Object.keys(state.harta.rincian).reduce(function (t, k) {
+  /*
+   * Mode harta: "total saja" atau "rincikan per jenis".
+   *
+   * Sebelumnya keduanya bercampur — user mengisi total, lalu menemukan kolom
+   * rincian, dan begitu diisi totalnya tertimpa serta terkunci sampai seluruh
+   * rincian dikosongkan. Sekarang keduanya dipisah tegas dan bisa ditukar
+   * kapan saja tanpa kehilangan angka.
+   */
+  function jumlahRincian() {
+    return Object.keys(state.harta.rincian).reduce(function (t, k) {
       return t + (state.harta.rincian[k] || 0);
     }, 0);
-    var terisi = Object.keys(state.harta.rincian).filter(function (k) {
-      return state.harta.rincian[k] > 0;
-    }).length;
-
-    $('#hitung-rincian').textContent = terisi ? String(terisi) : '';
-    var ket = inTotal.closest('.uang-field').querySelector('.uang-ket');
-
-    if (jml > 0) {
-      state.harta.total = jml;
-      inTotal.value = formatRibuan(jml);
-      inTotal.readOnly = true;
-      ket.textContent = 'Dihitung otomatis dari rincian di bawah. Kosongkan rinciannya kalau mau isi total langsung.';
-    } else {
-      inTotal.readOnly = false;
-      ket.textContent = 'Rumah, tanah, tabungan, kendaraan, emas, usaha — semuanya digabung.';
-    }
   }
 
-  pasangInputUang(inTotal, function (n) { if (!inTotal.readOnly) state.harta.total = n; });
+  function setModeHarta(mode) {
+    if (mode === modeHarta) return;
+
+    if (mode === 'rincian') {
+      // Angka total yang sudah diketik tidak dibuang, hanya tidak dipakai
+      // selama mode rincian aktif.
+      state.harta.totalManual = state.harta.total;
+    } else {
+      // Kembali ke total: bawa hasil penjumlahan rincian sebagai nilai awal
+      // yang bisa langsung disunting.
+      var jml = jumlahRincian();
+      if (jml > 0) state.harta.totalManual = jml;
+      state.harta.rincian = {};
+      $$('#rincian-harta input').forEach(function (el) { el.value = '0'; });
+      inTotal.value = formatRibuan(state.harta.totalManual || 0);
+    }
+
+    modeHarta = mode;
+    $$('[data-mode-harta]').forEach(function (b) {
+      b.setAttribute('aria-pressed', String(b.dataset.modeHarta === modeHarta));
+    });
+    $('#harta-total').hidden = modeHarta !== 'total';
+    $('#harta-rincian').hidden = modeHarta !== 'rincian';
+    sinkronTotal();
+  }
+
+  function sinkronTotal() {
+    if (modeHarta === 'rincian') {
+      state.harta.total = jumlahRincian();
+      $('#rincian-jumlah').textContent = 'Rp ' + formatRibuan(state.harta.total);
+    } else {
+      state.harta.total = state.harta.totalManual || 0;
+    }
+    hitungUlangKalauPerlu();
+  }
+
+  pasangInputUang(inTotal, function (n) { state.harta.totalManual = n; sinkronTotal(); });
   pasangInputUang($('#in-biaya'), function (n) { state.harta.biayaJenazah = n; });
   pasangInputUang($('#in-hutang'), function (n) { state.harta.hutang = n; });
   pasangInputUang($('#in-wasiat'), function (n) { state.harta.wasiat = n; });
@@ -254,6 +283,11 @@
     hitungUlangKalauPerlu();
   });
 
+  document.addEventListener('click', function (e) {
+    var t = e.target.closest('[data-mode-harta]');
+    if (t) setModeHarta(t.dataset.modeHarta);
+  });
+
   // ── Pindah mode isian ────────────────────────────────────────────
   document.addEventListener('click', function (e) {
     var t = e.target.closest('[data-mode]');
@@ -325,7 +359,10 @@
     }).join('');
     $('#progres').setAttribute('aria-valuenow', String(langkahKini));
     $('#progres-teks').textContent = 'Langkah ' + langkahKini + ' dari ' + TOTAL_LANGKAH;
-    $('#btn-mundur').style.visibility = langkahKini === 1 ? 'hidden' : 'visible';
+    // Di langkah pertama tidak ada langkah sebelumnya, tapi tombolnya tetap ada
+    // demi konsistensi tata letak — hanya berubah jadi jalan keluar ke beranda.
+    $('#btn-beranda').hidden = langkahKini !== 1;
+    $('#btn-mundur').hidden = langkahKini === 1;
     $('#btn-maju').innerHTML = langkahKini === TOTAL_LANGKAH
       ? 'Lihat Hasil ' + ikon('i-timbangan', 'ic-sm')
       : 'Lanjut ' + ikon('i-kanan', 'ic-sm');
@@ -383,6 +420,14 @@
     return hasil;
   }
 
+  /*
+   * Begitu hasil tampil, form disembunyikan.
+   *
+   * Sebelumnya form tetap terpampang dan hasilnya menempel di bawahnya, jadi
+   * halaman terasa belum selesai dan user tidak tahu harus melihat ke mana.
+   * Sekarang hanya hasil yang tampil, dengan dua jalan kembali: menyunting
+   * isian terakhir, atau mengulang dari awal.
+   */
   function tampilkanHasil() {
     // Panel dimunculkan LEBIH DULU baru diisi. Pohon keluarga menggambar garis
     // penghubungnya dari posisi asli elemen, dan elemen di dalam panel yang
@@ -391,7 +436,15 @@
     el.hidden = false;
     window.UIResult.render(hitung(), { onUbahPohon: saatPohonHasilBerubah });
     sudahAdaHasil = true;
-    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    document.getElementById('wizard').hidden = true;
+    window.scrollTo({ top: 0, behavior: 'auto' });
+  }
+
+  /** Kembali menyunting: form dimunculkan lagi di langkah terakhir. */
+  function kembaliKeIsian() {
+    document.getElementById('wizard').hidden = false;
+    document.getElementById('hasil').hidden = true;
+    keLangkah(TOTAL_LANGKAH);
   }
 
   /* Pohon di halaman hasil ikut bisa disunting. Setelah diubah, seluruh hasil
@@ -408,22 +461,26 @@
   }
 
   document.addEventListener('click', function (e) {
-    if (e.target.closest('#btn-ubah-input')) {
-      document.getElementById('wizard').scrollIntoView({ behavior: 'smooth' });
-      keLangkah(4);
-    }
+    if (e.target.closest('#btn-ubah-input')) kembaliKeIsian();
   });
 
   // ── Reset ────────────────────────────────────────────────────────
   $('#btn-mulai-ulang').addEventListener('click', function () {
     state = {
       keluarga: K.baru(null),
-      harta: { total: 0, rincian: {}, biayaJenazah: 0, hutang: 0, wasiat: 0, hartaBersama: false },
+      harta: { total: 0, totalManual: 0, rincian: {}, biayaJenazah: 0, hutang: 0, wasiat: 0, hartaBersama: false },
       kondisi: {}
     };
     sudahAdaHasil = false;
+    modeHarta = 'total';
+    document.getElementById('wizard').hidden = false;
     document.getElementById('hasil').hidden = true;
     document.getElementById('hasil').innerHTML = '';
+    $$('[data-mode-harta]').forEach(function (b) {
+      b.setAttribute('aria-pressed', String(b.dataset.modeHarta === 'total'));
+    });
+    $('#harta-total').hidden = false;
+    $('#harta-rincian').hidden = true;
     $$('#pilih-kelamin .pilih').forEach(function (x) { x.setAttribute('aria-pressed', 'false'); });
     ['#in-total', '#in-biaya', '#in-hutang', '#in-wasiat'].forEach(function (s) { $(s).value = '0'; });
     $('#ck-harta-bersama').setAttribute('aria-pressed', 'false');

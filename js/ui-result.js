@@ -49,13 +49,30 @@
   // ═══════════════════════════════════════════════════════════════
   // Ledger harta
   // ═══════════════════════════════════════════════════════════════
+  /*
+   * Rincian harta.
+   *
+   * Semua angka diletakkan pada satu kolom rata kanan supaya pengurangannya
+   * terbaca menurun sampai ke hasil akhir — seperti membaca struk. Keterangan
+   * panjang tidak lagi menyela di antara baris, melainkan disembunyikan di
+   * balik tombol info yang bisa diketuk (ini juga jalan di layar sentuh, yang
+   * tidak punya hover).
+   */
   function renderLedger(hasil, diam) {
     return '<div class="ledger">' + hasil.harta.langkah.map(function (l, i) {
       var delay = diam ? 0 : i * 90;
+      var idKet = 'ket-' + l.id;
       return '<div class="ledger-baris ' + l.tipe + '" style="animation-delay:' + delay + 'ms">' +
-        '<span class="ledger-label">' + l.label + '</span>' +
-        '<span class="ledger-nilai">' + (l.nilai < 0 ? '− ' : '') + rp(Math.abs(l.nilai)) + '</span>' +
-        (l.ket ? '<span class="ledger-ket">' + l.ket + '</span>' : '') +
+        '<span class="ledger-label">' + l.label +
+        (l.ket
+          ? '<button class="ledger-info" type="button" data-ket="' + idKet + '" ' +
+            'aria-expanded="false" aria-controls="' + idKet + '" ' +
+            'aria-label="Penjelasan ' + l.label + '" title="' + l.ket.replace(/"/g, '&quot;') + '">' +
+            ikon('i-info', 'ic-sm') + '</button>'
+          : '') +
+        '</span>' +
+        '<span class="ledger-nilai">' + (l.nilai < 0 ? '\u2212\u00a0' : '') + rp(Math.abs(l.nilai)) + '</span>' +
+        (l.ket ? '<div class="ledger-ket" id="' + idKet + '" hidden>' + l.ket + '</div>' : '') +
         '</div>';
     }).join('') + '</div>';
   }
@@ -200,12 +217,34 @@
     return baris.join('');
   }
 
+  /*
+   * Bagian appendix dijadikan akordeon.
+   *
+   * Tiga blok terakhir (catatan Pengadilan Agama, sumber dalil, langkah
+   * lanjutan) semuanya panjang. Kalau terbuka semua, halaman hasil jadi
+   * gulungan tanpa ujung dan orang kehilangan jejak. Judul plus ringkasan satu
+   * baris membuat mereka bisa memilih mana yang mau dibaca.
+   */
+  var nomorApx = 0;
+
+  function appendix(judul, ringkas, isi, terbuka) {
+    var id = 'apx-' + (++nomorApx);
+    return '<div class="apx' + (terbuka ? ' buka' : '') + '">' +
+      '<button class="apx-kepala" type="button" data-apx aria-expanded="' + !!terbuka +
+      '" aria-controls="' + id + '">' +
+      '<span class="apx-teks"><span class="apx-judul">' + judul + '</span>' +
+      '<span class="apx-ringkas">' + ringkas + '</span></span>' +
+      ikon('i-chevron', 'panah') + '</button>' +
+      '<div class="apx-isi" id="' + id + '">' + isi + '</div></div>';
+  }
+
   // ═══════════════════════════════════════════════════════════════
   // Render utama
   // ═══════════════════════════════════════════════════════════════
   function render(hasil, opts) {
     opts = opts || {};
     var wadah = document.getElementById('hasil');
+    nomorApx = 0;
 
     if (!hasil.valid) {
       root.UIResult.hasilTerakhir = hasil;
@@ -234,7 +273,7 @@
       '<h2 class="flav-display-l">Beginilah warisannya dibagi</h2>' +
       '<p class="flav-body" style="margin-top:var(--space-4)">' +
       (penerima.length
-        ? 'Dari ' + rp(hasil.harta.tirkah) + ' harta yang siap dibagi, ' +
+        ? 'Dari <strong>' + rp(hasil.harta.tirkah) + '</strong> harta yang siap dibagi, ' +
           ringkasSusunan(hasil) + ' mendapat bagian sesuai ketetapan Al-Qur’an dan Sunnah.'
         : 'Tidak ada harta yang bisa dibagi.') +
       '</p></div>';
@@ -276,8 +315,8 @@
         'padahal orangnya berbeda. Digambar begini, bedanya langsung kelihatan — perhatikan ' +
         'dari siapa masing-masing orang menurun. <strong>Ketuk siapa pun untuk mengubahnya</strong>, ' +
         'dan seluruh perhitungan di halaman ini ikut menyesuaikan.</p>' +
-        '<div class="pohon" id="pohon-hasil"></div>' +
-        '<p class="pohon-geser">Geser ke samping untuk melihat seluruh keluarga.</p>' +
+        // Keterangan warna ditaruh di ATAS pohon supaya bisa dibaca sambil
+        // melihat gambarnya, tanpa perlu menggulir ke bawah dulu.
         '<div class="pohon-legenda">' +
         '<span><i class="l-pewaris"></i> Pewaris (yang meninggal)</span>' +
         '<span><i class="l-menerima"></i> Dapat bagian</span>' +
@@ -285,7 +324,10 @@
         '<span><i class="l-kosong"></i> Berhak, tidak kebagian</span>' +
         '<span><i class="l-bukan"></i> Bukan ahli waris</span>' +
         '<span><i class="l-wafat"></i> Sudah wafat</span>' +
-        '</div></div></div>';
+        '</div>' +
+        '<div class="pohon" id="pohon-hasil"></div>' +
+        '<p class="pohon-geser">Geser ke samping untuk melihat seluruh keluarga.</p>' +
+        '</div></div>';
 
       // ── Kartu rinci ──────────────────────────────────────────────
       html += '<div class="wrap wrap-narrow"><div class="blok">' +
@@ -335,27 +377,27 @@
       html += '</div></div>';
     }
 
-    // ── Catatan KHI ────────────────────────────────────────────────
+    // ── Appendix: dibuka satu per satu sesuai kebutuhan ───────────
+    var apx = '';
+
     if (catatanKHI.length) {
-      html += '<div class="wrap wrap-narrow"><div class="blok">' +
-        '<h3 class="blok-judul">Kalau dibawa ke Pengadilan Agama</h3>' +
-        '<p class="blok-ket">Hasil di atas mengikuti fiqh mazhab Syafi’i. Pengadilan Agama ' +
+      apx += appendix('Kalau dibawa ke Pengadilan Agama',
+        catatanKHI.length + ' hal yang bisa diputuskan berbeda oleh hakim',
+        '<p class="blok-ket">Hasil di atas mengikuti fiqh mazhab Syafi\u2019i. Pengadilan Agama ' +
         'memakai Kompilasi Hukum Islam, yang di beberapa titik memutuskan berbeda. Ini bukan ' +
-        'pertentangan — keduanya sah ditempuh, dan yang perlu kamu tahu adalah bedanya di mana.</p>' +
+        'pertentangan \u2014 keduanya sah ditempuh, dan yang perlu kamu tahu adalah bedanya di mana.</p>' +
         catatanKHI.map(function (c) {
           return '<div class="note note-green" style="margin-bottom:var(--space-3)">' +
             '<div class="note-title">' + c.judul + '</div>' + c.teks +
             '<div class="dalil-sumber" style="margin-top:var(--space-3)">' + c.pasal + '</div></div>';
-        }).join('') + '</div></div>';
+        }).join(''), true);
     }
 
-    // ── Dalil ──────────────────────────────────────────────────────
-    html += '<div class="wrap wrap-narrow"><div class="blok">' +
-      '<h3 class="blok-judul">Sumber aturannya</h3>' +
-      '<p class="blok-ket">Semua angka di halaman ini berasal dari sumber berikut. Tidak ada ' +
-      'satu pun aturan yang kami tambahkan sendiri. Daftar lengkapnya — termasuk yang tidak ' +
-      'terpakai di kasus ini — ada di <a href="rujukan.html" target="_blank" rel="noopener">' +
-      'halaman Rujukan</a>.</p>' +
+    apx += appendix('Sumber aturannya',
+      dalilDipakai.length + ' ayat, hadits, dan putusan sahabat yang dipakai di kasus ini',
+      '<p class="blok-ket">Tidak ada satu pun aturan yang kami tambahkan sendiri. Daftar ' +
+      'lengkapnya \u2014 termasuk yang tidak terpakai di kasus ini \u2014 ada di ' +
+      '<a href="rujukan.html" target="_blank" rel="noopener">halaman Rujukan</a>.</p>' +
       dalilDipakai.map(function (d) {
         return '<div class="card" style="margin-bottom:var(--space-3)">' +
           '<div class="dalil-rujukan">' + d.rujukan + '</div>' +
@@ -365,11 +407,14 @@
           (d.ringkas ? '<p class="flav-body-sm" style="margin-top:var(--space-3)">' + d.ringkas + '</p>' : '') +
           (d.khilafiyah ? '<div class="note" style="margin-top:var(--space-3)">' + d.khilafiyah + '</div>' : '') +
           '</div>';
-      }).join('') + '</div></div>';
+      }).join(''), !catatanKHI.length);
 
-    // ── Langkah selanjutnya ────────────────────────────────────────
-    html += '<div class="wrap wrap-narrow"><div class="blok">' +
-      '<h3 class="blok-judul">Langkah selanjutnya</h3>' +
+    var wajib = saran.filter(function (x) { return x.tingkat === 'wajib'; }).length;
+    var totalPoin = saran.reduce(function (t, x) { return t + (x.poin || []).length; }, 0);
+
+    apx += appendix('Langkah selanjutnya',
+      saran.length + ' langkah, ' + totalPoin + ' hal yang perlu dikerjakan \u2014 ' +
+      wajib + ' di antaranya wajib didahulukan',
       '<p class="blok-ket">Tahu angkanya baru setengah jalan. Ini yang perlu dilakukan supaya ' +
       'pembagiannya benar-benar tuntas dan tidak jadi perkara di kemudian hari.</p>' +
       '<div class="saran">' + saran.map(function (s, i) {
@@ -392,7 +437,18 @@
       '<p class="flav-caption" style="margin-top:var(--space-5)">Alamat situs dan prosedur di ' +
       'atas bisa berubah, dan syarat administrasi kadang berbeda antar daerah. Pastikan lagi ' +
       'ke kantor terkait sebelum berangkat.</p>' +
-      '</div></div>';
+      '<p class="flav-caption" style="margin-top:var(--space-5)">Alamat situs dan prosedur di ' +
+      'atas bisa berubah, dan syarat administrasi kadang berbeda antar daerah. Pastikan lagi ' +
+      'ke kantor terkait sebelum berangkat.</p>', false);
+
+    // Bungkus seluruh appendix beserta kendali buka/tutup semuanya
+    html += '<div class="wrap wrap-narrow"><div class="blok">' +
+      '<div class="apx-kepala-blok">' +
+      '<h3 class="blok-judul" style="margin:0">Selengkapnya</h3>' +
+      '<button class="btn btn-ghost btn-sm" type="button" id="btn-apx-semua" ' +
+      'data-terbuka="false">Buka semua</button></div>' +
+      '<p class="blok-ket">Ketuk bagian yang ingin kamu baca.</p>' +
+      apx + '</div></div>';
 
     // ── Penutup ────────────────────────────────────────────────────
     html += '<div class="wrap wrap-narrow"><div class="note" style="margin-bottom:var(--space-10)">' +
@@ -473,6 +529,37 @@
     var kartu = t.closest('.hasil-kartu');
     var buka = kartu.classList.toggle('buka');
     t.setAttribute('aria-expanded', String(buka));
+  });
+
+  // buka/tutup satu bagian appendix
+  document.addEventListener('click', function (e) {
+    var t = e.target.closest('[data-apx]');
+    if (!t) return;
+    var buka = t.closest('.apx').classList.toggle('buka');
+    t.setAttribute('aria-expanded', String(buka));
+  });
+
+  // buka/tutup semua appendix sekaligus
+  document.addEventListener('click', function (e) {
+    var t = e.target.closest('#btn-apx-semua');
+    if (!t) return;
+    var buka = t.dataset.terbuka !== 'true';
+    Array.prototype.forEach.call(document.querySelectorAll('#hasil .apx'), function (a) {
+      a.classList.toggle('buka', buka);
+      a.querySelector('[data-apx]').setAttribute('aria-expanded', String(buka));
+    });
+    t.dataset.terbuka = String(buka);
+    t.textContent = buka ? 'Tutup semua' : 'Buka semua';
+  });
+
+  // keterangan baris rincian harta
+  document.addEventListener('click', function (e) {
+    var t = e.target.closest('[data-ket]');
+    if (!t) return;
+    var ket = document.getElementById(t.dataset.ket);
+    if (!ket) return;
+    ket.hidden = !ket.hidden;
+    t.setAttribute('aria-expanded', String(!ket.hidden));
   });
 
   root.UIResult = { render: render, WARNA: WARNA, rp: rp, rpRingkas: rpRingkas, hasilTerakhir: null };

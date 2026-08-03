@@ -381,10 +381,14 @@
 
 .ledger { display: grid; gap: 2px; }
 
+/* Dua kolom tetap: keterangan di kiri, angka rata kanan. Semua angka jatuh
+   pada satu garis vertikal supaya pengurangannya terbaca menurun sampai ke
+   hasil akhir, seperti membaca struk belanja. */
 .ledger-baris {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr auto;
   align-items: baseline;
-  gap: var(--space-3);
+  column-gap: var(--space-4);
   padding: var(--space-3) 0;
   border-bottom: 1px dashed var(--border-default);
   opacity: 0;
@@ -395,14 +399,36 @@
   to   { opacity: 1; transform: none; }
 }
 
-.ledger-label { flex: 1; font-size: var(--text-body-xs); color: var(--fg2); }
+.ledger-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--text-body-xs);
+  color: var(--fg2);
+  line-height: 1.4;
+}
+
+.ledger-info {
+  width: 26px; height: 26px;
+  flex: none;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  color: var(--fg3);
+}
+.ledger-info:hover { background: var(--color-flame-tint-sm); color: var(--color-flame); }
+.ledger-info .ic { width: 15px; height: 15px; }
+.ledger-info[aria-expanded="true"] { background: var(--color-flame-tint-sm); color: var(--color-flame); }
+
 .ledger-nilai {
   font-size: var(--text-body-s);
   font-weight: var(--fw-semibold);
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
+  text-align: right;
 }
 .ledger-baris.kurang .ledger-nilai { color: var(--color-flame); }
+
 .ledger-baris.hasil {
   border-bottom: none;
   border-top: 2px solid var(--color-charcoal);
@@ -420,13 +446,18 @@
   font-weight: var(--fw-extrabold);
   color: var(--color-flame);
 }
+
 .ledger-ket {
-  flex-basis: 100%;
+  grid-column: 1 / -1;
+  margin-top: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  background: var(--bg-secondary);
+  border-radius: var(--radius-sm);
   font-size: var(--text-caption);
-  color: var(--fg3);
-  line-height: 1.5;
-  margin-top: 2px;
+  color: var(--fg2);
+  line-height: 1.6;
 }
+.ledger-ket[hidden] { display: none; }
 
 /* ═══════════════════════════════════════════════════
    HASIL — DONUT
@@ -1529,4 +1560,100 @@ body.lembar-terbuka { overflow: hidden; }
   padding: var(--space-12) var(--space-5);
   color: var(--fg3);
   font-size: var(--text-body-xs);
+}
+
+
+/* ═══════════════════════════════════════════════════
+   APPENDIX (akordeon)
+   ═══════════════════════════════════════════════════ */
+
+.apx-kepala-blok {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  margin-bottom: var(--space-2);
+}
+
+.apx {
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-card);
+  background: #FFFFFF;
+  margin-bottom: var(--space-3);
+  overflow: hidden;
+}
+.apx.buka { border-color: var(--border-hover); }
+
+.apx-kepala {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  width: 100%;
+  padding: var(--space-5);
+  text-align: left;
+  min-height: 68px;
+}
+.apx-teks { flex: 1; min-width: 0; display: block; }
+.apx-judul {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 17px;
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--ls-snug);
+  color: var(--fg1);
+  line-height: 1.25;
+}
+.apx-ringkas {
+  display: block;
+  font-size: var(--text-caption);
+  color: var(--fg3);
+  margin-top: 3px;
+  line-height: 1.45;
+}
+.apx-kepala .panah {
+  flex: none;
+  color: var(--fg3);
+  transition: transform var(--duration-base) var(--ease-default);
+}
+.apx.buka .apx-kepala .panah { transform: rotate(180deg); }
+
+.apx-isi {
+  padding: 0 var(--space-5) var(--space-5);
+  border-top: 1px solid var(--border-default);
+  padding-top: var(--space-5);
+}
+.apx:not(.buka) .apx-isi { display: none; }
+
+@media (max-width: 560px) {
+  .apx-kepala { padding: var(--space-4); gap: var(--space-3); }
+  .apx-isi { padding-left: var(--space-4); padding-right: var(--space-4); }
+}
+
+/* ═══════════════════════════════════════════════════
+   RINCIAN HARTA — jumlah akhir
+   ═══════════════════════════════════════════════════ */
+
+.rincian-total {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-4);
+  margin-top: var(--space-5);
+  padding-top: var(--space-4);
+  border-top: 2px solid var(--color-charcoal);
+  font-size: var(--text-body-s);
+}
+.rincian-total strong {
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: var(--fw-extrabold);
+  color: var(--color-flame);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Penanda inline untuk hal penting di dalam kalimat */
+.sorot {
+  background: linear-gradient(transparent 62%, rgba(245, 166, 35, 0.4) 62%);
+  font-weight: var(--fw-semibold);
+  color: var(--fg1);
 }

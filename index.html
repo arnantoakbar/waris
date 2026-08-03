@@ -21,12 +21,23 @@
   <div class="wrap nav-inner">
     <a class="nav-brand" href="index.html">
       <img src="assets/mark-color.svg" alt="">
-      <span class="nav-brand-text">Waris<span class="nav-brand-sub">by Flavida</span></span>
+      <span class="nav-brand-teks">
+        <span class="nav-brand-nama">Waris</span>
+        <span class="nav-brand-sub">by Flavida</span>
+      </span>
     </a>
-    <span style="display:flex;align-items:center;gap:var(--space-4)">
-      <a href="rujukan.html" style="font-size:var(--text-label);font-weight:var(--fw-semibold);color:var(--fg2)">Rujukan</a>
+
+    <button class="nav-toggle" type="button" id="nav-toggle"
+            aria-expanded="false" aria-controls="nav-menu" aria-label="Buka menu">
+      <span class="nav-toggle-garis"></span>
+    </button>
+
+    <div class="nav-menu" id="nav-menu">
+      <a href="index.html">Beranda</a>
+      <a href="hitung.html">Hitung</a>
+      <a href="rujukan.html">Rujukan</a>
       <a class="btn btn-dark btn-sm" href="hitung.html">Mulai Hitung</a>
-    </span>
+    </div>
   </div>
 </nav>
 
@@ -37,12 +48,12 @@
     <div class="wrap">
       <div class="hero-grid">
         <div>
-          <img class="hero-flav" src="assets/flav-confident.svg" alt="">
           <span class="overline">Pembagian waris menurut syariat Islam</span>
           <h1>Warisan itu sudah ada aturannya.</h1>
           <p class="hero-lead">
-            Aturannya turun lengkap dalam Al-Qur'an dan dijelaskan Rasulullah, dan sejak itu
-            tidak pernah berubah. Yang sulit cuma menghitungnya. Bagian itu kami yang kerjakan.
+            Aturannya turun lengkap dalam Al-Qur'an dan dijelaskan Rasulullah, dan
+            <span class="sorot">sejak itu tidak pernah berubah</span>. Yang sulit cuma
+            menghitungnya. Bagian itu kami yang kerjakan.
           </p>
           <div class="btn-row">
             <a class="btn btn-primary" href="hitung.html">
@@ -75,8 +86,8 @@
           Bagiannya berupa pecahan yang harus dijumlahkan, ada aturan siapa menutup siapa, dan
           ada belasan kasus khusus yang penyelesaiannya berbeda dari pola biasa. Akibatnya
           keluarga menunda pembagian bertahun-tahun, atau membaginya dengan cara "yang penting
-          semua rata" — yang justru tidak sesuai aturan. Padahal jawabannya pasti, bukan
-          soal selera.
+          semua rata" — yang justru tidak sesuai aturan. Padahal
+          <span class="sorot">jawabannya pasti, bukan soal selera</span>.
         </p>
       </div>
 
@@ -168,7 +179,6 @@
       <div style="background: var(--bg-dark); border-radius: var(--radius-cta); padding: var(--space-12) var(--space-6); text-align: center; position: relative; overflow: hidden">
         <div style="position:absolute; inset:0; background: radial-gradient(ellipse 60% 80% at 50% 110%, rgba(232,57,29,0.35), transparent 65%)"></div>
         <div style="position: relative">
-          <img src="assets/flav-happy.svg" alt="" style="width: 84px; margin: 0 auto var(--space-5)">
           <h2 class="flav-display-m" style="color: var(--fg-on-dark); max-width: 20ch; margin-inline: auto">
             Keluarga berhak tahu haknya, bukan menebak-nebak.
           </h2>
@@ -211,5 +221,6 @@
 <script src="js/faraid/estate.js"></script>
 <script src="js/faraid/solve.js"></script>
 <script src="js/ui-landing.js"></script>
+<script src="js/ui-nav.js"></script>
 </body>
 </html>
