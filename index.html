@@ -8,14 +8,14 @@
 <meta name="theme-color" content="#FFF8F0">
 <link rel="icon" href="assets/mark-color.svg">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="css/tokens.css?v=3">
-<link rel="stylesheet" href="css/base.css?v=3">
-<link rel="stylesheet" href="css/app.css?v=3">
+<link rel="stylesheet" href="css/tokens.css?v=5">
+<link rel="stylesheet" href="css/base.css?v=5">
+<link rel="stylesheet" href="css/app.css?v=5">
 </head>
 <body>
 <a class="skip-link" href="#utama">Lompat ke isi</a>
 
-<script src="js/sprite.js?v=3"></script>
+<script src="js/sprite.js?v=5"></script>
 
 <nav class="nav">
   <div class="wrap nav-inner">
@@ -45,10 +45,56 @@
 
   <!-- ═══ HERO ═══ -->
   <section class="hero">
+    <!--
+      Latar pola geometri Islam (bintang delapan / khatim).
+      Dua lapis dengan ukuran dan arah gerak berbeda supaya terasa berlapis,
+      keduanya nyaris transparan agar tidak mengganggu keterbacaan. Selain
+      memperkuat suasana, pola ini menandai sejak layar pertama bahwa aturan
+      yang dipakai di sini adalah aturan waris Islam — berguna bagi pengunjung
+      non-muslim yang mungkin belum tahu.
+    -->
+    <div class="hero-pola" aria-hidden="true">
+      <svg class="hero-pola-lapis hero-pola-besar" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <pattern id="khatim-besar" width="120" height="120" patternUnits="userSpaceOnUse">
+            <g fill="none" stroke="currentColor" stroke-width="1.1">
+              <rect x="38" y="38" width="44" height="44"/>
+              <path d="M60 29 91 60 60 91 29 60Z"/>
+              <rect x="-22" y="-22" width="44" height="44"/>
+              <path d="M0 -31 31 0 0 31 -31 0Z"/>
+              <rect x="98" y="-22" width="44" height="44"/>
+              <path d="M120 -31 151 0 120 31 89 0Z"/>
+              <rect x="-22" y="98" width="44" height="44"/>
+              <path d="M0 89 31 120 0 151 -31 120Z"/>
+              <rect x="98" y="98" width="44" height="44"/>
+              <path d="M120 89 151 120 120 151 89 120Z"/>
+              <path d="M31 0 60 29M89 0 60 29M31 120 60 91M89 120 60 91M0 31 29 60M0 89 29 60M120 31 91 60M120 89 91 60"/>
+            </g>
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#khatim-besar)"/>
+      </svg>
+
+      <svg class="hero-pola-lapis hero-pola-kecil" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <pattern id="khatim-kecil" width="60" height="60" patternUnits="userSpaceOnUse">
+            <g fill="none" stroke="currentColor" stroke-width="0.9">
+              <rect x="19" y="19" width="22" height="22"/>
+              <path d="M30 14.5 45.5 30 30 45.5 14.5 30Z"/>
+            </g>
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#khatim-kecil)"/>
+      </svg>
+    </div>
+
     <div class="wrap">
       <div class="hero-grid">
         <div>
-          <span class="overline">Pembagian waris menurut syariat Islam</span>
+          <span class="lencana-syariat">
+            <svg class="ic ic-sm" aria-hidden="true"><use href="#i-kitab"></use></svg>
+            Pembagian waris menurut syariat Islam
+          </span>
           <h1>Warisan itu sudah ada aturannya.</h1>
           <p class="hero-lead">
             Aturannya turun lengkap dalam Al-Qur'an dan dijelaskan Rasulullah, dan
@@ -157,87 +203,133 @@
 
   <!-- ═══ BATASAN — jujur di depan ═══ -->
   <section class="section" style="padding-top: 0">
-    <div class="wrap wrap-narrow">
-      <div class="note">
-        <div class="note-title">Yang perlu kamu tahu sebelum memakai</div>
-        <p>Kalkulator ini menerapkan fiqh mazhab Syafi'i, yang dipakai mayoritas muslim
-        Indonesia. Kalau perkaranya dibawa ke Pengadilan Agama, di beberapa titik hakim bisa
-        memutuskan berbeda karena memakai Kompilasi Hukum Islam — dan bedanya kami tunjukkan
-        langsung di halaman hasil, bukan disembunyikan.</p>
-        <p style="margin-top: var(--space-3)">Beberapa keadaan sengaja tidak kami hitung
-        otomatis karena butuh penilaian manusia: anak yang masih dalam kandungan, ahli waris
-        yang hilang, dan kerabat jauh di luar 23 ahli waris utama. Untuk kasus seperti itu kami
-        akan bilang terus terang dan menyarankan kamu ke ustadz atau Pengadilan Agama, bukan
-        menebak-nebak.</p>
+    <div class="wrap">
+      <div class="batasan">
+        <div class="batasan-kepala">
+          <span class="badge badge-muted">Batasan</span>
+          <h2 class="flav-heading-l" style="margin-top: var(--space-3)">Yang perlu kamu tahu
+            sebelum memakai</h2>
+        </div>
+        <div class="batasan-poin">
+          <div class="batasan-item">
+            <span class="batasan-ikon">
+              <svg class="ic" aria-hidden="true"><use href="#i-timbangan"></use></svg>
+            </span>
+            <div>
+              <strong>Memakai fiqh mazhab Syafi'i</strong>
+              <p>Mazhab mayoritas muslim Indonesia. Kalau perkaranya dibawa ke Pengadilan
+                Agama, di beberapa titik hakim bisa memutuskan berbeda karena memakai Kompilasi
+                Hukum Islam — dan bedanya kami tunjukkan langsung di halaman hasil, bukan
+                disembunyikan.</p>
+            </div>
+          </div>
+          <div class="batasan-item">
+            <span class="batasan-ikon">
+              <svg class="ic" aria-hidden="true"><use href="#i-waspada"></use></svg>
+            </span>
+            <div>
+              <strong>Empat keadaan tidak dihitung otomatis</strong>
+              <p>Anak yang masih dalam kandungan, ahli waris yang hilang, kerabat jauh di luar
+                23 ahli waris utama, dan kakek yang berkumpul dengan dua jenis saudara
+                sekaligus. Untuk kasus itu kami bilang terus terang dan mengarahkan ke ustadz
+                atau Pengadilan Agama, bukan menebak-nebak.</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-
   <!-- ═══ KODE TERBUKA & KONTRIBUSI ═══ -->
   <section class="section" style="padding-top: 0" id="kontribusi">
-    <div class="wrap wrap-narrow">
+    <div class="wrap">
       <div class="terbuka">
-        <span class="overline">Kodenya terbuka</span>
-        <h2 class="flav-display-m" style="max-width: 22ch">Periksa sendiri, jangan percaya begitu saja.</h2>
+        <div class="terbuka-kiri">
+          <span class="overline">Kodenya terbuka</span>
+          <h2 class="flav-display-m" style="max-width: 16ch">Periksa sendiri, jangan percaya
+            begitu saja.</h2>
 
-        <p class="flav-body" style="margin-top: var(--space-5)">
-          Ini menyangkut hukum agama dan harta keluarga, jadi kami tidak minta kamu percaya
-          pada kotak hitam. Seluruh kode perhitungannya bisa dibaca siapa pun:
-          <span class="sorot">rumus faraidnya, tabel siapa menghalangi siapa, dan 75 kasus
-          ujinya</span> yang jawabannya diambil dari kitab faraid.
-        </p>
+          <p class="flav-body" style="margin-top: var(--space-5)">
+            Ini menyangkut hukum agama dan harta keluarga, jadi kami tidak minta kamu percaya
+            pada kotak hitam. Seluruh kode perhitungannya bisa dibaca siapa pun:
+            <span class="sorot">rumus faraidnya, tabel siapa menghalangi siapa, dan 75 kasus
+            ujinya</span> yang jawabannya diambil dari kitab faraid.
+          </p>
 
-        <div class="dalil" style="margin-top: var(--space-8)">
-          <div class="dalil-rujukan">HR Muslim no. 1631</div>
-          <div class="dalil-arab" lang="ar" dir="rtl">إِذَا مَاتَ الإِنْسَانُ انْقَطَعَ عَنْهُ عَمَلُهُ إِلَّا مِنْ ثَلَاثَةٍ: إِلَّا مِنْ صَدَقَةٍ جَارِيَةٍ، أَوْ عِلْمٍ يُنْتَفَعُ بِهِ، أَوْ وَلَدٍ صَالِحٍ يَدْعُو لَهُ</div>
-          <div class="dalil-terjemah">
-            Apabila manusia meninggal, terputuslah amalnya kecuali tiga perkara: sedekah
-            jariyah, ilmu yang bermanfaat, dan anak saleh yang mendoakannya.
+          <div class="dalil" style="margin-top: var(--space-6)">
+            <div class="dalil-rujukan">HR Muslim no. 1631</div>
+            <div class="dalil-arab" lang="ar" dir="rtl">إِذَا مَاتَ الإِنْسَانُ انْقَطَعَ عَنْهُ عَمَلُهُ إِلَّا مِنْ ثَلَاثَةٍ: إِلَّا مِنْ صَدَقَةٍ جَارِيَةٍ، أَوْ عِلْمٍ يُنْتَفَعُ بِهِ، أَوْ وَلَدٍ صَالِحٍ يَدْعُو لَهُ</div>
+            <div class="dalil-terjemah">
+              Apabila manusia meninggal, terputuslah amalnya kecuali tiga perkara: sedekah
+              jariyah, ilmu yang bermanfaat, dan anak saleh yang mendoakannya.
+            </div>
+            <div class="dalil-sumber">Dari Abu Hurairah radhiyallahu anhu.</div>
           </div>
-          <div class="dalil-sumber">Dari Abu Hurairah radhiyallahu anhu.</div>
+
+          <p class="flav-body-sm" style="margin-top: var(--space-5)">
+            Kalau kamu punya ilmu yang bisa membuat alat ini lebih benar, sumbangkanlah. Bukan
+            untuk kami — untuk keluarga muslim mana pun yang sedang kebingungan membagi
+            peninggalan orang tuanya.
+          </p>
+
+          <div class="btn-row" style="margin-top: var(--space-6)">
+            <a class="btn btn-dark" href="https://github.com/arnantoakbar/waris"
+               target="_blank" rel="noopener noreferrer">
+              <svg class="ic ic-sm ic-isi" aria-hidden="true"><use href="#i-github"></use></svg>
+              Lihat kodenya di GitHub
+            </a>
+            <a class="btn btn-ghost" href="https://github.com/arnantoakbar/waris/issues/new"
+               target="_blank" rel="noopener noreferrer">
+              Laporkan kekeliruan
+            </a>
+          </div>
         </div>
 
-        <p class="flav-body" style="margin-top: var(--space-6)">
-          Kalau kamu punya ilmu yang bisa membuat alat ini lebih benar, sumbangkanlah. Bukan
-          untuk kami — untuk keluarga muslim mana pun yang sedang kebingungan membagi
-          peninggalan orang tuanya.
-        </p>
+        <div class="terbuka-kanan">
+          <!-- Cuplikan kode sungguhan dari mesin faraid, bukan hiasan. -->
+          <div class="kode-kartu">
+            <div class="kode-bar">
+              <span class="kode-titik"></span><span class="kode-titik"></span><span class="kode-titik"></span>
+              <span class="kode-nama">js/faraid/shares.js</span>
+            </div>
+            <pre class="kode-isi"><code><span class="k-c">// Suami: 1/2 kalau tidak ada anak,</span>
+<span class="k-c">// 1/4 kalau ada. QS An-Nisa: 12</span>
+<span class="k-k">if</span> (ada(<span class="k-s">'suami'</span>)) {
+  set(<span class="k-s">'suami'</span>, faru ? F(<span class="k-n">1</span>, <span class="k-n">4</span>) : F(<span class="k-n">1</span>, <span class="k-n">2</span>));
+}
 
-        <div class="grid grid-2" style="margin-top: var(--space-8)">
-          <div class="card card-soft">
-            <h3 class="flav-heading-m">Yang paling kami butuhkan</h3>
-            <ul class="urutan urutan-titik" style="margin-top: var(--space-4)">
-              <li><strong>Koreksi dalil</strong> dari yang paham faraid — nomor hadits,
-                takhrij, terjemahan, atau kutipan yang keliru.</li>
-              <li><strong>Kasus uji baru</strong> dari kitab atau putusan Pengadilan Agama,
-                lengkap dengan jawaban bakunya.</li>
-              <li><strong>Laporan kekeliruan hitungan</strong> beserta susunan ahli warisnya,
-                supaya bisa kami reproduksi.</li>
+<span class="k-c">// Ibu turun ke 1/6 kalau ada anak,</span>
+<span class="k-c">// atau kalau saudaranya dua atau lebih</span>
+<span class="k-k">if</span> (ada(<span class="k-s">'ibu'</span>)) {
+  set(<span class="k-s">'ibu'</span>, (faru || saudara &gt;= <span class="k-n">2</span>)
+    ? F(<span class="k-n">1</span>, <span class="k-n">6</span>) : F(<span class="k-n">1</span>, <span class="k-n">3</span>));
+}</code></pre>
+          </div>
+
+          <div class="kontrib">
+            <div class="kontrib-judul">Yang paling kami butuhkan</div>
+            <ul class="kontrib-daftar">
+              <li>
+                <svg class="ic ic-sm" aria-hidden="true"><use href="#i-kitab"></use></svg>
+                <span><strong>Koreksi dalil</strong> dari yang paham faraid — nomor hadits,
+                  takhrij, atau terjemahan yang keliru.</span>
+              </li>
+              <li>
+                <svg class="ic ic-sm" aria-hidden="true"><use href="#i-timbangan"></use></svg>
+                <span><strong>Kasus uji baru</strong> dari kitab atau putusan Pengadilan Agama,
+                  lengkap dengan jawaban bakunya.</span>
+              </li>
+              <li>
+                <svg class="ic ic-sm" aria-hidden="true"><use href="#i-waspada"></use></svg>
+                <span><strong>Laporan kekeliruan hitungan</strong> beserta susunan ahli
+                  warisnya, supaya bisa kami reproduksi.</span>
+              </li>
             </ul>
-          </div>
-          <div class="card card-soft">
-            <h3 class="flav-heading-m">Tidak bisa ngoding?</h3>
-            <p class="flav-body-sm" style="margin-top: var(--space-3)">
-              Tidak masalah. Buka <em>Issues</em> di GitHub dan tulis saja dengan bahasa biasa —
-              atau titip lewat orang yang terbiasa. Yang kami perlukan ilmunya, bukan kodenya.
-            </p>
-            <p class="flav-body-sm" style="margin-top: var(--space-3)">
-              Menyebarkan alat ini ke keluarga yang membutuhkan juga sudah menolong.
+            <p class="kontrib-kaki">
+              Tidak bisa ngoding? Tulis saja di <em>Issues</em> dengan bahasa biasa. Yang kami
+              perlukan ilmunya, bukan kodenya.
             </p>
           </div>
-        </div>
-
-        <div class="btn-row" style="margin-top: var(--space-8)">
-          <a class="btn btn-dark" href="https://github.com/arnantoakbar/waris"
-             target="_blank" rel="noopener noreferrer">
-            <svg class="ic ic-sm" aria-hidden="true"><use href="#i-kode"></use></svg>
-            Lihat kodenya di GitHub
-          </a>
-          <a class="btn btn-ghost" href="https://github.com/arnantoakbar/waris/issues/new"
-             target="_blank" rel="noopener noreferrer">
-            Laporkan kekeliruan
-          </a>
         </div>
       </div>
     </div>
@@ -286,15 +378,15 @@
   </div>
 </footer>
 
-<script src="js/faraid/fraction.js?v=3"></script>
-<script src="js/faraid/heirs.js?v=3"></script>
-<script src="js/faraid/hijab.js?v=3"></script>
-<script src="js/faraid/shares.js?v=3"></script>
-<script src="js/faraid/ashabah.js?v=3"></script>
-<script src="js/faraid/special.js?v=3"></script>
-<script src="js/faraid/estate.js?v=3"></script>
-<script src="js/faraid/solve.js?v=3"></script>
-<script src="js/ui-landing.js?v=3"></script>
-<script src="js/ui-nav.js?v=3"></script>
+<script src="js/faraid/fraction.js?v=5"></script>
+<script src="js/faraid/heirs.js?v=5"></script>
+<script src="js/faraid/hijab.js?v=5"></script>
+<script src="js/faraid/shares.js?v=5"></script>
+<script src="js/faraid/ashabah.js?v=5"></script>
+<script src="js/faraid/special.js?v=5"></script>
+<script src="js/faraid/estate.js?v=5"></script>
+<script src="js/faraid/solve.js?v=5"></script>
+<script src="js/ui-landing.js?v=5"></script>
+<script src="js/ui-nav.js?v=5"></script>
 </body>
 </html>
