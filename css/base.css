@@ -33,6 +33,13 @@ body {
 
 img, svg { display: block; max-width: 100%; }
 
+/* Atribut hidden harus benar-benar menyembunyikan.
+   Aturan bawaan browser untuk [hidden] kalah oleh kelas apa pun yang menyetel
+   display — misalnya .btn yang inline-flex — sehingga elemen ber-hidden tetap
+   terlihat. Ini pernah membuat dua tombol "kembali" muncul bersamaan di
+   wizard. */
+[hidden] { display: none !important; }
+
 button, input, select, textarea { font: inherit; color: inherit; }
 
 button { background: none; border: none; cursor: pointer; }
@@ -244,7 +251,10 @@ h1, h2, h3, h4 {
     border-bottom: 1px solid var(--border-default);
     box-shadow: 0 12px 24px rgba(17, 17, 17, 0.06);
   }
-  .nav-menu[hidden] { display: none; }
+  /* Disembunyikan lewat kelas, bukan atribut hidden: tidak ada kedipan saat
+     halaman baru dimuat, dan kalau JS gagal, menu di desktop tetap tampil. */
+  .nav-menu { display: none; }
+  .nav-menu.buka { display: flex; }
   .nav-menu a:not(.btn),
   .nav-menu button:not(.btn) {
     display: flex;
@@ -263,7 +273,6 @@ h1, h2, h3, h4 {
 
 @media (min-width: 768px) {
   .nav-toggle { display: none; }
-  .nav-menu[hidden] { display: flex; }
   .nav-brand-nama { font-size: 20px; }
 }
 

@@ -17,9 +17,9 @@
   function setel(buka) {
     tombol.setAttribute('aria-expanded', String(buka));
     tombol.setAttribute('aria-label', buka ? 'Tutup menu' : 'Buka menu');
-    // Di desktop menu selalu tampil; atribut hidden hanya berlaku di mobile,
-    // di mana CSS-nya sudah diatur untuk mengabaikannya saat lebar.
-    menu.hidden = !buka && !mqDesktop.matches;
+    // Memakai kelas, bukan atribut hidden. Di desktop CSS sudah menampilkan
+    // menu apa adanya, jadi kelas ini hanya berpengaruh di layar sempit.
+    menu.classList.toggle('buka', buka);
   }
 
   setel(false);

@@ -102,7 +102,7 @@
       // Simpul bayangan — belum ada di model, tawarkan menambahkannya.
       h += '<p class="lembar-ket">Kerabat ini digambar samar karena diperlukan untuk ' +
         'menyambungkan keluarga, tapi belum kamu masukkan.</p>' +
-        '<div class="lembar-aksi"><button type="button" class="btn btn-primary btn-sm btn-block" ' +
+        '<div class="lembar-aksi"><button type="button" class="btn btn-dark btn-sm btn-block" ' +
         'data-hidupkan="' + esc(idOrang) + '">Tambahkan sebagai ahli waris yang masih hidup</button></div>';
       buka(h);
       return;
@@ -174,10 +174,14 @@
       h += '</div>';
     }
 
+    // "Selesai" dibuat menonjol dengan warna utama, "Hapus" sengaja tetap
+    // kalem — keduanya bersebelahan, dan yang merusak tidak boleh terlihat
+    // sama menariknya dengan yang aman.
     h += '<div class="lembar-aksi">' +
-      '<button type="button" class="btn btn-ghost btn-sm" data-tutup>Selesai</button>' +
       '<button type="button" class="btn btn-ghost btn-sm lembar-hapus" data-hapus>' +
-      ikon('i-sampah', 'ic-sm') + ' Hapus</button></div>';
+      ikon('i-sampah', 'ic-sm') + ' Hapus</button>' +
+      '<button type="button" class="btn btn-dark btn-sm lembar-simpan" data-tutup>' +
+      ikon('i-check', 'ic-sm') + ' Selesai</button></div>';
 
     buka(h);
   }

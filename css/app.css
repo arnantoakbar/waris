@@ -668,12 +668,19 @@
 .pohon-garis .samar { stroke: rgba(17, 17, 17, 0.14); stroke-dasharray: 3 4; }
 .pohon-garis .nikah { stroke: rgba(232, 57, 29, 0.45); stroke-width: 2; }
 
+/* align-items: stretch penting, bukan sekadar kosmetik.
+   Garis penghubung ditarik dari sisi bawah kartu orang tua. Kalau tinggi kartu
+   dalam satu baris berbeda-beda — misalnya kartu yang menampilkan pecahan dan
+   nominal jadi lebih tinggi daripada kartu Pewaris — maka garis yang berangkat
+   dari kartu pendek akan melintas menembus kartu tetangganya yang lebih
+   tinggi. Menyamakan tingginya membuat semua garis berangkat dari satu
+   ketinggian dan berjalan di celah antar baris. */
 .pohon-baris {
   position: relative;
   z-index: 1;
   display: flex;
   justify-content: center;
-  align-items: flex-start;
+  align-items: stretch;
   gap: var(--space-3);
 }
 
@@ -1060,8 +1067,10 @@ body.lembar-terbuka { overflow: hidden; }
   border-top: 1px solid var(--border-default);
 }
 .lembar-aksi .btn { flex: 1; }
-.lembar-hapus { color: var(--color-flame); }
-.lembar-hapus:hover { border-color: var(--color-flame); }
+/* Tombol simpan diberi bobot lebih besar daripada tombol hapus. */
+.lembar-simpan { flex: 2 !important; }
+.lembar-hapus { color: var(--fg2); flex: 0 1 auto !important; }
+.lembar-hapus:hover { color: var(--color-flame); border-color: var(--color-flame); }
 
 /* ── Keterangan warna ───────────────────────────── */
 
