@@ -20,6 +20,10 @@ document.write('<svg width="0" height="0" style="position:absolute" aria-hidden=
   '<path d="M6.6 6.6l.9 12.3a1.7 1.7 0 0 0 1.7 1.6h5.6a1.7 1.7 0 0 0 1.7-1.6l.9-12.3"/></symbol>' +
   '<symbol id="i-daftar" viewBox="0 0 24 24"><path d="M9 6.5h11M9 12h11M9 17.5h11"/>' +
   '<path d="M4.6 6.5h.01M4.6 12h.01M4.6 17.5h.01"/></symbol>' +
+  // Ikon kurung kode, bukan logo GitHub. Logo resminya merek dagang milik
+  // GitHub, dan menggambar ulang dari ingatan berisiko keliru bentuknya.
+  '<symbol id="i-kode" viewBox="0 0 24 24"><path d="m8.4 7.6-4.6 4.4 4.6 4.4"/>' +
+  '<path d="m15.6 7.6 4.6 4.4-4.6 4.4"/><path d="M13.4 4.6 10.6 19.4"/></symbol>' +
   '<symbol id="i-tautan" viewBox="0 0 24 24">' +
   '<path d="M10.6 13.4a3.6 3.6 0 0 0 5.4.4l2.2-2.2a3.6 3.6 0 0 0-5.1-5.1l-1.2 1.2"/>' +
   '<path d="M13.4 10.6a3.6 3.6 0 0 0-5.4-.4l-2.2 2.2a3.6 3.6 0 0 0 5.1 5.1l1.2-1.2"/></symbol>' +

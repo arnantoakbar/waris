@@ -1660,6 +1660,26 @@ body.lembar-terbuka { overflow: hidden; }
   font-variant-numeric: tabular-nums;
 }
 
+/* ═══════════════════════════════════════════════════
+   BAGIAN KODE TERBUKA
+   ═══════════════════════════════════════════════════ */
+
+.terbuka {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-cta);
+  padding: var(--space-8) var(--space-6);
+}
+.terbuka .dalil { border-left-color: var(--color-flame); }
+.terbuka .card-soft {
+  background: #FFFFFF;
+  border: 1px solid var(--border-default);
+}
+
+@media (min-width: 768px) {
+  .terbuka { padding: var(--space-12) var(--space-10); }
+}
+
 /* Penanda inline untuk hal penting di dalam kalimat */
 .sorot {
   background: linear-gradient(transparent 62%, rgba(245, 166, 35, 0.4) 62%);

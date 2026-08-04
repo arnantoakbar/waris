@@ -189,6 +189,36 @@ dibuktikan dengan test suite; keabsahan kutipan tidak bisa, dan ini menyangkut h
 
 ---
 
+## Berkontribusi
+
+Alat ini menyangkut hukum agama dan harta keluarga, jadi kodenya sengaja dibuka supaya bisa
+diperiksa siapa pun — bukan untuk dipercaya begitu saja.
+
+**Yang paling dibutuhkan:**
+
+1. **Koreksi dalil** dari yang paham faraid — nomor hadits, takhrij, terjemahan, atau kutipan
+   yang keliru di `js/dalil.js` dan `rujukan.html`. Ini yang paling berharga, karena logika
+   bisa diuji dengan test suite sementara keabsahan kutipan tidak bisa.
+2. **Kasus uji baru** dari kitab faraid atau putusan Pengadilan Agama. Tambahkan ke
+   `js/tests.js` beserta jawaban bakunya dan sebutkan sumbernya.
+3. **Laporan kekeliruan hitungan** — sertakan susunan ahli waris lengkapnya supaya bisa
+   direproduksi.
+4. **Aturan yang belum ditangani**, terutama mu'āddah (kakek bersama saudara kandung dan
+   seayah sekaligus) yang saat ini sengaja hanya ditandai, bukan dihitung.
+
+Tidak perlu bisa ngoding. Buka *Issues* dan tulis dengan bahasa biasa — yang diperlukan
+ilmunya, bukan kodenya.
+
+**Sebelum mengirim perubahan pada mesin faraid:** jalankan test suite dan pastikan semua
+kasus tetap lulus. Kalau mengubah perilaku hitungan, tambahkan kasus uji yang membuktikan
+perubahannya benar.
+
+**Catatan versi aset:** rujukan css dan js memakai penanda `?v=N`. Naikkan angkanya setiap
+kali merilis perubahan pada css atau js, supaya pengunjung lama tidak mendapat berkas basi
+dari cache.
+
+---
+
 ## Lisensi & aset merek
 
 Berkas di `assets/` (bloom mark dan maskot Flav) adalah aset merek **Flavida** dan tidak

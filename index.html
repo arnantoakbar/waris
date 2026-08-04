@@ -8,14 +8,14 @@
 <meta name="theme-color" content="#FFF8F0">
 <link rel="icon" href="assets/mark-color.svg">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="css/tokens.css?v=2">
-<link rel="stylesheet" href="css/base.css?v=2">
-<link rel="stylesheet" href="css/app.css?v=2">
+<link rel="stylesheet" href="css/tokens.css?v=3">
+<link rel="stylesheet" href="css/base.css?v=3">
+<link rel="stylesheet" href="css/app.css?v=3">
 </head>
 <body>
 <a class="skip-link" href="#utama">Lompat ke isi</a>
 
-<script src="js/sprite.js?v=2"></script>
+<script src="js/sprite.js?v=3"></script>
 
 <nav class="nav">
   <div class="wrap nav-inner">
@@ -173,6 +173,76 @@
     </div>
   </section>
 
+
+  <!-- ═══ KODE TERBUKA & KONTRIBUSI ═══ -->
+  <section class="section" style="padding-top: 0" id="kontribusi">
+    <div class="wrap wrap-narrow">
+      <div class="terbuka">
+        <span class="overline">Kodenya terbuka</span>
+        <h2 class="flav-display-m" style="max-width: 22ch">Periksa sendiri, jangan percaya begitu saja.</h2>
+
+        <p class="flav-body" style="margin-top: var(--space-5)">
+          Ini menyangkut hukum agama dan harta keluarga, jadi kami tidak minta kamu percaya
+          pada kotak hitam. Seluruh kode perhitungannya bisa dibaca siapa pun:
+          <span class="sorot">rumus faraidnya, tabel siapa menghalangi siapa, dan 75 kasus
+          ujinya</span> yang jawabannya diambil dari kitab faraid.
+        </p>
+
+        <div class="dalil" style="margin-top: var(--space-8)">
+          <div class="dalil-rujukan">HR Muslim no. 1631</div>
+          <div class="dalil-arab" lang="ar" dir="rtl">إِذَا مَاتَ الإِنْسَانُ انْقَطَعَ عَنْهُ عَمَلُهُ إِلَّا مِنْ ثَلَاثَةٍ: إِلَّا مِنْ صَدَقَةٍ جَارِيَةٍ، أَوْ عِلْمٍ يُنْتَفَعُ بِهِ، أَوْ وَلَدٍ صَالِحٍ يَدْعُو لَهُ</div>
+          <div class="dalil-terjemah">
+            Apabila manusia meninggal, terputuslah amalnya kecuali tiga perkara: sedekah
+            jariyah, ilmu yang bermanfaat, dan anak saleh yang mendoakannya.
+          </div>
+          <div class="dalil-sumber">Dari Abu Hurairah radhiyallahu anhu.</div>
+        </div>
+
+        <p class="flav-body" style="margin-top: var(--space-6)">
+          Kalau kamu punya ilmu yang bisa membuat alat ini lebih benar, sumbangkanlah. Bukan
+          untuk kami — untuk keluarga muslim mana pun yang sedang kebingungan membagi
+          peninggalan orang tuanya.
+        </p>
+
+        <div class="grid grid-2" style="margin-top: var(--space-8)">
+          <div class="card card-soft">
+            <h3 class="flav-heading-m">Yang paling kami butuhkan</h3>
+            <ul class="urutan urutan-titik" style="margin-top: var(--space-4)">
+              <li><strong>Koreksi dalil</strong> dari yang paham faraid — nomor hadits,
+                takhrij, terjemahan, atau kutipan yang keliru.</li>
+              <li><strong>Kasus uji baru</strong> dari kitab atau putusan Pengadilan Agama,
+                lengkap dengan jawaban bakunya.</li>
+              <li><strong>Laporan kekeliruan hitungan</strong> beserta susunan ahli warisnya,
+                supaya bisa kami reproduksi.</li>
+            </ul>
+          </div>
+          <div class="card card-soft">
+            <h3 class="flav-heading-m">Tidak bisa ngoding?</h3>
+            <p class="flav-body-sm" style="margin-top: var(--space-3)">
+              Tidak masalah. Buka <em>Issues</em> di GitHub dan tulis saja dengan bahasa biasa —
+              atau titip lewat orang yang terbiasa. Yang kami perlukan ilmunya, bukan kodenya.
+            </p>
+            <p class="flav-body-sm" style="margin-top: var(--space-3)">
+              Menyebarkan alat ini ke keluarga yang membutuhkan juga sudah menolong.
+            </p>
+          </div>
+        </div>
+
+        <div class="btn-row" style="margin-top: var(--space-8)">
+          <a class="btn btn-dark" href="https://github.com/arnantoakbar/waris"
+             target="_blank" rel="noopener noreferrer">
+            <svg class="ic ic-sm" aria-hidden="true"><use href="#i-kode"></use></svg>
+            Lihat kodenya di GitHub
+          </a>
+          <a class="btn btn-ghost" href="https://github.com/arnantoakbar/waris/issues/new"
+             target="_blank" rel="noopener noreferrer">
+            Laporkan kekeliruan
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ═══ CTA ═══ -->
   <section class="section" style="padding-top: 0">
     <div class="wrap">
@@ -205,22 +275,26 @@
         sebelum dipakai membagi harta yang sebenarnya.
       </p>
       <p style="margin-top: var(--space-4)">
-        <a href="rujukan.html">Rujukan Al-Qur'an &amp; Hadits</a>
+        <a href="rujukan.html">Rujukan Al-Qur'an &amp; Hadits</a> &nbsp;·&nbsp;
+        <a href="https://github.com/arnantoakbar/waris" target="_blank" rel="noopener noreferrer">Kode sumber di GitHub</a>
       </p>
     </div>
-    <div class="footer-made">Made with 🔥 in Indonesia</div>
+    <div class="footer-made">
+        Kodenya terbuka — silakan diperiksa dan dikoreksi.<br>
+        Made with 🔥 in Indonesia
+      </div>
   </div>
 </footer>
 
-<script src="js/faraid/fraction.js?v=2"></script>
-<script src="js/faraid/heirs.js?v=2"></script>
-<script src="js/faraid/hijab.js?v=2"></script>
-<script src="js/faraid/shares.js?v=2"></script>
-<script src="js/faraid/ashabah.js?v=2"></script>
-<script src="js/faraid/special.js?v=2"></script>
-<script src="js/faraid/estate.js?v=2"></script>
-<script src="js/faraid/solve.js?v=2"></script>
-<script src="js/ui-landing.js?v=2"></script>
-<script src="js/ui-nav.js?v=2"></script>
+<script src="js/faraid/fraction.js?v=3"></script>
+<script src="js/faraid/heirs.js?v=3"></script>
+<script src="js/faraid/hijab.js?v=3"></script>
+<script src="js/faraid/shares.js?v=3"></script>
+<script src="js/faraid/ashabah.js?v=3"></script>
+<script src="js/faraid/special.js?v=3"></script>
+<script src="js/faraid/estate.js?v=3"></script>
+<script src="js/faraid/solve.js?v=3"></script>
+<script src="js/ui-landing.js?v=3"></script>
+<script src="js/ui-nav.js?v=3"></script>
 </body>
 </html>
