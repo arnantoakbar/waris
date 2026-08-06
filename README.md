@@ -216,7 +216,14 @@ diperiksa siapa pun — bukan untuk dipercaya begitu saja.
    seayah sekaligus) yang saat ini sengaja hanya ditandai, bukan dihitung.
 
 Tidak perlu bisa ngoding. Buka *Issues* dan tulis dengan bahasa biasa — yang diperlukan
-ilmunya, bukan kodenya.
+ilmunya, bukan kodenya. Tidak punya akun GitHub pun tidak apa-apa:
+
+- **GitHub Issues** — <https://github.com/arnantoakbar/waris/issues>
+- **Email** — <hello@flavida.co>
+- **X** — [@FlavidaID](https://x.com/FlavidaID)
+
+Kalau bisa, sertakan rujukan pembandingnya (nomor hadits, nama kitab, atau tautan sumbernya)
+supaya lebih cepat dipastikan.
 
 **Sebelum mengirim perubahan pada mesin faraid:** jalankan test suite dan pastikan semua
 kasus tetap lulus. Kalau mengubah perilaku hitungan, tambahkan kasus uji yang membuktikan

@@ -198,6 +198,15 @@
       input: K('L', { anak_pr: 1, sdr_pr_kandung: 1 }),
       harap: { anak_pr: '1/2', sdr_pr_kandung: '1/2' } },
 
+    // Kasus yang tertulis apa adanya dalam HR Bukhari no. 6736: putusan Ibnu
+    // Mas'ud atas satu anak perempuan, satu cucu perempuan, dan satu saudara
+    // perempuan. Angkanya disebut langsung di matan haditsnya, jadi ini
+    // pembanding paling kuat yang kita punya untuk aturan cucu penyempurna
+    // sekaligus ashabah ma'al ghair.
+    { nama: 'HR Bukhari 6736 — 1 anak pr + 1 cucu pr + 1 sdr pr kandung',
+      input: K('L', { anak_pr: 1, cucu_pr: 1, sdr_pr_kandung: 1 }),
+      harap: { anak_pr: '1/2', cucu_pr: '1/6', sdr_pr_kandung: '1/3' } },
+
     { nama: "Ma'al ghair + istri: istri + 1 anak pr + 1 sdr pr kandung",
       input: K('L', { istri: 1, anak_pr: 1, sdr_pr_kandung: 1 }),
       harap: { istri: '1/8', anak_pr: '1/2', sdr_pr_kandung: '3/8' } },

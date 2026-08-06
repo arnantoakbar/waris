@@ -1928,3 +1928,77 @@ body.lembar-terbuka { overflow: hidden; }
   font-weight: var(--fw-semibold);
   color: var(--fg1);
 }
+
+
+/* ═══════════════════════════════════════════════════
+   AJAKAN MENGOREKSI (halaman Rujukan)
+   ═══════════════════════════════════════════════════ */
+
+.koreksi {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-cta);
+  padding: var(--space-8) var(--space-6);
+}
+
+.koreksi-jalur {
+  display: grid;
+  gap: var(--space-3);
+  margin-top: var(--space-6);
+}
+
+.koreksi-kartu {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-4);
+  padding: var(--space-5);
+  background: #FFFFFF;
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-card);
+  text-decoration: none;
+  transition: var(--transition-base);
+}
+.koreksi-kartu:hover {
+  text-decoration: none;
+  border-color: var(--color-flame);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-card);
+}
+.koreksi-kartu > span:last-child { display: block; flex: 1; min-width: 0; }
+
+.koreksi-ikon {
+  flex: none;
+  width: 44px; height: 44px;
+  display: grid;
+  place-items: center;
+  border-radius: var(--radius-icon);
+  background: var(--color-flame-tint-sm);
+  color: var(--color-flame);
+}
+
+.koreksi-kartu strong {
+  display: block;
+  font-size: var(--text-body-s);
+  font-weight: var(--fw-semibold);
+  color: var(--fg1);
+}
+.koreksi-ket {
+  display: block;
+  font-size: var(--text-caption);
+  color: var(--fg2);
+  line-height: 1.6;
+  margin-top: 3px;
+}
+.koreksi-alamat {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: var(--text-caption);
+  color: var(--color-ember);
+  margin-top: var(--space-2);
+}
+
+@media (min-width: 860px) {
+  .koreksi { padding: var(--space-10); }
+  .koreksi-jalur { grid-template-columns: repeat(3, 1fr); }
+  .koreksi-kartu { flex-direction: column; gap: var(--space-4); }
+}

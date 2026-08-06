@@ -32,6 +32,12 @@ document.write('<svg width="0" height="0" style="position:absolute" aria-hidden=
   '-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 ' +
   '4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315' +
   '.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></symbol>' +
+  // Logo X. Sama seperti logo GitHub, bentuknya isi penuh — pakai .ic-isi.
+  '<symbol id="i-x" viewBox="0 0 24 24"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406' +
+  'l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 ' +
+  '3.24H4.298Z"/></symbol>' +
+  '<symbol id="i-surel" viewBox="0 0 24 24"><rect x="2.8" y="4.8" width="18.4" height="14.4" rx="2.4"/>' +
+  '<path d="m3.4 6.6 8.6 6 8.6-6"/></symbol>' +
   '<symbol id="i-kode" viewBox="0 0 24 24"><path d="m8.4 7.6-4.6 4.4 4.6 4.4"/>' +
   '<path d="m15.6 7.6 4.6 4.4-4.6 4.4"/><path d="M13.4 4.6 10.6 19.4"/></symbol>' +
   '<symbol id="i-tautan" viewBox="0 0 24 24">' +

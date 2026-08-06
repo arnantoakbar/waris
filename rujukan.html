@@ -8,15 +8,15 @@
 <meta name="theme-color" content="#FFF8F0">
 <link rel="icon" href="assets/mark-color.svg">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="css/tokens.css?v=6">
-<link rel="stylesheet" href="css/base.css?v=6">
-<link rel="stylesheet" href="css/app.css?v=6">
-<link rel="stylesheet" href="css/print.css?v=6" media="print">
+<link rel="stylesheet" href="css/tokens.css?v=7">
+<link rel="stylesheet" href="css/base.css?v=7">
+<link rel="stylesheet" href="css/app.css?v=7">
+<link rel="stylesheet" href="css/print.css?v=7" media="print">
 </head>
 <body>
 <a class="skip-link" href="#utama">Lompat ke isi</a>
 
-<script src="js/sprite.js?v=6"></script>
+<script src="js/sprite.js?v=7"></script>
 
 <nav class="nav">
   <div class="wrap nav-inner">
@@ -164,11 +164,60 @@
         </div>
       </div>
 
-      <div class="note" style="margin-bottom: var(--space-10)">
-        <div class="note-title">Menemukan kekeliruan?</div>
-        Kalau kamu menemukan kutipan yang keliru, nomor hadits yang tidak cocok, atau terjemahan
-        yang kurang tepat, tolong beri tahu kami. Ini menyangkut hukum agama, dan kami lebih
-        memilih dikoreksi daripada membiarkan orang memakai rujukan yang salah.
+      <div class="koreksi" style="margin-bottom: var(--space-10)">
+        <span class="overline">Menemukan kekeliruan?</span>
+        <h2 class="flav-heading-l">Tolong beri tahu kami</h2>
+        <p class="flav-body" style="margin-top: var(--space-4)">
+          Kalau kamu menemukan kutipan yang keliru, nomor hadits yang tidak cocok, terjemahan
+          yang kurang tepat, atau hitungan yang tidak sesuai kitab faraid — sampaikan lewat
+          jalur mana pun di bawah. Ini menyangkut hukum agama dan harta keluarga orang lain,
+          jadi <span class="sorot">kami lebih memilih dikoreksi</span> daripada membiarkan
+          orang memakai rujukan yang salah.
+        </p>
+
+        <div class="koreksi-jalur">
+          <a class="koreksi-kartu" href="https://github.com/arnantoakbar/waris/issues/new"
+             target="_blank" rel="noopener noreferrer">
+            <span class="koreksi-ikon">
+              <svg class="ic ic-isi" aria-hidden="true"><use href="#i-github"></use></svg>
+            </span>
+            <span>
+              <strong>GitHub Issues</strong>
+              <span class="koreksi-ket">Paling kami sukai — riwayat koreksinya terbuka dan
+                bisa dilihat siapa saja.</span>
+              <span class="koreksi-alamat">arnantoakbar/waris</span>
+            </span>
+          </a>
+
+          <a class="koreksi-kartu" href="mailto:hello@flavida.co?subject=Koreksi%20rujukan%20Waris">
+            <span class="koreksi-ikon">
+              <svg class="ic" aria-hidden="true"><use href="#i-surel"></use></svg>
+            </span>
+            <span>
+              <strong>Email</strong>
+              <span class="koreksi-ket">Tidak punya akun GitHub? Kirim email biasa saja,
+                sebutkan bagian mana yang keliru.</span>
+              <span class="koreksi-alamat">hello@flavida.co</span>
+            </span>
+          </a>
+
+          <a class="koreksi-kartu" href="https://x.com/FlavidaID"
+             target="_blank" rel="noopener noreferrer">
+            <span class="koreksi-ikon">
+              <svg class="ic ic-isi" aria-hidden="true"><use href="#i-x"></use></svg>
+            </span>
+            <span>
+              <strong>X</strong>
+              <span class="koreksi-ket">Untuk koreksi singkat atau sekadar menanyakan sesuatu.</span>
+              <span class="koreksi-alamat">@FlavidaID</span>
+            </span>
+          </a>
+        </div>
+
+        <p class="flav-body-sm" style="margin-top: var(--space-6)">
+          Kalau bisa, sertakan <strong>rujukan pembandingnya</strong> — nomor hadits, nama kitab,
+          atau tautan sumbernya. Itu sangat mempercepat kami memastikan dan memperbaikinya.
+        </p>
       </div>
     </div>
   </section>
@@ -194,7 +243,7 @@
   </div>
 </footer>
 
-<script src="js/dalil.js?v=6"></script>
+<script src="js/dalil.js?v=7"></script>
 <script>
 (function () {
   'use strict';
@@ -248,6 +297,6 @@
   document.getElementById('daftar-rujukan').innerHTML = html;
 })();
 </script>
-<script src="js/ui-nav.js?v=6"></script>
+<script src="js/ui-nav.js?v=7"></script>
 </body>
 </html>
