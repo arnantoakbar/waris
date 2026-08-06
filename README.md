@@ -187,6 +187,15 @@ dan DM Sans lalu ubah baris `@import` di `css/tokens.css`.
 teks Arab, terjemahan, nomor hadits, dan status kesahihannya. Logika perhitungan bisa
 dibuktikan dengan test suite; keabsahan kutipan tidak bisa, dan ini menyangkut hukum agama.
 
+Setiap kutipan sudah dicocokkan satu per satu dengan [hadits.id](https://www.hadits.id) dan
+[Quran.com](https://quran.com) (Agustus 2026), dan tiap entri menyimpan `tautan` ke sumbernya
+supaya pembaca bisa memeriksa sendiri. Pencocokan ini memastikan nomor dan teksnya benar,
+tapi bukan pengganti pemeriksaan ahli — terutama untuk penilaian derajat hadits, yang antar
+ulama pun bisa berbeda.
+
+Catatan penting kalau nanti menambah dalil: **nomor hadits berbeda antar penerbit** karena
+mengikuti cetakan masing-masing. Selalu sertakan tautan ke sumbernya, jangan cukup nomor.
+
 ---
 
 ## Berkontribusi

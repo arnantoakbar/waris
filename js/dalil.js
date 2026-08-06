@@ -6,12 +6,18 @@
  * atau AI setiap kali orang menghitung. Jadi sumbernya dikumpulkan sekali,
  * disimpan di sini, lalu dipanggil berulang-ulang lewat lookup biasa.
  *
+ * Setiap entri menyimpan `tautan` ke sumber daring yang bisa dibuka pembaca
+ * untuk memeriksa sendiri teks Arab, terjemahan, sanad, dan derajat haditsnya.
+ * Nomor hadits dan derajat di bawah sudah dicocokkan satu per satu dengan
+ * hadits.id (Agustus 2026).
+ *
  * ─────────────────────────────────────────────────────────────────────
  * CATATAN UNTUK PEMILIK SITUS
- * Ini menyangkut hukum agama. Sebelum situs dipublikasikan, mintalah satu
- * orang ustadz yang kompeten di bidang faraid untuk memeriksa isi file ini
- * (teks Arab, terjemahan, nomor hadits, dan status kesahihannya). Kode bisa
- * diuji dengan test suite; keabsahan kutipan tidak bisa.
+ * Ini menyangkut hukum agama. Pencocokan dengan sumber daring memastikan
+ * nomor dan teksnya benar, tapi TIDAK menggantikan pemeriksaan seorang ustadz
+ * yang kompeten di bidang faraid — terutama untuk penilaian derajat hadits,
+ * yang antar ulama pun bisa berbeda. Kode bisa diuji dengan test suite;
+ * keabsahan kutipan tidak bisa.
  * ─────────────────────────────────────────────────────────────────────
  *
  * Terjemahan di bawah sengaja ditulis dalam bahasa Indonesia sehari-hari
@@ -27,6 +33,7 @@
     'qs4-7': {
       jenis: 'quran',
       rujukan: 'QS An-Nisa ayat 7',
+      tautan: { label: 'Baca di Quran.com', url: 'https://quran.com/4/7' },
       arab: 'لِّلرِّجَالِ نَصِيبٌ مِّمَّا تَرَكَ الْوَالِدَانِ وَالْأَقْرَبُونَ وَلِلنِّسَاءِ نَصِيبٌ مِّمَّا تَرَكَ الْوَالِدَانِ وَالْأَقْرَبُونَ مِمَّا قَلَّ مِنْهُ أَوْ كَثُرَ ۚ نَصِيبًا مَّفْرُوضًا',
       terjemah: 'Laki-laki punya bagian dari harta peninggalan orang tua dan kerabatnya, ' +
         'dan perempuan juga punya bagian dari harta peninggalan orang tua dan kerabatnya — ' +
@@ -38,6 +45,7 @@
     'qs4-11': {
       jenis: 'quran',
       rujukan: 'QS An-Nisa ayat 11',
+      tautan: { label: 'Baca di Quran.com', url: 'https://quran.com/4/11' },
       arab: 'يُوصِيكُمُ اللَّهُ فِي أَوْلَادِكُمْ ۖ لِلذَّكَرِ مِثْلُ حَظِّ الْأُنثَيَيْنِ',
       terjemah: 'Allah mensyariatkan kepadamu tentang pembagian warisan untuk anak-anakmu: ' +
         'bagian anak laki-laki sama dengan bagian dua anak perempuan.',
@@ -51,6 +59,7 @@
     'qs4-12': {
       jenis: 'quran',
       rujukan: 'QS An-Nisa ayat 12',
+      tautan: { label: 'Baca di Quran.com', url: 'https://quran.com/4/12' },
       arab: 'وَلَكُمْ نِصْفُ مَا تَرَكَ أَزْوَاجُكُمْ إِن لَّمْ يَكُن لَّهُنَّ وَلَدٌ ۚ فَإِن كَانَ لَهُنَّ وَلَدٌ فَلَكُمُ الرُّبُعُ مِمَّا تَرَكْنَ',
       terjemah: 'Kamu (para suami) mendapat setengah dari harta yang ditinggalkan istrimu ' +
         'jika mereka tidak punya anak. Jika mereka punya anak, kamu mendapat seperempat.',
@@ -63,6 +72,7 @@
     'qs4-176': {
       jenis: 'quran',
       rujukan: 'QS An-Nisa ayat 176',
+      tautan: { label: 'Baca di Quran.com', url: 'https://quran.com/4/176' },
       arab: 'يَسْتَفْتُونَكَ قُلِ اللَّهُ يُفْتِيكُمْ فِي الْكَلَالَةِ ۚ إِنِ امْرُؤٌ هَلَكَ لَيْسَ لَهُ وَلَدٌ وَلَهُ أُخْتٌ فَلَهَا نِصْفُ مَا تَرَكَ',
       terjemah: 'Mereka meminta fatwa kepadamu. Katakanlah: Allah memberi fatwa tentang kalalah. ' +
         'Jika seseorang meninggal tanpa meninggalkan anak, dan ia punya seorang saudara perempuan, ' +
@@ -74,6 +84,7 @@
     'qs4-13': {
       jenis: 'quran',
       rujukan: 'QS An-Nisa ayat 13-14',
+      tautan: { label: 'Baca di Quran.com', url: 'https://quran.com/4/13' },
       arab: 'تِلْكَ حُدُودُ اللَّهِ ۚ وَمَن يُطِعِ اللَّهَ وَرَسُولَهُ يُدْخِلْهُ جَنَّاتٍ تَجْرِي مِن تَحْتِهَا الْأَنْهَارُ',
       terjemah: 'Itulah batas-batas yang ditetapkan Allah. Siapa yang taat kepada Allah dan ' +
         'Rasul-Nya akan dimasukkan ke dalam surga yang mengalir sungai-sungai di bawahnya.',
@@ -89,16 +100,28 @@
       terjemah: 'Berikanlah bagian-bagian yang sudah ditetapkan kepada yang berhak. Lalu sisanya ' +
         'untuk kerabat laki-laki yang paling dekat.',
       sumber: 'Dari Ibnu Abbas radhiyallahu anhuma. Muttafaq alaih (disepakati Bukhari dan Muslim).',
+      tautan: { label: 'Baca di hadits.id — Bukhari 6732', url: 'https://www.hadits.id/hadits/bukhari/6732' },
+      tautanLain: [{ label: 'Muslim 1615', url: 'https://www.hadits.id/hadits/muslim/1615' }],
       ringkas: 'Dasar seluruh sistem ashabah: siapa yang menerima sisa harta setelah bagian ' +
         'tetap dibayarkan, dan urutan kedekatannya.'
     },
 
     'hadits-nenek': {
       jenis: 'hadits',
-      rujukan: 'HR Abu Dawud no. 2894, Tirmidzi no. 2101, Ibnu Majah no. 2724',
-      arab: 'أَنَّ النَّبِيَّ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ أَعْطَى الْجَدَّةَ السُّدُسَ',
-      terjemah: 'Nabi shallallahu alaihi wa sallam memberikan bagian seperenam kepada nenek.',
-      sumber: 'Dari Al-Mughirah bin Syu\'bah dan Muhammad bin Maslamah. Dinilai hasan sahih.',
+      rujukan: 'HR Tirmidzi no. 2101, Abu Dawud no. 2894, Ibnu Majah no. 2724',
+      arab: 'جَاءَتِ الْجَدَّةُ إِلَى أَبِي بَكْرٍ الصِّدِّيقِ تَسْأَلُهُ مِيرَاثَهَا ... فَشَهِدَ الْمُغِيرَةُ بْنُ شُعْبَةَ أَنَّ النَّبِيَّ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ أَعْطَاهَا السُّدُسَ',
+      terjemah: 'Seorang nenek datang kepada Abu Bakar menanyakan bagian warisnya. Abu Bakar ' +
+        'berkata bahwa ia tidak menemukan ketetapannya, lalu Al-Mughirah bin Syu\'bah bersaksi ' +
+        'bahwa Nabi shallallahu alaihi wa sallam memberikan seperenam kepada nenek, dan ' +
+        'kesaksian itu dikuatkan Muhammad bin Maslamah.',
+      sumber: 'Dari Qabishah bin Dzu\'aib. Jalur Tirmidzi dinilai sahih (Darussalam), ' +
+        'sedangkan jalur Abu Dawud dinilai dhaif oleh Al-Albani. Pemberlakuan bagian 1/6 ' +
+        'untuk nenek sendiri diamalkan keempat mazhab.',
+      tautan: { label: 'Baca di hadits.id — Tirmidzi 2101', url: 'https://www.hadits.id/hadits/tirmidzi/2101' },
+      tautanLain: [
+        { label: 'Abu Dawud 2894', url: 'https://www.hadits.id/hadits/abudawud/2894' },
+        { label: 'Ibnu Majah 2724', url: 'https://www.hadits.id/hadits/ibnmajah/2724' }
+      ],
       ringkas: 'Bagian nenek 1/6 tidak disebut dalam Al-Qur\'an, melainkan ditetapkan lewat ' +
         'sunnah. Kalau ada dua nenek yang sama-sama berhak, 1/6 itu dibagi rata.'
     },
@@ -110,7 +133,8 @@
       terjemah: 'Untuk anak perempuan setengah, untuk cucu perempuan dari anak laki-laki ' +
         'seperenam sebagai pelengkap dua pertiga, dan sisanya untuk saudara perempuan.',
       sumber: 'Putusan Abdullah bin Mas\'ud radhiyallahu anhu, yang menyatakan bahwa beliau ' +
-        'memutuskan sesuai putusan Nabi shallallahu alaihi wa sallam.',
+        'memutuskan sesuai putusan Nabi shallallahu alaihi wa sallam. Sahih.',
+      tautan: { label: 'Baca di hadits.id — Bukhari 6736', url: 'https://www.hadits.id/hadits/bukhari/6736' },
       ringkas: 'Dasar bagian 1/6 untuk cucu perempuan sebagai pelengkap ketika hanya ada satu ' +
         'anak perempuan. Juga dasar saudara perempuan menjadi ashabah bersama anak perempuan.'
     },
@@ -123,6 +147,8 @@
         'dalam keadaan berkecukupan itu lebih baik daripada meninggalkan mereka miskin sehingga ' +
         'meminta-minta kepada orang lain.',
       sumber: 'Dari Sa\'ad bin Abi Waqqash radhiyallahu anhu. Muttafaq alaih.',
+      tautan: { label: 'Baca di hadits.id — Muslim 1628', url: 'https://www.hadits.id/hadits/muslim/1628' },
+      tautanLain: [{ label: 'Bukhari 2742', url: 'https://www.hadits.id/hadits/bukhari/2742' }],
       ringkas: 'Batas maksimal wasiat adalah 1/3 harta. Lebih dari itu hanya sah kalau seluruh ' +
         'ahli waris merelakan.'
     },
@@ -133,7 +159,13 @@
       arab: 'إِنَّ اللَّهَ قَدْ أَعْطَى كُلَّ ذِي حَقٍّ حَقَّهُ، فَلَا وَصِيَّةَ لِوَارِثٍ',
       terjemah: 'Sesungguhnya Allah telah memberikan hak kepada setiap yang berhak, maka tidak ' +
         'ada wasiat untuk ahli waris.',
-      sumber: 'Dari Abu Umamah al-Bahili radhiyallahu anhu. Dinilai hasan sahih.',
+      sumber: 'Dari Abu Umamah al-Bahili radhiyallahu anhu, dari khutbah Nabi saat Haji Wada. ' +
+        'Dinilai hasan (Al-Albani dan Darussalam); Imam Tirmidzi sendiri menilainya hasan sahih.',
+      tautan: { label: 'Baca di hadits.id — Tirmidzi 2120', url: 'https://www.hadits.id/hadits/tirmidzi/2120' },
+      tautanLain: [
+        { label: 'Abu Dawud 2870', url: 'https://www.hadits.id/hadits/abudawud/2870' },
+        { label: 'Ibnu Majah 2713', url: 'https://www.hadits.id/hadits/ibnmajah/2713' }
+      ],
       ringkas: 'Wasiat tidak boleh diberikan kepada orang yang sudah menjadi ahli waris — ' +
         'bagiannya sudah diatur. Kecuali kalau seluruh ahli waris lain merelakan.'
     },
@@ -144,16 +176,22 @@
       arab: 'لَا يَرِثُ الْمُسْلِمُ الْكَافِرَ، وَلَا الْكَافِرُ الْمُسْلِمَ',
       terjemah: 'Orang muslim tidak mewarisi orang kafir, dan orang kafir tidak mewarisi orang muslim.',
       sumber: 'Dari Usamah bin Zaid radhiyallahu anhuma. Muttafaq alaih.',
+      tautan: { label: 'Baca di hadits.id — Bukhari 6764', url: 'https://www.hadits.id/hadits/bukhari/6764' },
+      tautanLain: [{ label: 'Muslim 1614', url: 'https://www.hadits.id/hadits/muslim/1614' }],
       ringkas: 'Perbedaan agama menggugurkan hak waris — dari kedua arah. Tapi pemberian lewat ' +
         'hibah semasa hidup atau wasiat (maksimal 1/3) tetap boleh.'
     },
 
     'hadits-pembunuh': {
       jenis: 'hadits',
-      rujukan: 'HR Abu Dawud no. 4564, Nasa\'i, Ibnu Majah no. 2735',
-      arab: 'لَيْسَ لِلْقَاتِلِ شَيْءٌ',
-      terjemah: 'Pembunuh tidak mendapat apa pun (dari warisan orang yang dibunuhnya).',
-      sumber: 'Dari Abu Hurairah dan Amr bin Syu\'aib. Dinilai sahih oleh para ulama hadits.',
+      rujukan: 'HR Abu Dawud no. 4564 & Ibnu Majah no. 2735',
+      arab: 'لَيْسَ لِلْقَاتِلِ شَىْءٌ ... وَلاَ يَرِثُ الْقَاتِلُ شَيْئًا',
+      terjemah: 'Pembunuh tidak mendapat apa pun, dan pembunuh tidak mewarisi sedikit pun.',
+      sumber: 'Riwayat Abu Dawud dalam Kitab Diyat, dinilai hasan oleh Al-Albani. Ibnu Majah ' +
+        'meriwayatkan dari Abu Hurairah dengan lafal "الْقَاتِلُ لَا يَرِثُ" (pembunuh tidak ' +
+        'mewarisi), dinilai hasan oleh Darussalam.',
+      tautan: { label: 'Baca di hadits.id — Abu Dawud 4564', url: 'https://www.hadits.id/hadits/abudawud/4564' },
+      tautanLain: [{ label: 'Ibnu Majah 2735', url: 'https://www.hadits.id/hadits/ibnmajah/2735' }],
       ringkas: 'Membunuh pewaris menggugurkan hak waris. Ini mencegah orang mempercepat kematian ' +
         'demi harta.'
     },
@@ -198,10 +236,13 @@
 
     'hadits-hutang': {
       jenis: 'hadits',
-      rujukan: 'HR Tirmidzi no. 2122, Ibnu Majah no. 2715',
-      terjemah: 'Rasulullah shallallahu alaihi wa sallam memutuskan bahwa hutang dilunasi lebih ' +
-        'dulu sebelum wasiat dilaksanakan, meskipun dalam Al-Qur\'an wasiat disebut terlebih dahulu.',
-      sumber: 'Dari Ali bin Abi Thalib radhiyallahu anhu. Para ulama sepakat mengamalkannya.',
+      rujukan: 'HR Tirmidzi no. 2122',
+      arab: 'قَضَى بِالدَّيْنِ قَبْلَ الْوَصِيَّةِ',
+      terjemah: 'Nabi shallallahu alaihi wa sallam memutuskan hutang dilunasi sebelum wasiat ' +
+        'dilaksanakan, padahal kalian membaca wasiat disebut sebelum hutang.',
+      sumber: 'Dari Ali bin Abi Thalib radhiyallahu anhu. Dinilai hasan oleh Darussalam, dan ' +
+        'para ulama sepakat mengamalkan urutan ini.',
+      tautan: { label: 'Baca di hadits.id — Tirmidzi 2122', url: 'https://www.hadits.id/hadits/tirmidzi/2122' },
       ringkas: 'Urutan yang benar: biaya pengurusan jenazah, lalu hutang, lalu wasiat, baru warisan.'
     }
   };

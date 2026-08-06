@@ -8,15 +8,15 @@
 <meta name="theme-color" content="#FFF8F0">
 <link rel="icon" href="assets/mark-color.svg">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="css/tokens.css?v=5">
-<link rel="stylesheet" href="css/base.css?v=5">
-<link rel="stylesheet" href="css/app.css?v=5">
-<link rel="stylesheet" href="css/print.css?v=5" media="print">
+<link rel="stylesheet" href="css/tokens.css?v=6">
+<link rel="stylesheet" href="css/base.css?v=6">
+<link rel="stylesheet" href="css/app.css?v=6">
+<link rel="stylesheet" href="css/print.css?v=6" media="print">
 </head>
 <body>
 <a class="skip-link" href="#utama">Lompat ke isi</a>
 
-<script src="js/sprite.js?v=5"></script>
+<script src="js/sprite.js?v=6"></script>
 
 <nav class="nav">
   <div class="wrap nav-inner">
@@ -135,6 +135,35 @@
         </ul>
       </div>
 
+      <div class="blok">
+        <h2 class="blok-judul">Sumber daring yang kami pakai</h2>
+        <p class="blok-ket">Setiap kutipan di halaman ini sudah dicocokkan satu per satu dengan
+          sumber di bawah, dan tiap kartu punya tautan langsung supaya kamu bisa memeriksanya
+          sendiri — teks Arab, sanad, sampai penilaian derajatnya.</p>
+        <ul class="urutan urutan-titik">
+          <li><strong><a href="https://www.hadits.id" target="_blank" rel="noopener noreferrer">Hadits.id</a></strong>
+            — sembilan kitab hadits dengan teks Arab, terjemahan, sanad, dan derajat.
+            Kitab warisnya: <a href="https://www.hadits.id/hadits/bukhari/kitab/85" target="_blank" rel="noopener noreferrer">Bukhari</a>,
+            <a href="https://www.hadits.id/hadits/muslim/kitab/23" target="_blank" rel="noopener noreferrer">Muslim</a>,
+            <a href="https://www.hadits.id/hadits/abudawud/kitab/19" target="_blank" rel="noopener noreferrer">Abu Dawud</a>,
+            <a href="https://www.hadits.id/hadits/tirmidzi/kitab/29" target="_blank" rel="noopener noreferrer">Tirmidzi</a>,
+            <a href="https://www.hadits.id/hadits/nasai/kitab/30" target="_blank" rel="noopener noreferrer">Nasa'i</a>,
+            <a href="https://www.hadits.id/hadits/ibnmajah/kitab/23" target="_blank" rel="noopener noreferrer">Ibnu Majah</a>.</li>
+          <li><strong><a href="https://quran.com/4" target="_blank" rel="noopener noreferrer">Quran.com</a></strong>
+            — teks Al-Qur'an beserta terjemahan Indonesia dan tafsir.</li>
+          <li><strong><a href="https://quran.tazkia.ac.id/" target="_blank" rel="noopener noreferrer">Quran Tazkia</a></strong>
+            dan <strong><a href="https://hadits.tazkia.ac.id/search/hadits?q=waris" target="_blank" rel="noopener noreferrer">Hadits Tazkia</a></strong>
+            — rujukan pembanding dari Institut Tazkia.</li>
+        </ul>
+        <div class="note" style="margin-top: var(--space-5)">
+          <div class="note-title">Kenapa nomornya kadang berbeda</div>
+          Satu hadits bisa punya nomor berlainan antar penerbit karena penomorannya mengikuti
+          cetakan masing-masing. Karena itu setiap kartu di atas diberi tautan langsung — nomor
+          saja tidak cukup untuk memastikan yang dimaksud hadits yang sama. Penilaian derajat
+          juga bisa berbeda antar ulama; kalau ada perbedaan, kami sebutkan apa adanya.
+        </div>
+      </div>
+
       <div class="note" style="margin-bottom: var(--space-10)">
         <div class="note-title">Menemukan kekeliruan?</div>
         Kalau kamu menemukan kutipan yang keliru, nomor hadits yang tidak cocok, atau terjemahan
@@ -165,7 +194,7 @@
   </div>
 </footer>
 
-<script src="js/dalil.js?v=5"></script>
+<script src="js/dalil.js?v=6"></script>
 <script>
 (function () {
   'use strict';
@@ -178,6 +207,18 @@
   };
 
   var URUT = ['quran', 'hadits', 'atsar', 'ijma'];
+
+  /* Tautan periksa-sendiri. Nomor hadits antar penerbit bisa berbeda, jadi
+     pembaca perlu bisa membuka sumbernya langsung — bukan cuma diberi angka. */
+  function tautanDalil(d) {
+    var semua = (d.tautan ? [d.tautan] : []).concat(d.tautanLain || []);
+    if (!semua.length) return '';
+    return '<div class="dalil-tautan">' + semua.map(function (t) {
+      return '<a href="' + t.url + '" target="_blank" rel="noopener noreferrer">' +
+        '<svg class="ic ic-sm" aria-hidden="true"><use href="#i-tautan"></use></svg>' +
+        t.label + '</a>';
+    }).join('') + '</div>';
+  }
   var data = window.Dalil.DATA;
 
   var html = URUT.map(function (jenis) {
@@ -194,6 +235,7 @@
           (d.arab ? '<div class="dalil-arab" lang="ar" dir="rtl">' + d.arab + '</div>' : '') +
           '<div class="dalil-terjemah">' + d.terjemah + '</div>' +
           (d.sumber ? '<div class="dalil-sumber">' + d.sumber + '</div>' : '') +
+          tautanDalil(d) +
           (d.ringkas ? '<p class="flav-body-sm" style="margin-top:var(--space-4)"><strong>Yang ditetapkan:</strong> ' +
             d.ringkas + '</p>' : '') +
           (d.detail ? '<p class="flav-body-sm" style="margin-top:var(--space-2)">' + d.detail + '</p>' : '') +
@@ -206,6 +248,6 @@
   document.getElementById('daftar-rujukan').innerHTML = html;
 })();
 </script>
-<script src="js/ui-nav.js?v=5"></script>
+<script src="js/ui-nav.js?v=6"></script>
 </body>
 </html>

@@ -134,6 +134,16 @@
     khusus: 'Aturan khusus'
   };
 
+  /* Tautan periksa-sendiri untuk sebuah dalil. */
+  function tautanDalil(d) {
+    var semua = (d.tautan ? [d.tautan] : []).concat(d.tautanLain || []);
+    if (!semua.length) return '';
+    return '<div class="dalil-tautan">' + semua.map(function (t) {
+      return '<a href="' + t.url + '" target="_blank" rel="noopener noreferrer">' +
+        ikon('i-tautan', 'ic-sm') + t.label + '</a>';
+    }).join('') + '</div>';
+  }
+
   function kartuWaris(a, warna) {
     var dalil = a.dalil ? root.Dalil.ambil(a.dalil) : null;
 
@@ -142,6 +152,7 @@
       (dalil.arab ? '<div class="dalil-arab" lang="ar" dir="rtl">' + dalil.arab + '</div>' : '') +
       '<div class="dalil-terjemah">' + dalil.terjemah + '</div>' +
       (dalil.sumber ? '<div class="dalil-sumber">' + dalil.sumber + '</div>' : '') +
+      tautanDalil(dalil) +
       '</div>' : '';
 
     var kanan = (a.status === 'terhalang' || a.status === 'nol')
@@ -404,6 +415,7 @@
           (d.arab ? '<div class="dalil-arab" lang="ar" dir="rtl">' + d.arab + '</div>' : '') +
           '<div class="dalil-terjemah">' + d.terjemah + '</div>' +
           (d.sumber ? '<div class="dalil-sumber">' + d.sumber + '</div>' : '') +
+          tautanDalil(d) +
           (d.ringkas ? '<p class="flav-body-sm" style="margin-top:var(--space-3)">' + d.ringkas + '</p>' : '') +
           (d.khilafiyah ? '<div class="note" style="margin-top:var(--space-3)">' + d.khilafiyah + '</div>' : '') +
           '</div>';

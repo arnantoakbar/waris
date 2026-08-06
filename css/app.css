@@ -1186,6 +1186,29 @@ body.lembar-terbuka { overflow: hidden; }
   margin-top: var(--space-2);
 }
 
+/* Tautan periksa-sendiri ke sumber daring. Nomor hadits saja tidak cukup —
+   penomorannya berbeda antar penerbit, jadi pembaca perlu bisa membuka
+   halaman aslinya. */
+.dalil-tautan {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-4);
+  margin-top: var(--space-3);
+  padding-top: var(--space-3);
+  border-top: 1px dashed var(--border-default);
+}
+.dalil-tautan a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--text-caption);
+  font-weight: var(--fw-semibold);
+  color: var(--color-ember);
+  text-decoration: none;
+}
+.dalil-tautan a:hover { color: var(--color-flame); text-decoration: underline; }
+.dalil-tautan .ic { flex: none; color: var(--color-flame); }
+
 /* ═══════════════════════════════════════════════════
    LANGKAH SELANJUTNYA
    ═══════════════════════════════════════════════════ */
