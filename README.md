@@ -11,6 +11,88 @@ Website ini menutup celah itu.
 
 ---
 
+## Tampilannya
+
+Semua tangkapan layar di bawah diambil dari aplikasi yang berjalan, bukan mockup.
+
+### Halaman utama
+
+Animasi demo berjalan sendiri di hero — satu kasus contoh dihitung dari nol sampai selesai,
+supaya pengunjung paham cara kerjanya tanpa membaca teks panjang. Latar geometri Islami
+menandakan bahwa aturan yang dipakai di sini khusus untuk muslim.
+
+![Halaman utama](docs/gambar/01-beranda.png)
+
+### Dua cara mengisi ahli waris
+
+Cara cepat: daftar centang dan tombol +/−. Cocok untuk keluarga yang sederhana susunannya.
+
+![Isian daftar](docs/gambar/02-isian-daftar.png)
+
+Cara akurat: susun pohon keluarganya seperti aslinya. Cucu ditambahkan dari dalam kartu
+anaknya, keponakan dari dalam kartu saudaranya — jadi hubungan antar orang tidak perlu
+ditebak oleh mesinnya. Ini yang membedakan cucu lewat anak laki-laki (mewarisi) dari cucu
+lewat anak perempuan (tidak mewarisi).
+
+![Isian pohon keluarga](docs/gambar/03-pohon-isian.png)
+
+### Hasil perhitungan
+
+Harta dipotong dulu sesuai urutan dalam QS An-Nisa: biaya pengurusan jenazah, hutang, lalu
+wasiat. Baru sisanya dibagi. Donutnya menampilkan proporsi tiap pihak beserta nominal
+rupiahnya.
+
+![Rincian harta dan pembagian](docs/gambar/04-hasil.png)
+
+### Pohon keluarga dengan hasilnya
+
+Pecahan dan nominal ditempelkan langsung ke orangnya. Yang tidak kebagian tetap ditampilkan
+lengkap dengan alasannya — anak angkat dan cucu lewat anak perempuan bukan ahli waris,
+dan itu terlihat jelas alih-alih hilang diam-diam.
+
+![Pohon keluarga dengan pembagian](docs/gambar/05-pohon-hasil.png)
+
+Ketuk siapa pun untuk mengubah jenis kelamin, keadaan, status, atau menambahkan anak di
+bawahnya. Seluruh perhitungan di halaman langsung dihitung ulang.
+
+![Edit anggota keluarga](docs/gambar/11-edit-pohon.png)
+
+### Dalil untuk setiap angka
+
+Tiap bagian bisa dibuka untuk melihat alasannya, teks Arab ayat atau haditsnya, terjemahan,
+derajat kesahihan, dan tautan ke sumber daring yang bisa diperiksa sendiri.
+
+![Dalil per ahli waris](docs/gambar/06-dalil.png)
+
+### Langkah selanjutnya
+
+Angka saja belum menyelesaikan urusan. Ada checklist yang menyesuaikan kondisi keluarganya —
+dokumen yang perlu diurus, lembaga yang perlu didatangi, dan mana yang wajib didahulukan.
+
+![Checklist langkah selanjutnya](docs/gambar/07-langkah.png)
+
+### Halaman rujukan
+
+Seluruh ayat dan hadits yang dipakai kalkulator ini dikumpulkan di satu halaman, lengkap
+dengan takhrij dan tautan ke hadits.id serta Qur'an digital.
+
+![Halaman rujukan](docs/gambar/08-rujukan.png)
+
+### Mobile
+
+Dirancang mobile-first — inilah tampilan yang dipakai sebagian besar pengunjung.
+
+<img src="docs/gambar/09-mobile.png" width="360" alt="Tampilan mobile">
+
+### Uji mesin faraid
+
+`tests.html` menjalankan 76 kasus yang jawabannya sudah baku dalam kitab faraid. Kalau ada
+satu saja yang merah, hasil kalkulator tidak boleh dipercaya.
+
+![Hasil uji 76/76](docs/gambar/10-uji.png)
+
+---
+
 ## Menjalankan
 
 Tidak ada build step, tidak ada dependency, tidak ada npm.
