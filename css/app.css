@@ -669,6 +669,10 @@
 }
 .pohon-garis .samar { stroke: rgba(17, 17, 17, 0.14); stroke-dasharray: 3 4; }
 .pohon-garis .nikah { stroke: rgba(232, 57, 29, 0.45); stroke-width: 2; }
+/* Pernikahan dengan pasangan yang sudah wafat digambar seperti kerabat wafat
+   lainnya — putus-putus dan pudar — supaya sekali lihat langsung ketahuan
+   pasangan mana yang masih hidup. */
+.pohon-garis .nikah.samar { stroke: rgba(17, 17, 17, 0.28); stroke-width: 1.5; }
 
 /* align-items: stretch penting, bukan sekadar kosmetik.
    Garis penghubung ditarik dari sisi bawah kartu orang tua. Kalau tinggi kartu
@@ -790,9 +794,13 @@
 .pohon-simpul[data-status="bukan"] .pohon-ikon svg { fill: rgba(17, 17, 17, 0.28); }
 .pohon-simpul[data-status="bukan"] .pohon-silang { color: var(--fg3); }
 
-/* Sudah wafat — hanya menjadi penghubung ke keturunannya */
+/* Sudah wafat — hanya menjadi penghubung ke keturunannya.
+   Latarnya HARUS berisi, bukan transparent. Pewaris dengan lebih dari satu
+   pasangan membuat garis pernikahan ke pasangan yang jauh melintasi kartu
+   yang ada di antaranya; kalau kartunya tembus pandang, garis itu mencoret
+   teks di dalamnya alih-alih lewat di belakangnya. */
 .pohon-simpul[data-status="wafat"] {
-  background: transparent;
+  background: var(--color-cream);
   border-color: rgba(17, 17, 17, 0.14);
   border-style: dashed;
 }
@@ -827,7 +835,7 @@
 /* Penghubung yang sudah wafat — digambar samar supaya jalur kekerabatan
    tetap terbaca tanpa mencuri perhatian. */
 .pohon-simpul[data-status="hantu"] {
-  background: transparent;
+  background: var(--color-cream);
   border-color: rgba(17, 17, 17, 0.1);
   border-style: dashed;
   opacity: 0.55;

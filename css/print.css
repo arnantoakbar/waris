@@ -121,6 +121,13 @@
   .lembar { display: none !important; }
   .pohon-legenda { font-size: 8pt; margin-top: 6pt; }
 
+  /* Di layar kartu kerabat wafat berlatar cream supaya garis pernikahan lewat
+     di belakangnya, bukan menembus teksnya. Kertas latarnya putih, jadi
+     warnanya disesuaikan. */
+  .pohon-simpul[data-status="wafat"],
+  .pohon-simpul[data-status="hantu"] { background: #FFFFFF !important; }
+
+
   /* Peringatan wajib ikut tercetak dan tetap menonjol — lembar PDF ini akan
      beredar lepas dari websitenya. */
   .awas {

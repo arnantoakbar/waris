@@ -362,19 +362,32 @@
         ' V ' + kAnak.atas.toFixed(1) + '" class="' + (samar ? 'garis samar' : 'garis') + '"/>');
     });
 
-    // garis pernikahan
+    // ── Garis pernikahan ─────────────────────────────────────────
+    // Pasangan selalu digambar di sebelah kanan pewaris, jadi kalau
+    // pasangannya lebih dari satu, garis ke pasangan yang jauh melewati kartu
+    // pasangan yang ada di antaranya. Itu tidak apa-apa — garis digambar di
+    // lapisan bawah, jadi terlihat lewat DI BELAKANG kartu, persis seperti
+    // bagan silsilah pada umumnya. Syaratnya kartu tidak boleh tembus
+    // pandang; lihat .pohon-simpul[data-status="wafat"] di app.css.
+    // Tiap celah antar kartu digambar SEKALI saja, memakai gaya pasangan yang
+    // dituju. Kalau tiap pasangan ditarik garisnya sendiri dari pewaris, garis
+    // pasangan yang jauh menimpa garis pasangan yang dekat di celah yang sama,
+    // dan gaya "sudah wafat" jadi tertutup garis pasangan yang masih hidup.
     var kPewaris = kotak(PEWARIS);
-    kanvas.querySelectorAll('[data-tipe="pasangan"]').forEach(function (el) {
-      var kp = kotak(el.dataset.id);
-      if (!kp || !kPewaris) return;
-      var y = (Math.max(kPewaris.atas, kp.atas) + Math.min(kPewaris.bawah, kp.bawah)) / 2;
-      var x1 = Math.min(kPewaris.kanan, kp.kanan);
-      var x2 = Math.max(kPewaris.kiri, kp.kiri);
-      if (x2 > x1) {
-        jalur.push('<path d="M ' + x1.toFixed(1) + ' ' + y.toFixed(1) +
-          ' H ' + x2.toFixed(1) + '" class="garis nikah"/>');
-      }
-    });
+    if (kPewaris) {
+      [].slice.call(kanvas.querySelectorAll('[data-tipe="pasangan"]'))
+        .map(function (el) { return kotak(el.dataset.id); })
+        .filter(Boolean)
+        .sort(function (a, b) { return a.kiri - b.kiri; })
+        .forEach(function (kp, i, urut) {
+          var x1 = i === 0 ? kPewaris.kanan : urut[i - 1].kanan;
+          if (kp.kiri <= x1) return;
+          var y = (Math.max(kPewaris.atas, kp.atas) + Math.min(kPewaris.bawah, kp.bawah)) / 2;
+          jalur.push('<path d="M ' + x1.toFixed(1) + ' ' + y.toFixed(1) +
+            ' H ' + kp.kiri.toFixed(1) + '" class="garis nikah' +
+            (kp.samar ? ' samar' : '') + '"/>');
+        });
+    }
 
     svg.innerHTML = jalur.join('');
   }

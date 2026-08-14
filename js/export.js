@@ -145,6 +145,32 @@
       ctx.restore();
     });
 
+    // ── Garis pernikahan ─────────────────────────────────────────
+    // Ikut digambar sebelum simpul, jadi garis ke pasangan yang jauh lewat di
+    // belakang kartu pasangan di antaranya — sama seperti di layar.
+    var sPewaris = data.simpul.filter(function (s) { return s.tipe === 'pewaris'; })[0];
+    if (sPewaris) {
+      var kw = sPewaris.kotak;
+      data.simpul.filter(function (s) { return s.tipe === 'pasangan'; })
+        .sort(function (a, b) { return a.kotak.x - b.kotak.x; })
+        .forEach(function (s, i, urut) {
+          var kp = s.kotak;
+          var x1 = i === 0 ? kw.x + kw.w : urut[i - 1].kotak.x + urut[i - 1].kotak.w;
+          if (kp.x <= x1) return;
+          var y = (Math.max(kw.y, kp.y) + Math.min(kw.y + kw.h, kp.y + kp.h)) / 2;
+          var mati = s.status === 'wafat';
+          ctx.save();
+          ctx.strokeStyle = mati ? 'rgba(17,17,17,0.28)' : 'rgba(232,57,29,0.45)';
+          ctx.lineWidth = mati ? 1.4 : 2;
+          ctx.setLineDash(mati ? [3, 4] : []);
+          ctx.beginPath();
+          ctx.moveTo(petaX(x1), petaY(y));
+          ctx.lineTo(petaX(kp.x), petaY(y));
+          ctx.stroke();
+          ctx.restore();
+        });
+    }
+
     // ── Simpul ───────────────────────────────────────────────────
     data.simpul.forEach(function (s) {
       var g = GAYA[s.status] || GAYA.hantu;
