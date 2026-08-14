@@ -73,12 +73,19 @@
       jenis: 'quran',
       rujukan: 'QS An-Nisa ayat 176',
       tautan: { label: 'Baca di Quran.com', url: 'https://quran.com/4/176' },
-      arab: 'يَسْتَفْتُونَكَ قُلِ اللَّهُ يُفْتِيكُمْ فِي الْكَلَالَةِ ۚ إِنِ امْرُؤٌ هَلَكَ لَيْسَ لَهُ وَلَدٌ وَلَهُ أُخْتٌ فَلَهَا نِصْفُ مَا تَرَكَ',
+      arab: 'يَسْتَفْتُونَكَ قُلِ اللَّهُ يُفْتِيكُمْ فِي الْكَلَالَةِ ۚ إِنِ امْرُؤٌ هَلَكَ لَيْسَ لَهُ وَلَدٌ وَلَهُ أُخْتٌ فَلَهَا نِصْفُ مَا تَرَكَ ۚ ' +
+        'وَهُوَ يَرِثُهَا إِنْ لَمْ يَكُنْ لَهَا وَلَدٌ ۚ فَإِنْ كَانَتَا اثْنَتَيْنِ فَلَهُمَا الثُّلُثَانِ مِمَّا تَرَكَ ۚ ' +
+        'وَإِنْ كَانُوا إِخْوَةً رِجَالًا وَنِسَاءً فَلِلذَّكَرِ مِثْلُ حَظِّ الْأُنْثَيَيْنِ',
       terjemah: 'Mereka meminta fatwa kepadamu. Katakanlah: Allah memberi fatwa tentang kalalah. ' +
         'Jika seseorang meninggal tanpa meninggalkan anak, dan ia punya seorang saudara perempuan, ' +
-        'maka saudara perempuan itu mendapat setengah dari harta yang ditinggalkan.',
+        'maka saudara perempuan itu mendapat setengah dari harta yang ditinggalkan. Saudara ' +
+        'laki-laki mewarisi saudara perempuannya jika ia tidak punya anak. Jika saudara ' +
+        'perempuannya dua orang, keduanya mendapat dua pertiga dari harta yang ditinggalkan. ' +
+        'Dan jika mereka terdiri dari saudara laki-laki dan perempuan, maka bagian seorang ' +
+        'laki-laki sama dengan bagian dua orang perempuan.',
       ringkas: 'Dasar bagian saudara kandung dan saudara seayah, dalam keadaan kalalah — ' +
-        'pewaris tidak punya anak maupun ayah.'
+        'pewaris tidak punya anak maupun ayah. Kalimat terakhirnya adalah dasar pembagian ' +
+        '2 : 1 antara saudara laki-laki dan saudara perempuan.'
     },
 
     'qs4-13': {

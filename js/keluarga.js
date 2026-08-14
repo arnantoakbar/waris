@@ -26,7 +26,7 @@
     return {
       jenisKelamin: jenisKelamin || null,   // jenis kelamin pewaris
       pasangan: [],                          // {id, hidup}
-      anak: [],                              // {id, gender, hidup, angkat, anak:[{id,gender}]}
+      anak: [],                              // {id, gender, hidup, angkat, tiri, anak:[{id,gender}]}
       ayah: null,                            // {hidup}
       ibu: null,
       kakek: null,
@@ -64,7 +64,11 @@
     opsi = opsi || {};
     var o = {
       id: id(), gender: gender, hidup: opsi.hidup !== false,
-      angkat: !!opsi.angkat, anak: []
+      // angkat dan tiri sama-sama bukan ahli waris, tapi alasannya berbeda dan
+      // akibat hukumnya di Indonesia juga berbeda — jadi disimpan terpisah.
+      // Anak angkat: KHI Pasal 209 memberi wasiat wajibah maksimal 1/3.
+      // Anak tiri  : tidak. Ia mewarisi dari orang tua kandungnya sendiri.
+      angkat: !!opsi.angkat, tiri: !!opsi.tiri, anak: []
     };
     k.anak.push(o);
     return o;
@@ -177,7 +181,7 @@
     });
 
     if (pasanganWafat) {
-      var adaAnakKandung = k.anak.some(function (a) { return !a.angkat; });
+      var adaAnakKandung = k.anak.some(function (a) { return !a.angkat && !a.tiri; });
       catatan.push({
         id: 'pasangan_wafat',
         tingkat: 'penting',
@@ -197,11 +201,16 @@
     // ── Anak & cucu ───────────────────────────────────────────────
     var adaCucuLewatAnakPr = 0;
     var adaAnakAngkat = 0;
+    var adaAnakTiri = 0;
 
     k.anak.forEach(function (a) {
       if (a.angkat) {
         adaAnakAngkat++;
         return; // anak angkat bukan ahli waris
+      }
+      if (a.tiri) {
+        adaAnakTiri++;
+        return; // anak tiri mewarisi dari orang tua kandungnya, bukan dari pewaris
       }
       if (a.hidup) {
         tambah(a.gender === 'L' ? 'anak_lk' : 'anak_pr', a.id);
@@ -239,6 +248,20 @@
         teks: 'Ada ' + adaAnakAngkat + ' anak angkat. Anak angkat bukan ahli waris karena ' +
           'pengangkatan tidak memindahkan hubungan nasab. Tapi KHI Pasal 209 memberinya hak ' +
           'wasiat wajibah maksimal 1/3 harta, dan itu ditetapkan lewat Pengadilan Agama.'
+      });
+    }
+
+    if (adaAnakTiri) {
+      catatan.push({
+        id: 'anak_tiri',
+        tingkat: 'penting',
+        teks: 'Ada ' + adaAnakTiri + ' anak tiri — anak bawaan pasangan dari pernikahan ' +
+          'sebelumnya. Anak tiri bukan ahli waris karena tidak ada hubungan nasab dengan ' +
+          'pewaris; ia mewarisi dari orang tua kandungnya sendiri. Perlu dicatat: anak tiri ' +
+          'BERBEDA dari anak angkat. Wasiat wajibah KHI Pasal 209 hanya untuk anak angkat, ' +
+          'tidak untuk anak tiri. Kalau pewaris ingin memberi sesuatu kepada anak tirinya, ' +
+          'jalurnya adalah hibah semasa hidup atau wasiat biasa maksimal 1/3 — dan wasiat itu ' +
+          'sah justru karena anak tiri bukan ahli waris.'
       });
     }
 
@@ -348,7 +371,9 @@
 
       case 'cucu_lk': case 'cucu_pr': {
         var gender = kunci === 'cucu_lk' ? 'L' : 'P';
-        var ortu = k.anak.filter(function (a) { return a.gender === 'L' && !a.angkat; })[0];
+        var ortu = k.anak.filter(function (a) {
+          return a.gender === 'L' && !a.angkat && !a.tiri;
+        })[0];
         var mengarang = false;
         if (!ortu) {
           // Cucu hanya bisa ada lewat anak laki-laki. Kalau belum ada,
@@ -426,7 +451,7 @@
    */
   function rapikan(k) {
     k.anak = k.anak.filter(function (a) {
-      return a.hidup || a.angkat || a.anak.length;
+      return a.hidup || a.angkat || a.tiri || a.anak.length;
     });
     k.saudara = k.saudara.filter(function (s) {
       return s.hidup || s.anak.length;

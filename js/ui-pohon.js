@@ -141,7 +141,7 @@
 
     k.anak.forEach(function (a) {
       baris[3].push(simpul({ id: a.id, tipe: 'anak',
-        nama: a.angkat ? 'Anak angkat' : 'Anak',
+        nama: a.angkat ? 'Anak angkat' : a.tiri ? 'Anak tiri' : 'Anak',
         jalur: a.gender === 'L' ? 'laki-laki' : 'perempuan',
         gender: a.gender, orang: a }));
       sisi[a.id] = [PEWARIS];
@@ -169,7 +169,7 @@
     if (s.bayangan) return 'hantu';
     var o = s.orang;
     if (!o) return 'hantu';
-    if (o.angkat) return 'bukan';
+    if (o.angkat || o.tiri) return 'bukan';
     if (o.hidup === false) return 'wafat';
 
     var kunci = peta ? peta[o.id] : null;
@@ -296,7 +296,7 @@
       t.push(['pasangan', k.jenisKelamin === 'P' ? 'Suami' : 'Istri']);
     }
     t.push(['anak', 'Anak']);
-    t.push(['anak_angkat', 'Anak angkat']);
+    t.push(['anak_angkat', 'Anak tiri / angkat']);
     if (!k.ayah || !k.ibu) t.push(['ortu', 'Orang tua']);
     t.push(['saudara', 'Saudara']);
     if (!k.kakek || !k.nenekAyah || !k.nenekIbu) t.push(['kakeknenek', 'Kakek / nenek']);

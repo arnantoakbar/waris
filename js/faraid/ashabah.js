@@ -17,6 +17,35 @@
   var H = root.Heirs;
   var F = f.F;
 
+  /*
+   * Aturan 2 : 1 punya DUA ayat yang berbeda, dan keduanya tidak saling
+   * menggantikan:
+   *   - QS An-Nisa 11  berbicara tentang ANAK ("fii awlaadikum"). Cucu ikut
+   *                    ayat ini karena mengambil kedudukan anak saat anak
+   *                    laki-laki tidak ada.
+   *   - QS An-Nisa 176 berbicara tentang SAUDARA dalam keadaan kalalah, dan
+   *                    kalimat terakhirnya menyebut 2 : 1 secara khusus untuk
+   *                    saudara laki-laki dan perempuan.
+   * Dulu semua pasangan ditunjukkan ke QS An-Nisa 11 — keliru, karena ayat itu
+   * tidak menyinggung saudara sama sekali.
+   */
+  var DALIL_BIL_GHAIR = {
+    anak_lk: 'qs4-11',
+    cucu_lk: 'qs4-11',
+    sdr_lk_kandung: 'qs4-176',
+    sdr_lk_sebapak: 'qs4-176'
+  };
+
+  var KETERANGAN_BIL_GHAIR = {
+    anak_lk: 'Aturan ini disebut langsung dalam QS An-Nisa ayat 11 tentang anak.',
+    cucu_lk: 'Cucu lewat anak laki-laki mengambil kedudukan anak ketika pewaris tidak ' +
+      'meninggalkan anak laki-laki, jadi memakai aturan yang sama dengan anak.',
+    sdr_lk_kandung: 'Aturan ini disebut di akhir QS An-Nisa ayat 176, ayat tentang kalalah ' +
+      '— yaitu pewaris yang tidak meninggalkan anak maupun ayah.',
+    sdr_lk_sebapak: 'Saudara seayah mengambil kedudukan saudara kandung ketika saudara ' +
+      'kandung tidak ada, jadi memakai aturan yang sama dalam QS An-Nisa ayat 176.'
+  };
+
   /**
    * @param {Object} aktif
    * @param {Fraction} sisa  sisa harta setelah bagian tetap
@@ -45,8 +74,9 @@
           tipe: 'bil_ghair',
           penerima: [key, partner],
           alasan: H.label(key) + ' dan ' + H.label(partner).toLowerCase() +
-            ' berbagi sisa harta dengan perbandingan 2 : 1 — bagian laki-laki dua kali bagian perempuan.',
-          dalil: 'qs4-11'
+            ' berbagi sisa harta dengan perbandingan 2 : 1 — bagian laki-laki dua kali ' +
+            'bagian perempuan. ' + KETERANGAN_BIL_GHAIR[key],
+          dalil: DALIL_BIL_GHAIR[key]
         };
       }
 
@@ -73,9 +103,13 @@
           bagian: b,
           tipe: 'maal_ghair',
           penerima: [kandidat],
+          // HR Bukhari 6736 menyebut keadaan ini apa adanya: "...dan sisanya
+          // untuk saudara perempuan" — lebih tepat daripada hadits ashabah
+          // yang sifatnya umum.
           alasan: H.label(kandidat) + ' menjadi ashabah karena pewaris meninggalkan anak/cucu perempuan, ' +
-            'sehingga mengambil sisa harta setelah bagian tetap dibayarkan.',
-          dalil: 'hadits-ashabah'
+            'sehingga mengambil sisa harta setelah bagian tetap dibayarkan. Keadaan ini disebut ' +
+            'langsung dalam putusan Ibnu Mas\'ud: "dan sisanya untuk saudara perempuan".',
+          dalil: 'hadits-cucu-pr'
         };
       }
     }

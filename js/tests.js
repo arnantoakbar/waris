@@ -320,6 +320,29 @@
   // ═══════════════════════════════════════════════════════════════
   // Uji perhitungan tirkah (harta yang boleh dibagi)
   // ═══════════════════════════════════════════════════════════════
+  // ── Dalil harus cocok dengan ahli warisnya ─────────────────────
+  var KASUS_DALIL = [
+    { nama: 'Dalil 2:1 anak = QS An-Nisa 11',
+      input: K('P', { suami: 1, anak_lk: 1, anak_pr: 1 }),
+      harap: { suami: '1/4', anak_lk: '1/2', anak_pr: '1/4' },
+      dalil: { anak_lk: 'qs4-11', anak_pr: 'qs4-11' } },
+
+    { nama: 'Dalil 2:1 saudara kandung = QS An-Nisa 176, bukan ayat 11',
+      input: K('P', { suami: 1, sdr_lk_kandung: 1, sdr_pr_kandung: 1 }),
+      harap: { suami: '1/2', sdr_lk_kandung: '1/3', sdr_pr_kandung: '1/6' },
+      dalil: { sdr_lk_kandung: 'qs4-176', sdr_pr_kandung: 'qs4-176' } },
+
+    { nama: 'Dalil 2:1 saudara sebapak = QS An-Nisa 176',
+      input: K('P', { suami: 1, sdr_lk_sebapak: 1, sdr_pr_sebapak: 1 }),
+      harap: { suami: '1/2', sdr_lk_sebapak: '1/3', sdr_pr_sebapak: '1/6' },
+      dalil: { sdr_lk_sebapak: 'qs4-176', sdr_pr_sebapak: 'qs4-176' } },
+
+    { nama: 'Dalil ashabah maal ghair = HR Bukhari 6736',
+      input: K('P', { anak_pr: 1, sdr_pr_kandung: 1 }),
+      harap: { anak_pr: '1/2', sdr_pr_kandung: '1/2' },
+      dalil: { sdr_pr_kandung: 'hadits-cucu-pr' } }
+  ];
+
   var KASUS_HARTA = [
     { nama: 'Tanpa potongan apa pun',
       harta: { total: 120000000 }, adaPasangan: false,
@@ -412,6 +435,49 @@
       },
       harap: { sdr_pr_kandung: 1 } },
 
+    // ── Keluarga sambung ────────────────────────────────────────────
+    // Suami wafat. Istri pertama sudah wafat lebih dulu, lalu ia menikah lagi.
+    // Dari istri pertama: 1 anak lk + 1 anak pr. Dari istri kedua: 1 anak lk.
+    // Istri kedua membawa seorang anak perempuan dari pernikahan sebelumnya.
+    { nama: 'Sambung — suami wafat, istri pertama sudah wafat, ada anak tiri',
+      susun: function (K) {
+        var k = K.baru('L');
+        K.tambahPasangan(k, { hidup: false });         // istri pertama
+        K.tambahPasangan(k, { hidup: true });          // istri kedua
+        K.tambahAnak(k, 'L');                          // dari istri pertama
+        K.tambahAnak(k, 'P');                          // dari istri pertama
+        K.tambahAnak(k, 'L');                          // dari istri kedua
+        K.tambahAnak(k, 'P', { tiri: true });          // bawaan istri kedua
+        return k;
+      },
+      harap: { istri: 1, anak_lk: 2, anak_pr: 1 } },
+
+    // Kebalikannya. Istri wafat. Suami pertama sudah wafat lebih dulu, lalu ia
+    // menikah lagi dengan laki-laki yang membawa anak, dan mereka punya anak.
+    { nama: 'Sambung — istri wafat, suami pertama sudah wafat, ada anak tiri',
+      susun: function (K) {
+        var k = K.baru('P');
+        K.tambahPasangan(k, { hidup: false });         // suami pertama
+        K.tambahPasangan(k, { hidup: true });          // suami kedua
+        K.tambahAnak(k, 'L');                          // anak dari suami kedua
+        K.tambahAnak(k, 'P', { tiri: true });          // bawaan suami kedua
+        return k;
+      },
+      harap: { suami: 1, anak_lk: 1 } },
+
+    { nama: 'Anak tiri terpisah dari anak angkat',
+      susun: function (K) {
+        var k = K.baru('L');
+        K.tambahAnak(k, 'L');
+        K.tambahAnak(k, 'P', { tiri: true });
+        K.tambahAnak(k, 'L', { angkat: true });
+        var c = K.keAhliWaris(k).catatan.map(function (x) { return x.id; });
+        if (c.indexOf('anak_tiri') === -1) throw new Error('catatan anak tiri hilang');
+        if (c.indexOf('anak_angkat') === -1) throw new Error('catatan anak angkat hilang');
+        return k;
+      },
+      harap: { anak_lk: 1 } },
+
     { nama: 'Cucu lewat anak laki-laki yang wafat tetap mewarisi',
       susun: function (K) {
         var k = K.baru('L');
@@ -440,7 +506,7 @@
     var f = root.Fraction;
     var hasil = [];
 
-    KASUS.forEach(function (t) {
+    KASUS.concat(KASUS_DALIL).forEach(function (t) {
       var gagal = [];
       var r;
       try {
@@ -486,6 +552,17 @@
           gagal.push('seharusnya terdeteksi kasus ' + t.kasus + ', dapat ' + (kk ? kk.id : 'tidak ada'));
         }
       }
+      // Dalil yang ditempelkan ke sebuah bagian harus ayat/hadits yang memang
+      // membicarakan ahli waris itu. Aturan 2 : 1 untuk anak ada di QS An-Nisa
+      // 11, sedangkan untuk saudara ada di QS An-Nisa 176 — pernah tertukar.
+      Object.keys(t.dalil || {}).forEach(function (k) {
+        var a = r.ahliWaris.filter(function (x) { return x.key === k; })[0];
+        if (!a || a.dalil !== t.dalil[k]) {
+          gagal.push('dalil ' + k + ': dapat ' + (a ? a.dalil : 'tidak ada') +
+            ', harap ' + t.dalil[k]);
+        }
+      });
+
       if (t.sisaTidakTerbagi) {
         if (!r.sisaTidakTerbagi || f.toText(r.sisaTidakTerbagi.bagian) !== t.sisaTidakTerbagi) {
           gagal.push('sisa tidak terbagi seharusnya ' + t.sisaTidakTerbagi);
@@ -542,7 +619,8 @@
   }
 
   root.Tests = {
-    KASUS: KASUS, KASUS_HARTA: KASUS_HARTA, KASUS_KELUARGA: KASUS_KELUARGA,
+    KASUS: KASUS, KASUS_DALIL: KASUS_DALIL, KASUS_HARTA: KASUS_HARTA,
+    KASUS_KELUARGA: KASUS_KELUARGA,
     jalankan: jalankan
   };
 })(typeof window !== 'undefined' ? window : globalThis);

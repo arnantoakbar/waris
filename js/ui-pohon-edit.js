@@ -138,14 +138,22 @@
         'bawah pewaris seperti biasa.</p>';
     }
 
-    // ── Anak angkat ────────────────────────────────────────────────
+    // ── Kandung, tiri, atau angkat ─────────────────────────────────
     if (tipe === 'anak') {
-      h += baris('Status', pilihan('angkat',
-        [[false, 'Anak kandung'], [true, 'Anak angkat']], !!o.angkat));
+      var statusAnak = o.angkat ? 'angkat' : o.tiri ? 'tiri' : 'kandung';
+      h += baris('Status', pilihan('statusAnak', [
+        ['kandung', 'Anak kandung'], ['tiri', 'Anak tiri'], ['angkat', 'Anak angkat']
+      ], statusAnak));
       if (o.angkat) {
         h += '<p class="lembar-ket lembar-catat">Anak angkat bukan ahli waris. Tapi KHI ' +
           'Pasal 209 memberinya hak wasiat wajibah maksimal 1/3 harta, ditetapkan lewat ' +
           'Pengadilan Agama.</p>';
+      }
+      if (o.tiri) {
+        h += '<p class="lembar-ket lembar-catat">Anak tiri — anak bawaan pasangan dari ' +
+          'pernikahan sebelumnya. Bukan ahli waris, dan berbeda dari anak angkat: wasiat ' +
+          'wajibah KHI Pasal 209 tidak berlaku untuknya. Ia mewarisi dari orang tua ' +
+          'kandungnya sendiri.</p>';
       }
     }
 
@@ -219,8 +227,11 @@
         break;
 
       case 'anak_angkat':
-        h += '<p class="lembar-ket">Anak angkat bukan ahli waris, tapi tetap digambar supaya ' +
-          'susunan keluarganya utuh — dan kami akan menambahkan catatan tentang wasiat wajibah.</p>' +
+        h += '<p class="lembar-ket">Keduanya bukan ahli waris, tapi tetap digambar supaya ' +
+          'susunan keluarganya utuh. Bedanya: <strong>anak tiri</strong> adalah anak bawaan ' +
+          'pasangan dari pernikahan sebelumnya dan mewarisi dari orang tua kandungnya, ' +
+          'sedangkan <strong>anak angkat</strong> berhak atas wasiat wajibah KHI Pasal 209.</p>' +
+          tombol('tiri_L', 'Anak tiri laki-laki') + tombol('tiri_P', 'Anak tiri perempuan') +
           tombol('angkat_L', 'Anak angkat laki-laki') + tombol('angkat_P', 'Anak angkat perempuan');
         break;
 
@@ -263,6 +274,8 @@
     else if (aksi === 'anak_P') K.tambahAnak(k, 'P');
     else if (aksi === 'angkat_L') K.tambahAnak(k, 'L', { angkat: true });
     else if (aksi === 'angkat_P') K.tambahAnak(k, 'P', { angkat: true });
+    else if (aksi === 'tiri_L') K.tambahAnak(k, 'L', { tiri: true });
+    else if (aksi === 'tiri_P') K.tambahAnak(k, 'P', { tiri: true });
     else if (aksi === 'ayah') k.ayah = { hidup: true };
     else if (aksi === 'ibu') k.ibu = { hidup: true };
     else if (aksi === 'kakek') k.kakek = { hidup: true };
@@ -332,7 +345,11 @@
       var nilai = set.dataset.nilai;
       if (set.dataset.set === 'hidup') o.hidup = (nilai === 'true');
       else if (set.dataset.set === 'angkat') o.angkat = (nilai === 'true');
-      else o[set.dataset.set] = nilai;
+      else if (set.dataset.set === 'statusAnak') {
+        // Ketiganya saling meniadakan: kandung, tiri, atau angkat.
+        o.angkat = (nilai === 'angkat');
+        o.tiri = (nilai === 'tiri');
+      } else o[set.dataset.set] = nilai;
       perbarui();
       bukaUbah(idAktif, temuan.tipe);   // gambar ulang lembar dengan nilai baru
       return;

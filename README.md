@@ -86,10 +86,10 @@ Dirancang mobile-first — inilah tampilan yang dipakai sebagian besar pengunjun
 
 ### Uji mesin faraid
 
-`tests.html` menjalankan 82 kasus yang jawabannya sudah baku dalam kitab faraid. Kalau ada
+`tests.html` menjalankan 89 kasus yang jawabannya sudah baku dalam kitab faraid. Kalau ada
 satu saja yang merah, hasil kalkulator tidak boleh dipercaya.
 
-![Hasil uji 82/82](docs/gambar/10-uji.png)
+![Hasil uji 89/89](docs/gambar/10-uji.png)
 
 ---
 
@@ -139,7 +139,7 @@ js/
   ui-pohon-edit.js      Penyuntingan pohon (bilah tambah + lembar ubah)
   ui-*.js               Lapisan tampilan lainnya
   export.js             PNG (canvas) & PDF (dialog cetak)
-  tests.js              82 kasus uji
+  tests.js              89 kasus uji
 ```
 
 ## Model susunan keluarga
@@ -158,6 +158,16 @@ benar cucu tidak berhak sama sekali dan saudara perempuan mendapat 1/12.
 Dengan model struktur, cucu lewat anak perempuan digambar apa adanya dan ditandai **bukan
 ahli waris**. Hal yang sama berlaku untuk anak angkat, keponakan dari saudara perempuan,
 keponakan dari saudara seibu, dan sepupu perempuan.
+
+### Anak tiri, anak angkat, anak kandung
+
+Ketiganya berbeda dan tidak boleh disamakan, karena akibat hukumnya di Indonesia berbeda:
+
+| Status | Mewarisi? | Catatan |
+|---|---|---|
+| Anak kandung | Ya | Termasuk anak dari pernikahan sebelumnya — nasabnya tidak terputus. |
+| Anak tiri | Tidak | Anak bawaan pasangan. Mewarisi dari orang tua kandungnya sendiri. Wasiat wajibah KHI Pasal 209 **tidak** berlaku; jalurnya hibah semasa hidup atau wasiat biasa maksimal 1/3. |
+| Anak angkat | Tidak | Pengangkatan tidak memindahkan nasab, tapi KHI Pasal 209 memberi wasiat wajibah maksimal 1/3 lewat Pengadilan Agama. |
 
 ### Kerabat yang sudah wafat lebih dulu
 
@@ -244,10 +254,11 @@ Bisa juga dari terminal:
 node -e "['faraid/fraction','faraid/heirs','faraid/hijab','faraid/shares','faraid/ashabah','faraid/special','faraid/estate','faraid/solve','keluarga','tests'].forEach(m=>require('./js/'+m+'.js'));const h=Tests.jalankan();const g=h.filter(x=>!x.lulus);g.forEach(x=>console.log('GAGAL',x.nama,x.pesan));console.log(h.length-g.length+'/'+h.length+' lulus')"
 ```
 
-82 kasus, mencakup: setiap tingkat 'aul (6→7/8/9/10, 12→13/15/17, 24→27), radd dengan dan
+89 kasus, mencakup: setiap tingkat 'aul (6→7/8/9/10, 12→13/15/17, 24→27), radd dengan dan
 tanpa pasangan, seluruh kasus khusus bernama, aturan hijab, perhitungan tirkah, dan
 penurunan susunan keluarga menjadi daftar ahli waris — termasuk siapa yang gugur karena
-sudah wafat lebih dulu. Jawabannya diambil dari kasus-kasus baku dalam kitab faraid.
+sudah wafat lebih dulu, keluarga sambung dengan anak tiri, dan pemeriksaan bahwa dalil
+yang ditempelkan ke sebuah bagian benar-benar membicarakan ahli waris itu. Jawabannya diambil dari kasus-kasus baku dalam kitab faraid.
 
 ---
 
