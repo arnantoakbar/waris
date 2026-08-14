@@ -127,9 +127,15 @@
     }
 
     // ── Masih hidup atau sudah wafat ───────────────────────────────
-    if (['anak', 'saudara', 'paman', 'ayah', 'ibu', 'kakek', 'nenekAyah', 'nenekIbu'].indexOf(tipe) > -1) {
+    if (['pasangan', 'anak', 'saudara', 'paman', 'ayah', 'ibu', 'kakek',
+         'nenekAyah', 'nenekIbu'].indexOf(tipe) > -1) {
       h += baris('Keadaan', pilihan('hidup',
         [[true, 'Masih hidup'], [false, 'Sudah wafat']], o.hidup !== false));
+    }
+    if (tipe === 'pasangan' && o.hidup === false) {
+      h += '<p class="lembar-ket lembar-catat">Pasangan yang wafat lebih dulu bukan ahli ' +
+        'waris. Tapi anak dari pernikahan itu tetap mewarisi penuh — tandai anaknya di ' +
+        'bawah pewaris seperti biasa.</p>';
     }
 
     // ── Anak angkat ────────────────────────────────────────────────

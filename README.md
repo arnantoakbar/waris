@@ -86,10 +86,10 @@ Dirancang mobile-first — inilah tampilan yang dipakai sebagian besar pengunjun
 
 ### Uji mesin faraid
 
-`tests.html` menjalankan 76 kasus yang jawabannya sudah baku dalam kitab faraid. Kalau ada
+`tests.html` menjalankan 82 kasus yang jawabannya sudah baku dalam kitab faraid. Kalau ada
 satu saja yang merah, hasil kalkulator tidak boleh dipercaya.
 
-![Hasil uji 76/76](docs/gambar/10-uji.png)
+![Hasil uji 82/82](docs/gambar/10-uji.png)
 
 ---
 
@@ -139,7 +139,7 @@ js/
   ui-pohon-edit.js      Penyuntingan pohon (bilah tambah + lembar ubah)
   ui-*.js               Lapisan tampilan lainnya
   export.js             PNG (canvas) & PDF (dialog cetak)
-  tests.js              75 kasus uji
+  tests.js              82 kasus uji
 ```
 
 ## Model susunan keluarga
@@ -158,6 +158,27 @@ benar cucu tidak berhak sama sekali dan saudara perempuan mendapat 1/12.
 Dengan model struktur, cucu lewat anak perempuan digambar apa adanya dan ditandai **bukan
 ahli waris**. Hal yang sama berlaku untuk anak angkat, keponakan dari saudara perempuan,
 keponakan dari saudara seibu, dan sepupu perempuan.
+
+### Kerabat yang sudah wafat lebih dulu
+
+Syarat mewarisi adalah ahli warisnya **masih hidup saat pewaris wafat**. Kerabat yang wafat
+lebih dulu tidak mewarisi apa pun — tapi ia tidak dihapus dari bagan, karena posisinya masih
+menentukan siapa yang naik menggantikannya dalam antrean ashabah:
+
+| Yang wafat lebih dulu | Akibatnya |
+|---|---|
+| Pasangan | Bukan ahli waris. Anak dari pernikahan itu tetap mewarisi penuh. Yang wafat juga tidak memakan jatah batas 4 istri. |
+| Anak laki-laki | Bukan ahli waris, tapi anaknya (cucu lewat anak laki-laki) naik menggantikan posisinya. |
+| Anak perempuan | Bukan ahli waris, dan anaknya tetap bukan ahli waris — cucu lewat anak perempuan adalah dzawil arham. |
+| Saudara laki-laki | Bukan ahli waris, tapi anak laki-lakinya masuk antrean ashabah sebagai keponakan. |
+| Saudara perempuan | Bukan ahli waris, dan anaknya juga bukan — keponakan hanya mewarisi lewat saudara laki-laki. |
+
+Perlu ditegaskan: ini **bukan** ahli waris pengganti. Dalam fiqh, keponakan dan cucu masuk
+karena haknya sendiri sebagai ashabah, dan bisa tetap terhalang oleh kerabat yang lebih
+dekat. Contoh yang mudah keliru: kalau pewaris meninggalkan anak perempuan, saudara
+perempuan kandung menjadi ashabah ma'al ghair dan justru **menghalangi** keponakan.
+Ahli waris pengganti yang sebenarnya diatur KHI Pasal 185 dan hanya berlaku lewat
+Pengadilan Agama — perbedaannya ditampilkan sebagai catatan, bukan diterapkan diam-diam.
 
 Daftar penghitung (+/−) dan pohon keluarga menyunting model yang **sama**, jadi keduanya
 tidak mungkin bertentangan. Kalau lewat daftar user menambah cucu padahal belum ada anak
@@ -220,12 +241,13 @@ Buka <http://localhost:8123/tests.html>. Semua kasus harus hijau.
 Bisa juga dari terminal:
 
 ```bash
-node -e "['fraction','heirs','hijab','shares','ashabah','special','estate','solve'].forEach(m=>require('./js/faraid/'+m+'.js'));require('./js/tests.js');const h=Tests.jalankan();const g=h.filter(x=>!x.lulus);g.forEach(x=>console.log('GAGAL',x.nama,x.pesan));console.log(h.length-g.length+'/'+h.length+' lulus')"
+node -e "['faraid/fraction','faraid/heirs','faraid/hijab','faraid/shares','faraid/ashabah','faraid/special','faraid/estate','faraid/solve','keluarga','tests'].forEach(m=>require('./js/'+m+'.js'));const h=Tests.jalankan();const g=h.filter(x=>!x.lulus);g.forEach(x=>console.log('GAGAL',x.nama,x.pesan));console.log(h.length-g.length+'/'+h.length+' lulus')"
 ```
 
-75 kasus, mencakup: setiap tingkat 'aul (6→7/8/9/10, 12→13/15/17, 24→27), radd dengan dan
-tanpa pasangan, seluruh kasus khusus bernama, aturan hijab, dan perhitungan tirkah.
-Jawabannya diambil dari kasus-kasus baku dalam kitab faraid.
+82 kasus, mencakup: setiap tingkat 'aul (6→7/8/9/10, 12→13/15/17, 24→27), radd dengan dan
+tanpa pasangan, seluruh kasus khusus bernama, aturan hijab, perhitungan tirkah, dan
+penurunan susunan keluarga menjadi daftar ahli waris — termasuk siapa yang gugur karena
+sudah wafat lebih dulu. Jawabannya diambil dari kasus-kasus baku dalam kitab faraid.
 
 ---
 

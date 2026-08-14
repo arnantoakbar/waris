@@ -25,7 +25,7 @@
   function baru(jenisKelamin) {
     return {
       jenisKelamin: jenisKelamin || null,   // jenis kelamin pewaris
-      pasangan: [],                          // {id}
+      pasangan: [],                          // {id, hidup}
       anak: [],                              // {id, gender, hidup, angkat, anak:[{id,gender}]}
       ayah: null,                            // {hidup}
       ibu: null,
@@ -43,11 +43,21 @@
   // Perubahan isi
   // ═══════════════════════════════════════════════════════════════
 
-  function tambahPasangan(k) {
-    if (k.pasangan.length >= MAKS_PASANGAN(k.jenisKelamin)) return null;
-    var o = { id: id() };
+  // Batas 4 istri hanya berlaku untuk pasangan yang MASIH HIDUP saat pewaris
+  // wafat. Istri yang sudah wafat lebih dulu bukan ahli waris, jadi tidak ikut
+  // dihitung — seorang laki-laki bisa punya banyak mantan istri yang telah
+  // wafat tanpa melanggar batas itu.
+  function tambahPasangan(k, opsi) {
+    opsi = opsi || {};
+    var hidup = opsi.hidup !== false;
+    if (hidup && jumlahPasanganHidup(k) >= MAKS_PASANGAN(k.jenisKelamin)) return null;
+    var o = { id: id(), hidup: hidup };
     k.pasangan.push(o);
     return o;
+  }
+
+  function jumlahPasanganHidup(k) {
+    return k.pasangan.filter(function (o) { return o.hidup !== false; }).length;
   }
 
   function tambahAnak(k, gender, opsi) {
@@ -155,8 +165,34 @@
     }
 
     // ── Pasangan ──────────────────────────────────────────────────
+    // Syarat mewarisi adalah pernikahan yang masih sah SAAT pewaris wafat, dan
+    // ahli warisnya sendiri masih hidup pada saat itu. Pasangan yang wafat
+    // lebih dulu tidak mewarisi apa pun — hubungan warisnya justru terbalik:
+    // dulu pewaris yang mewarisi dari dia.
     var kunciPasangan = k.jenisKelamin === 'P' ? 'suami' : 'istri';
-    k.pasangan.forEach(function (o) { tambah(kunciPasangan, o.id); });
+    var pasanganWafat = 0;
+    k.pasangan.forEach(function (o) {
+      if (o.hidup === false) { pasanganWafat++; return; }
+      tambah(kunciPasangan, o.id);
+    });
+
+    if (pasanganWafat) {
+      var adaAnakKandung = k.anak.some(function (a) { return !a.angkat; });
+      catatan.push({
+        id: 'pasangan_wafat',
+        tingkat: 'penting',
+        teks: 'Ada ' + pasanganWafat + ' pasangan yang wafat lebih dulu. Pasangan yang sudah ' +
+          'wafat bukan ahli waris — yang mewarisi hanya pasangan yang masih hidup saat pewaris ' +
+          'wafat. ' +
+          (adaAnakKandung
+            ? 'Anak kandung dari pernikahan itu tetap mewarisi penuh; nasabnya ke pewaris ' +
+              'tidak terputus oleh wafatnya sang ibu/ayah, dan bagiannya sama saja dengan ' +
+              'anak dari pernikahan mana pun. '
+            : '') +
+          'Kalau pewaris dulu sempat mewarisi harta dari pasangan yang wafat itu, harta ' +
+          'tersebut sudah menjadi milik pewaris dan ikut masuk ke total harta peninggalan.'
+      });
+    }
 
     // ── Anak & cucu ───────────────────────────────────────────────
     var adaCucuLewatAnakPr = 0;
@@ -403,6 +439,7 @@
   root.Keluarga = {
     baru: baru,
     MAKS_PASANGAN: MAKS_PASANGAN,
+    jumlahPasanganHidup: jumlahPasanganHidup,
     tambahPasangan: tambahPasangan,
     tambahAnak: tambahAnak,
     tambahSaudara: tambahSaudara,

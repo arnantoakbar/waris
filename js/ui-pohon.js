@@ -290,7 +290,9 @@
 
   function bilahTambah(k) {
     var t = [];
-    if (k.pasangan.length < K.MAKS_PASANGAN(k.jenisKelamin)) {
+    // Yang dibatasi hanya pasangan yang masih hidup; yang sudah wafat tidak
+    // ikut mengunci tombolnya.
+    if (K.jumlahPasanganHidup(k) < K.MAKS_PASANGAN(k.jenisKelamin)) {
       t.push(['pasangan', k.jenisKelamin === 'P' ? 'Suami' : 'Istri']);
     }
     t.push(['anak', 'Anak']);

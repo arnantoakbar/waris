@@ -359,6 +359,81 @@
   ];
 
   // ═══════════════════════════════════════════════════════════════
+  // Susunan keluarga -> daftar ahli waris
+  //
+  // Bagian ini menguji penurunan struktur keluarga menjadi angka, BUKAN
+  // pembagiannya. Yang paling penting di sini: siapa yang gugur karena sudah
+  // wafat lebih dulu, dan siapa yang tetap masuk meski penghubungnya wafat.
+  // Syarat mewarisi adalah ahli warisnya masih hidup saat pewaris wafat.
+  // ═══════════════════════════════════════════════════════════════
+  var KASUS_KELUARGA = [
+    { nama: 'Pasangan yang wafat lebih dulu bukan ahli waris',
+      susun: function (K) {
+        var k = K.baru('L');
+        K.tambahPasangan(k, { hidup: false });   // istri terdahulu, ibu dari anak-anak
+        K.tambahPasangan(k, { hidup: true });    // istri terakhir, tanpa anak
+        K.tambahAnak(k, 'P'); K.tambahAnak(k, 'P'); K.tambahAnak(k, 'P');
+        return k;
+      },
+      harap: { istri: 1, anak_pr: 3 } },
+
+    { nama: 'Istri yang wafat tidak memakan jatah batas 4 istri',
+      susun: function (K) {
+        var k = K.baru('L');
+        [1, 2, 3].forEach(function () { K.tambahPasangan(k, { hidup: false }); });
+        var ke4 = [1, 2, 3, 4].map(function () { return K.tambahPasangan(k, { hidup: true }); });
+        var ke5 = K.tambahPasangan(k, { hidup: true });   // harus ditolak
+        if (ke4.some(function (x) { return !x; }) || ke5) throw new Error('batas istri salah');
+        return k;
+      },
+      harap: { istri: 4 } },
+
+    { nama: 'Saudara yang wafat gugur, anak laki-lakinya tetap masuk antrean',
+      susun: function (K) {
+        var k = K.baru('L');
+        K.tambahPasangan(k);
+        [1, 2, 3].forEach(function () { K.tambahAnak(k, 'P'); });
+        K.tambahSaudara(k, 'kandung', 'L', { hidup: true });
+        var wafat = K.tambahSaudara(k, 'kandung', 'L', { hidup: false });
+        K.tambahSaudara(k, 'kandung', 'P', { hidup: true });
+        K.tambahKeturunan(wafat, 'L');
+        return k;
+      },
+      harap: { istri: 1, anak_pr: 3, sdr_lk_kandung: 1, sdr_pr_kandung: 1,
+               keponakan_kandung: 1 } },
+
+    { nama: 'Anak dari saudara PEREMPUAN yang wafat bukan ahli waris',
+      susun: function (K) {
+        var k = K.baru('L');
+        var wafat = K.tambahSaudara(k, 'kandung', 'P', { hidup: false });
+        K.tambahKeturunan(wafat, 'L');
+        K.tambahSaudara(k, 'kandung', 'P', { hidup: true });
+        return k;
+      },
+      harap: { sdr_pr_kandung: 1 } },
+
+    { nama: 'Cucu lewat anak laki-laki yang wafat tetap mewarisi',
+      susun: function (K) {
+        var k = K.baru('L');
+        var anakWafat = K.tambahAnak(k, 'L', { hidup: false });
+        K.tambahKeturunan(anakWafat, 'L');
+        K.tambahKeturunan(anakWafat, 'P');
+        return k;
+      },
+      harap: { cucu_lk: 1, cucu_pr: 1 } },
+
+    { nama: 'Cucu lewat anak perempuan yang wafat tetap bukan ahli waris',
+      susun: function (K) {
+        var k = K.baru('L');
+        var anakWafat = K.tambahAnak(k, 'P', { hidup: false });
+        K.tambahKeturunan(anakWafat, 'L');
+        K.tambahAnak(k, 'P');
+        return k;
+      },
+      harap: { anak_pr: 1 } }
+  ];
+
+  // ═══════════════════════════════════════════════════════════════
   // Runner
   // ═══════════════════════════════════════════════════════════════
   function jalankan() {
@@ -439,8 +514,35 @@
       });
     });
 
+    KASUS_KELUARGA.forEach(function (t) {
+      var gagal = [];
+      var didapat = {};
+      try {
+        didapat = root.Keluarga.keAhliWaris(t.susun(root.Keluarga)).counts;
+      } catch (e) {
+        gagal.push('Error: ' + e.message);
+      }
+      Object.keys(t.harap).forEach(function (k) {
+        if (didapat[k] !== t.harap[k]) {
+          gagal.push(k + ': dapat ' + (didapat[k] || 0) + ', harap ' + t.harap[k]);
+        }
+      });
+      Object.keys(didapat).forEach(function (k) {
+        if (!(k in t.harap)) gagal.push(k + ': dapat ' + didapat[k] + ', seharusnya tidak ada');
+      });
+      hasil.push({
+        nama: 'Keluarga — ' + t.nama,
+        lulus: gagal.length === 0,
+        pesan: gagal,
+        detail: Object.keys(didapat).map(function (k) { return k + ' ' + didapat[k]; }).join(' · ')
+      });
+    });
+
     return hasil;
   }
 
-  root.Tests = { KASUS: KASUS, KASUS_HARTA: KASUS_HARTA, jalankan: jalankan };
+  root.Tests = {
+    KASUS: KASUS, KASUS_HARTA: KASUS_HARTA, KASUS_KELUARGA: KASUS_KELUARGA,
+    jalankan: jalankan
+  };
 })(typeof window !== 'undefined' ? window : globalThis);

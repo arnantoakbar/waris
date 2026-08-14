@@ -64,8 +64,14 @@
         x.setAttribute('aria-pressed', String(x === b));
       });
       // Pasangan dibatasi ulang: pewaris perempuan hanya boleh punya 1 suami.
+      // Batasnya hanya menyangkut pasangan yang masih hidup — yang sudah wafat
+      // bukan ahli waris, jadi berapa pun jumlahnya tidak perlu dipangkas.
       var maks = K.MAKS_PASANGAN(state.keluarga.jenisKelamin);
-      state.keluarga.pasangan = state.keluarga.pasangan.slice(0, maks);
+      var sisaJatah = maks;
+      state.keluarga.pasangan = state.keluarga.pasangan.filter(function (o) {
+        if (o.hidup === false) return true;
+        return sisaJatah-- > 0;
+      });
       renderAhliWaris();
       renderKondisi();
       hitungUlangKalauPerlu();
@@ -315,7 +321,7 @@
       { id: 'adaSengketa', judul: 'Ahli waris belum sepakat atau sedang berselisih',
         ket: 'Kami akan menyarankan jalur Pengadilan Agama.' }
     ];
-    if (state.keluarga.jenisKelamin === 'L' && state.keluarga.pasangan.length) {
+    if (state.keluarga.jenisKelamin === 'L' && K.jumlahPasanganHidup(state.keluarga)) {
       list.splice(1, 0, { id: 'istriHamil', judul: 'Ada istri yang sedang hamil',
         ket: 'Bagian anak dalam kandungan harus ditahan dulu sampai ia lahir.' });
     }
