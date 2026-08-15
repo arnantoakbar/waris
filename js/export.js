@@ -304,8 +304,16 @@
       : 0;
 
     var tinggiDonut = penerima.length ? 500 : 0;
-    var saran = root.Advice ? root.Advice.langkah(hasil) : [];
-    var catatanKHI = root.KHI ? root.KHI.catatan(hasil) : [];
+
+    // Ekspor harus mengikuti dasar hukum yang dipilih user di halaman hasil.
+    // Kalau tidak, PNG mode "Qur'an & Sunnah saja" tetap memuat catatan
+    // Pengadilan Agama dan langkah harta bersama — bertentangan dengan yang
+    // dilihat di layar.
+    var pakaiHukum = !!hasil.pakaiHukumIndonesia;
+    var saran = (root.Advice ? root.Advice.langkah(hasil) : []).filter(function (s) {
+      return pakaiHukum || !s.hukumIndonesia;
+    });
+    var catatanKHI = (pakaiHukum && root.KHI) ? root.KHI.catatan(hasil) : [];
     var dalilDipakai = root.Dalil ? root.Dalil.kumpulkan(hasil) : [];
 
     // Tingginya dilebihkan lalu dipotong ke isi sebenarnya di akhir fungsi.

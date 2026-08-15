@@ -271,8 +271,13 @@
     var terhalang = hasil.ahliWaris.filter(function (a) {
       return a.status === 'terhalang' || a.status === 'nol';
     });
-    var catatanKHI = root.KHI.catatan(hasil);
-    var saran = root.Advice.langkah(hasil);
+    // Mode dasar hukum. Bawaannya syariat murni: aturan negara hanya muncul
+    // kalau user memang memilihnya (atau mencentang harta bersama di langkah 3).
+    var pakaiHukum = !!hasil.pakaiHukumIndonesia;
+    var catatanKHI = pakaiHukum ? root.KHI.catatan(hasil) : [];
+    var saran = root.Advice.langkah(hasil).filter(function (s) {
+      return pakaiHukum || !s.hukumIndonesia;
+    });
     var dalilDipakai = root.Dalil.kumpulkan(hasil);
 
     var html = '';
@@ -302,6 +307,35 @@
       '<a class="btn btn-ghost btn-sm" href="rujukan.html" target="_blank" rel="noopener">' +
       ikon('i-kitab', 'ic-sm') + ' Lihat seluruh dalil rujukannya</a>' +
       '</div></div>';
+
+    // ── Pilihan dasar hukum ────────────────────────────────────────
+    // Diletakkan di atas angka, bukan di kaki halaman: dasar yang dipakai
+    // mengubah angkanya, jadi user harus tahu sebelum membaca hasilnya.
+    html += '<div class="wrap wrap-narrow"><div class="dasar">' +
+      '<span class="dasar-teks">' +
+      '<span class="dasar-judul">Dasar yang dipakai</span>' +
+      '<span class="dasar-ket">' +
+      (pakaiHukum
+        ? 'Al-Qur\u2019an dan Sunnah, ditambah aturan negara yang berlaku bagi umat Islam \u2014 ' +
+          'pemisahan harta bersama dan catatan Pengadilan Agama.'
+        : 'Murni Al-Qur\u2019an dan Sunnah. Aturan negara seperti harta bersama, ahli waris ' +
+          'pengganti, dan wasiat wajibah tidak diterapkan.') +
+      '</span></span>' +
+      '<span class="dasar-pilih" role="group" aria-label="Dasar hukum yang dipakai">' +
+      '<button type="button" data-dasar="syariat" aria-pressed="' + (!pakaiHukum) + '">' +
+      'Qur\u2019an &amp; Sunnah</button>' +
+      '<button type="button" data-dasar="indonesia" aria-pressed="' + pakaiHukum + '">' +
+      '+ Hukum Indonesia</button>' +
+      '</span></div>' +
+      (!pakaiHukum && hasil.hartaBersamaDicentang
+        ? '<div class="pita pita-hukum" style="margin-bottom:var(--space-6);align-items:flex-start">' +
+          ikon('i-info') +
+          '<span>Kamu mencentang <strong>harta bersama</strong> di langkah 3, tapi mode ini ' +
+          'tidak memakainya \u2014 pemisahan harta bersama berasal dari hukum negara, bukan dari ' +
+          'ayat atau hadits waris. Pilih <strong>+ Hukum Indonesia</strong> untuk ' +
+          'memberlakukannya.</span></div>'
+        : '') +
+      '</div>';
 
     // ── Ledger ─────────────────────────────────────────────────────
     html += '<div class="wrap wrap-narrow"><div class="blok">' +
@@ -507,6 +541,20 @@
         hasil: hasil,
         sunting: !!opts.onUbahPohon,
         onUbah: opts.onUbahPohon
+      });
+    }
+
+    // Pilihan dasar hukum. Menggulir balik ke pemilihnya setelah render ulang,
+    // supaya user tidak kehilangan tempat saat angkanya berubah.
+    if (opts.onUbahDasar) {
+      Array.prototype.forEach.call(wadah.querySelectorAll('[data-dasar]'), function (b) {
+        b.addEventListener('click', function () {
+          if (b.getAttribute('aria-pressed') === 'true') return;
+          var atas = b.getBoundingClientRect().top;
+          opts.onUbahDasar(b.dataset.dasar === 'indonesia');
+          var baru = document.querySelector('#hasil [data-dasar]');
+          if (baru) window.scrollBy(0, baru.getBoundingClientRect().top - atas);
+        });
       });
     }
 

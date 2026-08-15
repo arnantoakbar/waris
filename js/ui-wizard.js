@@ -18,10 +18,16 @@
   var K = window.Keluarga;
   var TOTAL_LANGKAH = 5;
 
+  /* pakaiHukumIndonesia menentukan apakah hasil ditampilkan murni menurut
+     Al-Qur'an dan sunnah, atau ditambah aturan negara yang berlaku bagi umat
+     Islam (harta bersama + catatan Pengadilan Agama). Dasarnya syariat murni;
+     mencentang harta bersama di langkah 3 otomatis menyalakannya, karena itu
+     memang permintaan eksplisit user. */
   var state = {
     keluarga: K.baru(null),
     harta: { total: 0, totalManual: 0, rincian: {}, biayaJenazah: 0, hutang: 0, wasiat: 0, hartaBersama: false },
-    kondisi: {}
+    kondisi: {},
+    pakaiHukumIndonesia: false
   };
 
   var langkahKini = 1;
@@ -159,6 +165,9 @@
   $('#ck-harta-bersama').addEventListener('click', function () {
     state.harta.hartaBersama = !state.harta.hartaBersama;
     this.setAttribute('aria-pressed', String(state.harta.hartaBersama));
+    // Harta bersama adalah aturan negara. Mencentangnya berarti user memang
+    // ingin aturan Indonesia ikut dipakai.
+    if (state.harta.hartaBersama) state.pakaiHukumIndonesia = true;
     hitungUlangKalauPerlu();
   });
 
@@ -412,12 +421,23 @@
     // susunan keluarga itu sendiri.
     if (t.anakAngkat) kondisi.anakAngkat = true;
 
+    // Dalam mode syariat murni, pemisahan harta bersama tidak diberlakukan —
+    // ia bukan aturan faraid. Centangnya tetap tersimpan, jadi user bisa
+    // bolak-balik membandingkan tanpa kehilangan isian.
+    var harta = state.harta;
+    if (!state.pakaiHukumIndonesia && harta.hartaBersama) {
+      harta = Object.keys(harta).reduce(function (o, k) { o[k] = harta[k]; return o; }, {});
+      harta.hartaBersama = false;
+    }
+
     var hasil = window.Faraid.hitung({
       jenisKelamin: state.keluarga.jenisKelamin,
-      harta: state.harta,
+      harta: harta,
       ahliWaris: t.counts,
       kondisi: kondisi
     });
+    hasil.pakaiHukumIndonesia = state.pakaiHukumIndonesia;
+    hasil.hartaBersamaDicentang = !!state.harta.hartaBersama;
 
     // Catatan dari struktur keluarga (cucu lewat anak perempuan, anak angkat,
     // keponakan yang tidak berhak) digabungkan ke catatan hasil.
@@ -440,7 +460,8 @@
     // masih hidden tidak punya ukuran — garisnya jadi tidak tergambar.
     var el = document.getElementById('hasil');
     el.hidden = false;
-    window.UIResult.render(hitung(), { onUbahPohon: saatPohonHasilBerubah });
+    window.UIResult.render(hitung(), { onUbahPohon: saatPohonHasilBerubah,
+      onUbahDasar: saatDasarBerubah });
     sudahAdaHasil = true;
     document.getElementById('wizard').hidden = true;
     window.scrollTo({ top: 0, behavior: 'auto' });
@@ -458,12 +479,20 @@
   function saatPohonHasilBerubah() {
     renderAhliWaris();
     renderKondisi();
-    window.UIResult.render(hitung(), { diam: true, onUbahPohon: saatPohonHasilBerubah });
+    window.UIResult.render(hitung(), { diam: true, onUbahPohon: saatPohonHasilBerubah,
+      onUbahDasar: saatDasarBerubah });
+  }
+
+  /* Dipanggil dari tombol pilihan dasar hukum di halaman hasil. */
+  function saatDasarBerubah(pakai) {
+    state.pakaiHukumIndonesia = !!pakai;
+    hitungUlangKalauPerlu();
   }
 
   function hitungUlangKalauPerlu() {
     if (!sudahAdaHasil) return;
-    window.UIResult.render(hitung(), { diam: true, onUbahPohon: saatPohonHasilBerubah });
+    window.UIResult.render(hitung(), { diam: true, onUbahPohon: saatPohonHasilBerubah,
+      onUbahDasar: saatDasarBerubah });
   }
 
   document.addEventListener('click', function (e) {
@@ -475,7 +504,8 @@
     state = {
       keluarga: K.baru(null),
       harta: { total: 0, totalManual: 0, rincian: {}, biayaJenazah: 0, hutang: 0, wasiat: 0, hartaBersama: false },
-      kondisi: {}
+      kondisi: {},
+      pakaiHukumIndonesia: false
     };
     sudahAdaHasil = false;
     modeHarta = 'total';

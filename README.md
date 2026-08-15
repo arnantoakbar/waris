@@ -169,6 +169,37 @@ Ketiganya berbeda dan tidak boleh disamakan, karena akibat hukumnya di Indonesia
 | Anak tiri | Tidak | Anak bawaan pasangan. Mewarisi dari orang tua kandungnya sendiri. Wasiat wajibah KHI Pasal 209 **tidak** berlaku; jalurnya hibah semasa hidup atau wasiat biasa maksimal 1/3. |
 | Anak angkat | Tidak | Pengangkatan tidak memindahkan nasab, tapi KHI Pasal 209 memberi wasiat wajibah maksimal 1/3 lewat Pengadilan Agama. |
 
+### Dua dasar hukum, dipilih pemakai
+
+Halaman hasil punya pemilih **"Qur'an & Sunnah"** atau **"+ Hukum Indonesia"**. Bawaannya
+syariat murni; mencentang harta bersama di langkah 3 otomatis menyalakan mode Indonesia,
+karena centang itu memang permintaan eksplisit.
+
+| | Qur'an & Sunnah | + Hukum Indonesia |
+|---|---|---|
+| Pemisahan harta bersama | Tidak diterapkan | Separuh dikeluarkan lebih dulu |
+| Catatan Pengadilan Agama | Disembunyikan | Ditampilkan dengan tautan pasalnya |
+| Checklist harta bersama | Disembunyikan | Muncul dengan disclaimer dan sumber |
+| Ekspor PNG dan PDF | Ikut mode yang dipilih | Ikut mode yang dipilih |
+
+Angkanya benar-benar berubah, bukan sekadar menyembunyikan teks — itulah gunanya: pemakai
+bisa melihat persis apa yang ditambahkan aturan negara.
+
+### Aturan negara: hanya yang berlaku bagi umat Islam
+
+Rujukan utama tetap Al-Qur'an dan sunnah. Aturan negara dicantumkan hanya bila ia memang
+aturan bagi umat Islam, dan setiap penyebutannya membawa tautan ke sumber yang bisa dibuka:
+
+| Rujukan | Dipakai untuk |
+|---|---|
+| [UU 1/1974 Pasal 35](https://pasal.id/peraturan/uu/uu-no-1-tahun-1974#pasal-35) | Definisi harta bersama dan harta bawaan |
+| [KHI Pasal 96, 185, 209](https://peraturan.bpk.go.id/Details/293351/inpres-no-1-tahun-1991) | Separuh harta bersama, ahli waris pengganti, wasiat wajibah |
+| [UU 3/2006 Pasal 49](https://pasal.id/peraturan/uu/uu-no-3-tahun-2006#pasal-49) | Kewenangan Pengadilan Agama atas perkara waris orang Islam |
+
+Teks pasalnya diverifikasi lewat basis data peraturan resmi, bukan dari ingatan. KHI adalah
+lampiran Inpres 1/1991 sehingga tidak terindeks per pasal — kutipannya dicocokkan ke sumber
+Ditjen Badilag Mahkamah Agung. **KUHPerdata dan hukum adat tidak dipakai sama sekali.**
+
 ### Kerabat yang sudah wafat lebih dulu
 
 Syarat mewarisi adalah ahli warisnya **masih hidup saat pewaris wafat**. Kerabat yang wafat

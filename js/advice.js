@@ -59,7 +59,9 @@
 
   /**
    * @param {Object} hasil  keluaran Faraid.hitung()
-   * @returns {Array<{id, tingkat, judul, teks, poin, tautan}>}
+   * @returns {Array<{id, tingkat, judul, teks, poin, tautan, hukumIndonesia}>}
+   *   hukumIndonesia menandai langkah yang bersumber dari aturan negara, bukan
+   *   dari dalil — halaman hasil menyembunyikannya di mode syariat murni.
    *          tingkat: 'wajib' | 'penting' | 'saran'
    */
   function langkah(hasil) {
@@ -326,6 +328,7 @@
       out.push({
         id: 'cek_harta_bersama',
         tingkat: 'penting',
+        hukumIndonesia: true,
         judul: 'Pastikan dulu status harta bersamanya',
         teks: 'Kamu tidak menandai harta ini sebagai harta bersama, jadi seluruhnya dihitung ' +
           'sebagai milik almarhum. Ini perlu dicek ulang karena pengaruhnya besar. ' +
@@ -346,6 +349,7 @@
       out.push({
         id: 'pisah_harta_bersama',
         tingkat: 'wajib',
+        hukumIndonesia: true,
         judul: 'Pisahkan dulu harta bersama, sebelum warisan dibagi',
         teks: 'Separuh harta bersama sudah dikeluarkan dari hitungan karena ia milik pasangan ' +
           'yang masih hidup sejak semula, bukan warisan. Pemisahan itu perlu disepakati ' +

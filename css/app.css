@@ -1660,6 +1660,73 @@ body.lembar-terbuka { overflow: hidden; }
   border: 1px solid rgba(232,57,29,0.2);
 }
 
+/* Aturan yang berasal dari hukum negara, bukan dari dalil. Dibedakan warnanya
+   supaya sekali lihat ketahuan bahwa sumbernya lain. */
+.pita-hukum {
+  background: rgba(17,17,17,0.035);
+  border: 1px solid rgba(17,17,17,0.1);
+}
+.pita-hukum .ic { color: var(--fg3); }
+.pita-hukum a { color: var(--color-ember); text-decoration: underline; }
+.pita-tekan {
+  display: block;
+  margin-top: var(--space-2);
+  font-weight: var(--fw-semibold);
+  color: var(--fg2);
+}
+
+/* ── Pilihan dasar hukum di halaman hasil ───────────────────────── */
+.dasar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--space-5);
+  border-radius: var(--radius-card);
+  border: 1px solid var(--border-default);
+  background: var(--bg-secondary);
+  margin-bottom: var(--space-6);
+}
+.dasar-teks { flex: 1 1 260px; min-width: 0; }
+.dasar-judul {
+  display: block;
+  font-weight: var(--fw-semibold);
+  font-size: var(--text-body-sm);
+  color: var(--fg1);
+}
+.dasar-ket {
+  display: block;
+  font-size: var(--text-body-xs);
+  color: var(--fg3);
+  line-height: 1.5;
+  margin-top: 2px;
+}
+.dasar-pilih { display: flex; gap: 4px; flex: 0 0 auto; }
+.dasar-pilih button {
+  padding: 9px 16px;
+  border-radius: 100px;
+  border: 1.5px solid var(--border-default);
+  background: transparent;
+  font: inherit;
+  font-size: var(--text-body-xs);
+  font-weight: var(--fw-semibold);
+  color: var(--fg2);
+  cursor: pointer;
+  transition: var(--transition-base);
+  min-height: 44px;
+}
+.dasar-pilih button[aria-pressed="true"] {
+  background: var(--color-charcoal);
+  border-color: var(--color-charcoal);
+  color: var(--fg-on-dark);
+}
+.dasar-pilih button:hover:not([aria-pressed="true"]) { border-color: var(--color-flame); }
+
+@media (max-width: 560px) {
+  .dasar-pilih { width: 100%; }
+  .dasar-pilih button { flex: 1; }
+}
+
 .hitung-flav {
   width: 64px;
   margin: 0 auto var(--space-4);
