@@ -1173,6 +1173,17 @@ body.lembar-terbuka { overflow: hidden; }
   color: var(--color-ember);
   margin-bottom: var(--space-2);
 }
+/* Menyebut klausa mana di dalam ayat yang sedang dikutip — ayat waris memuat
+   beberapa ketetapan sekaligus, jadi tanpa ini pembaca bisa mengira seluruh
+   ayat berbicara tentang dirinya. */
+.dalil-klausa {
+  display: block;
+  margin-top: 3px;
+  font-weight: var(--fw-medium);
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--fg3);
+}
 .dalil-arab {
   direction: rtl;
   text-align: right;
@@ -2077,3 +2088,33 @@ body.lembar-terbuka { overflow: hidden; }
   .koreksi-jalur { grid-template-columns: repeat(3, 1fr); }
   .koreksi-kartu { flex-direction: column; gap: var(--space-4); }
 }
+
+/* ── Rincian klausa di halaman rujukan ──────────────────────────────
+   Ayat waris memuat beberapa ketetapan sekaligus. Dirinci supaya pembaca
+   bisa mencocokkan klausa mana yang dipakai untuk ahli waris mana. */
+.klausa-daftar {
+  margin-top: var(--space-5);
+  padding-top: var(--space-4);
+  border-top: 1px dashed var(--border-default);
+}
+.klausa-judul {
+  font-size: var(--text-micro);
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--ls-wide);
+  text-transform: uppercase;
+  color: var(--fg3);
+  margin-bottom: var(--space-3);
+}
+.klausa {
+  padding: var(--space-3) 0;
+  border-bottom: 1px dashed rgba(17, 17, 17, 0.08);
+}
+.klausa:last-child { border-bottom: 0; padding-bottom: 0; }
+.klausa-ket {
+  font-size: var(--text-body-xs);
+  font-weight: var(--fw-semibold);
+  color: var(--color-ember);
+  margin-bottom: var(--space-2);
+}
+.klausa .dalil-arab { font-size: 20px; margin: var(--space-2) 0; }
+.klausa .dalil-terjemah { font-size: var(--text-body-xs); }

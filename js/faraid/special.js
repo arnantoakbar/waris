@@ -61,7 +61,25 @@
         'daripada ayah. Padahal dalam sistem waris Islam, ketika kedudukan sama, ' +
         'laki-laki mendapat dua kali bagian perempuan. Umar bin Khattab memutuskan ibu ' +
         'mendapat 1/3 dari sisa, dan putusan ini diikuti jumhur ulama termasuk Imam Syafi\'i.',
-      dalil: 'qs4-11'
+      // Bagian pasangan di sini berasal dari QS An-Nisa 12, bukan ayat 11 —
+      // ayat 11 tidak menyinggung suami/istri sama sekali. Yang khas pada
+      // Umariyyatain adalah bagian IBU: 1/3 dari sisa, bukan 1/3 harta.
+      dalil: 'qs4-11',
+      dalilPerOrang: {
+        suami: 'qs4-12',
+        istri: 'qs4-12',
+        // Di kasus ini pewaris TIDAK punya anak, jadi ayah bukan mengambil 1/6
+        // bagian tetap melainkan seluruh sisa sebagai ashabah. Menunjuk klausa
+        // "masing-masing seperenam jika ia punya anak" justru salah keadaan.
+        ayah: 'hadits-ashabah'
+      },
+      potongan: {
+        suami: 'suamiTanpaAnak',
+        istri: 'istriTanpaAnak',
+        // Angka 1/3 untuk ibu memang dari ayat ini; yang menjadi ijtihad Umar
+        // adalah membacanya sebagai 1/3 SISA, bukan 1/3 seluruh harta.
+        ibu: 'ibuTanpaAnak'
+      }
     };
   }
 

@@ -337,6 +337,52 @@
       harap: { suami: '1/2', sdr_lk_sebapak: '1/3', sdr_pr_sebapak: '1/6' },
       dalil: { sdr_lk_sebapak: 'qs4-176', sdr_pr_sebapak: 'qs4-176' } },
 
+    // Kasus yang dilaporkan: potongan ayat harus menyebut hak masing-masing,
+    // bukan kalimat pembuka ayatnya.
+    { nama: 'Klausa ayat cocok: ibu, istri, dan anak dalam satu kasus',
+      input: K('L', { ibu: 1, istri: 1, anak_lk: 1, anak_pr: 1 }),
+      harap: { istri: '1/8', ibu: '1/6', anak_lk: '17/36', anak_pr: '17/72' },
+      dalil: { istri: 'qs4-12', ibu: 'qs4-11', anak_lk: 'qs4-11', anak_pr: 'qs4-11' },
+      potongan: { istri: 'istriAdaAnak', ibu: 'ortuAdaAnak',
+                  anak_lk: 'anak', anak_pr: 'anak' } },
+
+    { nama: 'Klausa istri berubah saat tidak ada anak',
+      input: K('L', { istri: 1, ibu: 1, ayah: 1 }),
+      harap: { istri: '1/4', ibu: '1/4', ayah: '1/2' },
+      kasus: 'umariyyatain',
+      dalil: { istri: 'qs4-12' },
+      potongan: { istri: 'istriTanpaAnak', ibu: 'ibuTanpaAnak' } },
+
+    { nama: 'Klausa suami: 1/2 tanpa anak, 1/4 dengan anak',
+      input: K('P', { suami: 1, anak_pr: 2 }),
+      harap: { suami: '1/4', anak_pr: '3/4' }, radd: true,
+      dalil: { suami: 'qs4-12', anak_pr: 'qs4-11' },
+      potongan: { suami: 'suamiAdaAnak', anak_pr: 'anakPrBanyak' } },
+
+    { nama: 'Klausa ibu 1/6 karena dua saudara, bukan karena anak',
+      input: K('L', { ibu: 1, ayah: 1, sdr_lk_kandung: 2 }),
+      harap: { ibu: '1/6', ayah: '5/6' },
+      terhalang: ['sdr_lk_kandung'],
+      dalil: { ibu: 'qs4-11' },
+      potongan: { ibu: 'ibuAdaSaudara' } },
+
+    // Bagian tetapnya 1/2 dan 1/6; sisanya 1/3 dikembalikan lewat radd secara
+    // proporsional, jadi angka akhirnya 3/4 dan 1/4. Klausa ayat yang dirujuk
+    // tetap klausa bagian tetapnya — radd tidak mengubah asal haknya.
+    { nama: 'Klausa saudara perempuan kandung dan saudara seibu (radd)',
+      input: K('L', { sdr_pr_kandung: 1, sdr_lk_seibu: 1 }),
+      harap: { sdr_pr_kandung: '3/4', sdr_lk_seibu: '1/4' },
+      radd: true,
+      dalil: { sdr_pr_kandung: 'qs4-176', sdr_lk_seibu: 'qs4-12' },
+      potongan: { sdr_pr_kandung: 'sdrPrTunggal', sdr_lk_seibu: 'seibuTunggal' } },
+
+    { nama: 'Klausa saudara campur 2:1 = akhir QS An-Nisa 176',
+      input: K('P', { suami: 1, sdr_lk_kandung: 1, sdr_pr_kandung: 1 }),
+      harap: { suami: '1/2', sdr_lk_kandung: '1/3', sdr_pr_kandung: '1/6' },
+      dalil: { sdr_lk_kandung: 'qs4-176', sdr_pr_kandung: 'qs4-176' },
+      potongan: { sdr_lk_kandung: 'saudaraCampur', sdr_pr_kandung: 'saudaraCampur',
+                  suami: 'suamiTanpaAnak' } },
+
     { nama: 'Dalil ashabah maal ghair = HR Bukhari 6736',
       input: K('P', { anak_pr: 1, sdr_pr_kandung: 1 }),
       harap: { anak_pr: '1/2', sdr_pr_kandung: '1/2' },
@@ -583,6 +629,21 @@
         if (!a || a.dalil !== t.dalil[k]) {
           gagal.push('dalil ' + k + ': dapat ' + (a ? a.dalil : 'tidak ada') +
             ', harap ' + t.dalil[k]);
+        }
+      });
+
+      // Potongan ayat harus menyebut hak orang ini. Ayat waris memuat beberapa
+      // ketetapan; menunjuk ayat yang benar tapi klausa yang salah membuat
+      // kutipannya tidak membuktikan apa-apa.
+      Object.keys(t.potongan || {}).forEach(function (k) {
+        var a = r.ahliWaris.filter(function (x) { return x.key === k; })[0];
+        if (!a || a.potongan !== t.potongan[k]) {
+          gagal.push('potongan ' + k + ': dapat ' + (a ? (a.potongan || 'tidak ada') : '-') +
+            ', harap ' + t.potongan[k]);
+        }
+        var d = a && a.dalil && root.Dalil && root.Dalil.DATA[a.dalil];
+        if (d && (!d.potongan || !d.potongan[t.potongan[k]])) {
+          gagal.push('potongan ' + t.potongan[k] + ' tidak ada di ' + a.dalil);
         }
       });
 

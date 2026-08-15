@@ -144,16 +144,39 @@
     }).join('') + '</div>';
   }
 
+  /*
+   * Satu ayat waris memuat beberapa ketetapan sekaligus. Yang ditampilkan di
+   * kartu harus klausa yang MENYEBUT hak orang ini — kalau tidak, pembaca yang
+   * memeriksa teks Arabnya tidak menemukan apa pun tentang dirinya, dan
+   * kutipannya justru melemahkan kepercayaan. Ayat utuhnya tetap bisa dibuka
+   * lewat tautannya.
+   */
+  function blokDalil(id, idPotongan) {
+    var d = root.Dalil.ambil(id);
+    if (!d) return '';
+    var pot = (d.potongan && idPotongan) ? d.potongan[idPotongan] : null;
+    var arab = pot ? pot.arab : d.arab;
+    var arti = pot ? pot.terjemah : d.terjemah;
+
+    return '<div class="dalil">' +
+      '<div class="dalil-rujukan">' + d.rujukan +
+      (pot ? '<span class="dalil-klausa">' + pot.ket + '</span>' : '') + '</div>' +
+      (arab ? '<div class="dalil-arab" lang="ar" dir="rtl">' + arab + '</div>' : '') +
+      '<div class="dalil-terjemah">' + arti + '</div>' +
+      (d.sumber ? '<div class="dalil-sumber">' + d.sumber + '</div>' : '') +
+      tautanDalil(d) +
+      '</div>';
+  }
+
   function kartuWaris(a, warna) {
     var dalil = a.dalil ? root.Dalil.ambil(a.dalil) : null;
 
-    var isiDalil = dalil ? '<div class="dalil">' +
-      '<div class="dalil-rujukan">' + dalil.rujukan + '</div>' +
-      (dalil.arab ? '<div class="dalil-arab" lang="ar" dir="rtl">' + dalil.arab + '</div>' : '') +
-      '<div class="dalil-terjemah">' + dalil.terjemah + '</div>' +
-      (dalil.sumber ? '<div class="dalil-sumber">' + dalil.sumber + '</div>' : '') +
-      tautanDalil(dalil) +
-      '</div>' : '';
+    // Sebagian bagian bersandar pada lebih dari satu sumber — ayat menetapkan
+    // besarannya, hadits menetapkan mekanismenya. Keduanya ditampilkan.
+    var isiDalil = dalil
+      ? blokDalil(a.dalil, a.potongan) +
+        (a.dalilLain || []).map(function (id) { return blokDalil(id, null); }).join('')
+      : '';
 
     var kanan = (a.status === 'terhalang' || a.status === 'nol')
       ? '<span class="hasil-angka"><span class="hasil-pecahan hasil-nihil">' +

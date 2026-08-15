@@ -36,6 +36,14 @@
     sdr_lk_sebapak: 'qs4-176'
   };
 
+  /* Klausa di dalam ayat yang benar-benar menyebut perbandingan 2 : 1. */
+  var POTONGAN_BIL_GHAIR = {
+    anak_lk: 'anak',
+    cucu_lk: 'anak',
+    sdr_lk_kandung: 'saudaraCampur',
+    sdr_lk_sebapak: 'saudaraCampur'
+  };
+
   var KETERANGAN_BIL_GHAIR = {
     anak_lk: 'Aturan ini disebut langsung dalam QS An-Nisa ayat 11 tentang anak.',
     cucu_lk: 'Cucu lewat anak laki-laki mengambil kedudukan anak ketika pewaris tidak ' +
@@ -76,7 +84,11 @@
           alasan: H.label(key) + ' dan ' + H.label(partner).toLowerCase() +
             ' berbagi sisa harta dengan perbandingan 2 : 1 — bagian laki-laki dua kali ' +
             'bagian perempuan. ' + KETERANGAN_BIL_GHAIR[key],
-          dalil: DALIL_BIL_GHAIR[key]
+          dalil: DALIL_BIL_GHAIR[key],
+          potongan: POTONGAN_BIL_GHAIR[key],
+          // Ayat menetapkan PERBANDINGANNYA; hadits menetapkan bahwa merekalah
+          // yang mengambil sisa harta. Dua hal berbeda, jadi dua-duanya dirujuk.
+          dalilLain: ['hadits-ashabah']
         };
       }
 
@@ -88,7 +100,10 @@
         alasan: (key === 'ayah' || key === 'kakek')
           ? H.label(key) + ' mengambil seluruh sisa harta setelah bagian tetap dibayarkan.'
           : H.label(key) + ' adalah kerabat laki-laki terdekat, jadi seluruh sisa harta menjadi haknya.',
-        dalil: 'hadits-ashabah'
+        dalil: 'hadits-ashabah',
+        // Hak anak dan cucu untuk mewarisi sendiri berasal dari QS An-Nisa 11.
+        dalilLain: (key === 'anak_lk' || key === 'cucu_lk') ? ['qs4-11']
+                 : (key === 'ayah' || key === 'kakek') ? ['qs4-11'] : []
       };
     }
 
@@ -109,7 +124,8 @@
           alasan: H.label(kandidat) + ' menjadi ashabah karena pewaris meninggalkan anak/cucu perempuan, ' +
             'sehingga mengambil sisa harta setelah bagian tetap dibayarkan. Keadaan ini disebut ' +
             'langsung dalam putusan Ibnu Mas\'ud: "dan sisanya untuk saudara perempuan".',
-          dalil: 'hadits-cucu-pr'
+          dalil: 'hadits-cucu-pr',
+          dalilLain: ['qs4-176']
         };
       }
     }

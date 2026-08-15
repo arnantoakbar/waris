@@ -27,7 +27,9 @@
     opts = opts || {};
     var fardh = {};   // key -> Fraction (total kelompok)
     var alasan = {};  // key -> penjelasan singkat
-    var dalil = {};   // key -> id dalil di dalil.js
+    var dalil = {};      // key -> id dalil di dalil.js
+    var potongan = {};   // key -> potongan ayat mana yang menyebut hak ini
+    var dalilLain = {};  // key -> sumber pendamping (mis. ayat + hadits qiyas)
 
     function ada(k) { return (aktif[k] || 0) > 0; }
     function n(k) { return aktif[k] || 0; }
@@ -36,10 +38,16 @@
     var faruPr = ada('anak_pr') || ada('cucu_pr');
     var faru = faruLk || faruPr;
 
-    function set(key, frac, teks, idDalil) {
+    /*
+     * idPotongan menunjuk klausa mana di dalam ayat yang menetapkan bagian ini.
+     * Tanpa itu, kartu ibu menampilkan kalimat tentang anak — ayatnya benar,
+     * tapi kutipannya tidak membuktikan apa pun bagi pembaca yang memeriksa.
+     */
+    function set(key, frac, teks, idDalil, idPotongan) {
       fardh[key] = frac;
       alasan[key] = teks;
       dalil[key] = idDalil;
+      if (idPotongan) potongan[key] = idPotongan;
     }
 
     // ── Pasangan ─────────────────────────────────────────────────────
@@ -48,7 +56,7 @@
         faru
           ? 'Suami mendapat 1/4 karena pewaris meninggalkan anak atau cucu.'
           : 'Suami mendapat 1/2 karena pewaris tidak meninggalkan anak atau cucu.',
-        'qs4-12');
+        'qs4-12', faru ? 'suamiAdaAnak' : 'suamiTanpaAnak');
     }
     if (ada('istri')) {
       set('istri', faru ? F(1, 8) : F(1, 4),
@@ -57,7 +65,7 @@
             (n('istri') > 1 ? ', dibagi rata untuk ' + n('istri') + ' istri.' : '.')
           : 'Istri mendapat 1/4 karena pewaris tidak meninggalkan anak atau cucu' +
             (n('istri') > 1 ? ', dibagi rata untuk ' + n('istri') + ' istri.' : '.'),
-        'qs4-12');
+        'qs4-12', faru ? 'istriAdaAnak' : 'istriTanpaAnak');
     }
 
     // ── Ibu ──────────────────────────────────────────────────────────
@@ -67,13 +75,16 @@
 
     if (ada('ibu')) {
       if (faru) {
-        set('ibu', F(1, 6), 'Ibu mendapat 1/6 karena pewaris meninggalkan anak atau cucu.', 'qs4-11');
+        set('ibu', F(1, 6), 'Ibu mendapat 1/6 karena pewaris meninggalkan anak atau cucu.',
+          'qs4-11', 'ortuAdaAnak');
       } else if (jmlSaudaraAsli >= 2) {
         set('ibu', F(1, 6),
           'Ibu mendapat 1/6 karena pewaris punya dua saudara atau lebih. ' +
-          'Ini berlaku walaupun saudara-saudara itu sendiri terhalang oleh ayah.', 'qs4-11');
+          'Ini berlaku walaupun saudara-saudara itu sendiri terhalang oleh ayah.',
+          'qs4-11', 'ibuAdaSaudara');
       } else {
-        set('ibu', F(1, 3), 'Ibu mendapat 1/3 karena pewaris tidak punya anak, cucu, maupun dua saudara.', 'qs4-11');
+        set('ibu', F(1, 3), 'Ibu mendapat 1/3 karena pewaris tidak punya anak, cucu, maupun dua saudara.',
+          'qs4-11', 'ibuTanpaAnak');
       }
     }
 
@@ -95,11 +106,11 @@
       if (faruLk) {
         set('ayah', F(1, 6),
           'Ayah mendapat 1/6 karena pewaris meninggalkan keturunan laki-laki. ' +
-          'Sisa harta jatuh ke keturunan itu.', 'qs4-11');
+          'Sisa harta jatuh ke keturunan itu.', 'qs4-11', 'ortuAdaAnak');
       } else if (faruPr) {
         set('ayah', F(1, 6),
           'Ayah mendapat 1/6 sebagai bagian tetap, ditambah sisa harta setelah ' +
-          'semua bagian tetap dibayarkan.', 'qs4-11');
+          'semua bagian tetap dibayarkan.', 'qs4-11', 'ortuAdaAnak');
       }
       // tanpa keturunan sama sekali: ayah murni ashabah, tidak punya bagian tetap
     }
@@ -118,10 +129,12 @@
     // ── Anak perempuan ───────────────────────────────────────────────
     if (ada('anak_pr') && !ada('anak_lk')) {
       if (n('anak_pr') === 1) {
-        set('anak_pr', F(1, 2), 'Satu anak perempuan tanpa saudara laki-laki mendapat 1/2.', 'qs4-11');
+        set('anak_pr', F(1, 2), 'Satu anak perempuan tanpa saudara laki-laki mendapat 1/2.',
+          'qs4-11', 'anakPrTunggal');
       } else {
         set('anak_pr', F(2, 3),
-          n('anak_pr') + ' anak perempuan tanpa saudara laki-laki berbagi 2/3.', 'qs4-11');
+          n('anak_pr') + ' anak perempuan tanpa saudara laki-laki berbagi 2/3.',
+          'qs4-11', 'anakPrBanyak');
       }
     }
 
@@ -133,9 +146,11 @@
           'mengambil 1/2, sisa 1/6 melengkapinya menjadi 2/3.', 'hadits-cucu-pr');
       } else if (!ada('anak_pr')) {
         if (n('cucu_pr') === 1) {
-          set('cucu_pr', F(1, 2), 'Satu cucu perempuan menempati posisi anak perempuan dan mendapat 1/2.', 'qs4-11');
+          set('cucu_pr', F(1, 2), 'Satu cucu perempuan menempati posisi anak perempuan dan mendapat 1/2.',
+            'qs4-11', 'anakPrTunggal');
         } else {
-          set('cucu_pr', F(2, 3), n('cucu_pr') + ' cucu perempuan berbagi 2/3, menempati posisi anak perempuan.', 'qs4-11');
+          set('cucu_pr', F(2, 3), n('cucu_pr') + ' cucu perempuan berbagi 2/3, menempati posisi anak perempuan.',
+            'qs4-11', 'anakPrBanyak');
         }
       }
     }
@@ -149,38 +164,53 @@
         : seibuTotal + ' saudara seibu berbagi 1/3 sama rata — laki-laki dan perempuan sama besar.';
       // dibagi rata per kepala tanpa membedakan laki-laki/perempuan
       if (ada('sdr_lk_seibu')) {
-        set('sdr_lk_seibu', f.mul(totalSeibu, F(n('sdr_lk_seibu'), seibuTotal)), teksSeibu, 'qs4-12');
+        set('sdr_lk_seibu', f.mul(totalSeibu, F(n('sdr_lk_seibu'), seibuTotal)), teksSeibu,
+          'qs4-12', seibuTotal === 1 ? 'seibuTunggal' : 'seibuBanyak');
       }
       if (ada('sdr_pr_seibu')) {
-        set('sdr_pr_seibu', f.mul(totalSeibu, F(n('sdr_pr_seibu'), seibuTotal)), teksSeibu, 'qs4-12');
+        set('sdr_pr_seibu', f.mul(totalSeibu, F(n('sdr_pr_seibu'), seibuTotal)), teksSeibu,
+          'qs4-12', seibuTotal === 1 ? 'seibuTunggal' : 'seibuBanyak');
       }
     }
 
     // ── Saudara perempuan kandung ────────────────────────────────────
     if (!opts.lewatiFardhSaudara && ada('sdr_pr_kandung') && !ada('sdr_lk_kandung') && !faruPr) {
       if (n('sdr_pr_kandung') === 1) {
-        set('sdr_pr_kandung', F(1, 2), 'Satu saudara perempuan kandung mendapat 1/2.', 'qs4-176');
+        set('sdr_pr_kandung', F(1, 2), 'Satu saudara perempuan kandung mendapat 1/2.',
+          'qs4-176', 'sdrPrTunggal');
       } else {
-        set('sdr_pr_kandung', F(2, 3), n('sdr_pr_kandung') + ' saudara perempuan kandung berbagi 2/3.', 'qs4-176');
+        set('sdr_pr_kandung', F(2, 3), n('sdr_pr_kandung') + ' saudara perempuan kandung berbagi 2/3.',
+          'qs4-176', 'sdrPrBanyak');
       }
     }
 
     // ── Saudara perempuan seayah ─────────────────────────────────────
     if (!opts.lewatiFardhSaudara && ada('sdr_pr_sebapak') && !ada('sdr_lk_sebapak') && !faruPr) {
       if (n('sdr_pr_kandung') === 1) {
+        // Angka 1/6 ini TIDAK disebut dalam QS An-Nisa 176. Ia diqiyaskan pada
+        // putusan Ibnu Mas'ud tentang cucu perempuan yang melengkapi 2/3
+        // bersama satu anak perempuan (HR Bukhari 6736) — keadaannya sama
+        // persis, hanya tingkatannya yang berbeda. Menunjuk ayat 176 di sini
+        // menyesatkan, karena pembaca tidak akan menemukan angka 1/6 di sana.
         set('sdr_pr_sebapak', F(1, 6),
           'Saudara perempuan seayah mendapat 1/6 sebagai pelengkap bagian 2/3, ' +
-          'karena saudara perempuan kandung hanya satu orang.', 'qs4-176');
+          'karena saudara perempuan kandung hanya satu orang. Angka ini diqiyaskan ' +
+          'pada putusan tentang cucu perempuan yang melengkapi bagian anak perempuan.',
+          'hadits-cucu-pr');
+        dalilLain['sdr_pr_sebapak'] = ['qs4-176'];
       } else if (!ada('sdr_pr_kandung')) {
         if (n('sdr_pr_sebapak') === 1) {
-          set('sdr_pr_sebapak', F(1, 2), 'Satu saudara perempuan seayah mendapat 1/2.', 'qs4-176');
+          set('sdr_pr_sebapak', F(1, 2), 'Satu saudara perempuan seayah mendapat 1/2.',
+            'qs4-176', 'sdrPrTunggal');
         } else {
-          set('sdr_pr_sebapak', F(2, 3), n('sdr_pr_sebapak') + ' saudara perempuan seayah berbagi 2/3.', 'qs4-176');
+          set('sdr_pr_sebapak', F(2, 3), n('sdr_pr_sebapak') + ' saudara perempuan seayah berbagi 2/3.',
+            'qs4-176', 'sdrPrBanyak');
         }
       }
     }
 
-    return { fardh: fardh, alasan: alasan, dalil: dalil, faru: faru, faruLk: faruLk, faruPr: faruPr };
+    return { fardh: fardh, alasan: alasan, dalil: dalil, potongan: potongan,
+             dalilLain: dalilLain, faru: faru, faruLk: faruLk, faruPr: faruPr };
   }
 
   root.Shares = { hitung: hitung };

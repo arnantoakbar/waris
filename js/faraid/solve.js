@@ -84,6 +84,8 @@
     var jenis = {};    // key -> 'fardh' | 'ashabah' | 'fardh+ashabah' | 'khusus' | 'radd'
     var alasan = {};
     var dalilKey = {};
+    var potonganKey = {};   // klausa mana di dalam ayat yang menyebut hak ini
+    var dalilLainKey = {};  // sumber pendamping, mis. ayat + hadits sekaligus
     var fardh = {};
 
     if (khusus) {
@@ -92,7 +94,13 @@
         final[k] = khusus.bagian[k];
         jenis[k] = 'khusus';
         alasan[k] = (khusus.alasan && khusus.alasan[k]) || khusus.penjelasan;
-        dalilKey[k] = khusus.dalil;
+        dalilKey[k] = (khusus.dalilPerOrang && khusus.dalilPerOrang[k]) || khusus.dalil;
+        if (khusus.potongan && khusus.potongan[k]) potonganKey[k] = khusus.potongan[k];
+        if (khusus.dalilPerOrang && khusus.dalilPerOrang[k]) {
+          // Ahli waris ini punya ayatnya sendiri; ayat kasus khususnya tetap
+          // dirujuk sebagai pendamping supaya konteksnya tidak hilang.
+          dalilLainKey[k] = (dalilLainKey[k] || []).concat([khusus.dalil]);
+        }
       });
       out.perhitungan.langkah.push(khusus.nama + ': ' + khusus.penjelasan);
       if (khusus.khilafiyah) {
@@ -115,6 +123,10 @@
         jenis[k] = 'fardh';
         alasan[k] = hasilShares.alasan[k];
         dalilKey[k] = hasilShares.dalil[k];
+        if (hasilShares.potongan[k]) potonganKey[k] = hasilShares.potongan[k];
+        if ((hasilShares.dalilLain || {})[k]) {
+          dalilLainKey[k] = (dalilLainKey[k] || []).concat(hasilShares.dalilLain[k]);
+        }
       });
 
       // asal masalah sebelum 'aul
@@ -180,6 +192,10 @@
                 ? alasan[k] + ' ' + ash.alasan
                 : ash.alasan;
               dalilKey[k] = dalilKey[k] || ash.dalil;
+              if (!potonganKey[k] && ash.potongan) potonganKey[k] = ash.potongan;
+              if ((ash.dalilLain || []).length) {
+                dalilLainKey[k] = (dalilLainKey[k] || []).concat(ash.dalilLain);
+              }
             });
             out.perhitungan.langkah.push('Sisa harta ' + f.toText(sisa) + ' — ' + ash.alasan);
             out.perhitungan.tipeAshabah = ash.tipe;
@@ -280,7 +296,11 @@
         nominalPerOrang: Math.floor(nominal / jumlahAktif),
         jenis: jenis[def.key] || 'ashabah',
         alasan: alasan[def.key] || '',
-        dalil: dalilKey[def.key] || null
+        dalil: dalilKey[def.key] || null,
+        potongan: potonganKey[def.key] || null,
+        dalilLain: (dalilLainKey[def.key] || []).filter(function (id, i, a) {
+          return id !== dalilKey[def.key] && a.indexOf(id) === i;
+        })
       });
     });
 
