@@ -43,69 +43,62 @@
     },
 
     /*
-     * Satu ayat memuat beberapa ketetapan sekaligus. Kalau yang ditampilkan
-     * selalu potongan pembukanya, pembaca yang memeriksa teks Arabnya tidak
-     * akan menemukan hak yang sedang dibicarakan — ibu mencari bagiannya, yang
-     * muncul justru kalimat tentang anak. Karena itu tiap ketetapan disimpan
-     * sebagai potongan tersendiri, dan mesin menunjuk potongan yang tepat.
+     * AYAT DITAMPILKAN UTUH — TIDAK PERNAH DIPENGGAL.
+     *
+     * Satu ayat waris memuat beberapa ketetapan sekaligus. Kalau yang
+     * ditampilkan hanya klausa yang sedang dibahas, pembaca kehilangan konteks
+     * dan kutipannya berubah menjadi potongan yang bisa menyesatkan. Karena itu
+     * ayat disimpan sebagai deretan RUAS: seluruh ruas selalu ditampilkan, dan
+     * ruas yang menetapkan bagian orang yang sedang dibaca cukup disorot,
+     * sisanya dipudarkan.
+     *
+     * Ruas yang bukan ketetapan bagian (kalimat penghubung dan penutup ayat)
+     * memakai id null — ia tetap tampil, hanya tidak pernah menjadi sorotan.
      */
     'qs4-11': {
       jenis: 'quran',
       rujukan: 'QS An-Nisa ayat 11',
-      tautan: { label: 'Baca ayat lengkapnya di Quran.com', url: 'https://quran.com/4/11' },
-      arab: 'يُوصِيكُمُ اللَّهُ فِي أَوْلَادِكُمْ ۖ لِلذَّكَرِ مِثْلُ حَظِّ الْأُنْثَيَيْنِ ۚ ' +
-        'فَإِنْ كُنَّ نِسَاءً فَوْقَ اثْنَتَيْنِ فَلَهُنَّ ثُلُثَا مَا تَرَكَ ۖ وَإِنْ كَانَتْ وَاحِدَةً فَلَهَا النِّصْفُ ۚ ' +
-        'وَلِأَبَوَيْهِ لِكُلِّ وَاحِدٍ مِنْهُمَا السُّدُسُ مِمَّا تَرَكَ إِنْ كَانَ لَهُ وَلَدٌ ۚ ' +
-        'فَإِنْ لَمْ يَكُنْ لَهُ وَلَدٌ وَوَرِثَهُ أَبَوَاهُ فَلِأُمِّهِ الثُّلُثُ ۚ فَإِنْ كَانَ لَهُ إِخْوَةٌ فَلِأُمِّهِ السُّدُسُ ۚ ' +
-        'مِنْ بَعْدِ وَصِيَّةٍ يُوصِي بِهَا أَوْ دَيْنٍ',
-      terjemah: 'Allah mensyariatkan kepadamu tentang pembagian warisan untuk anak-anakmu: ' +
-        'bagian anak laki-laki sama dengan bagian dua anak perempuan. Kalau anak perempuan ' +
-        'lebih dari dua orang, bagian mereka dua pertiga dari harta yang ditinggalkan. Kalau ' +
-        'anak perempuan itu seorang saja, bagiannya setengah. Untuk kedua orang tua, ' +
-        'masing-masing seperenam dari harta yang ditinggalkan, jika pewaris punya anak. ' +
-        'Jika ia tidak punya anak dan yang mewarisinya hanya kedua orang tuanya, ibunya ' +
-        'mendapat sepertiga. Jika ia punya beberapa saudara, ibunya mendapat seperenam. ' +
-        'Semua itu setelah wasiat yang ia buat dan hutangnya diselesaikan.',
+      tautan: { label: 'Baca di Quran.com', url: 'https://quran.com/4/11' },
+      segmen: [
+        { id: 'anak',
+          arab: 'يُوصِيكُمُ اللَّهُ فِي أَوْلَادِكُمْ ۖ لِلذَّكَرِ مِثْلُ حَظِّ الْأُنْثَيَيْنِ ۚ',
+          arti: 'Allah mensyariatkan kepadamu tentang pembagian warisan untuk anak-anakmu: ' +
+            'bagian anak laki-laki sama dengan bagian dua anak perempuan.' },
+        { id: 'anakPrBanyak',
+          arab: 'فَإِنْ كُنَّ نِسَاءً فَوْقَ اثْنَتَيْنِ فَلَهُنَّ ثُلُثَا مَا تَرَكَ ۖ',
+          arti: 'Kalau anak perempuan itu lebih dari dua orang, bagian mereka dua pertiga ' +
+            'dari harta yang ditinggalkan.' },
+        { id: 'anakPrTunggal',
+          arab: 'وَإِنْ كَانَتْ وَاحِدَةً فَلَهَا النِّصْفُ ۚ',
+          arti: 'Kalau anak perempuan itu seorang saja, bagiannya setengah.' },
+        { id: 'ortuAdaAnak',
+          arab: 'وَلِأَبَوَيْهِ لِكُلِّ وَاحِدٍ مِنْهُمَا السُّدُسُ مِمَّا تَرَكَ إِنْ كَانَ لَهُ وَلَدٌ ۚ',
+          arti: 'Untuk kedua orang tuanya, masing-masing seperenam dari harta yang ' +
+            'ditinggalkan, jika pewaris punya anak.' },
+        { id: 'ibuTanpaAnak',
+          arab: 'فَإِنْ لَمْ يَكُنْ لَهُ وَلَدٌ وَوَرِثَهُ أَبَوَاهُ فَلِأُمِّهِ الثُّلُثُ ۚ',
+          arti: 'Jika pewaris tidak punya anak dan yang mewarisinya hanya kedua orang tuanya, ' +
+            'maka ibunya mendapat sepertiga.' },
+        { id: 'ibuAdaSaudara',
+          arab: 'فَإِنْ كَانَ لَهُ إِخْوَةٌ فَلِأُمِّهِ السُّدُسُ ۚ',
+          arti: 'Jika pewaris punya beberapa saudara, maka ibunya mendapat seperenam.' },
+        { id: 'urutan',
+          arab: 'مِنْ بَعْدِ وَصِيَّةٍ يُوصِي بِهَا أَوْ دَيْنٍ ۗ',
+          arti: 'Semua itu setelah wasiat yang ia buat dan hutangnya diselesaikan.' },
+        { id: null,
+          arab: 'آبَاؤُكُمْ وَأَبْنَاؤُكُمْ لَا تَدْرُونَ أَيُّهُمْ أَقْرَبُ لَكُمْ نَفْعًا ۚ فَرِيضَةً مِنَ اللَّهِ ۗ إِنَّ اللَّهَ كَانَ عَلِيمًا حَكِيمًا',
+          arti: 'Tentang orang tua dan anak-anakmu, kamu tidak tahu siapa di antara mereka ' +
+            'yang lebih dekat manfaatnya bagimu. Ini ketetapan dari Allah. Sungguh Allah Maha ' +
+            'Mengetahui lagi Maha Bijaksana.' }
+      ],
       potongan: {
-        anak: {
-          ket: 'Bagian anak laki-laki dan anak perempuan',
-          arab: 'يُوصِيكُمُ اللَّهُ فِي أَوْلَادِكُمْ ۖ لِلذَّكَرِ مِثْلُ حَظِّ الْأُنْثَيَيْنِ',
-          terjemah: 'Allah mensyariatkan kepadamu tentang pembagian warisan untuk anak-anakmu: ' +
-            'bagian anak laki-laki sama dengan bagian dua anak perempuan.'
-        },
-        anakPrBanyak: {
-          ket: 'Dua anak perempuan atau lebih, tanpa anak laki-laki',
-          arab: 'فَإِنْ كُنَّ نِسَاءً فَوْقَ اثْنَتَيْنِ فَلَهُنَّ ثُلُثَا مَا تَرَكَ',
-          terjemah: 'Kalau anak perempuan itu lebih dari dua orang, bagian mereka dua pertiga ' +
-            'dari harta yang ditinggalkan.'
-        },
-        anakPrTunggal: {
-          ket: 'Satu anak perempuan, tanpa anak laki-laki',
-          arab: 'وَإِنْ كَانَتْ وَاحِدَةً فَلَهَا النِّصْفُ',
-          terjemah: 'Kalau anak perempuan itu seorang saja, bagiannya setengah.'
-        },
-        ortuAdaAnak: {
-          ket: 'Ayah dan ibu ketika pewaris meninggalkan anak atau cucu',
-          arab: 'وَلِأَبَوَيْهِ لِكُلِّ وَاحِدٍ مِنْهُمَا السُّدُسُ مِمَّا تَرَكَ إِنْ كَانَ لَهُ وَلَدٌ',
-          terjemah: 'Untuk kedua orang tuanya, masing-masing seperenam dari harta yang ' +
-            'ditinggalkan, jika pewaris punya anak.'
-        },
-        ibuTanpaAnak: {
-          ket: 'Ibu ketika tidak ada anak maupun cucu',
-          arab: 'فَإِنْ لَمْ يَكُنْ لَهُ وَلَدٌ وَوَرِثَهُ أَبَوَاهُ فَلِأُمِّهِ الثُّلُثُ',
-          terjemah: 'Jika pewaris tidak punya anak dan yang mewarisinya hanya kedua orang ' +
-            'tuanya, maka ibunya mendapat sepertiga.'
-        },
-        ibuAdaSaudara: {
-          ket: 'Ibu ketika pewaris punya dua saudara atau lebih',
-          arab: 'فَإِنْ كَانَ لَهُ إِخْوَةٌ فَلِأُمِّهِ السُّدُسُ',
-          terjemah: 'Jika pewaris punya beberapa saudara, maka ibunya mendapat seperenam.'
-        },
-        urutan: {
-          ket: 'Wasiat dan hutang diselesaikan lebih dulu',
-          arab: 'مِنْ بَعْدِ وَصِيَّةٍ يُوصِي بِهَا أَوْ دَيْنٍ',
-          terjemah: 'Semua itu setelah wasiat yang ia buat dan hutangnya diselesaikan.'
-        }
+        anak: { ket: 'Bagian anak laki-laki dan anak perempuan' },
+        anakPrBanyak: { ket: 'Dua anak perempuan atau lebih, tanpa anak laki-laki' },
+        anakPrTunggal: { ket: 'Satu anak perempuan, tanpa anak laki-laki' },
+        ortuAdaAnak: { ket: 'Ayah dan ibu ketika pewaris meninggalkan anak atau cucu' },
+        ibuTanpaAnak: { ket: 'Ibu ketika tidak ada anak maupun cucu' },
+        ibuAdaSaudara: { ket: 'Ibu ketika pewaris punya dua saudara atau lebih' },
+        urutan: { ket: 'Wasiat dan hutang diselesaikan lebih dulu' }
       },
       ringkas: 'Dasar bagian anak, ayah, dan ibu. Ayat ini juga menetapkan bahwa pembagian ' +
         'dilakukan setelah wasiat dilaksanakan dan hutang dilunasi.'
@@ -114,55 +107,51 @@
     'qs4-12': {
       jenis: 'quran',
       rujukan: 'QS An-Nisa ayat 12',
-      tautan: { label: 'Baca ayat lengkapnya di Quran.com', url: 'https://quran.com/4/12' },
-      arab: 'وَلَكُمْ نِصْفُ مَا تَرَكَ أَزْوَاجُكُمْ إِنْ لَمْ يَكُنْ لَهُنَّ وَلَدٌ ۚ فَإِنْ كَانَ لَهُنَّ وَلَدٌ فَلَكُمُ الرُّبُعُ مِمَّا تَرَكْنَ ۚ ' +
-        'وَلَهُنَّ الرُّبُعُ مِمَّا تَرَكْتُمْ إِنْ لَمْ يَكُنْ لَكُمْ وَلَدٌ ۚ فَإِنْ كَانَ لَكُمْ وَلَدٌ فَلَهُنَّ الثُّمُنُ مِمَّا تَرَكْتُمْ ۚ ' +
-        'وَإِنْ كَانَ رَجُلٌ يُورَثُ كَلَالَةً أَوِ امْرَأَةٌ وَلَهُ أَخٌ أَوْ أُخْتٌ فَلِكُلِّ وَاحِدٍ مِنْهُمَا السُّدُسُ ۚ ' +
-        'فَإِنْ كَانُوا أَكْثَرَ مِنْ ذَٰلِكَ فَهُمْ شُرَكَاءُ فِي الثُّلُثِ',
-      terjemah: 'Kamu (para suami) mendapat setengah dari harta yang ditinggalkan istrimu jika ' +
-        'mereka tidak punya anak; jika mereka punya anak, kamu mendapat seperempat. Para istri ' +
-        'mendapat seperempat dari harta yang kamu tinggalkan jika kamu tidak punya anak; jika ' +
-        'kamu punya anak, mereka mendapat seperdelapan. Jika seseorang meninggal dalam keadaan ' +
-        'kalalah — tanpa orang tua dan tanpa anak — sedang ia punya seorang saudara laki-laki ' +
-        'atau perempuan seibu, masing-masing mendapat seperenam; kalau mereka lebih dari itu, ' +
-        'mereka berserikat dalam sepertiga.',
+      tautan: { label: 'Baca di Quran.com', url: 'https://quran.com/4/12' },
+      segmen: [
+        { id: 'suamiTanpaAnak',
+          arab: 'وَلَكُمْ نِصْفُ مَا تَرَكَ أَزْوَاجُكُمْ إِنْ لَمْ يَكُنْ لَهُنَّ وَلَدٌ ۚ',
+          arti: 'Kamu (para suami) mendapat setengah dari harta yang ditinggalkan istrimu jika ' +
+            'mereka tidak punya anak.' },
+        { id: 'suamiAdaAnak',
+          arab: 'فَإِنْ كَانَ لَهُنَّ وَلَدٌ فَلَكُمُ الرُّبُعُ مِمَّا تَرَكْنَ ۚ',
+          arti: 'Jika mereka punya anak, maka kamu mendapat seperempat dari harta yang mereka ' +
+            'tinggalkan.' },
+        { id: null,
+          arab: 'مِنْ بَعْدِ وَصِيَّةٍ يُوصِينَ بِهَا أَوْ دَيْنٍ ۚ',
+          arti: 'Itu setelah wasiat yang mereka buat dan hutangnya diselesaikan.' },
+        { id: 'istriTanpaAnak',
+          arab: 'وَلَهُنَّ الرُّبُعُ مِمَّا تَرَكْتُمْ إِنْ لَمْ يَكُنْ لَكُمْ وَلَدٌ ۚ',
+          arti: 'Para istri mendapat seperempat dari harta yang kamu tinggalkan jika kamu tidak ' +
+            'punya anak.' },
+        { id: 'istriAdaAnak',
+          arab: 'فَإِنْ كَانَ لَكُمْ وَلَدٌ فَلَهُنَّ الثُّمُنُ مِمَّا تَرَكْتُمْ ۚ',
+          arti: 'Jika kamu punya anak, maka para istri mendapat seperdelapan dari harta yang ' +
+            'kamu tinggalkan.' },
+        { id: null,
+          arab: 'مِنْ بَعْدِ وَصِيَّةٍ تُوصُونَ بِهَا أَوْ دَيْنٍ ۗ',
+          arti: 'Itu setelah wasiat yang kamu buat dan hutangmu diselesaikan.' },
+        { id: 'seibuTunggal',
+          arab: 'وَإِنْ كَانَ رَجُلٌ يُورَثُ كَلَالَةً أَوِ امْرَأَةٌ وَلَهُ أَخٌ أَوْ أُخْتٌ فَلِكُلِّ وَاحِدٍ مِنْهُمَا السُّدُسُ ۚ',
+          arti: 'Jika seseorang meninggal dalam keadaan kalalah — tanpa orang tua dan tanpa ' +
+            'anak — sedang ia punya seorang saudara laki-laki atau perempuan seibu, ' +
+            'masing-masing mendapat seperenam.' },
+        { id: 'seibuBanyak',
+          arab: 'فَإِنْ كَانُوا أَكْثَرَ مِنْ ذَٰلِكَ فَهُمْ شُرَكَاءُ فِي الثُّلُثِ ۚ',
+          arti: 'Kalau mereka lebih dari itu, mereka berserikat dalam sepertiga.' },
+        { id: null,
+          arab: 'مِنْ بَعْدِ وَصِيَّةٍ يُوصَىٰ بِهَا أَوْ دَيْنٍ غَيْرَ مُضَارٍّ ۚ وَصِيَّةً مِنَ اللَّهِ ۗ وَاللَّهُ عَلِيمٌ حَلِيمٌ',
+          arti: 'Itu setelah wasiat yang dibuat dan hutang diselesaikan, dengan tidak ' +
+            'merugikan ahli waris. Demikianlah wasiat dari Allah. Dan Allah Maha Mengetahui ' +
+            'lagi Maha Penyantun.' }
+      ],
       potongan: {
-        suamiTanpaAnak: {
-          ket: 'Suami ketika istri tidak meninggalkan anak atau cucu',
-          arab: 'وَلَكُمْ نِصْفُ مَا تَرَكَ أَزْوَاجُكُمْ إِنْ لَمْ يَكُنْ لَهُنَّ وَلَدٌ',
-          terjemah: 'Kamu (para suami) mendapat setengah dari harta yang ditinggalkan istrimu ' +
-            'jika mereka tidak punya anak.'
-        },
-        suamiAdaAnak: {
-          ket: 'Suami ketika istri meninggalkan anak atau cucu',
-          arab: 'فَإِنْ كَانَ لَهُنَّ وَلَدٌ فَلَكُمُ الرُّبُعُ مِمَّا تَرَكْنَ',
-          terjemah: 'Jika mereka punya anak, maka kamu mendapat seperempat dari harta yang ' +
-            'mereka tinggalkan.'
-        },
-        istriTanpaAnak: {
-          ket: 'Istri ketika suami tidak meninggalkan anak atau cucu',
-          arab: 'وَلَهُنَّ الرُّبُعُ مِمَّا تَرَكْتُمْ إِنْ لَمْ يَكُنْ لَكُمْ وَلَدٌ',
-          terjemah: 'Para istri mendapat seperempat dari harta yang kamu tinggalkan jika kamu ' +
-            'tidak punya anak.'
-        },
-        istriAdaAnak: {
-          ket: 'Istri ketika suami meninggalkan anak atau cucu',
-          arab: 'فَإِنْ كَانَ لَكُمْ وَلَدٌ فَلَهُنَّ الثُّمُنُ مِمَّا تَرَكْتُمْ',
-          terjemah: 'Jika kamu punya anak, maka para istri mendapat seperdelapan dari harta ' +
-            'yang kamu tinggalkan.'
-        },
-        seibuTunggal: {
-          ket: 'Satu saudara seibu, dalam keadaan kalalah',
-          arab: 'وَإِنْ كَانَ رَجُلٌ يُورَثُ كَلَالَةً أَوِ امْرَأَةٌ وَلَهُ أَخٌ أَوْ أُخْتٌ فَلِكُلِّ وَاحِدٍ مِنْهُمَا السُّدُسُ',
-          terjemah: 'Jika seseorang meninggal dalam keadaan kalalah — tanpa orang tua dan tanpa ' +
-            'anak — sedang ia punya seorang saudara laki-laki atau perempuan seibu, masing-masing ' +
-            'mendapat seperenam.'
-        },
-        seibuBanyak: {
-          ket: 'Dua saudara seibu atau lebih',
-          arab: 'فَإِنْ كَانُوا أَكْثَرَ مِنْ ذَٰلِكَ فَهُمْ شُرَكَاءُ فِي الثُّلُثِ',
-          terjemah: 'Kalau mereka lebih dari itu, mereka berserikat dalam sepertiga.'
-        }
+        suamiTanpaAnak: { ket: 'Suami ketika istri tidak meninggalkan anak atau cucu' },
+        suamiAdaAnak: { ket: 'Suami ketika istri meninggalkan anak atau cucu' },
+        istriTanpaAnak: { ket: 'Istri ketika suami tidak meninggalkan anak atau cucu' },
+        istriAdaAnak: { ket: 'Istri ketika suami meninggalkan anak atau cucu' },
+        seibuTunggal: { ket: 'Satu saudara seibu, dalam keadaan kalalah' },
+        seibuBanyak: { ket: 'Dua saudara seibu atau lebih' }
       },
       ringkas: 'Dasar bagian suami dan istri, serta bagian saudara seibu.'
     },
@@ -171,45 +160,41 @@
       jenis: 'quran',
       rujukan: 'QS An-Nisa ayat 176',
       tautan: { label: 'Baca di Quran.com', url: 'https://quran.com/4/176' },
-      arab: 'يَسْتَفْتُونَكَ قُلِ اللَّهُ يُفْتِيكُمْ فِي الْكَلَالَةِ ۚ إِنِ امْرُؤٌ هَلَكَ لَيْسَ لَهُ وَلَدٌ وَلَهُ أُخْتٌ فَلَهَا نِصْفُ مَا تَرَكَ ۚ ' +
-        'وَهُوَ يَرِثُهَا إِنْ لَمْ يَكُنْ لَهَا وَلَدٌ ۚ فَإِنْ كَانَتَا اثْنَتَيْنِ فَلَهُمَا الثُّلُثَانِ مِمَّا تَرَكَ ۚ ' +
-        'وَإِنْ كَانُوا إِخْوَةً رِجَالًا وَنِسَاءً فَلِلذَّكَرِ مِثْلُ حَظِّ الْأُنْثَيَيْنِ',
-      terjemah: 'Mereka meminta fatwa kepadamu. Katakanlah: Allah memberi fatwa tentang kalalah. ' +
-        'Jika seseorang meninggal tanpa meninggalkan anak, dan ia punya seorang saudara perempuan, ' +
-        'maka saudara perempuan itu mendapat setengah dari harta yang ditinggalkan. Saudara ' +
-        'laki-laki mewarisi saudara perempuannya jika ia tidak punya anak. Jika saudara ' +
-        'perempuannya dua orang, keduanya mendapat dua pertiga dari harta yang ditinggalkan. ' +
-        'Dan jika mereka terdiri dari saudara laki-laki dan perempuan, maka bagian seorang ' +
-        'laki-laki sama dengan bagian dua orang perempuan.',
-      potongan: {
-        sdrPrTunggal: {
-          ket: 'Satu saudara perempuan, dalam keadaan kalalah',
-          arab: 'إِنِ امْرُؤٌ هَلَكَ لَيْسَ لَهُ وَلَدٌ وَلَهُ أُخْتٌ فَلَهَا نِصْفُ مَا تَرَكَ',
-          terjemah: 'Jika seseorang meninggal tanpa meninggalkan anak, dan ia punya seorang ' +
+      segmen: [
+        { id: null,
+          arab: 'يَسْتَفْتُونَكَ قُلِ اللَّهُ يُفْتِيكُمْ فِي الْكَلَالَةِ ۚ',
+          arti: 'Mereka meminta fatwa kepadamu. Katakanlah: Allah memberi fatwa kepadamu ' +
+            'tentang kalalah.' },
+        { id: 'sdrPrTunggal',
+          arab: 'إِنِ امْرُؤٌ هَلَكَ لَيْسَ لَهُ وَلَدٌ وَلَهُ أُخْتٌ فَلَهَا نِصْفُ مَا تَرَكَ ۚ',
+          arti: 'Jika seseorang meninggal tanpa meninggalkan anak, dan ia punya seorang ' +
             'saudara perempuan, maka saudara perempuan itu mendapat setengah dari harta yang ' +
-            'ditinggalkan.'
-        },
-        sdrPrBanyak: {
-          ket: 'Dua saudara perempuan atau lebih',
-          arab: 'فَإِنْ كَانَتَا اثْنَتَيْنِ فَلَهُمَا الثُّلُثَانِ مِمَّا تَرَكَ',
-          terjemah: 'Jika saudara perempuannya dua orang, keduanya mendapat dua pertiga dari ' +
-            'harta yang ditinggalkan.'
-        },
-        saudaraCampur: {
-          ket: 'Saudara laki-laki dan perempuan bersama-sama',
-          arab: 'وَإِنْ كَانُوا إِخْوَةً رِجَالًا وَنِسَاءً فَلِلذَّكَرِ مِثْلُ حَظِّ الْأُنْثَيَيْنِ',
-          terjemah: 'Dan jika mereka terdiri dari saudara laki-laki dan perempuan, maka bagian ' +
-            'seorang laki-laki sama dengan bagian dua orang perempuan.'
-        },
-        sdrLkSendiri: {
-          ket: 'Saudara laki-laki mewarisi saudara perempuannya',
-          arab: 'وَهُوَ يَرِثُهَا إِنْ لَمْ يَكُنْ لَهَا وَلَدٌ',
-          terjemah: 'Dan saudara laki-laki mewarisi saudara perempuannya jika ia tidak punya anak.'
-        }
+            'ditinggalkan.' },
+        { id: 'sdrLkSendiri',
+          arab: 'وَهُوَ يَرِثُهَا إِنْ لَمْ يَكُنْ لَهَا وَلَدٌ ۚ',
+          arti: 'Dan saudara laki-laki mewarisi saudara perempuannya jika ia tidak punya anak.' },
+        { id: 'sdrPrBanyak',
+          arab: 'فَإِنْ كَانَتَا اثْنَتَيْنِ فَلَهُمَا الثُّلُثَانِ مِمَّا تَرَكَ ۚ',
+          arti: 'Jika saudara perempuannya dua orang, keduanya mendapat dua pertiga dari harta ' +
+            'yang ditinggalkan.' },
+        { id: 'saudaraCampur',
+          arab: 'وَإِنْ كَانُوا إِخْوَةً رِجَالًا وَنِسَاءً فَلِلذَّكَرِ مِثْلُ حَظِّ الْأُنْثَيَيْنِ ۗ',
+          arti: 'Dan jika mereka terdiri dari saudara laki-laki dan perempuan, maka bagian ' +
+            'seorang laki-laki sama dengan bagian dua orang perempuan.' },
+        { id: null,
+          arab: 'يُبَيِّنُ اللَّهُ لَكُمْ أَنْ تَضِلُّوا ۗ وَاللَّهُ بِكُلِّ شَيْءٍ عَلِيمٌ',
+          arti: 'Allah menerangkannya kepadamu supaya kamu tidak sesat. Dan Allah Maha ' +
+            'Mengetahui segala sesuatu.' }
+      ],
+      potongan: {
+        sdrPrTunggal: { ket: 'Satu saudara perempuan, dalam keadaan kalalah' },
+        sdrLkSendiri: { ket: 'Saudara laki-laki mewarisi saudara perempuannya' },
+        sdrPrBanyak: { ket: 'Dua saudara perempuan atau lebih' },
+        saudaraCampur: { ket: 'Saudara laki-laki dan perempuan bersama-sama' }
       },
       ringkas: 'Dasar bagian saudara kandung dan saudara seayah, dalam keadaan kalalah — ' +
-        'pewaris tidak punya anak maupun ayah. Kalimat terakhirnya adalah dasar pembagian ' +
-        '2 : 1 antara saudara laki-laki dan saudara perempuan.'
+        'pewaris tidak punya anak maupun ayah. Kalimat menjelang penutupnya adalah dasar ' +
+        'pembagian 2 : 1 antara saudara laki-laki dan saudara perempuan.'
     },
 
     'qs4-13': {
@@ -443,6 +428,19 @@
       return Object.assign({ id: id }, DALIL[id]);
     });
   }
+
+  /*
+   * Ayat yang tersimpan sebagai ruas diberi `arab` dan `terjemah` utuh hasil
+   * gabungan ruasnya. Dengan begitu pemakai data ini — kartu hasil, halaman
+   * rujukan, ekspor PNG — tidak perlu tahu soal ruas kalau hanya butuh ayat
+   * lengkapnya, dan tidak mungkin ada dua versi teks yang berbeda.
+   */
+  Object.keys(DALIL).forEach(function (id) {
+    var d = DALIL[id];
+    if (!d.segmen) return;
+    d.arab = d.segmen.map(function (s) { return s.arab; }).join(' ');
+    d.terjemah = d.segmen.map(function (s) { return s.arti; }).join(' ');
+  });
 
   root.Dalil = { DATA: DALIL, ambil: ambil, kumpulkan: kumpulkan };
 })(typeof window !== 'undefined' ? window : globalThis);

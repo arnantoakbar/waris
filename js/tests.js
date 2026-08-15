@@ -320,6 +320,48 @@
   // ═══════════════════════════════════════════════════════════════
   // Uji perhitungan tirkah (harta yang boleh dibagi)
   // ═══════════════════════════════════════════════════════════════
+  /*
+   * Ayat tidak boleh dipenggal. Kalau sebuah entri memakai ruas, teks utuhnya
+   * harus benar-benar gabungan seluruh ruas — termasuk ruas penutup ayat yang
+   * tidak pernah jadi sorotan. Uji ini menjaga aturan itu tetap berlaku kalau
+   * ada yang menyunting datanya nanti.
+   */
+  function ujiKeutuhanAyat() {
+    var gagal = [];
+    var D = root.Dalil && root.Dalil.DATA;
+    if (!D) return ['Dalil.DATA tidak tersedia'];
+
+    Object.keys(D).forEach(function (id) {
+      var d = D[id];
+      if (!d.segmen) return;
+
+      var gabungArab = d.segmen.map(function (s) { return s.arab; }).join(' ');
+      if (d.arab !== gabungArab) gagal.push(id + ': teks Arab utuh tidak sama dengan gabungan ruasnya');
+
+      var gabungArti = d.segmen.map(function (s) { return s.arti; }).join(' ');
+      if (d.terjemah !== gabungArti) gagal.push(id + ': terjemahan utuh tidak sama dengan gabungan ruasnya');
+
+      d.segmen.forEach(function (s, i) {
+        if (!s.arab) gagal.push(id + ': ruas ke-' + i + ' tidak punya teks Arab');
+        if (!s.arti) gagal.push(id + ': ruas ke-' + i + ' tidak punya terjemahan');
+      });
+
+      // Tiap klausa yang bisa disorot harus benar-benar ada sebagai ruas,
+      // dan sebaliknya tiap ruas ber-id harus punya keterangannya.
+      Object.keys(d.potongan || {}).forEach(function (k) {
+        if (!d.segmen.some(function (s) { return s.id === k; })) {
+          gagal.push(id + ': klausa "' + k + '" tidak punya ruas di dalam ayat');
+        }
+      });
+      d.segmen.forEach(function (s) {
+        if (s.id && !(d.potongan || {})[s.id]) {
+          gagal.push(id + ': ruas "' + s.id + '" tidak punya keterangan di potongan');
+        }
+      });
+    });
+    return gagal;
+  }
+
   // ── Dalil harus cocok dengan ahli warisnya ─────────────────────
   var KASUS_DALIL = [
     { nama: 'Dalil 2:1 anak = QS An-Nisa 11',
@@ -673,6 +715,17 @@
         pesan: gagal,
         detail: 'tirkah ' + r.tirkah
       });
+    });
+
+    var gagalAyat = ujiKeutuhanAyat();
+    hasil.push({
+      nama: 'Ayat tersimpan utuh, tidak ada yang dipenggal',
+      lulus: gagalAyat.length === 0,
+      pesan: gagalAyat,
+      detail: Object.keys((root.Dalil && root.Dalil.DATA) || {})
+        .filter(function (id) { return root.Dalil.DATA[id].segmen; })
+        .map(function (id) { return id + ' (' + root.Dalil.DATA[id].segmen.length + ' ruas)'; })
+        .join(' · ')
     });
 
     KASUS_KELUARGA.forEach(function (t) {

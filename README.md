@@ -86,10 +86,10 @@ Dirancang mobile-first — inilah tampilan yang dipakai sebagian besar pengunjun
 
 ### Uji mesin faraid
 
-`tests.html` menjalankan 96 kasus yang jawabannya sudah baku dalam kitab faraid. Kalau ada
+`tests.html` menjalankan 97 kasus yang jawabannya sudah baku dalam kitab faraid. Kalau ada
 satu saja yang merah, hasil kalkulator tidak boleh dipercaya.
 
-![Hasil uji 96/96](docs/gambar/10-uji.png)
+![Hasil uji 97/97](docs/gambar/10-uji.png)
 
 ---
 
@@ -139,7 +139,7 @@ js/
   ui-pohon-edit.js      Penyuntingan pohon (bilah tambah + lembar ubah)
   ui-*.js               Lapisan tampilan lainnya
   export.js             PNG (canvas) & PDF (dialog cetak)
-  tests.js              96 kasus uji
+  tests.js              97 kasus uji
 ```
 
 ## Model susunan keluarga
@@ -169,18 +169,22 @@ Ketiganya berbeda dan tidak boleh disamakan, karena akibat hukumnya di Indonesia
 | Anak tiri | Tidak | Anak bawaan pasangan. Mewarisi dari orang tua kandungnya sendiri. Wasiat wajibah KHI Pasal 209 **tidak** berlaku; jalurnya hibah semasa hidup atau wasiat biasa maksimal 1/3. |
 | Anak angkat | Tidak | Pengangkatan tidak memindahkan nasab, tapi KHI Pasal 209 memberi wasiat wajibah maksimal 1/3 lewat Pengadilan Agama. |
 
-### Kutipan ayat menunjuk klausa, bukan seluruh ayat
+### Ayat ditampilkan utuh, klausanya disorot
 
 Satu ayat waris memuat beberapa ketetapan sekaligus. QS An-Nisa 11 mengatur anak, ayah, dan
-ibu dalam satu ayat; QS An-Nisa 12 mengatur suami, istri, dan saudara seibu sekaligus. Kalau
-yang ditampilkan selalu kalimat pembuka ayatnya, pembaca yang memeriksa teks Arabnya tidak
-menemukan haknya — kartu ibu memunculkan kalimat tentang anak, kartu istri memunculkan
-kalimat tentang suami. Ayatnya benar, tapi kutipannya tidak membuktikan apa pun.
+ibu dalam satu ayat; QS An-Nisa 12 mengatur suami, istri, dan saudara seibu sekaligus.
 
-Karena itu tiap ketetapan disimpan sebagai potongan tersendiri di `js/dalil.js`, dan mesin
-menunjuk potongan yang tepat lewat `potongan` pada tiap bagian:
+Aturannya di sini: **ayat tidak pernah dipenggal.** Seluruh ayat selalu ditampilkan sampai
+kalimat penutupnya, lalu ruas yang menetapkan bagian orang yang sedang dibaca disorot dan
+sisanya dipudarkan. Pembaca tetap melihat firman selengkapnya, tanpa kehilangan petunjuk
+bagian mana yang sedang dibicarakan.
 
-| Ahli waris | Ayat | Klausa yang dikutip |
+Ayat disimpan sebagai deretan ruas di `js/dalil.js`, dan `arab` serta `terjemah` utuhnya
+diturunkan dari gabungan ruas itu — jadi tidak mungkin ada dua versi teks yang berbeda.
+Ruas yang bukan ketetapan bagian (kalimat penghubung dan penutup ayat) memakai `id: null`:
+tetap tampil, tapi tidak pernah menjadi sorotan.
+
+| Ahli waris | Ayat | Ruas yang disorot |
 |---|---|---|
 | Istri, ada anak | An-Nisa 12 | "…jika kamu punya anak, mereka mendapat seperdelapan" |
 | Istri, tanpa anak | An-Nisa 12 | "…seperempat jika kamu tidak punya anak" |
@@ -197,6 +201,9 @@ merujuk An-Nisa 11 (perbandingan 2 : 1) **dan** HR Bukhari 6732 (siapa yang meng
 Ada juga angka yang memang tidak ada di ayat mana pun dan dinyatakan terus terang sebagai
 qiyas — misalnya 1/6 untuk saudara perempuan seayah yang melengkapi 2/3, yang diqiyaskan
 pada putusan Ibnu Mas'ud tentang cucu perempuan (HR Bukhari 6736).
+
+Ada kasus uji khusus yang menjaga aturan ini: teks utuh tiap ayat harus benar-benar sama
+dengan gabungan seluruh ruasnya, sehingga tidak ada ruas yang bisa hilang diam-diam.
 
 ### Dua dasar hukum, dipilih pemakai
 
@@ -314,7 +321,7 @@ Bisa juga dari terminal:
 node -e "['faraid/fraction','faraid/heirs','faraid/hijab','faraid/shares','faraid/ashabah','faraid/special','faraid/estate','faraid/solve','keluarga','tests'].forEach(m=>require('./js/'+m+'.js'));const h=Tests.jalankan();const g=h.filter(x=>!x.lulus);g.forEach(x=>console.log('GAGAL',x.nama,x.pesan));console.log(h.length-g.length+'/'+h.length+' lulus')"
 ```
 
-96 kasus, mencakup: setiap tingkat 'aul (6→7/8/9/10, 12→13/15/17, 24→27), radd dengan dan
+97 kasus, mencakup: setiap tingkat 'aul (6→7/8/9/10, 12→13/15/17, 24→27), radd dengan dan
 tanpa pasangan, seluruh kasus khusus bernama, aturan hijab, perhitungan tirkah, dan
 penurunan susunan keluarga menjadi daftar ahli waris — termasuk siapa yang gugur karena
 sudah wafat lebih dulu, keluarga sambung dengan anak tiri, dan pemeriksaan bahwa dalil

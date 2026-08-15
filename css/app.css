@@ -2089,9 +2089,24 @@ body.lembar-terbuka { overflow: hidden; }
   .koreksi-kartu { flex-direction: column; gap: var(--space-4); }
 }
 
-/* ── Rincian klausa di halaman rujukan ──────────────────────────────
-   Ayat waris memuat beberapa ketetapan sekaligus. Dirinci supaya pembaca
-   bisa mencocokkan klausa mana yang dipakai untuk ahli waris mana. */
+/* ── Sorotan di dalam ayat ──────────────────────────────────────────
+   Ayat tidak pernah dipenggal. Ruas yang menetapkan bagian orang yang sedang
+   dibaca ditampilkan normal, sisanya dipudarkan — jadi pembaca tetap melihat
+   firman selengkapnya sambil tahu bagian mana yang sedang dibicarakan. */
+.ayat-sorot {
+  color: var(--fg1);
+  background: rgba(245, 166, 35, 0.22);
+  border-radius: 4px;
+  padding: 1px 3px;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+.dalil-arab .ayat-sorot { background: rgba(245, 166, 35, 0.28); }
+.ayat-redup { color: var(--fg2); opacity: 0.62; }
+
+/* Tanpa sorotan aktif (mis. di halaman rujukan) seluruh ayat tampil normal. */
+.dalil-penuh .ayat-redup { color: inherit; opacity: 1; }
+
 .klausa-daftar {
   margin-top: var(--space-5);
   padding-top: var(--space-4);
@@ -2114,7 +2129,6 @@ body.lembar-terbuka { overflow: hidden; }
   font-size: var(--text-body-xs);
   font-weight: var(--fw-semibold);
   color: var(--color-ember);
-  margin-bottom: var(--space-2);
+  margin-bottom: 2px;
 }
-.klausa .dalil-arab { font-size: 20px; margin: var(--space-2) 0; }
-.klausa .dalil-terjemah { font-size: var(--text-body-xs); }
+.klausa .dalil-terjemah { font-size: var(--text-body-xs); margin: 0; }

@@ -145,24 +145,37 @@
   }
 
   /*
-   * Satu ayat waris memuat beberapa ketetapan sekaligus. Yang ditampilkan di
-   * kartu harus klausa yang MENYEBUT hak orang ini — kalau tidak, pembaca yang
-   * memeriksa teks Arabnya tidak menemukan apa pun tentang dirinya, dan
-   * kutipannya justru melemahkan kepercayaan. Ayat utuhnya tetap bisa dibuka
-   * lewat tautannya.
+   * Ayat SELALU ditampilkan utuh — tidak pernah dipenggal.
+   *
+   * Satu ayat waris memuat beberapa ketetapan sekaligus. Kalau hanya klausa
+   * yang sedang dibahas yang ditampilkan, pembaca kehilangan konteks dan
+   * kutipannya berubah jadi potongan. Jadi seluruh ayat dirender, lalu ruas
+   * yang menetapkan bagian orang ini disorot dan sisanya dipudarkan —
+   * kejelasan tanpa memotong firman.
    */
+  function ayatBersorot(d, idPotongan, kelasTeks, ambil) {
+    if (!d.segmen) return '<div class="' + kelasTeks + '">' + ambil(d) + '</div>';
+    return '<div class="' + kelasTeks + '">' + d.segmen.map(function (s) {
+      var sorot = idPotongan && s.id === idPotongan;
+      return '<span class="' + (sorot ? 'ayat-sorot' : 'ayat-redup') + '">' +
+        ambil(s) + '</span>';
+    }).join(' ') + '</div>';
+  }
+
   function blokDalil(id, idPotongan) {
     var d = root.Dalil.ambil(id);
     if (!d) return '';
     var pot = (d.potongan && idPotongan) ? d.potongan[idPotongan] : null;
-    var arab = pot ? pot.arab : d.arab;
-    var arti = pot ? pot.terjemah : d.terjemah;
 
     return '<div class="dalil">' +
       '<div class="dalil-rujukan">' + d.rujukan +
-      (pot ? '<span class="dalil-klausa">' + pot.ket + '</span>' : '') + '</div>' +
-      (arab ? '<div class="dalil-arab" lang="ar" dir="rtl">' + arab + '</div>' : '') +
-      '<div class="dalil-terjemah">' + arti + '</div>' +
+      (pot ? '<span class="dalil-klausa">Yang disorot: ' + pot.ket + '</span>' : '') + '</div>' +
+      (d.arab
+        ? ayatBersorot(d, idPotongan, 'dalil-arab" lang="ar" dir="rtl',
+            function (x) { return x.arab; })
+        : '') +
+      ayatBersorot(d, idPotongan, 'dalil-terjemah',
+        function (x) { return x.arti || x.terjemah; }) +
       (d.sumber ? '<div class="dalil-sumber">' + d.sumber + '</div>' : '') +
       tautanDalil(d) +
       '</div>';
