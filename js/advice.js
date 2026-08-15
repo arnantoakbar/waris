@@ -46,6 +46,17 @@
                  url: 'https://baznas.go.id' }
   };
 
+  /* Sumber hukum diambil dari registry di js/khi.js supaya tautannya tidak
+     bercabang dua. Semuanya sudah dicocokkan ke basis data peraturan resmi. */
+  function hukum(nama) {
+    var s = root.KHI && root.KHI.SUMBER;
+    return (s && s[nama]) || null;
+  }
+  function tautanHukum() {
+    return Array.prototype.slice.call(arguments)
+      .map(hukum).filter(Boolean);
+  }
+
   /**
    * @param {Object} hasil  keluaran Faraid.hitung()
    * @returns {Array<{id, tingkat, judul, teks, poin, tautan}>}
@@ -284,13 +295,41 @@
     }
 
     // ── 10. Harta bersama ─────────────────────────────────────────
+    // Pemisahan harta bersama BUKAN bagian dari faraid. Ia menentukan siapa
+    // pemilik hartanya lebih dulu; warisan baru berjalan atas bagian pewaris.
+    // Karena itu langkahnya selalu disertai penegasan dan sumber hukumnya.
+    var CATATAN_HARTA_BERSAMA =
+      'Perlu ditegaskan: pemisahan harta bersama BUKAN aturan faraid dan tidak ' +
+      'berasal dari Al-Qur\'an maupun hadits waris. Kitab faraid klasik tidak ' +
+      'mengenal istilah ini — harta suami tetap milik suami, harta istri tetap ' +
+      'milik istri. Yang berlaku di Indonesia adalah penetapan KEPEMILIKAN lebih ' +
+      'dulu menurut hukum negara, baru sisanya dibagi menurut syariat. Dasar ' +
+      'fiqihnya disandarkan pada syirkah (perkongsian) dan \'urf, dengan sandaran ' +
+      'QS An-Nisa ayat 32. Angka 50:50 adalah patokan umum, bukan harga mati: ' +
+      'Pengadilan Agama dapat memutus proporsi lain bila kontribusi kedua pihak ' +
+      'terbukti timpang. Untuk kasus nyata, tanyakan ke ustadz dan ke Pengadilan ' +
+      'Agama — jangan bersandar pada halaman ini saja.';
+
+    var SUMBER_HARTA_BERSAMA = [
+      { teks: '<strong>UU Perkawinan No. 1/1974 Pasal 35 ayat (1):</strong> harta yang ' +
+        'diperoleh selama perkawinan menjadi harta bersama. Ayat (2): harta bawaan, ' +
+        'serta warisan dan hadiah yang diterima masing-masing, TIDAK termasuk. ' +
+        'Pasal ini tidak diubah oleh UU No. 16/2019.' },
+      { teks: '<strong>KHI Pasal 96 ayat (1):</strong> "Apabila terjadi cerai mati, maka ' +
+        'separoh harta bersama menjadi hak pasangan yang hidup lebih lama."' },
+      { teks: '<strong>UU No. 3/2006 Pasal 49:</strong> perkara perkawinan dan waris bagi ' +
+        'orang beragama Islam menjadi kewenangan Pengadilan Agama — inilah yang membuat ' +
+        'aturan di atas relevan bagi keluarga muslim.' }
+    ];
+
     if (adaPasangan && !harta.hartaBersama) {
       out.push({
         id: 'cek_harta_bersama',
         tingkat: 'penting',
         judul: 'Pastikan dulu status harta bersamanya',
         teks: 'Kamu tidak menandai harta ini sebagai harta bersama, jadi seluruhnya dihitung ' +
-          'sebagai milik almarhum. Ini perlu dicek ulang karena pengaruhnya besar.',
+          'sebagai milik almarhum. Ini perlu dicek ulang karena pengaruhnya besar. ' +
+          CATATAN_HARTA_BERSAMA,
         poin: [
           { teks: 'Harta yang diperoleh selama pernikahan umumnya berstatus harta bersama. ' +
             'Separuhnya milik pasangan yang masih hidup — bukan warisan.' },
@@ -298,7 +337,32 @@
             'masing-masing.' },
           { teks: 'Kalau ternyata harta bersama, kembali ke form dan aktifkan pilihan itu — ' +
             'hasilnya akan berubah cukup jauh.' }
-        ]
+        ].concat(SUMBER_HARTA_BERSAMA),
+        tautan: tautanHukum('uuKawin35', 'khi', 'peradilanAgama').concat([T.badilag])
+      });
+    }
+
+    if (adaPasangan && harta.hartaBersama) {
+      out.push({
+        id: 'pisah_harta_bersama',
+        tingkat: 'wajib',
+        judul: 'Pisahkan dulu harta bersama, sebelum warisan dibagi',
+        teks: 'Separuh harta bersama sudah dikeluarkan dari hitungan karena ia milik pasangan ' +
+          'yang masih hidup sejak semula, bukan warisan. Pemisahan itu perlu disepakati ' +
+          'tertulis dan sebaiknya dikuatkan lewat penetapan pengadilan supaya tidak jadi ' +
+          'sengketa. ' + CATATAN_HARTA_BERSAMA,
+        poin: [
+          { teks: 'Daftarkan mana yang harta bersama dan mana harta bawaan. Cek tanggal ' +
+            'perolehannya lewat sertifikat, BPKB, atau rekening — bukan dari ingatan.' },
+          { teks: 'Kalau ada perjanjian perkawinan (pranikah/pascanikah), isinya yang berlaku, ' +
+            'bukan patokan 50:50.' },
+          { teks: 'Tuangkan hasil pemisahan dalam kesepakatan tertulis yang ditandatangani ' +
+            'seluruh ahli waris, di hadapan notaris kalau nilainya besar.' },
+          { teks: 'Untuk aset bersertifikat, pemisahan ini harus tercermin di dokumen ' +
+            'kepemilikannya — kalau tidak, masalahnya muncul saat balik nama.' }
+        ].concat(SUMBER_HARTA_BERSAMA),
+        tautan: tautanHukum('uuKawin35', 'khi', 'peradilanAgama')
+          .concat([T.badilag, T.notaris])
       });
     }
 

@@ -263,11 +263,21 @@
         'Perlu dicatat: kitab faraid klasik tidak mengenal harta bersama, dan pembagian 50:50 ' +
         'adalah patokan umum — Pengadilan Agama dapat memutus proporsi lain bila kontribusi ' +
         'kedua pihak terbukti timpang.',
+      khilafiyah: 'Aturan negara ini dicantumkan karena ia memang berlaku bagi umat Islam: ' +
+        'UU No. 3/2006 Pasal 49 menetapkan bahwa perkara perkawinan, waris, wasiat, dan hibah ' +
+        'bagi <strong>orang-orang yang beragama Islam</strong> menjadi kewenangan Pengadilan ' +
+        'Agama, yang memutus dengan hukum Islam. Kalkulator ini tidak memakai hukum waris ' +
+        'perdata umum (KUHPerdata) maupun hukum adat sama sekali.',
       tautan: { label: 'UU 1/1974 Pasal 35', url: 'https://pasal.id/peraturan/uu/uu-no-1-tahun-1974#pasal-35' },
       tautanLain: [
+        { label: 'UU 3/2006 Pasal 49 — kewenangan Pengadilan Agama',
+          url: 'https://pasal.id/peraturan/uu/uu-no-3-tahun-2006#pasal-49' },
+        { label: 'Inpres 1/1991 (KHI)',
+          url: 'https://peraturan.bpk.go.id/Details/293351/inpres-no-1-tahun-1991' },
         { label: 'QS An-Nisa ayat 32', url: 'https://quran.com/4/32' }
       ],
-      ringkas: 'Dasar pemisahan separuh harta bersama sebelum warisan dibagi.'
+      ringkas: 'Dasar pemisahan separuh harta bersama sebelum warisan dibagi. Bukan dalil ' +
+        'faraid — dan bukan pula pengganti dalil.'
     },
 
     'hadits-hutang': {

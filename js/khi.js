@@ -8,14 +8,49 @@
  * File ini tidak mengubah hitungan apa pun. Ia hanya memunculkan catatan
  * "kalau perkara ini dibawa ke Pengadilan Agama, hasilnya bisa begini",
  * supaya keluarga tidak kaget di kemudian hari.
+ *
+ * BATASAN YANG DISENGAJA
+ * Rujukan utama kalkulator ini adalah Al-Qur'an dan sunnah. Aturan negara
+ * hanya dicantumkan bila ia memang aturan bagi umat Islam — KHI, dan
+ * kewenangan Pengadilan Agama yang oleh UU dibatasi pada "orang-orang yang
+ * beragama Islam". Hukum waris perdata umum (KUHPerdata/BW) dan hukum adat
+ * sengaja tidak dipakai sama sekali.
  */
 
 (function (root) {
   'use strict';
 
+  /*
+   * Sumber hukum yang dipakai, semuanya sudah dicocokkan ke basis data
+   * peraturan resmi (pasal.id / peraturan.go.id / peraturan.bpk.go.id).
+   *
+   * Catatan tentang KHI: batang tubuhnya adalah LAMPIRAN Inpres No. 1 Tahun
+   * 1991, bukan pasal di dalam Inpres-nya. Karena itu pasal KHI tidak bisa
+   * ditautkan per pasal seperti undang-undang; tautannya mengarah ke halaman
+   * resmi Inpres beserta lampirannya.
+   */
+  var SUMBER = {
+    khi: {
+      label: 'Inpres No. 1 Tahun 1991 (Kompilasi Hukum Islam)',
+      url: 'https://peraturan.bpk.go.id/Details/293351/inpres-no-1-tahun-1991'
+    },
+    uuKawin35: {
+      label: 'UU Perkawinan No. 1/1974 Pasal 35',
+      url: 'https://pasal.id/peraturan/uu/uu-no-1-tahun-1974#pasal-35'
+    },
+    peradilanAgama: {
+      label: 'UU No. 3/2006 Pasal 49 — kewenangan Pengadilan Agama',
+      url: 'https://pasal.id/peraturan/uu/uu-no-3-tahun-2006#pasal-49'
+    },
+    putusan: {
+      label: 'Direktori Putusan Mahkamah Agung',
+      url: 'https://putusan3.mahkamahagung.go.id'
+    }
+  };
+
   /**
    * @param {Object} hasil   keluaran Faraid.hitung()
-   * @returns {Array<{id, judul, teks, pasal}>}
+   * @returns {Array<{id, judul, teks, pasal, tautan}>}
    */
   function catatan(hasil) {
     var out = [];
@@ -32,6 +67,7 @@
         id: 'khi-185',
         judul: 'Cucu dari anak yang wafat lebih dulu',
         pasal: 'KHI Pasal 185',
+        tautan: [SUMBER.khi, SUMBER.peradilanAgama],
         teks: 'Menurut fiqh klasik, cucu dari anak yang wafat lebih dulu TERHALANG selama ' +
           'masih ada anak pewaris yang hidup — jadi mereka tidak masuk hitungan di atas. ' +
           'KHI Pasal 185 mengatur lain: cucu itu bisa menggantikan posisi orang tuanya sebagai ' +
@@ -48,6 +84,7 @@
         id: 'khi-209',
         judul: 'Anak angkat',
         pasal: 'KHI Pasal 209',
+        tautan: [SUMBER.khi, SUMBER.peradilanAgama],
         teks: 'Anak angkat bukan ahli waris, karena hubungan nasab tidak berpindah lewat ' +
           'pengangkatan. Tapi KHI Pasal 209 memberi anak angkat hak "wasiat wajibah" maksimal ' +
           '1/3 dari harta warisan orang tua angkatnya, meskipun wasiat itu tidak pernah ' +
@@ -60,6 +97,7 @@
         id: 'khi-wasiat-wajibah',
         judul: 'Anggota keluarga yang berbeda agama',
         pasal: 'Yurisprudensi Mahkamah Agung',
+        tautan: [SUMBER.putusan, SUMBER.khi],
         teks: 'Secara fiqh, perbedaan agama menggugurkan hak waris — dan KHI juga mensyaratkan ' +
           'ahli waris beragama Islam. Namun dalam beberapa putusannya, Mahkamah Agung memberikan ' +
           '"wasiat wajibah" kepada ahli waris non-muslim, besarnya tidak melebihi bagian yang ' +
@@ -74,6 +112,7 @@
         id: 'khi-96',
         judul: 'Harta bersama belum dipisahkan',
         pasal: 'KHI Pasal 96 & UU Perkawinan Pasal 35',
+        tautan: [SUMBER.uuKawin35, SUMBER.khi],
         teks: 'Kamu tidak menandai harta ini sebagai harta bersama, jadi seluruhnya dihitung ' +
           'sebagai milik pewaris. Perlu dicek lagi: harta yang diperoleh selama pernikahan ' +
           'umumnya berstatus harta bersama, dan separuhnya adalah hak milik pasangan yang masih ' +
@@ -89,6 +128,7 @@
         id: 'khi-radd',
         judul: 'Pasangan tidak ikut menerima sisa (radd)',
         pasal: 'Praktik Pengadilan Agama',
+        tautan: [SUMBER.putusan, SUMBER.peradilanAgama],
         teks: 'Dalam hitungan di atas, sisa harta dikembalikan hanya kepada ahli waris selain ' +
           'suami/istri — ini pendapat jumhur ulama. Sebagian hakim Pengadilan Agama di Indonesia ' +
           'mengikuti pendapat lain yang juga mengikutsertakan pasangan dalam radd, sehingga ' +
@@ -101,6 +141,7 @@
         id: 'khi-sisa',
         judul: 'Sisa harta setelah bagian pasangan',
         pasal: 'Praktik Pengadilan Agama',
+        tautan: [SUMBER.putusan, SUMBER.peradilanAgama],
         teks: 'Karena tidak ada ahli waris lain, secara fiqh klasik sisa harta diserahkan ke ' +
           'baitul mal. Di Indonesia lembaga baitul mal tidak berjalan seperti dulu, sehingga ' +
           'Pengadilan Agama pada umumnya menyerahkan sisa itu kepada suami/istri yang masih ' +
@@ -111,5 +152,5 @@
     return out;
   }
 
-  root.KHI = { catatan: catatan };
+  root.KHI = { catatan: catatan, SUMBER: SUMBER };
 })(typeof window !== 'undefined' ? window : globalThis);

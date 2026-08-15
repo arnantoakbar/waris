@@ -397,10 +397,24 @@
         '<p class="blok-ket">Hasil di atas mengikuti fiqh mazhab Syafi\u2019i. Pengadilan Agama ' +
         'memakai Kompilasi Hukum Islam, yang di beberapa titik memutuskan berbeda. Ini bukan ' +
         'pertentangan \u2014 keduanya sah ditempuh, dan yang perlu kamu tahu adalah bedanya di mana.</p>' +
+        '<div class="pita" style="margin-bottom:var(--space-5)">' + ikon('i-info') +
+        '<span><strong>Yang di bawah ini aturan negara, bukan dalil.</strong> Rujukan utama ' +
+        'kalkulator ini tetap Al-Qur\u2019an dan sunnah. Aturan negara dicantumkan hanya karena ' +
+        'ia berlaku bagi umat Islam dan dipakai hakim Pengadilan Agama \u2014 yang kewenangannya ' +
+        'memang dibatasi pada perkara orang beragama Islam. Kalau keduanya berbeda, yang mengikat ' +
+        'secara hukum adalah putusan pengadilan, dan yang mengikat secara agama adalah dalilnya. ' +
+        'Tanyakan ke ustadz atau hakim yang berwenang sebelum memutuskan.</span></div>' +
         catatanKHI.map(function (c) {
           return '<div class="note note-green" style="margin-bottom:var(--space-3)">' +
             '<div class="note-title">' + c.judul + '</div>' + c.teks +
-            '<div class="dalil-sumber" style="margin-top:var(--space-3)">' + c.pasal + '</div></div>';
+            '<div class="dalil-sumber" style="margin-top:var(--space-3)">' + c.pasal + '</div>' +
+            ((c.tautan || []).length
+              ? '<div class="dalil-tautan">' + c.tautan.map(function (t) {
+                  return '<a href="' + t.url + '" target="_blank" rel="noopener noreferrer">' +
+                    ikon('i-tautan', 'ic-sm') + t.label + '</a>';
+                }).join('') + '</div>'
+              : '') +
+            '</div>';
         }).join(''), true);
     }
 

@@ -238,8 +238,26 @@
   }
 
   /** Paragraf biasa, otomatis dibungkus. */
+  /*
+   * Teks saran dan catatan ditulis dengan penekanan HTML karena di layar ia
+   * dirender sebagai HTML. Kanvas tidak mengenal tag, jadi kalau diteruskan
+   * apa adanya, tulisan "<strong>" ikut tergambar di dalam PNG.
+   */
+  function tanpaTag(teks) {
+    return String(teks == null ? '' : teks)
+      .replace(/<[^>]*>/g, '')
+      .replace(/&nbsp;/g, ' ')
+      .replace(/&amp;/g, '&')
+      .replace(/&lt;/g, '<')
+      .replace(/&gt;/g, '>')
+      .replace(/&quot;/g, '"')
+      .replace(/\s+/g, ' ')
+      .trim();
+  }
+
   function paragraf(ctx, teks, y, opsi) {
     opsi = opsi || {};
+    teks = tanpaTag(teks);
     ctx.fillStyle = opsi.warna || MID;
     ctx.font = (opsi.font || '400 17px "DM Sans", sans-serif');
     var lebar = opsi.lebar || (W - PAD * 2);
@@ -503,7 +521,7 @@
       catatanKHI.forEach(function (c) {
         ctx.fillStyle = CHARCOAL;
         ctx.font = '700 19px "DM Sans", sans-serif';
-        ctx.fillText(c.judul, PAD, y);
+        ctx.fillText(tanpaTag(c.judul), PAD, y);
         y += 26;
         y = paragraf(ctx, c.teks, y);
         ctx.fillStyle = LIGHT;
@@ -520,7 +538,7 @@
       saran.forEach(function (s2, i) {
         ctx.fillStyle = CHARCOAL;
         ctx.font = '700 20px "DM Sans", sans-serif';
-        ctx.fillText((i + 1) + '. ' + s2.judul, PAD, y);
+        ctx.fillText((i + 1) + '. ' + tanpaTag(s2.judul), PAD, y);
         y += 28;
         y = paragraf(ctx, s2.teks, y, { kiri: PAD + 26, lebar: W - PAD * 2 - 26 });
         (s2.poin || []).forEach(function (p) {
