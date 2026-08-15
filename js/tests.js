@@ -478,6 +478,29 @@
       },
       harap: { anak_lk: 1 } },
 
+    // Pohon keluarga mewarnai kartu lewat petaOrang. Untuk ayah, ibu, kakek,
+    // dan nenek kuncinya adalah nama medannya sendiri, bukan sebuah id —
+    // kontrak itu pernah putus dan membuat kelimanya tampil "bukan ahli waris"
+    // di diagram padahal di daftar pembagian mereka kebagian.
+    { nama: 'Orang tua dan kakek nenek terpetakan dengan kunci nama medannya',
+      susun: function (K) {
+        var k = K.baru('L');
+        K.tambahPasangan(k);
+        K.tambahAnak(k, 'L');
+        k.ayah = { hidup: true };
+        k.ibu = { hidup: true };
+        k.kakek = { hidup: true };
+        k.nenekAyah = { hidup: true };
+        k.nenekIbu = { hidup: true };
+        var peta = K.keAhliWaris(k).petaOrang;
+        ['ayah', 'ibu', 'kakek', 'nenekAyah', 'nenekIbu'].forEach(function (nama) {
+          if (!peta[nama]) throw new Error('petaOrang kehilangan kunci "' + nama + '"');
+        });
+        return k;
+      },
+      harap: { istri: 1, anak_lk: 1, ayah: 1, ibu: 1, kakek: 1,
+               nenek_ayah: 1, nenek_ibu: 1 } },
+
     { nama: 'Cucu lewat anak laki-laki yang wafat tetap mewarisi',
       susun: function (K) {
         var k = K.baru('L');

@@ -8,15 +8,15 @@
 <meta name="theme-color" content="#FFF8F0">
 <link rel="icon" href="assets/mark-color.svg">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="css/tokens.css?v=12">
-<link rel="stylesheet" href="css/base.css?v=12">
-<link rel="stylesheet" href="css/app.css?v=12">
-<link rel="stylesheet" href="css/print.css?v=12" media="print">
+<link rel="stylesheet" href="css/tokens.css?v=15">
+<link rel="stylesheet" href="css/base.css?v=15">
+<link rel="stylesheet" href="css/app.css?v=15">
+<link rel="stylesheet" href="css/print.css?v=15" media="print">
 </head>
 <body>
 <a class="skip-link" href="#utama">Lompat ke isi</a>
 
-<script src="js/sprite.js?v=12"></script>
+<script src="js/sprite.js?v=15"></script>
 
 <nav class="nav">
   <div class="wrap nav-inner">
@@ -51,6 +51,12 @@
         Setiap aturan yang dipakai kalkulator ini bisa ditelusuri ke ayat, hadits, atau putusan
         sahabat di halaman ini. Tidak ada satu pun aturan yang kami tambahkan sendiri —
         pembagian waris dalam Islam sudah lengkap dan tertutup sejak diturunkan.
+      </p>
+      <p class="flav-body" style="margin-top: var(--space-4)">
+        Satu hal yang <strong>bukan</strong> bagian dari faraid tetap kami cantumkan di bagian
+        terakhir: pemisahan separuh <strong>harta bersama</strong>. Itu aturan negara yang
+        menentukan siapa pemilik hartanya lebih dulu, sebelum warisan dibagi menurut syariat.
+        Kami pisahkan supaya tidak tertukar dengan dalil.
       </p>
 
       <div class="pita pita-peringatan" style="margin-top: var(--space-8); align-items: flex-start">
@@ -243,7 +249,7 @@
   </div>
 </footer>
 
-<script src="js/dalil.js?v=12"></script>
+<script src="js/dalil.js?v=15"></script>
 <script>
 (function () {
   'use strict';
@@ -252,10 +258,14 @@
     quran:  { judul: 'Al-Qur’an', ket: 'An-Nisa ayat 7, 11, 12, dan 176 menetapkan hampir seluruh bagian tetap dalam waris. Ayat 13–14 menutupnya sebagai batas yang tidak boleh dilanggar.' },
     hadits: { judul: 'Hadits', ket: 'Menjelaskan dan melengkapi apa yang tidak dirinci dalam Al-Qur’an — seperti bagian nenek dan siapa penerima sisa harta.' },
     atsar:  { judul: 'Putusan sahabat Nabi', ket: 'Untuk kasus rumit yang tidak disebut langsung, para sahabat sudah memutuskannya dan putusan itu menjadi pegangan mazhab.' },
-    ijma:   { judul: 'Kesepakatan ulama', ket: 'Hal yang disepakati seluruh mazhab berdasarkan keumuman ayat waris.' }
+    ijma:   { judul: 'Kesepakatan ulama', ket: 'Hal yang disepakati seluruh mazhab berdasarkan keumuman ayat waris.' },
+    hukum:  { judul: 'Hukum positif Indonesia', ket: 'Bukan dalil faraid. Ini aturan negara yang menentukan KEPEMILIKAN harta lebih dulu, sebelum warisan dibagi menurut syariat.' }
   };
 
-  var URUT = ['quran', 'hadits', 'atsar', 'ijma'];
+  // Hukum positif sengaja diletakkan paling akhir, terpisah dari dalil syar'i,
+  // supaya pembaca tidak menyangka pemisahan harta bersama berasal dari ayat
+  // atau hadits waris.
+  var URUT = ['quran', 'hadits', 'atsar', 'ijma', 'hukum'];
 
   /* Tautan periksa-sendiri. Nomor hadits antar penerbit bisa berbeda, jadi
      pembaca perlu bisa membuka sumbernya langsung — bukan cuma diberi angka. */
@@ -297,6 +307,6 @@
   document.getElementById('daftar-rujukan').innerHTML = html;
 })();
 </script>
-<script src="js/ui-nav.js?v=12"></script>
+<script src="js/ui-nav.js?v=15"></script>
 </body>
 </html>

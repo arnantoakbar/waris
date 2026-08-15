@@ -172,7 +172,13 @@
     if (o.angkat || o.tiri) return 'bukan';
     if (o.hidup === false) return 'wafat';
 
-    var kunci = peta ? peta[o.id] : null;
+    // Ayah, ibu, kakek, dan nenek disimpan sebagai objek polos {hidup:true}
+    // tanpa id — yang menjadi kunci adalah nama medannya sendiri, dan itulah
+    // yang dipakai keAhliWaris() saat mengisi petaOrang. Kalau di sini hanya
+    // orang.id yang dibaca, kelimanya selalu jatuh ke 'bukan ahli waris'
+    // walaupun di daftar pembagian mereka jelas kebagian.
+    var idPeta = o.id != null ? o.id : s.id;
+    var kunci = peta ? peta[idPeta] : null;
     if (!kunci) return 'bukan';          // hidup, tapi memang bukan ahli waris
     if (!dariHasil) return 'ada';        // mode isian: belum ada hitungan
     var h = dariHasil[kunci];
@@ -227,7 +233,9 @@
       html += '<div class="pohon-baris">';
       b.forEach(function (s) {
         var status = statusSimpul(s, peta, dariHasil);
-        var kunci = s.orang && peta[s.orang.id];
+        // Sama seperti di statusSimpul: ayah, ibu, kakek, dan nenek tidak
+        // punya id, kuncinya adalah id simpulnya sendiri.
+        var kunci = s.orang && peta[s.orang.id != null ? s.orang.id : s.id];
         var h = kunci && dariHasil ? dariHasil[kunci] : null;
 
         // Bagian per ORANG, bukan per kelompok. Kalau 3 anak perempuan berbagi

@@ -241,6 +241,35 @@
       ringkas: 'Dasar bagian kakek 1/6 dan statusnya sebagai ashabah.'
     },
 
+    // Sengaja dipisahkan sebagai jenis 'hukum', bukan quran/hadits/atsar/ijma.
+    // Pemisahan separuh harta bersama TIDAK berasal dari ayat atau hadits
+    // waris, dan kitab faraid klasik tidak mengenal istilah ini — harta suami
+    // tetap milik suami dan harta istri tetap milik istri. Yang terjadi di
+    // Indonesia adalah penetapan KEPEMILIKAN lebih dulu, baru sisanya diwaris.
+    // Menampilkannya sebagai dalil syar'i akan menyesatkan.
+    'harta-bersama': {
+      jenis: 'hukum',
+      rujukan: 'UU Perkawinan No. 1/1974 Pasal 35 & KHI Pasal 96',
+      terjemah: 'UU No. 1 Tahun 1974 Pasal 35 ayat (1): "Harta benda yang diperoleh selama ' +
+        'perkawinan menjadi harta bersama." Ayat (2): harta bawaan masing-masing, serta harta ' +
+        'yang diperoleh sebagai hadiah atau warisan, tetap di bawah penguasaan masing-masing. ' +
+        'Kompilasi Hukum Islam Pasal 96 ayat (1): "Apabila terjadi cerai mati, maka separoh ' +
+        'harta bersama menjadi hak pasangan yang hidup lebih lama."',
+      sumber: 'Ini hukum positif Indonesia, bukan dalil faraid. Separuh harta bersama bukan ' +
+        'warisan — ia sudah menjadi milik pasangan sejak semula, jadi dikeluarkan lebih dulu ' +
+        'sebelum harta pewaris dibagi. Dasar fiqihnya disandarkan pada syirkah (perkongsian) ' +
+        'dan \'urf, dengan sandaran QS An-Nisa ayat 32: "Bagi laki-laki ada bagian dari apa ' +
+        'yang mereka usahakan, dan bagi perempuan ada bagian dari apa yang mereka usahakan." ' +
+        'Perlu dicatat: kitab faraid klasik tidak mengenal harta bersama, dan pembagian 50:50 ' +
+        'adalah patokan umum — Pengadilan Agama dapat memutus proporsi lain bila kontribusi ' +
+        'kedua pihak terbukti timpang.',
+      tautan: { label: 'UU 1/1974 Pasal 35', url: 'https://pasal.id/peraturan/uu/uu-no-1-tahun-1974#pasal-35' },
+      tautanLain: [
+        { label: 'QS An-Nisa ayat 32', url: 'https://quran.com/4/32' }
+      ],
+      ringkas: 'Dasar pemisahan separuh harta bersama sebelum warisan dibagi.'
+    },
+
     'hadits-hutang': {
       jenis: 'hadits',
       rujukan: 'HR Tirmidzi no. 2122',
@@ -271,6 +300,7 @@
     }
     (hasil.catatan || []).forEach(function (c) { tambah(c.dalil); });
     (hasil.peringatan || []).forEach(function (p) { tambah(p.dalil); });
+    if (hasil.harta && hasil.harta.bagianHartaBersama > 0) tambah('harta-bersama');
     if (hasil.harta && hasil.harta.wasiat > 0) tambah('hadits-wasiat-sepertiga');
     if (hasil.harta && hasil.harta.hutang > 0) tambah('hadits-hutang');
     tambah('hadits-ashabah');

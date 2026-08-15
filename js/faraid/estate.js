@@ -47,7 +47,11 @@
         nilai: -bagianPasangan,
         tipe: 'kurang',
         ket: 'Separuh harta bersama adalah hak milik pasangan sejak awal, bukan warisan. ' +
-             'Yang dibagi hanya separuh milik pewaris.'
+             'Yang dibagi hanya separuh milik pewaris. Dasarnya UU Perkawinan No. 1/1974 ' +
+             'Pasal 35 dan KHI Pasal 96 — hukum positif Indonesia, bukan dalil faraid. ' +
+             'Harta bawaan sebelum menikah, serta warisan dan hadiah yang diterima ' +
+             'masing-masing, TIDAK termasuk harta bersama.',
+        dalil: 'harta-bersama'
       });
       catatan.push({
         id: 'harta_bersama',
