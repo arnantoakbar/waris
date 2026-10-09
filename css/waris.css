@@ -815,3 +815,27 @@ body.lembar-terbuka { overflow: hidden; }
   #btn-mulai-ulang { width: 44px; min-width: 0; min-height: 44px; padding: 0; justify-content: center; }
   #btn-mulai-ulang .nav-teks { display: none; }
 }
+
+/* ═══════════════════════════════════════════════════
+   NAV SELULER — satu item per baris + tombol tutup
+   ═══════════════════════════════════════════════════ */
+
+/* Di design system tautan menu mengalir sebaris di dalam <nav>-nya, jadi di
+   layar sempit terlihat berdampingan. Di sini dibuat menumpuk satu per baris. */
+.fl-menu nav { display: grid; gap: 2px; justify-items: stretch; }
+.fl-menu a { display: flex; align-items: center; min-height: 56px; border-radius: var(--radius-input); padding-inline: 12px; }
+.fl-menu a:hover,
+.fl-menu a:focus-visible { background: var(--flame-50); color: var(--color-ember); }
+
+/* Tombol tutup di dalam lapisan menu. Navbar ada DI BAWAH overlay
+   (--z-overlay di atas --z-nav), jadi ikon ✕ pada tombol hamburger tidak
+   pernah terlihat selagi menu terbuka — perlu tombol tutup sendiri. */
+.fl-menu__close { position: absolute; top: 16px; right: clamp(20px, 4vw, 40px); display: inline-grid; place-items: center; width: 44px; height: 44px; border: 0; border-radius: var(--radius-pill); background: var(--surface-sunk); color: var(--color-ember); box-shadow: var(--shadow-inset); }
+.fl-menu__close:active { transform: scale(0.96); }
+.fl-menu__close .fl-icon { width: 22px; height: 22px; }
+
+/* Tombol utama navbar disembunyikan selama banner cover masih terlihat —
+   cover sudah punya tombolnya sendiri, jadi tidak ada dua ajakan yang sama.
+   Tema + menu tetap menempel ke kanan supaya navbar tidak melompat. */
+.fl-nav.is-cover .fl-nav__cta { display: none; }
+.fl-nav.is-cover .tema-toggle { margin-left: auto; }
