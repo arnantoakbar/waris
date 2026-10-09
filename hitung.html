@@ -2,22 +2,23 @@
 <html lang="id" data-theme="auto" data-no-snav>
 <head>
 <meta charset="utf-8">
+<script>try{var t=localStorage.getItem('waris-tema');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Hitung pembagian waris — Waris by Flavida</title>
 <meta name="description" content="Isi kondisi keluargamu, lihat pembagian warisan sesuai Al-Qur'an dan Sunnah lengkap dengan dalilnya. Dihitung di browser, tidak ada data yang dikirim ke mana pun.">
 <meta name="theme-color" content="#FFF8F0">
 <link rel="icon" href="assets/v4/mark-simple.svg" type="image/svg+xml">
-<link rel="stylesheet" href="colors_and_type.css?v=24">
-<link rel="stylesheet" href="flavida.css?v=24">
-<link rel="stylesheet" href="flavida-extra.css?v=24">
-<link rel="stylesheet" href="flavida-sections.css?v=24">
-<link rel="stylesheet" href="css/waris.css?v=24">
-<link rel="stylesheet" href="css/print.css?v=24" media="print">
+<link rel="stylesheet" href="colors_and_type.css?v=27">
+<link rel="stylesheet" href="flavida.css?v=27">
+<link rel="stylesheet" href="flavida-extra.css?v=27">
+<link rel="stylesheet" href="flavida-sections.css?v=27">
+<link rel="stylesheet" href="css/waris.css?v=27">
+<link rel="stylesheet" href="css/print.css?v=27" media="print">
 </head>
 <body>
 <a class="fl-skip" href="#utama">Lompat ke isi</a>
 <script src="assets/v4/icons.sprite.js"></script>
-<script src="js/sprite.js?v=24"></script>
+<script src="js/sprite.js?v=27"></script>
 
 <nav class="fl-nav" data-autohide aria-label="Utama">
   <a class="fl-nav__brand" href="index.html" aria-label="Waris by Flavida, ke beranda">
@@ -29,7 +30,11 @@
     <li><a href="hitung.html" aria-current="page">Hitung</a></li>
     <li><a href="rujukan.html">Rujukan</a></li>
   </ul>
-  <button class="fl-btn fl-btn--sm fl-btn--ghost fl-nav__cta" id="btn-mulai-ulang" type="button"><svg class="fl-icon" aria-hidden="true"><use href="#i-ulang"/></svg>Ulangi dari awal</button>
+  <button class="fl-btn fl-btn--sm fl-btn--ghost fl-nav__cta" id="btn-mulai-ulang" type="button" aria-label="Ulangi dari awal"><svg class="fl-icon" aria-hidden="true"><use href="#i-ulang"/></svg><span class="nav-teks">Ulangi dari awal</span></button>
+  <button class="tema-toggle" type="button" data-tema-toggle aria-pressed="false" aria-label="Mode gelap">
+    <svg class="fl-icon i-bulan" aria-hidden="true"><use href="#i-moon"/></svg>
+    <svg class="fl-icon i-matahari" aria-hidden="true"><use href="#i-sun"/></svg>
+  </button>
   <button class="fl-nav__toggle" type="button" aria-label="Menu" aria-controls="menu" aria-expanded="false">
     <svg class="fl-icon i-open" aria-hidden="true"><use href="#i-menu"/></svg>
     <svg class="fl-icon i-close" aria-hidden="true"><use href="#i-x"/></svg>
@@ -216,7 +221,7 @@
         <div id="kondisi-khusus"></div>
         <div class="pita" style="margin-top: var(--space-6)">
           <svg class="fl-icon" aria-hidden="true"><use href="#i-info"/></svg>
-          <span>Semua isian kamu diproses di dalam browser ini saja. Tidak ada satu pun data
+          <span>Semua isian kamu diproses di dalam browser ini saja. Tidak ada satu pun isian
             yang dikirim, disimpan, atau dicatat di mana pun.</span>
         </div>
       </div>
@@ -275,24 +280,25 @@
   </div>
 </footer>
 
-<script src="js/faraid/fraction.js?v=24"></script>
-<script src="js/faraid/heirs.js?v=24"></script>
-<script src="js/faraid/hijab.js?v=24"></script>
-<script src="js/faraid/shares.js?v=24"></script>
-<script src="js/faraid/ashabah.js?v=24"></script>
-<script src="js/faraid/special.js?v=24"></script>
-<script src="js/faraid/estate.js?v=24"></script>
-<script src="js/faraid/solve.js?v=24"></script>
-<script src="js/dalil.js?v=24"></script>
-<script src="js/khi.js?v=24"></script>
-<script src="js/advice.js?v=24"></script>
-<script src="js/export.js?v=24"></script>
-<script src="js/keluarga.js?v=24"></script>
-<script src="js/ui-pohon.js?v=24"></script>
-<script src="js/ui-pohon-edit.js?v=24"></script>
-<script src="js/ui-result.js?v=24"></script>
-<script src="js/ui-wizard.js?v=24"></script>
+<script src="js/faraid/fraction.js?v=27"></script>
+<script src="js/faraid/heirs.js?v=27"></script>
+<script src="js/faraid/hijab.js?v=27"></script>
+<script src="js/faraid/shares.js?v=27"></script>
+<script src="js/faraid/ashabah.js?v=27"></script>
+<script src="js/faraid/special.js?v=27"></script>
+<script src="js/faraid/estate.js?v=27"></script>
+<script src="js/faraid/solve.js?v=27"></script>
+<script src="js/dalil.js?v=27"></script>
+<script src="js/khi.js?v=27"></script>
+<script src="js/advice.js?v=27"></script>
+<script src="js/export.js?v=27"></script>
+<script src="js/keluarga.js?v=27"></script>
+<script src="js/ui-pohon.js?v=27"></script>
+<script src="js/ui-pohon-edit.js?v=27"></script>
+<script src="js/ui-result.js?v=27"></script>
+<script src="js/ui-wizard.js?v=27"></script>
+<script src="js/tema.js?v=27"></script>
 <script src="js/motion.min.js"></script>
-<script src="js/flavida.js?v=24"></script>
+<script src="js/flavida.js?v=27"></script>
 </body>
 </html>

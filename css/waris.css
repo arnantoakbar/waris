@@ -797,3 +797,21 @@ body.lembar-terbuka { overflow: hidden; }
 /* Anak grid tidak boleh melebar mengikuti isinya (mis. blok kode): tanpa ini
    kolom tunggal di layar sempit meluber ke samping. */
 .fl-split > *, .batasan > *, .alasan li > *, .koreksi-jalur > * { min-width: 0; }
+
+/* ═════════ Tombol terang / gelap ═════════ */
+.tema-toggle { display: inline-grid; place-items: center; flex: none; width: 44px; height: 44px; border: 0; border-radius: 50%; background: var(--surface-sunk); color: var(--color-ember); box-shadow: var(--shadow-inset); cursor: pointer; transition: color var(--dur-fast); }
+.tema-toggle:hover { color: var(--flame-800); }
+.tema-toggle .i-matahari { display: none; }
+:root[data-theme="dark"] .tema-toggle .i-bulan { display: none; }
+:root[data-theme="dark"] .tema-toggle .i-matahari { display: inline; }
+@media (prefers-color-scheme: dark) {
+  :root[data-theme="auto"] .tema-toggle .i-bulan { display: none; }
+  :root[data-theme="auto"] .tema-toggle .i-matahari { display: inline; }
+}
+
+/* Layar sempit: "Ulangi dari awal" jadi tombol ikon supaya navbar muat bersama tombol tema dan menu. */
+.fl-nav__toggle { flex: none; }
+@media (max-width: 479px) {
+  #btn-mulai-ulang { width: 44px; min-width: 0; min-height: 44px; padding: 0; justify-content: center; }
+  #btn-mulai-ulang .nav-teks { display: none; }
+}

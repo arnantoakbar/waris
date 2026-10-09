@@ -144,6 +144,7 @@ js/
   ui-pohon.js           Diagram pohon keluarga
   ui-pohon-edit.js      Penyuntingan pohon (bilah tambah + lembar ubah)
   ui-*.js               Lapisan tampilan lainnya
+  tema.js               Tombol terang/gelap (bawaan: ikut perangkat)
   export.js             PNG (canvas) & PDF (dialog cetak)
   tests.js              97 kasus uji
 ```
@@ -360,13 +361,15 @@ bilang terus terang dan mengarahkan ke ustadz atau Pengadilan Agama:
 ## Privasi
 
 **Nol permintaan jaringan** saat halaman dimuat: semua font, ikon, dan skrip self-hosted.
-Tidak ada `fetch`, `XMLHttpRequest`, `localStorage`, `sessionStorage`, maupun cookie di
-seluruh kode — termasuk di kit Flavida. Semua perhitungan berjalan di browser pengguna.
-Export PNG digambar langsung ke `<canvas>`, export PDF lewat dialog cetak browser —
-keduanya tanpa pustaka pihak ketiga dan tanpa mengirim apa pun ke luar.
+Tidak ada `fetch`, `XMLHttpRequest`, atau cookie di seluruh kode, dan isian pengguna tidak
+pernah disimpan. Semua perhitungan berjalan di browser pengguna. Export PNG digambar langsung
+ke `<canvas>`, export PDF lewat dialog cetak browser — keduanya tanpa pustaka pihak ketiga
+dan tanpa mengirim apa pun ke luar.
 
-Tema terang/gelap mengikuti perangkat (`data-theme="auto"`), tanpa tombol dan tanpa
-menyimpan pilihan apa pun. Saat mencetak atau mengekspor, tampilan dipaksa terang.
+Satu-satunya yang diingat adalah pilihan tema: tombol terang/gelap di navbar menyimpan kata
+`light` atau `dark` di `localStorage` (kunci `waris-tema`) supaya pilihannya terbawa antar
+halaman. Selama tombol belum pernah ditekan, tampilan mengikuti pengaturan perangkat
+(`data-theme="auto"`). Saat mencetak atau mengekspor, tampilan selalu dipaksa terang.
 
 ---
 
@@ -451,7 +454,7 @@ Tampilan mengikuti Flavida Design System v4.1:
   (timbul, cekung, bergaris putus, bertitik) *dan* kata ("terhalang", "bukan ahli waris").
 - **Warna grafik** dari `--chart-1..8`; PNG ekspor memakai salinan heksanya karena kanvas
   tidak mengerti `var()`, dan selalu bertema terang.
-- **Tema gelap** otomatis mengikuti perangkat; semua komponen buatan sendiri hanya memakai
+- **Tema gelap** otomatis mengikuti perangkat dan bisa diganti lewat tombol di navbar (`js/tema.js`); semua komponen buatan sendiri hanya memakai
   token yang ikut berbalik, jadi tidak ada aturan khusus tema gelap di `css/waris.css`.
 
 Memperbarui kit: jalankan `tools/export-kit.sh <folder-waris>` dari repo design system, lalu
