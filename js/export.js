@@ -21,6 +21,7 @@
   var MID = '#555555';
   var LIGHT = '#999999';
   var FLAME = '#E8391D';
+  var EMBER = '#A0341A';
 
   function rp(n) {
     return 'Rp ' + String(Math.round(n || 0)).replace(/\B(?=(\d{3})+(?!\d))/g, '.');
@@ -194,12 +195,12 @@
       var ty = y + 9 * skala + ukIkon + 15 * skala;
 
       ctx.fillStyle = g.teks;
-      ctx.font = '700 ' + (12 * skala).toFixed(1) + 'px "DM Sans", sans-serif';
+      ctx.font = '700 ' + (12 * skala).toFixed(1) + 'px "Figtree", sans-serif';
       ctx.fillText(s.nama || '', x + w / 2, ty, w - 6);
       ty += 12 * skala;
 
       ctx.fillStyle = g.ket;
-      ctx.font = '400 ' + (9.5 * skala).toFixed(1) + 'px "DM Sans", sans-serif';
+      ctx.font = '400 ' + (9.5 * skala).toFixed(1) + 'px "Figtree", sans-serif';
       pecahBaris(ctx, s.jalur || '', w - 8).slice(0, 2).forEach(function (b) {
         ctx.fillText(b, x + w / 2, ty, w - 6);
         ty += 10.5 * skala;
@@ -207,20 +208,20 @@
 
       if (s.bagian) {
         ctx.fillStyle = '#E8391D';
-        ctx.font = '800 ' + (15 * skala).toFixed(1) + 'px "Bricolage Grotesque", "Arial Black", sans-serif';
+        ctx.font = '800 ' + (15 * skala).toFixed(1) + 'px "Gabarito", "Arial Black", sans-serif';
         ty += 3 * skala;
         ctx.fillText(s.bagian, x + w / 2, ty, w - 6);
         ty += 12 * skala;
       }
       if (s.rp) {
         ctx.fillStyle = MID;
-        ctx.font = '600 ' + (9.5 * skala).toFixed(1) + 'px "DM Sans", sans-serif';
+        ctx.font = '600 ' + (9.5 * skala).toFixed(1) + 'px "Figtree", sans-serif';
         ctx.fillText(s.rp, x + w / 2, ty, w - 6);
         ty += 11 * skala;
       }
       if (s.catatan) {
         ctx.fillStyle = g.ket;
-        ctx.font = '700 ' + (8 * skala).toFixed(1) + 'px "DM Sans", sans-serif';
+        ctx.font = '700 ' + (8 * skala).toFixed(1) + 'px "Figtree", sans-serif';
         ctx.fillText(s.catatan.toUpperCase(), x + w / 2, ty, w - 6);
       }
       ctx.textAlign = 'left';
@@ -229,12 +230,12 @@
     return data.tinggi * skala;
   }
 
-  /** Judul bagian bergaya overline. */
+  /** Judul bagian: Gabarito, huruf kecil biasa, tinta ember (tanpa kicker huruf kapital). */
   function judulBagian(ctx, teks, y) {
-    ctx.fillStyle = FLAME;
-    ctx.font = '700 17px "DM Sans", sans-serif';
-    ctx.fillText(teks.toUpperCase(), PAD, y);
-    return y + 30;
+    ctx.fillStyle = EMBER;
+    ctx.font = '900 26px "Gabarito", "Arial Black", sans-serif';
+    ctx.fillText(teks, PAD, y);
+    return y + 40;
   }
 
   /** Paragraf biasa, otomatis dibungkus. */
@@ -259,7 +260,7 @@
     opsi = opsi || {};
     teks = tanpaTag(teks);
     ctx.fillStyle = opsi.warna || MID;
-    ctx.font = (opsi.font || '400 17px "DM Sans", sans-serif');
+    ctx.font = (opsi.font || '400 17px "Figtree", sans-serif');
     var lebar = opsi.lebar || (W - PAD * 2);
     var kiri = opsi.kiri || PAD;
     pecahBaris(ctx, teks, lebar).forEach(function (b) {
@@ -293,7 +294,7 @@
   function gambarKartu(hasil) {
     var penerima = hasil.ahliWaris.filter(function (a) { return a.status === 'menerima'; });
     var terhalang = hasil.ahliWaris.filter(function (a) { return a.status === 'terhalang'; });
-    var warna = root.UIResult.WARNA;
+    var warna = root.UIResult.WARNA_CETAK;
 
     // Tinggi sementara dilebihkan; kanvas dipotong ke tinggi isi sebenarnya
     // di akhir fungsi supaya tidak ada ruang kosong menggantung di bawah.
@@ -349,18 +350,17 @@
 
     // ── Kepala ───────────────────────────────────────────────────
     ctx.fillStyle = FLAME;
-    ctx.font = '700 20px "DM Sans", sans-serif';
-    ctx.fillText('PEMBAGIAN WARISAN MENURUT SYARIAT ISLAM', PAD, y);
-    y += 52;
-
-    ctx.fillStyle = CHARCOAL;
-    ctx.font = '800 52px "Bricolage Grotesque", "Arial Black", sans-serif';
+    y += 30;
+    ctx.fillStyle = EMBER;
+    ctx.font = '900 54px "Gabarito", "Arial Black", sans-serif';
     ctx.fillText('Hasil perhitungan waris', PAD, y);
     y += 44;
 
     ctx.fillStyle = MID;
-    ctx.font = '400 22px "DM Sans", sans-serif';
-    ctx.fillText('Harta siap dibagi: ' + rp(hasil.harta.tirkah) + '   ·   ' + tanggalHariIni(), PAD, y);
+    ctx.font = '400 22px "Figtree", sans-serif';
+    ctx.fillText('Pembagian waris menurut syariat Islam   ·   ' + tanggalHariIni(), PAD, y);
+    y += 34;
+    ctx.fillText('Harta siap dibagi: ' + rp(hasil.harta.tirkah), PAD, y);
     y += 56;
 
     // ── Rincian harta ────────────────────────────────────────────
@@ -368,16 +368,16 @@
     hasil.harta.langkah.forEach(function (l) {
       var akhir = l.tipe === 'hasil';
       ctx.fillStyle = akhir ? CHARCOAL : MID;
-      ctx.font = (akhir ? '700 19px' : '400 18px') + ' "DM Sans", sans-serif';
+      ctx.font = (akhir ? '700 19px' : '400 18px') + ' "Figtree", sans-serif';
       ctx.fillText(l.label, PAD, y);
 
       ctx.textAlign = 'right';
       if (akhir) {
         ctx.fillStyle = FLAME;
-        ctx.font = '800 24px "Bricolage Grotesque", "Arial Black", sans-serif';
+        ctx.font = '800 24px "Gabarito", "Arial Black", sans-serif';
       } else {
         ctx.fillStyle = l.nilai < 0 ? FLAME : CHARCOAL;
-        ctx.font = '600 18px "DM Sans", sans-serif';
+        ctx.font = '600 18px "Figtree", sans-serif';
       }
       ctx.fillText((l.nilai < 0 ? '\u2212 ' : '') + rp(Math.abs(l.nilai)), W - PAD, y);
       ctx.textAlign = 'left';
@@ -412,17 +412,17 @@
         var s = f.toNumber(hasil.sisaTidakTerbagi.bagian) * Math.PI * 2;
         ctx.beginPath();
         ctx.arc(cx, cy, R, mulai, mulai + s);
-        ctx.strokeStyle = '#CCC4BB';
+        ctx.strokeStyle = '#E4CDB8';
         ctx.lineWidth = tebal;
         ctx.stroke();
       }
 
       ctx.textAlign = 'center';
       ctx.fillStyle = CHARCOAL;
-      ctx.font = '800 34px "Bricolage Grotesque", "Arial Black", sans-serif';
+      ctx.font = '800 34px "Gabarito", "Arial Black", sans-serif';
       ctx.fillText(root.UIResult.rpRingkas(hasil.harta.tirkah), cx, cy + 4);
       ctx.fillStyle = LIGHT;
-      ctx.font = '700 15px "DM Sans", sans-serif';
+      ctx.font = '700 15px "Figtree", sans-serif';
       ctx.fillText('DIBAGI KE ' + penerima.length + ' PIHAK', cx, cy + 32);
       ctx.textAlign = 'left';
 
@@ -432,7 +432,7 @@
     // ── Pohon keluarga ───────────────────────────────────────────
     if (dataPohon) {
       ctx.fillStyle = FLAME;
-      ctx.font = '700 17px "DM Sans", sans-serif';
+      ctx.font = '700 17px "Figtree", sans-serif';
       ctx.fillText('POSISINYA DALAM KELUARGA', PAD, y);
       y += 30;
       y += gambarPohon(ctx, dataPohon, y, lebarIsi);
@@ -445,20 +445,20 @@
       ctx.fillRect(PAD, y - 22, 10, 44);
 
       ctx.fillStyle = CHARCOAL;
-      ctx.font = '600 24px "DM Sans", sans-serif';
+      ctx.font = '600 24px "Figtree", sans-serif';
       ctx.fillText(a.label + (a.jumlah > 1 ? '  ×' + a.jumlah : ''), PAD + 28, y);
 
       ctx.fillStyle = LIGHT;
-      ctx.font = '400 17px "DM Sans", sans-serif';
+      ctx.font = '400 17px "Figtree", sans-serif';
       var sub = a.persen + '%' + (a.jumlah > 1 ? '  ·  ' + rp(a.nominalPerOrang) + ' per orang' : '');
       ctx.fillText(sub, PAD + 28, y + 24);
 
       ctx.textAlign = 'right';
       ctx.fillStyle = CHARCOAL;
-      ctx.font = '800 30px "Bricolage Grotesque", "Arial Black", sans-serif';
+      ctx.font = '800 30px "Gabarito", "Arial Black", sans-serif';
       ctx.fillText(a.bagianTeks, W - PAD, y);
       ctx.fillStyle = MID;
-      ctx.font = '600 18px "DM Sans", sans-serif';
+      ctx.font = '600 18px "Figtree", sans-serif';
       ctx.fillText(rp(a.nominal), W - PAD, y + 24);
       ctx.textAlign = 'left';
 
@@ -467,7 +467,7 @@
 
     if (hasil.sisaTidakTerbagi) {
       ctx.fillStyle = MID;
-      ctx.font = '400 19px "DM Sans", sans-serif';
+      ctx.font = '400 19px "Figtree", sans-serif';
       ctx.fillText('Belum ada yang berhak: ' + hasil.sisaTidakTerbagi.bagianTeks + '  ·  ' +
         rp(hasil.sisaTidakTerbagi.nominal), PAD, y);
       y += 48;
@@ -477,12 +477,12 @@
     if (terhalang.length) {
       y += 20;
       ctx.fillStyle = FLAME;
-      ctx.font = '700 17px "DM Sans", sans-serif';
+      ctx.font = '700 17px "Figtree", sans-serif';
       ctx.fillText('TIDAK MENDAPAT BAGIAN', PAD, y);
       y += 34;
       terhalang.forEach(function (a) {
         ctx.fillStyle = MID;
-        ctx.font = '400 19px "DM Sans", sans-serif';
+        ctx.font = '400 19px "Figtree", sans-serif';
         var oleh = a.terhalangOleh.map(function (k) { return root.Heirs.label(k).toLowerCase(); })
           .filter(function (v, idx, s) { return s.indexOf(v) === idx; }).join(', ');
         ctx.fillText(a.label + (a.jumlah > 1 ? ' ×' + a.jumlah : '') + ' — terhalang oleh ' + oleh, PAD, y);
@@ -498,10 +498,10 @@
         hasil.perhitungan.asalMasalahAkhir + ' bagian sama besar, lalu dibagikan begini:', y);
       y += 8;
       ctx.fillStyle = CHARCOAL;
-      ctx.font = '600 17px "DM Sans", sans-serif';
+      ctx.font = '600 17px "Figtree", sans-serif';
       y = paragraf(ctx, penerima.map(function (a) {
         return a.label + ' = ' + a.siham + '/' + hasil.perhitungan.asalMasalahAkhir;
-      }).join('   \u00b7   '), y, { font: '600 17px "DM Sans", sans-serif', warna: CHARCOAL });
+      }).join('   \u00b7   '), y, { font: '600 17px "Figtree", sans-serif', warna: CHARCOAL });
       hasil.perhitungan.langkah.forEach(function (l) {
         y += 12;
         y = paragraf(ctx, l, y);
@@ -515,7 +515,7 @@
       y = judulBagian(ctx, 'Yang perlu diperhatikan', y);
       semuaCatatan.forEach(function (c) {
         ctx.fillStyle = FLAME;
-        ctx.font = '700 20px "DM Sans", sans-serif';
+        ctx.font = '700 20px "Figtree", sans-serif';
         ctx.fillText('\u2022', PAD, y);
         y = paragraf(ctx, c.teks, y, { kiri: PAD + 22, lebar: W - PAD * 2 - 22 });
         y += 14;
@@ -528,12 +528,12 @@
       y = judulBagian(ctx, 'Kalau dibawa ke Pengadilan Agama', y);
       catatanKHI.forEach(function (c) {
         ctx.fillStyle = CHARCOAL;
-        ctx.font = '700 19px "DM Sans", sans-serif';
+        ctx.font = '700 19px "Figtree", sans-serif';
         ctx.fillText(tanpaTag(c.judul), PAD, y);
         y += 26;
         y = paragraf(ctx, c.teks, y);
         ctx.fillStyle = LIGHT;
-        ctx.font = '400 15px "DM Sans", sans-serif';
+        ctx.font = '400 15px "Figtree", sans-serif';
         ctx.fillText(c.pasal, PAD, y);
         y += 34;
       });
@@ -545,7 +545,7 @@
       y = judulBagian(ctx, 'Langkah selanjutnya', y);
       saran.forEach(function (s2, i) {
         ctx.fillStyle = CHARCOAL;
-        ctx.font = '700 20px "DM Sans", sans-serif';
+        ctx.font = '700 20px "Figtree", sans-serif';
         ctx.fillText((i + 1) + '. ' + tanpaTag(s2.judul), PAD, y);
         y += 28;
         y = paragraf(ctx, s2.teks, y, { kiri: PAD + 26, lebar: W - PAD * 2 - 26 });
@@ -556,13 +556,13 @@
           ctx.strokeRect(PAD + 26, y - 12, 13, 13);
           y = paragraf(ctx, p.teks, y, {
             kiri: PAD + 50, lebar: W - PAD * 2 - 50,
-            font: '400 16px "DM Sans", sans-serif', jarak: 23
+            font: '400 16px "Figtree", sans-serif', jarak: 23
           });
         });
         (s2.tautan || []).forEach(function (t) {
           y += 4;
           ctx.fillStyle = '#A0341A';
-          ctx.font = '600 15px "DM Sans", sans-serif';
+          ctx.font = '600 15px "Figtree", sans-serif';
           ctx.fillText(t.label + ' \u2014 ' + t.url, PAD + 26, y);
           y += 22;
         });
@@ -575,19 +575,19 @@
       y = judulBagian(ctx, 'Sumber aturannya', y);
       dalilDipakai.forEach(function (d) {
         ctx.fillStyle = CHARCOAL;
-        ctx.font = '600 16px "DM Sans", sans-serif';
+        ctx.font = '600 16px "Figtree", sans-serif';
         ctx.fillText('\u2022 ' + d.rujukan, PAD, y);
         y += 23;
         if (d.ringkas) {
           y = paragraf(ctx, d.ringkas, y, {
             kiri: PAD + 20, lebar: W - PAD * 2 - 20,
-            font: '400 15px "DM Sans", sans-serif', jarak: 21, warna: LIGHT
+            font: '400 15px "Figtree", sans-serif', jarak: 21, warna: LIGHT
           });
         }
         y += 10;
       });
       y = paragraf(ctx, 'Teks Arab dan terjemahan lengkapnya ada di halaman Rujukan ' +
-        '(rujukan.html) pada situs ini.', y, { font: '400 15px "DM Sans", sans-serif', warna: LIGHT });
+        '(rujukan.html) pada situs ini.', y, { font: '400 15px "Figtree", sans-serif', warna: LIGHT });
       y += 20;
     }
 
@@ -613,11 +613,11 @@
     ctx.stroke();
 
     ctx.fillStyle = FLAME;
-    ctx.font = '800 20px "Bricolage Grotesque", "Arial Black", sans-serif';
+    ctx.font = '800 20px "Gabarito", "Arial Black", sans-serif';
     ctx.fillText('Jangan jadikan ini sumber utama', PAD + 24, y + 34);
 
     ctx.fillStyle = CHARCOAL;
-    ctx.font = '400 16px "DM Sans", sans-serif';
+    ctx.font = '400 16px "Figtree", sans-serif';
     var awas = 'Verifikasi dan validasikan hasil ini kepada ustadz atau ulama terdekat, atau ke ' +
       'Pengadilan Agama, sebelum dipakai membagi harta yang sebenarnya. Kalkulator tidak bisa ' +
       'melihat hal yang tidak diisikan — hibah semasa hidup, status harta bawaan, atau ahli ' +
@@ -630,7 +630,7 @@
     y += tinggiKotak + 34;
 
     ctx.fillStyle = MID;
-    ctx.font = '400 16px "DM Sans", sans-serif';
+    ctx.font = '400 16px "Figtree", sans-serif';
     var kaki = 'Dihitung menurut ketetapan QS An-Nisa ayat 11, 12, dan 176 serta hadits-hadits ' +
       'sahih tentang waris, mengikuti fiqh mazhab Syafi\'i. Rujukan lengkapnya ada di halaman ' +
       'Rujukan (rujukan.html) pada situs ini.';
@@ -641,10 +641,10 @@
 
     y += 20;
     ctx.fillStyle = CHARCOAL;
-    ctx.font = '800 22px "Bricolage Grotesque", "Arial Black", sans-serif';
+    ctx.font = '800 22px "Gabarito", "Arial Black", sans-serif';
     ctx.fillText('Waris', PAD, y);
     ctx.fillStyle = LIGHT;
-    ctx.font = '400 18px "DM Sans", sans-serif';
+    ctx.font = '400 18px "Figtree", sans-serif';
     ctx.fillText('  by Flavida', PAD + ctx.measureText('Waris').width + 14, y);
 
     // ── Potong ke tinggi isi ─────────────────────────────────────
@@ -696,6 +696,26 @@
     if (btnPng) btnPng.onclick = function () { unduhPNG(hasil); };
     if (btnPdf) btnPdf.onclick = unduhPDF;
   }
+
+
+  /*
+   * Kertas tidak punya tema gelap. Halaman mengikuti tema perangkat
+   * (data-theme="auto"), jadi saat mencetak — lewat tombol PDF maupun Ctrl+P —
+   * dipaksa terang dulu, lalu dikembalikan. Tanpa ini PDF dari perangkat
+   * bertema gelap berisi teks terang di atas kertas putih.
+   */
+  var temaSebelumCetak = null;
+  root.addEventListener('beforeprint', function () {
+    var h = document.documentElement;
+    temaSebelumCetak = h.getAttribute('data-theme');
+    h.setAttribute('data-theme', 'light');
+  });
+  root.addEventListener('afterprint', function () {
+    var h = document.documentElement;
+    if (temaSebelumCetak === null) h.removeAttribute('data-theme');
+    else h.setAttribute('data-theme', temaSebelumCetak);
+    temaSebelumCetak = null;
+  });
 
   root.WarisExport = { pasang: pasang, unduhPNG: unduhPNG, unduhPDF: unduhPDF, gambarKartu: gambarKartu };
 })(typeof window !== 'undefined' ? window : globalThis);

@@ -255,7 +255,7 @@
           (bisaSunting || status === 'menerima' || status === 'terhalang' || status === 'kosong'
             ? ' tabindex="0" role="button"' : '') + '>' +
           (bisaSunting ? '<span class="pohon-ubah" aria-hidden="true">' +
-            '<svg class="ic" viewBox="0 0 24 24"><use href="#i-pensil"></use></svg></span>' : '') +
+            '<svg class="fl-icon" viewBox="0 0 24 24"><use href="#i-pensil"></use></svg></span>' : '') +
           '<span class="pohon-ikon">' + piktogram(s.gender) + '</span>' +
           '<span class="pohon-nama">' + esc(s.nama) + '</span>' +
           '<span class="pohon-jalur">' + esc(s.jalur) + '</span>' +
@@ -313,7 +313,7 @@
     return '<div class="pohon-bilah"><span class="pohon-bilah-judul">Tambah</span>' +
       t.map(function (x) {
         return '<button type="button" class="pohon-tambah" data-tambah="' + x[0] + '">' +
-          '<svg class="ic ic-sm" aria-hidden="true"><use href="#i-plus"></use></svg>' + x[1] + '</button>';
+          '<svg class="fl-icon ic-sm" aria-hidden="true"><use href="#i-plus"></use></svg>' + x[1] + '</button>';
       }).join('') + '</div>';
   }
 

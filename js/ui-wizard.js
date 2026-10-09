@@ -57,7 +57,7 @@
   }
 
   function ikon(id, kelas) {
-    return '<svg class="ic ' + (kelas || '') + '" aria-hidden="true"><use href="#' + id + '"></use></svg>';
+    return '<svg class="fl-icon ' + (kelas || '') + '" aria-hidden="true"><use href="#' + id + '"></use></svg>';
   }
 
   // ═══════════════════════════════════════════════════════════════
@@ -91,10 +91,10 @@
 
   function renderRincian() {
     $('#rincian-harta').innerHTML = window.Advice.JENIS_HARTA.map(function (j) {
-      return '<div class="uang-field" style="margin-bottom:var(--space-3)">' +
-        '<label class="uang-label" for="rin-' + j.id + '" style="display:flex;align-items:center;gap:8px">' +
+      return '<div class="fl-field">' +
+        '<label for="rin-' + j.id + '" style="display:flex;align-items:center;gap:8px">' +
         ikon(j.icon, 'ic-sm') + j.label + '</label>' +
-        '<div class="uang-box"><span class="rp">Rp</span>' +
+        '<div class="fl-affix"><span class="rp">Rp</span>' +
         '<input id="rin-' + j.id + '" type="text" inputmode="numeric" value="0" data-rincian="' + j.id + '"></div>' +
         '</div>';
     }).join('');
@@ -187,10 +187,10 @@
     var kendali = tunggal
       ? '<button class="toggle" type="button" data-toggle="' + def.key + '" ' +
         'aria-pressed="' + (jml > 0) + '" aria-label="' + def.label + '"></button>'
-      : '<div class="counter">' +
+      : '<div class="fl-stepper">' +
         '<button type="button" data-kurang="' + def.key + '" aria-label="Kurangi ' + def.label + '"' +
         (jml === 0 ? ' disabled' : '') + '>' + ikon('i-minus', 'ic-sm') + '</button>' +
-        '<span class="nilai" data-nilai="' + def.key + '">' + jml + '</span>' +
+        '<output class="nilai" data-nilai="' + def.key + '" aria-live="polite">' + jml + '</output>' +
         '<button type="button" data-tambah="' + def.key + '" aria-label="Tambah ' + def.label + '"' +
         (jml >= def.max ? ' disabled' : '') + '>' + ikon('i-plus', 'ic-sm') + '</button>' +
         '</div>';
@@ -229,7 +229,7 @@
       var list = daftarGrup(g.id);
       if (!list.length) return '';
       return '<div style="margin-bottom:var(--space-6)">' +
-        '<div class="progres-teks">' + g.label + '</div>' +
+        '<p class="waris-grup-judul">' + g.label + '</p>' +
         '<div class="waris-grid">' + list.map(function (d) {
           return kartuWaris(d, jml(d.key));
         }).join('') + '</div></div>';
@@ -242,7 +242,7 @@
         '<button class="lipat-tombol" type="button" data-lipat>' +
         ikon(list[0].icon, 'ic-sm') + g.label +
         '<span class="lipat-hitung">' + (isi || '') + '</span>' +
-        ikon('i-chevron', 'ic-sm panah') + '</button>' +
+        ikon('i-chevron-down', 'ic-sm panah') + '</button>' +
         '<div class="lipat-isi"><div class="waris-grid">' +
         list.map(function (d) { return kartuWaris(d, jml(d.key)); }).join('') +
         '</div></div></div>';
@@ -348,7 +348,7 @@
     $('#kondisi-khusus').innerHTML = tersedia.map(function (k) {
       return '<button class="ceklis" type="button" data-kondisi="' + k.id + '" ' +
         'aria-pressed="' + !!state.kondisi[k.id] + '">' +
-        '<span class="kotak"><svg class="ic" aria-hidden="true" style="width:14px;height:14px;stroke-width:2.6">' +
+        '<span class="kotak"><svg class="fl-icon" aria-hidden="true" style="width:14px;height:14px;stroke-width:3">' +
         '<use href="#i-check"></use></svg></span>' +
         '<span><span class="ceklis-judul">' + k.judul + '</span>' +
         '<span class="ceklis-ket">' + k.ket + '</span></span></button>';
@@ -367,20 +367,25 @@
   // ═══════════════════════════════════════════════════════════════
   // NAVIGASI
   // ═══════════════════════════════════════════════════════════════
+  var NAMA_LANGKAH = ['Pewaris', 'Harta', 'Kewajiban', 'Keluarga', 'Kondisi'];
+
   function renderProgres() {
-    $('#progres').innerHTML = Array.apply(null, { length: TOTAL_LANGKAH }).map(function (_, i) {
+    // fl-steps dari design system: nomor bulat + nama langkah. Yang sedang
+    // dikerjakan bertanda aria-current, yang sudah lewat diberi is-done.
+    $('#progres').innerHTML = NAMA_LANGKAH.slice(0, TOTAL_LANGKAH).map(function (nama, i) {
       var n = i + 1;
-      return '<div class="progres-item ' + (n < langkahKini ? 'lewat' : n === langkahKini ? 'kini' : '') + '"></div>';
+      return '<li' + (n === langkahKini ? ' aria-current="step"' : n < langkahKini ? ' class="is-done"' : '') +
+        '>' + nama + '</li>';
     }).join('');
-    $('#progres').setAttribute('aria-valuenow', String(langkahKini));
-    $('#progres-teks').textContent = 'Langkah ' + langkahKini + ' dari ' + TOTAL_LANGKAH;
+    $('#progres-teks').textContent = 'Langkah ' + langkahKini + ' dari ' + TOTAL_LANGKAH +
+      ': ' + NAMA_LANGKAH[langkahKini - 1];
     // Di langkah pertama tidak ada langkah sebelumnya, tapi tombolnya tetap ada
     // demi konsistensi tata letak — hanya berubah jadi jalan keluar ke beranda.
     $('#btn-beranda').hidden = langkahKini !== 1;
     $('#btn-mundur').hidden = langkahKini === 1;
     $('#btn-maju').innerHTML = langkahKini === TOTAL_LANGKAH
       ? 'Lihat Hasil ' + ikon('i-timbangan', 'ic-sm')
-      : 'Lanjut ' + ikon('i-kanan', 'ic-sm');
+      : 'Lanjut ' + ikon('i-arrow-right', 'ic-sm');
   }
 
   function keLangkah(n) {

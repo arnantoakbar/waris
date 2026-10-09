@@ -25,23 +25,28 @@
     print-color-adjust: exact !important;
   }
 
-  .nav,
-  .footer,
+  .fl-nav,
+  .fl-menu,
+  .fl-footer,
+  .fl-skip,
   .bar-aksi,
   .no-print,
   #wizard,
-  .skip-link,
   .panah,
   #pesan-galat { display: none !important; }
 
   #hasil[hidden] { display: block !important; }
 
-  .wrap, .wrap-narrow {
+  .fl-wrap, .fl-wrap--narrow {
     max-width: 100% !important;
     padding: 0 !important;
   }
 
-  .section { padding: 0 !important; }
+  .fl-section { padding: 0 !important; }
+
+  /* Kertas tidak punya tema gelap, dan bayangan clay hanya memboroskan tinta. */
+  * { box-shadow: none !important; text-shadow: none !important; }
+  .hasil-kartu, .saran-item, .apx, .dasar { border: 0.5pt solid rgba(160,52,26,0.25) !important; }
 
   /* Kop dokumen */
   #hasil::before {
@@ -59,7 +64,6 @@
   }
 
   .hasil-kepala-besar { padding: 0 0 14pt !important; text-align: left; }
-  .hasil-kepala-besar img { display: none; }
   .hasil-kepala-besar h2 { font-size: 22pt; }
 
   .blok {
@@ -95,7 +99,6 @@
     margin-bottom: 4pt;
   }
   .hasil-kepala { padding: 6pt 8pt; min-height: 0; }
-  .hasil-ikon { width: 26pt; height: 26pt; }
   .hasil-pecahan { font-size: 13pt; }
   .hasil-detail { display: block !important; padding: 0 8pt 8pt; font-size: 8.5pt; }
 
@@ -138,7 +141,7 @@
   }
   .awas-kepala { font-size: 12pt; margin-bottom: 4pt; }
   .awas p { font-size: 9pt; }
-  .awas .btn { display: none !important; }
+  .awas .fl-btn { display: none !important; }
 
   /* Tautan di daftar langkah dicetak lengkap dengan alamatnya, supaya masih
      berguna di atas kertas. */
@@ -153,14 +156,17 @@
   /* Dalil */
   .dalil-arab { font-size: 14pt; line-height: 1.9; }
   .dalil-terjemah { font-size: 8.5pt; }
-  .card { padding: 8pt !important; break-inside: avoid; margin-bottom: 5pt; }
+  .fl-cite { padding: 8pt !important; break-inside: avoid; margin-bottom: 5pt; }
+  .fl-arabic { font-size: 14pt; line-height: 1.9; }
+  .fl-cite__tr, .dalil-sumber { font-size: 8.5pt; }
+  .fl-cite__src a::after { content: " (" attr(href) ")"; font-weight: 400; color: #555555; font-size: 7pt; }
 
   /* Saran */
   .saran-item { padding: 7pt 9pt; break-inside: avoid; }
   .saran-judul { font-size: 10.5pt; }
   .saran-teks { font-size: 8.5pt; }
 
-  .note, .pita { padding: 7pt 9pt; font-size: 8.5pt; break-inside: avoid; }
+  .note, .pita, .fl-notice { padding: 7pt 9pt; font-size: 8.5pt; break-inside: avoid; }
 
   /* Kop halaman baru untuk bagian besar */
   .blok:has(.saran) { break-before: page; }

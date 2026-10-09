@@ -1,0 +1,369 @@
+/*
+ * Flavida Design System · Tokens, type, motion curves
+ * v4.0 · "Flame-tree clay" · flavida.co
+ *
+ * Fonts are self-hosted (no third-party request):
+ *   Gabarito (display, 800/900) · Figtree (body, 300-900) — both SIL OFL, variable, latin subset.
+ * Load order for a page:  colors_and_type.css  →  flavida.css (components)  →  scripts (see README).
+ * Paths below are relative to THIS file; if you copy the css elsewhere, move fonts/ with it.
+ */
+
+@font-face {
+  font-family: 'Gabarito';
+  src: url('fonts/gabarito-latin-wght.woff2') format('woff2');
+  font-weight: 400 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Figtree';
+  src: url('fonts/figtree-latin-wght.woff2') format('woff2');
+  font-weight: 300 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root, [data-theme="light"] {
+  /* ═════════ BRAND COLOR (binding hexes, from the Delonix regia) ═════════ */
+  --color-flame:      #E8391D;  /* Flame — petals, blobs, large type, graphics */
+  --color-orange:     #F5760A;  /* Fire orange — gradient mid, hover warmth */
+  --color-amber:      #F5A623;  /* Amber — stamens, sparkles, highlights, tags on dark */
+  --color-ember:      #A0341A;  /* Ember — headline + logo ink on light grounds */
+  --color-charcoal:   #111111;  /* Charcoal — dark sections, B&W print */
+  --color-cream:      #FFF8F0;  /* Cream — primary ground */
+  --color-parchment:  #FFF0E0;  /* Parchment — secondary ground, panels */
+  --color-green:      #1B5E3B;  /* Canopy green — rare accent from the leaves */
+
+  /* Flame ramp (derived, for clay shading + states) */
+  --flame-50:  #FFF1EC;
+  --flame-100: #FFE0D5;
+  --flame-200: #FFC1AD;
+  --flame-300: #FF9A7C;
+  --flame-400: #F46A47;
+  --flame-500: #E8391D;   /* = --color-flame */
+  --flame-600: #D02E14;
+  --flame-700: #B02510;
+  --flame-800: #8A1E0F;
+  --flame-900: #5E1509;
+
+  /* Amber ramp */
+  --amber-50:  #FFF7E3;
+  --amber-100: #FFEBBD;
+  --amber-300: #FFCF6B;
+  --amber-500: #F5A623;   /* = --color-amber */
+  --amber-700: #A8650A;
+
+  /* Character skin tones (from the Flav render) */
+  --color-peach:       #F8D3B2;
+  --color-peach-deep:  #EDB48C;
+  --color-mitten:      #F9E6D2;
+  --color-blush:       #F29080;
+  --color-eye:         #2A1510;
+
+  /* Text — all pass AA on cream and parchment */
+  --color-ink:        #1A1410;  /* body headings / strong text (warm black) */
+  --color-mid:        #5A4F48;  /* secondary text (7.5:1 on cream) */
+  --color-light:      #706157;  /* tertiary text, captions (5.6:1 on cream, 5.0:1 on sunk wells) */
+  --color-flame-ink:  #C42E14;  /* flame as small text / links on cream (5.3:1) */
+  --color-on-flame:   #FFFFFF;
+
+
+  /* Ink tokens: readable text on top of each tint (used by alerts, callouts, chips) */
+  --amber-ink:   #6B3F02;
+  --success-ink: #124F2D;
+  --warning-ink: #6B3F02;
+  --error-ink:   #8A1E0F;
+  --info-ink:    #1E4568;
+  --glass:       rgba(255, 253, 249, 0.86);   /* floating nav, section pill */
+  --color-ember-fixed: #A0341A;             /* ember as ink on cream-fixed surfaces: never flips in dark */
+  --color-flame-ink-fixed: #C42E14;
+  --color-cream-fixed: #FFF8F0;              /* cream as a text/ink color: never flips in dark */
+  --gloss-soft: linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0));  /* gloss on pale buttons */
+
+  /* Pastel clay tones: category colors for chips, tiles and sticker backgrounds (text uses the -ink partner, AA) */
+  --tone-mint:   #CFEFDD; --tone-mint-ink:   #14633C;
+  --tone-sky:    #D4E6FA; --tone-sky-ink:    #1D4F87;
+  --tone-lilac:  #E3DAF7; --tone-lilac-ink:  #46338F;
+  --tone-rose:   #FAD7E3; --tone-rose-ink:   #8E2C55;
+  --tone-butter: #FFF0B8; --tone-butter-ink: #6B4A00;
+  --tone-peach:  #FFDCC7; --tone-peach-ink:  #8A3A12;
+
+  /* Chart series (categorical). Flame leads; the rest stay distinguishable in grayscale and for color-blind readers. */
+  --chart-1: #E8391D;  /* flame */
+  --chart-2: #2A78D6;  /* blue */
+  --chart-3: #F5A623;  /* amber */
+  --chart-4: #1B9E77;  /* leaf */
+  --chart-5: #5B4BB7;  /* violet */
+  --chart-6: #E87BA4;  /* rose */
+  --chart-7: #A0341A;  /* ember */
+  --chart-8: #6B7A8F;  /* slate */
+  --chart-seq-1: #FFE0D5; --chart-seq-2: #FFA98E; --chart-seq-3: #F46A47; --chart-seq-4: #D02E14; --chart-seq-5: #8A1E0F; /* sequential */
+  --level-1: var(--color-success); --level-2: #8F5507; --level-3: #A8410A; --level-4: var(--color-error);   /* severity I to IV */
+
+  /* Semantic */
+  --color-success: #16703F;
+  --color-warning: #8F5507;
+  --color-error:   #C42E14;
+  --color-info:    #2F6196;
+  --color-success-bg: #E6F4EC;
+  --color-warning-bg: #FFF1D6;
+  --color-error-bg:   #FFE4DC;
+  --color-info-bg:    #E5EEF7;
+
+  /* Surfaces */
+  --bg-primary:    var(--color-cream);
+  --bg-secondary:  var(--color-parchment);
+  --bg-dark:       var(--color-charcoal);
+  --fg-on-dark-strong: #FFFFFF;           /* titles on dark grounds */
+  --field-focus-border: var(--color-ink);   /* focus = ink edge + amber halo, so it never reads as an error */
+  --field-focus-ring: 0 0 0 4px rgba(245, 166, 35, 0.42);
+  --bg-accent:     var(--color-flame);
+  --surface:       #FFFDF9;               /* puffy card face (warm white) */
+  --surface-sunk:  #F8E9D6;               /* pressed/inset wells, input fill */
+
+  /* Foreground aliases (legacy names kept) */
+  --fg-logo:       var(--color-ember);
+  --fg1:           var(--color-ink);
+  --fg2:           var(--color-mid);
+  --fg3:           var(--color-light);
+  --fg-accent:     var(--color-flame-ink);
+  --fg-on-dark:    var(--color-cream);
+  --fg-on-dark-dim: rgba(255, 248, 240, 0.72);
+
+  /* Lines */
+  --color-border:        rgba(160, 52, 26, 0.14);
+  --color-border-hover:  rgba(160, 52, 26, 0.30);
+  --border-default:      var(--color-border);
+  --border-hover:        var(--color-border-hover);
+  --color-focus:         var(--color-flame-ink);
+  --focus-ring:          0 0 0 3px var(--color-cream), 0 0 0 6px var(--color-flame-ink);
+
+  /* Gradients */
+  --grad-flame:  linear-gradient(135deg, var(--amber-500) 0%, var(--color-orange) 45%, var(--color-flame) 100%);
+  --grad-petal:  radial-gradient(120% 120% at 28% 18%, #FF8A5C 0%, var(--color-flame) 48%, #C42E14 100%);
+  --grad-btn:    linear-gradient(180deg, #E8472B 0%, #D8341A 55%, #C42E14 100%);
+  --glow-hero:   radial-gradient(60% 55% at 50% 100%, rgba(245, 118, 10, 0.18), transparent 70%),
+                 radial-gradient(40% 40% at 85% 15%, rgba(232, 57, 29, 0.10), transparent 65%);
+  --glow-dark:   radial-gradient(60% 80% at 50% 115%, rgba(232, 57, 29, 0.45), transparent 65%);
+
+  /* ═════════ CLAY ELEVATION — the system's depth language ═════════
+     Every raised thing = top inner highlight + bottom inner shade + soft warm drop shadow. */
+  --shadow-clay-sm:
+    inset 0 1.5px 0 rgba(255, 255, 255, 0.9),
+    inset 0 -3px 6px rgba(160, 52, 26, 0.07),
+    0 1px 2px rgba(160, 52, 26, 0.10),
+    0 8px 14px -8px rgba(160, 52, 26, 0.22);
+  --shadow-clay-md:
+    inset 0 2px 0 rgba(255, 255, 255, 0.95),
+    inset 0 -6px 12px rgba(160, 52, 26, 0.08),
+    0 2px 4px rgba(160, 52, 26, 0.08),
+    0 18px 30px -12px rgba(160, 52, 26, 0.26);
+  --shadow-clay-lg:
+    inset 0 3px 0 rgba(255, 255, 255, 0.95),
+    inset 0 -10px 18px rgba(160, 52, 26, 0.09),
+    0 4px 8px rgba(160, 52, 26, 0.08),
+    0 34px 54px -20px rgba(160, 52, 26, 0.34);
+  --shadow-clay-flame:
+    inset 0 2px 0 rgba(255, 255, 255, 0.38),
+    inset 0 -6px 10px rgba(110, 22, 8, 0.36),
+    0 2px 3px rgba(150, 30, 10, 0.25),
+    0 14px 24px -8px rgba(232, 57, 29, 0.55);
+  --shadow-clay-pressed:
+    inset 0 4px 10px rgba(110, 22, 8, 0.38),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.18),
+    0 1px 1px rgba(150, 30, 10, 0.2);
+  --shadow-inset:
+    inset 0 3px 7px rgba(160, 52, 26, 0.14),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.9);
+  --shadow-sticker: drop-shadow(0 10px 14px rgba(160, 52, 26, 0.22));
+  /* legacy aliases */
+  --shadow-card:       var(--shadow-clay-md);
+  --shadow-card-hover: var(--shadow-clay-lg);
+  --shadow-btn:        var(--shadow-clay-flame);
+  --shadow-mascot:     drop-shadow(0 14px 22px rgba(160, 52, 26, 0.24));
+  --color-shadow:       rgba(160, 52, 26, 0.10);
+  --color-shadow-hover: rgba(160, 52, 26, 0.22);
+  --color-flame-tint-sm: rgba(232, 57, 29, 0.06);
+  --color-flame-tint-md: rgba(232, 57, 29, 0.12);
+  --color-flame-tint-lg: rgba(232, 57, 29, 0.20);
+
+  /* ═════════ TYPE ═════════ */
+  --font-display: 'Gabarito', 'Trebuchet MS', 'Segoe UI', system-ui, sans-serif;
+  --font-body:    'Figtree', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --font-mono:    ui-monospace, 'SF Mono', 'Cascadia Mono', Menlo, Consolas, monospace;
+
+  --fw-light: 300; --fw-regular: 400; --fw-medium: 500; --fw-semibold: 600;
+  --fw-bold: 700; --fw-extrabold: 800; --fw-black: 900;
+
+  /* Display tops out at 6rem (96px) */
+  --text-display-xl: clamp(2.75rem, 1.6rem + 5.6vw, 6rem);
+  --text-display-l:  clamp(2.125rem, 1.4rem + 3.4vw, 3.75rem);
+  --text-display-m:  clamp(1.75rem, 1.3rem + 2.2vw, 2.75rem);
+  --text-heading-l:  clamp(1.5rem, 1.2rem + 1.3vw, 2.125rem);
+  --text-heading-m:  clamp(1.25rem, 1.1rem + 0.7vw, 1.5rem);
+  --text-heading-s:  1.125rem;
+  --text-body-xl:    clamp(1.125rem, 1.04rem + 0.4vw, 1.3125rem);
+  --text-body:       1rem;
+  --text-body-s:     0.9375rem;
+  --text-body-xs:    0.875rem;
+  --text-label:      0.8125rem;
+  --text-caption:    0.75rem;
+  --text-micro:      0.6875rem;
+
+  --lh-display: 1.0;
+  --lh-heading: 1.08;
+  --lh-tight:   1.2;
+  --lh-lead:    1.55;
+  --lh-body:    1.65;
+  --lh-ui:      1.4;
+
+  --ls-tight:   -0.03em;   /* display xl */
+  --ls-snug:    -0.02em;   /* section titles */
+  --ls-normal:  0;
+  --ls-wide:    0.02em;
+  --ls-wider:   0.06em;
+  --ls-widest:  0.1em;     /* tags only */
+  --measure:    68ch;
+
+  /* ═════════ SPACE (4px base) ═════════ */
+  --space-1: 4px;  --space-2: 8px;   --space-3: 12px;  --space-4: 16px;  --space-5: 20px;
+  --space-6: 24px; --space-7: 28px;  --space-8: 32px;  --space-10: 40px; --space-12: 48px;
+  --space-14: 56px; --space-16: 64px; --space-20: 80px; --space-24: 96px; --space-32: 128px;
+
+  /* ═════════ SHAPE — chunkier than v3 ═════════ */
+  --radius-pill:  999px;
+  --radius-panel: 24px;   /* hero panels, CTA banners */
+  --radius-card:  20px;
+  --radius-icon:  14px;
+  --radius-input: 12px;
+  --radius-sm:    10px;
+  --radius-xs:    6px;
+  --radius-cta:   var(--radius-panel);
+
+  /* ═════════ MOTION ═════════
+     Clay is soft: arrivals decelerate, pressable things overshoot a little, Flav overshoots a lot.
+     UI springs stay small (peak <= ~4%); the mascot may pop (up to ~30%). */
+  --ease-out:    cubic-bezier(0.16, 1, 0.3, 1);       /* confident arrival */
+  --ease-in:     cubic-bezier(0.5, 0, 0.75, 0);       /* exits (faster than entrances) */
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-spring-soft: linear(0, 0.0241, 0.0859, 0.1718, 0.2712, 0.3755, 0.4787, 0.5764, 0.6656, 0.7447, 0.813, 0.8704, 0.9174, 0.9548, 0.9837, 1.0051, 1.0201, 1.03, 1.0357, 1.0381, 1.0382, 1.0364, 1.0335, 1.0299, 1.026, 1.022, 1.0181, 1.0145, 1.0112, 1.0084, 1.006, 1);
+  --ease-spring-bounce: linear(0, 0.0584, 0.2027, 0.3907, 0.5883, 0.771, 0.923, 1.0371, 1.1123, 1.1521, 1.163, 1.1526, 1.1286, 1.0978, 1.0656, 1.036, 1.0115, 0.9932, 0.9813, 0.975, 0.9734, 0.9753, 0.9793, 0.9843, 0.9896, 0.9943, 0.9983, 1.0012, 1.0031, 1.0041, 1.0043, 1);
+  --ease-spring-pop: linear(0, 0.0983, 0.336, 0.6287, 0.9059, 1.1207, 1.251, 1.297, 1.2745, 1.2074, 1.1211, 1.0372, 0.9705, 0.9286, 0.9121, 0.9167, 0.9354, 0.9608, 0.9861, 1.0067, 1.0201, 1.0259, 1.0252, 1.02, 1.0126, 1.005, 0.9986, 0.9944, 0.9924, 0.9924, 0.9938, 1);
+  --ease-default: var(--ease-out);
+  --dur-instant: 90ms;
+  --dur-fast:    150ms;
+  --dur-base:    240ms;
+  --dur-slow:    450ms;
+  --dur-enter:   700ms;
+  --dur-spring-soft:   480ms;
+  --dur-spring-bounce: 620ms;
+  --dur-spring-pop:    760ms;
+  --transition-base:
+    transform var(--dur-spring-soft) var(--ease-spring-soft),
+    box-shadow var(--dur-base) var(--ease-out),
+    background-color var(--dur-base) var(--ease-out),
+    border-color var(--dur-base) var(--ease-out),
+    color var(--dur-fast) var(--ease-out);
+
+  /* Z layers */
+  --z-nav: 50; --z-overlay: 80; --z-toast: 100;
+}
+
+/* ═════════ SEMANTIC TYPE CLASSES (legacy .flav-* names kept; .fl-* are canonical) ═════════ */
+.fl-display-xl, .flav-display-xl { font-family: var(--font-display); font-size: var(--text-display-xl); font-weight: var(--fw-black); line-height: var(--lh-display); letter-spacing: var(--ls-tight); text-wrap: balance; }
+.fl-display-l,  .flav-display-l  { font-family: var(--font-display); font-size: var(--text-display-l);  font-weight: var(--fw-black); line-height: var(--lh-heading); letter-spacing: var(--ls-snug); text-wrap: balance; }
+.fl-display-m,  .flav-display-m  { font-family: var(--font-display); font-size: var(--text-display-m);  font-weight: var(--fw-extrabold); line-height: var(--lh-heading); letter-spacing: var(--ls-snug); text-wrap: balance; }
+.fl-heading-l,  .flav-heading-l  { font-family: var(--font-display); font-size: var(--text-heading-l);  font-weight: var(--fw-extrabold); line-height: var(--lh-heading); letter-spacing: var(--ls-snug); text-wrap: balance; }
+.fl-heading-m,  .flav-heading-m  { font-family: var(--font-display); font-size: var(--text-heading-m);  font-weight: var(--fw-extrabold); line-height: var(--lh-tight); letter-spacing: -0.01em; }
+.fl-heading-s                    { font-family: var(--font-display); font-size: var(--text-heading-s);  font-weight: var(--fw-bold); line-height: var(--lh-tight); }
+.fl-lead,       .flav-body-lead  { font-family: var(--font-body); font-size: var(--text-body-xl); font-weight: var(--fw-regular); line-height: var(--lh-lead); color: var(--fg2); max-width: var(--measure); text-wrap: pretty; }
+.fl-body,       .flav-body       { font-family: var(--font-body); font-size: var(--text-body); font-weight: var(--fw-regular); line-height: var(--lh-body); color: var(--fg2); max-width: var(--measure); text-wrap: pretty; }
+.fl-body-s,     .flav-body-sm    { font-family: var(--font-body); font-size: var(--text-body-xs); font-weight: var(--fw-regular); line-height: var(--lh-body); color: var(--fg2); }
+.fl-label,      .flav-label      { font-family: var(--font-body); font-size: var(--text-micro); font-weight: var(--fw-bold); letter-spacing: var(--ls-widest); text-transform: uppercase; color: var(--fg-accent); }
+.fl-caption,    .flav-caption    { font-family: var(--font-body); font-size: var(--text-caption); font-weight: var(--fw-regular); color: var(--fg3); }
+.fl-mono                         { font-family: var(--font-mono); font-size: 0.875em; }
+
+/* utility gradients / glows (fills only; no gradient text) */
+.fl-gradient-flame, .flav-gradient-flame { background: var(--grad-flame); }
+.fl-glow-hero,  .flav-glow-hero  { background: var(--glow-hero); }
+.fl-glow-dark,  .flav-glow-dark  { background: var(--glow-dark); }
+
+/* ═════════ LEGACY v3 SHORT ALIASES (old pages used --flame/--cream etc.) ═════════ */
+:root, [data-theme="light"] {
+  --flame: var(--color-flame); --orange: var(--color-orange); --amber: var(--color-amber);
+  --ember: var(--color-ember); --charcoal: var(--color-charcoal); --cream: var(--color-cream);
+  --parchment: var(--color-parchment); --ink: var(--color-ink); --mid: var(--color-mid); --light: var(--color-light);
+}
+
+/* Pin a region to the light palette inside a dark page (print artboards, previews): <div data-theme="light"> */
+:where([data-theme="light"]:not(:root)) { color: var(--color-mid); }
+
+/* ═════════ DARK THEME ═════════
+   Opt in with <html data-theme="dark">, or data-theme="auto" to follow the device. Scope it to any container.
+   Warm charcoal, never cold gray. Roles are remapped, so components need no changes. */
+:root[data-theme="dark"], [data-theme="dark"] {
+  color-scheme: dark;
+  --bg-primary: #17110E;
+  --bg-secondary: #1F1713;
+  --bg-dark: #0B0705;                       /* dark sections sit below the page, not on it */
+  --color-parchment: #231A15;
+  --surface: #271E19;
+  --surface-sunk: #130E0B;
+  --color-ink: #FFF3E8;
+  --color-mid: #D6C5B8;
+  --color-light: #A9968B;
+  --color-ember: #FFAE93;
+  --color-flame-ink: #FF8E6E;
+  --color-border: rgba(255, 220, 200, 0.14);
+  --color-border-hover: rgba(255, 220, 200, 0.3);
+  --fg1: var(--color-ink); --fg2: var(--color-mid); --fg3: var(--color-light);
+  --flame-50: rgba(255, 142, 110, 0.10); --flame-100: rgba(255, 142, 110, 0.18); --flame-200: rgba(255, 142, 110, 0.30);
+  --flame-700: #FFB5A1; --flame-800: #FFC9B8;
+  --amber-50: rgba(245, 166, 35, 0.10); --amber-100: rgba(245, 166, 35, 0.2); --amber-ink: #FFD9A0;
+  --color-success: #6FD9A0; --color-warning: #F0B65A; --color-error: #FF9A85; --color-info: #8DB9F0;
+  --color-success-bg: rgba(60, 200, 120, 0.14); --color-warning-bg: rgba(240, 182, 90, 0.14); --color-error-bg: rgba(255, 120, 100, 0.15); --color-info-bg: rgba(110, 160, 230, 0.15);
+  --success-ink: #BFF0D6; --warning-ink: #F7D9A6; --error-ink: #FFC9BD; --info-ink: #C9DDF7;
+  --level-2: #F0B65A; --level-3: #FF9E5C;
+  --glass: rgba(35, 26, 21, 0.84);
+  --gloss-soft: linear-gradient(180deg, rgba(255, 235, 220, 0.12), rgba(255, 235, 220, 0));
+  --focus-ring: 0 0 0 3px #17110E, 0 0 0 6px #FF8E6E;
+  --tone-mint: rgba(111, 217, 160, 0.16); --tone-mint-ink: #9BE6BE;
+  --tone-sky: rgba(141, 185, 240, 0.16); --tone-sky-ink: #B4D3F7;
+  --tone-lilac: rgba(170, 150, 240, 0.18); --tone-lilac-ink: #CDBFF8;
+  --tone-rose: rgba(240, 130, 170, 0.17); --tone-rose-ink: #F6B5CD;
+  --tone-butter: rgba(245, 214, 90, 0.15); --tone-butter-ink: #F3DD8A;
+  --tone-peach: rgba(255, 160, 110, 0.17); --tone-peach-ink: #FFC4A3;
+  --chart-1: #FF6B4A; --chart-2: #5AA0F0; --chart-3: #F5B545; --chart-4: #3CC79A; --chart-5: #9A89F0; --chart-6: #F08EB3; --chart-7: #FF9B7D; --chart-8: #9AA9BD;
+  --chart-seq-1: #3A1E15; --chart-seq-2: #7A3320; --chart-seq-3: #C24427; --chart-seq-4: #F46A47; --chart-seq-5: #FFB59A;
+  --shadow-clay-sm: inset 0 1.5px 0 rgba(255, 235, 220, 0.07), inset 0 -3px 6px rgba(0, 0, 0, 0.35), 0 1px 2px rgba(0, 0, 0, 0.45), 0 8px 14px -8px rgba(0, 0, 0, 0.65);
+  --shadow-clay-md: inset 0 2px 0 rgba(255, 235, 220, 0.08), inset 0 -6px 12px rgba(0, 0, 0, 0.35), 0 2px 4px rgba(0, 0, 0, 0.4), 0 18px 30px -12px rgba(0, 0, 0, 0.7);
+  --shadow-clay-lg: inset 0 3px 0 rgba(255, 235, 220, 0.09), inset 0 -10px 18px rgba(0, 0, 0, 0.35), 0 4px 8px rgba(0, 0, 0, 0.45), 0 34px 54px -20px rgba(0, 0, 0, 0.8);
+  --shadow-inset: inset 0 3px 8px rgba(0, 0, 0, 0.55), inset 0 -1px 0 rgba(255, 235, 220, 0.06);
+  --shadow-sticker: drop-shadow(0 10px 14px rgba(0, 0, 0, 0.5));
+  --shadow-mascot: drop-shadow(0 14px 22px rgba(0, 0, 0, 0.5));
+  --glow-hero: radial-gradient(60% 55% at 50% 100%, rgba(245, 118, 10, 0.12), transparent 70%);
+}
+:root[data-theme="dark"] body, [data-theme="dark"].fl-themed { background: var(--bg-primary); color: var(--color-ink); }
+@media (prefers-color-scheme: dark) {
+  :root[data-theme="auto"] {
+    color-scheme: dark;
+    --bg-primary: #17110E; --bg-secondary: #1F1713; --color-parchment: #231A15; --surface: #271E19; --surface-sunk: #130E0B;
+    --color-ink: #FFF3E8; --color-mid: #D6C5B8; --color-light: #A9968B; --color-ember: #FFAE93; --color-flame-ink: #FF8E6E;
+    --color-border: rgba(255, 220, 200, 0.14); --color-border-hover: rgba(255, 220, 200, 0.3);
+    --fg1: var(--color-ink); --fg2: var(--color-mid); --fg3: var(--color-light);
+    --flame-50: rgba(255, 142, 110, 0.10); --flame-100: rgba(255, 142, 110, 0.18); --flame-200: rgba(255, 142, 110, 0.30); --flame-700: #FFB5A1; --flame-800: #FFC9B8;
+    --amber-50: rgba(245, 166, 35, 0.10); --amber-100: rgba(245, 166, 35, 0.2); --amber-ink: #FFD9A0;
+    --color-success: #6FD9A0; --color-warning: #F0B65A; --color-error: #FF9A85; --color-info: #8DB9F0;
+    --color-success-bg: rgba(60, 200, 120, 0.14); --color-warning-bg: rgba(240, 182, 90, 0.14); --color-error-bg: rgba(255, 120, 100, 0.15); --color-info-bg: rgba(110, 160, 230, 0.15);
+    --success-ink: #BFF0D6; --warning-ink: #F7D9A6; --error-ink: #FFC9BD; --info-ink: #C9DDF7; --level-2: #F0B65A; --level-3: #FF9E5C;
+    --glass: rgba(35, 26, 21, 0.84);
+    --gloss-soft: linear-gradient(180deg, rgba(255, 235, 220, 0.12), rgba(255, 235, 220, 0));
+    --chart-1: #FF6B4A; --chart-2: #5AA0F0; --chart-3: #F5B545; --chart-4: #3CC79A; --chart-5: #9A89F0; --chart-6: #F08EB3; --chart-7: #FF9B7D; --chart-8: #9AA9BD;
+    --shadow-clay-sm: inset 0 1.5px 0 rgba(255, 235, 220, 0.07), inset 0 -3px 6px rgba(0, 0, 0, 0.35), 0 1px 2px rgba(0, 0, 0, 0.45), 0 8px 14px -8px rgba(0, 0, 0, 0.65);
+    --shadow-clay-md: inset 0 2px 0 rgba(255, 235, 220, 0.08), inset 0 -6px 12px rgba(0, 0, 0, 0.35), 0 2px 4px rgba(0, 0, 0, 0.4), 0 18px 30px -12px rgba(0, 0, 0, 0.7);
+    --shadow-clay-lg: inset 0 3px 0 rgba(255, 235, 220, 0.09), inset 0 -10px 18px rgba(0, 0, 0, 0.35), 0 4px 8px rgba(0, 0, 0, 0.45), 0 34px 54px -20px rgba(0, 0, 0, 0.8);
+    --shadow-inset: inset 0 3px 8px rgba(0, 0, 0, 0.55), inset 0 -1px 0 rgba(255, 235, 220, 0.06);
+    --shadow-sticker: drop-shadow(0 10px 14px rgba(0, 0, 0, 0.5));
+  }
+  :root[data-theme="auto"] body { background: var(--bg-primary); color: var(--color-ink); }
+}

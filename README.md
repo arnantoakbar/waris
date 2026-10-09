@@ -1,7 +1,7 @@
 # Waris — kalkulator pembagian warisan Islam
 
 Website statis untuk menghitung pembagian warisan menurut syariat Islam, dalam bahasa
-Indonesia sehari-hari. Dibangun dengan Flavida Design System.
+Indonesia sehari-hari. Dibangun di atas Flavida Design System v4.1 ("Flame-tree clay"), tanpa maskot.
 
 Aturan waris dalam Islam sudah baku dan tertutup — ditetapkan dalam QS An-Nisa ayat 11, 12,
 dan 176 serta sejumlah hadits sahih, dan tidak pernah berubah sejak diturunkan. Yang membuat
@@ -114,10 +114,16 @@ hitung.html             Wizard input dan hasil
 rujukan.html            Appendix — seluruh dalil Al-Qur'an & Hadits
 tests.html              Penguji mesin faraid — buka di browser
 
+colors_and_type.css     ┐ Kit Flavida Design System — salinan dari repo flavida-design-system
+flavida.css             │ (token + font self-hosted, komponen .fl-*, bagian marketing).
+flavida-extra.css       │ Jangan disunting di sini; perbarui lewat tools/export-kit.sh.
+flavida-sections.css    ┘
+fonts/                  Gabarito, Figtree, Noto Naskh Arabic (OFL), self-hosted
+assets/v4/              Bloom mark, sprite ikon Lucide (+ lisensinya)
+
 css/
-  tokens.css            Salinan verbatim dari flavida-design-system
-  base.css              Reset, nav, footer, tombol, kartu
-  app.css               Wizard, donut, ledger, kartu hasil
+  waris.css             Yang TIDAK ada di design system: wizard, ledger, donut, pohon
+                        keluarga, lembar ubah. Hanya memakai token Flavida.
   print.css             Tata letak cetak / Simpan sebagai PDF
 
 js/faraid/              Mesin perhitungan — murni, tanpa sentuhan DOM
@@ -353,13 +359,14 @@ bilang terus terang dan mengarahkan ke ustadz atau Pengadilan Agama:
 
 ## Privasi
 
-Nol permintaan jaringan selain Google Fonts. Tidak ada `fetch`, `XMLHttpRequest`,
-`localStorage`, `sessionStorage`, maupun cookie di seluruh kode. Semua perhitungan berjalan
-di browser pengguna. Export PNG digambar langsung ke `<canvas>`, export PDF lewat dialog
-cetak browser — keduanya tanpa pustaka pihak ketiga dan tanpa mengirim apa pun ke luar.
+**Nol permintaan jaringan** saat halaman dimuat: semua font, ikon, dan skrip self-hosted.
+Tidak ada `fetch`, `XMLHttpRequest`, `localStorage`, `sessionStorage`, maupun cookie di
+seluruh kode — termasuk di kit Flavida. Semua perhitungan berjalan di browser pengguna.
+Export PNG digambar langsung ke `<canvas>`, export PDF lewat dialog cetak browser —
+keduanya tanpa pustaka pihak ketiga dan tanpa mengirim apa pun ke luar.
 
-Kalau ingin benar-benar bebas dari permintaan eksternal, self-host font Bricolage Grotesque
-dan DM Sans lalu ubah baris `@import` di `css/tokens.css`.
+Tema terang/gelap mengikuti perangkat (`data-theme="auto"`), tanpa tombol dan tanpa
+menyimpan pilihan apa pun. Saat mencetak atau mengekspor, tampilan dipaksa terang.
 
 ---
 
@@ -419,13 +426,37 @@ dari cache.
 
 ## Lisensi & aset merek
 
-Berkas di `assets/` (bloom mark dan maskot Flav) adalah aset merek **Flavida** dan tidak
-dimaksudkan untuk dipakai ulang di luar proyek ini. Kalau kamu ingin memakai kode kalkulator
-faraidnya, ganti dulu aset dan penamaannya.
+Kit di root (`colors_and_type.css`, `flavida*.css`, `fonts/`, `assets/v4/`, `js/flavida.js`,
+`js/motion.min.js`) berasal dari **Flavida Design System** dan bloom mark adalah aset merek
+**Flavida**; keduanya tidak dimaksudkan untuk dipakai ulang di luar proyek ini. Font memakai
+lisensi OFL (`fonts/OFL-*.txt`), ikon Lucide berlisensi ISC (`assets/v4/ICONS-LICENSE.txt`),
+dan Motion berlisensi MIT. Kalau kamu ingin memakai kode kalkulator faraidnya, ganti dulu aset
+dan penamaannya.
 
 Belum ada berkas LICENSE — artinya hak cipta masih sepenuhnya pada pemilik repositori. Kalau
 memang ingin dibuka untuk umum, tambahkan lisensi yang sesuai (misalnya MIT untuk kodenya,
 dengan pengecualian aset merek).
+
+## Desain
+
+Tampilan mengikuti Flavida Design System v4.1:
+
+- **Gaya clay**: bentuk timbul memakai `--shadow-clay-*`, yang cekung (isian, trek, kartu
+  "terhalang") memakai `--shadow-inset`. Radius kartu 20px, isian 12px, tombol bulat penuh.
+- **Tanpa maskot.** Ini situs keagamaan, jadi Flav sengaja tidak dipakai di mana pun.
+- **Tanpa kicker** di atas judul, tanpa teks bergradien, tanpa emoji; ikon dari sprite Lucide.
+- **Kutipan** memakai komponen `fl-cite` + `fl-arabic` (Noto Naskh Arabic) dengan lencana
+  derajat hadits (`fl-grade`) yang selalu berupa kata, bukan hanya warna.
+- **Status tidak bergantung pada warna**: tiap status di pohon keluarga punya bentuk berbeda
+  (timbul, cekung, bergaris putus, bertitik) *dan* kata ("terhalang", "bukan ahli waris").
+- **Warna grafik** dari `--chart-1..8`; PNG ekspor memakai salinan heksanya karena kanvas
+  tidak mengerti `var()`, dan selalu bertema terang.
+- **Tema gelap** otomatis mengikuti perangkat; semua komponen buatan sendiri hanya memakai
+  token yang ikut berbalik, jadi tidak ada aturan khusus tema gelap di `css/waris.css`.
+
+Memperbarui kit: jalankan `tools/export-kit.sh <folder-waris>` dari repo design system, lalu
+hapus berkas yang tidak dipakai (`themes/`, `flavida-app.css`, `js/flavida-ui.js`,
+`js/flavida-charts.js`, logo selain bloom mark).
 
 ## Penafian
 

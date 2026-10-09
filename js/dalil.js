@@ -442,5 +442,62 @@
     d.terjemah = d.segmen.map(function (s) { return s.arti; }).join(' ');
   });
 
-  root.Dalil = { DATA: DALIL, ambil: ambil, kumpulkan: kumpulkan };
+  /*
+   * Derajat hadits, hanya untuk yang tidak ambigu. Hadits Qabishah tentang
+   * nenek sengaja tidak diberi derajat: jalur Tirmidzi sahih tetapi jalur Abu
+   * Dawud dhaif, dan satu label akan menyesatkan. Penjelasannya ada di teks
+   * `sumber`. Ayat, atsar, dan ijma tidak punya derajat.
+   */
+  var DERAJAT = {
+    'hadits-ashabah': 'sahih', 'hadits-cucu-pr': 'sahih', 'hadits-wasiat-sepertiga': 'sahih',
+    'hadits-beda-agama': 'sahih', 'hadits-wasiat-ahli-waris': 'hasan',
+    'hadits-pembunuh': 'hasan', 'hadits-hutang': 'hasan'
+  };
+  var NAMA_DERAJAT = { sahih: 'Sahih', hasan: 'Hasan', dhaif: 'Dhaif' };
+  Object.keys(DERAJAT).forEach(function (id) { DALIL[id].derajat = DERAJAT[id]; });
+
+  /*
+   * Kutipan siap tampil, memakai komponen fl-cite dari Flavida design system.
+   *
+   * Ayat TIDAK PERNAH dipenggal. Kalau idPotongan diberikan, seluruh ruas
+   * tetap tampil: ruas yang menetapkan bagian orang yang sedang dibahas
+   * disorot (<mark>), sisanya dipudarkan. Tanpa idPotongan semuanya normal.
+   */
+  function ruas(d, kunci, idPotongan) {
+    return d.segmen.map(function (s) {
+      var teks = s[kunci];
+      if (!idPotongan) return teks;
+      return s.id === idPotongan
+        ? '<mark class="ayat-sorot">' + teks + '</mark>'
+        : '<span class="ayat-redup">' + teks + '</span>';
+    }).join(' ');
+  }
+
+  function kutip(id, idPotongan) {
+    var d = DALIL[id];
+    if (!d) return '';
+    var pot = (d.potongan && idPotongan) ? d.potongan[idPotongan] : null;
+    var arab = d.segmen ? ruas(d, 'arab', pot && idPotongan) : d.arab;
+    var arti = d.segmen ? ruas(d, 'arti', pot && idPotongan) : d.terjemah;
+    var tautan = (d.tautan ? [d.tautan] : []).concat(d.tautanLain || []);
+
+    return '<figure class="fl-cite">' +
+      (pot ? '<p class="dalil-klausa">Yang disorot: ' + pot.ket + '</p>' : '') +
+      (arab ? '<p class="fl-arabic" lang="ar" dir="rtl">' + arab + '</p>' : '') +
+      '<p class="fl-cite__tr">' + arti + '</p>' +
+      (d.sumber ? '<p class="dalil-sumber">' + d.sumber + '</p>' : '') +
+      '<figcaption class="fl-cite__src">' +
+      (d.derajat
+        ? '<span class="fl-grade" data-grade="' + d.derajat + '"><svg class="fl-icon" aria-hidden="true">' +
+          '<use href="#i-check"/></svg> ' + NAMA_DERAJAT[d.derajat] + '</span>'
+        : '') +
+      '<span>' + d.rujukan + '</span>' +
+      tautan.map(function (u) {
+        return '<a href="' + u.url + '" target="_blank" rel="noopener noreferrer">' + u.label +
+          ' <svg class="fl-icon" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>';
+      }).join('') +
+      '</figcaption></figure>';
+  }
+
+  root.Dalil = { DATA: DALIL, ambil: ambil, kumpulkan: kumpulkan, kutip: kutip };
 })(typeof window !== 'undefined' ? window : globalThis);

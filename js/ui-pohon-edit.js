@@ -26,7 +26,7 @@
   }
 
   function ikon(id, kelas) {
-    return '<svg class="ic ' + (kelas || '') + '" aria-hidden="true"><use href="#' + id + '"></use></svg>';
+    return '<svg class="fl-icon ' + (kelas || '') + '" aria-hidden="true"><use href="#' + id + '"></use></svg>';
   }
 
   function opsiModel() { return wadahAktif && wadahAktif._opsi; }
@@ -96,13 +96,13 @@
     var o = temuan ? temuan.orang : null;
     var h = '<div class="lembar-kepala"><h3>' + (JUDUL_TIPE[tipe] || 'Anggota keluarga') + '</h3>' +
       '<button type="button" class="lembar-tutup" data-tutup aria-label="Tutup">' +
-      ikon('i-silang') + '</button></div>';
+      ikon('i-x') + '</button></div>';
 
     if (!o) {
       // Simpul bayangan — belum ada di model, tawarkan menambahkannya.
       h += '<p class="lembar-ket">Kerabat ini digambar samar karena diperlukan untuk ' +
         'menyambungkan keluarga, tapi belum kamu masukkan.</p>' +
-        '<div class="lembar-aksi"><button type="button" class="btn btn-dark btn-sm btn-block" ' +
+        '<div class="lembar-aksi"><button type="button" class="fl-btn fl-btn--dark fl-btn--sm fl-btn--block" ' +
         'data-hidupkan="' + esc(idOrang) + '">Tambahkan sebagai ahli waris yang masih hidup</button></div>';
       buka(h);
       return;
@@ -169,7 +169,7 @@
         (jml ? '<div class="lembar-daftar">' + o.anak.map(function (c) {
           return '<span class="lembar-cip">' + (c.gender === 'L' ? 'Laki-laki' : 'Perempuan') +
             '<button type="button" data-hapus-anak="' + esc(c.id) + '" aria-label="Hapus">' +
-            ikon('i-silang', 'ic-sm') + '</button></span>';
+            ikon('i-x', 'ic-sm') + '</button></span>';
         }).join('') + '</div>' : '<p class="lembar-ket">Belum ada.</p>') +
         '<div class="lembar-pilih lembar-pilih-longgar">' +
         '<button type="button" data-tambah-anak="L">' + ikon('i-plus', 'ic-sm') + ' Laki-laki</button>' +
@@ -192,9 +192,9 @@
     // kalem — keduanya bersebelahan, dan yang merusak tidak boleh terlihat
     // sama menariknya dengan yang aman.
     h += '<div class="lembar-aksi">' +
-      '<button type="button" class="btn btn-ghost btn-sm lembar-hapus" data-hapus>' +
+      '<button type="button" class="fl-btn fl-btn--ghost fl-btn--sm lembar-hapus" data-hapus>' +
       ikon('i-sampah', 'ic-sm') + ' Hapus</button>' +
-      '<button type="button" class="btn btn-dark btn-sm lembar-simpan" data-tutup>' +
+      '<button type="button" class="fl-btn fl-btn--dark fl-btn--sm lembar-simpan" data-tutup>' +
       ikon('i-check', 'ic-sm') + ' Selesai</button></div>';
 
     buka(h);
@@ -210,7 +210,7 @@
 
     var h = '<div class="lembar-kepala"><h3>Tambah anggota keluarga</h3>' +
       '<button type="button" class="lembar-tutup" data-tutup aria-label="Tutup">' +
-      ikon('i-silang') + '</button></div>';
+      ikon('i-x') + '</button></div>';
 
     function tombol(aksi, label, ket) {
       return '<button type="button" class="lembar-opsi" data-buat="' + aksi + '">' +

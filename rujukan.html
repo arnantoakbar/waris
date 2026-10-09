@@ -1,64 +1,64 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" data-theme="auto">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Rujukan — dalil waris dari Al-Qur'an dan Sunnah | Waris by Flavida</title>
 <meta name="description" content="Daftar lengkap ayat Al-Qur'an, hadits sahih, dan putusan sahabat yang menjadi dasar setiap aturan dalam kalkulator waris ini.">
 <meta name="theme-color" content="#FFF8F0">
-<link rel="icon" href="assets/mark-color.svg">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="css/tokens.css?v=23">
-<link rel="stylesheet" href="css/base.css?v=23">
-<link rel="stylesheet" href="css/app.css?v=23">
-<link rel="stylesheet" href="css/print.css?v=23" media="print">
+<link rel="icon" href="assets/v4/mark-simple.svg" type="image/svg+xml">
+<link rel="stylesheet" href="colors_and_type.css?v=24">
+<link rel="stylesheet" href="flavida.css?v=24">
+<link rel="stylesheet" href="flavida-extra.css?v=24">
+<link rel="stylesheet" href="flavida-sections.css?v=24">
+<link rel="stylesheet" href="css/waris.css?v=24">
+<link rel="stylesheet" href="css/print.css?v=24" media="print">
 </head>
 <body>
-<a class="skip-link" href="#utama">Lompat ke isi</a>
+<a class="fl-skip" href="#utama">Lompat ke isi</a>
+<script src="assets/v4/icons.sprite.js"></script>
+<script src="js/sprite.js?v=24"></script>
 
-<script src="js/sprite.js?v=23"></script>
-
-<nav class="nav">
-  <div class="wrap nav-inner">
-    <a class="nav-brand" href="index.html">
-      <img src="assets/mark-color.svg" alt="">
-      <span class="nav-brand-teks">
-        <span class="nav-brand-nama">Waris</span>
-        <span class="nav-brand-sub">by Flavida</span>
-      </span>
-    </a>
-
-    <button class="nav-toggle" type="button" id="nav-toggle"
-            aria-expanded="false" aria-controls="nav-menu" aria-label="Buka menu">
-      <span class="nav-toggle-garis"></span>
-    </button>
-
-    <div class="nav-menu" id="nav-menu">
-      <a href="index.html">Beranda</a>
-      <a href="hitung.html">Hitung</a>
-      <a href="rujukan.html">Rujukan</a>
-      <a class="btn btn-dark btn-sm" href="hitung.html">Mulai Hitung</a>
-    </div>
-  </div>
+<nav class="fl-nav" data-autohide aria-label="Utama">
+  <a class="fl-nav__brand" href="index.html" aria-label="Waris by Flavida, ke beranda">
+    <img src="assets/v4/mark-color.svg" alt="" width="34" height="34">
+    <span>Waris</span><small class="nav-sub">by Flavida</small>
+  </a>
+  <ul class="fl-nav__links" role="list">
+    <li><a href="index.html">Beranda</a></li>
+    <li><a href="hitung.html">Hitung</a></li>
+    <li><a href="rujukan.html" aria-current="page">Rujukan</a></li>
+  </ul>
+  <a class="fl-btn fl-btn--sm fl-nav__cta" href="hitung.html">Mulai Hitung</a>
+  <button class="fl-nav__toggle" type="button" aria-label="Menu" aria-controls="menu" aria-expanded="false">
+    <svg class="fl-icon i-open" aria-hidden="true"><use href="#i-menu"/></svg>
+    <svg class="fl-icon i-close" aria-hidden="true"><use href="#i-x"/></svg>
+  </button>
 </nav>
+<div class="fl-menu" id="menu">
+  <nav aria-label="Menu seluler">
+    <a href="index.html">Beranda</a>
+    <a href="hitung.html">Hitung</a>
+    <a href="rujukan.html">Rujukan</a>
+  </nav>
+</div>
 
 <main id="utama">
-  <section class="section" style="padding-bottom: var(--space-8)">
-    <div class="wrap wrap-narrow">
-      <span class="overline">Appendix — sumber rujukan</span>
-      <h1 class="flav-display-l">Dari mana angka-angka itu berasal</h1>
-      <p class="flav-body-lead" style="margin-top: var(--space-5)">
+  <section class="fl-section" style="padding-bottom: var(--space-8)">
+    <div class="fl-wrap fl-wrap--narrow">
+      <h1 class="fl-display-l" style="color: var(--color-ember)">Dari mana angka-angka itu <mark class="fl-marker">berasal</mark></h1>
+      <p class="fl-lead" style="margin-top: var(--space-5)">
         Setiap aturan yang dipakai kalkulator ini bisa ditelusuri ke ayat, hadits, atau putusan
         sahabat di halaman ini. Tidak ada satu pun aturan yang kami tambahkan sendiri —
         pembagian waris dalam Islam sudah lengkap dan tertutup sejak diturunkan.
       </p>
-      <p class="flav-body" style="margin-top: var(--space-4)">
+      <p class="fl-body" style="margin-top: var(--space-4)">
         Satu hal yang <strong>bukan</strong> bagian dari faraid tetap kami cantumkan di bagian
         terakhir: pemisahan separuh <strong>harta bersama</strong>. Itu aturan negara yang
         menentukan siapa pemilik hartanya lebih dulu, sebelum warisan dibagi menurut syariat.
         Kami pisahkan supaya tidak tertukar dengan dalil.
       </p>
-      <p class="flav-body" style="margin-top: var(--space-4)">
+      <p class="fl-body" style="margin-top: var(--space-4)">
         Aturan negara hanya kami cantumkan bila ia memang aturan <strong>bagi umat Islam</strong>:
         Kompilasi Hukum Islam, dan kewenangan Pengadilan Agama yang oleh
         <a href="https://pasal.id/peraturan/uu/uu-no-3-tahun-2006#pasal-49" target="_blank" rel="noopener noreferrer">UU
@@ -67,22 +67,22 @@
         adat tidak dipakai sama sekali di kalkulator ini.
       </p>
 
-      <div class="pita pita-peringatan" style="margin-top: var(--space-8); align-items: flex-start">
-        <svg class="ic" aria-hidden="true"><use href="#i-waspada"></use></svg>
-        <span>
-          <strong>Jangan jadikan halaman ini sumber utama.</strong> Kami mengumpulkan rujukan
-          ini sebaik-baiknya, tapi kami bukan lembaga fatwa. Sebelum memakai hasil perhitungan
-          untuk membagi harta yang sebenarnya, verifikasi dan validasikan kepada ustadz atau
-          ulama terdekat yang kamu percaya, atau ke Pengadilan Agama. Untuk memeriksa teks
-          Arab dan takhrij haditsnya, rujuklah pada mushaf dan kitab hadits cetak, atau tanyakan
-          langsung kepada ahlinya.
-        </span>
+      <div class="fl-callout" data-tone="warn" style="margin-top: var(--space-8)">
+        <span class="fl-callout__icon"><svg class="fl-icon" aria-hidden="true"><use href="#i-waspada"/></svg></span>
+        <div>
+          <h3>Jangan jadikan halaman ini sumber utama</h3>
+          <p>Kami mengumpulkan rujukan ini sebaik-baiknya, tapi kami bukan lembaga fatwa. Sebelum
+            memakai hasil perhitungan untuk membagi harta yang sebenarnya, verifikasi dan validasikan
+            kepada ustadz atau ulama terdekat yang kamu percaya, atau ke Pengadilan Agama. Untuk
+            memeriksa teks Arab dan takhrij haditsnya, rujuklah pada mushaf dan kitab hadits cetak,
+            atau tanyakan langsung kepada ahlinya.</p>
+        </div>
       </div>
     </div>
   </section>
 
-  <section class="section" style="padding-top: 0">
-    <div class="wrap wrap-narrow">
+  <section class="fl-section" style="padding-top: 0">
+    <div class="fl-wrap fl-wrap--narrow">
       <div id="daftar-rujukan"></div>
 
       <div class="blok" style="margin-top: var(--space-12)">
@@ -179,47 +179,33 @@
       </div>
 
       <div class="koreksi" style="margin-bottom: var(--space-10)">
-        <span class="overline">Menemukan kekeliruan?</span>
-        <h2 class="flav-heading-l">Tolong beri tahu kami</h2>
-        <p class="flav-body" style="margin-top: var(--space-4)">
+        <h2 class="fl-heading-l">Menemukan kekeliruan? <mark class="fl-marker">Tolong beri tahu kami</mark></h2>
+        <p class="fl-body" style="margin-top: var(--space-4)">
           Kalau kamu menemukan kutipan yang keliru, nomor hadits yang tidak cocok, terjemahan
           yang kurang tepat, atau hitungan yang tidak sesuai kitab faraid — sampaikan lewat
           jalur mana pun di bawah. Ini menyangkut hukum agama dan harta keluarga orang lain,
-          jadi <span class="sorot">kami lebih memilih dikoreksi</span> daripada membiarkan
-          orang memakai rujukan yang salah.
+          jadi kami lebih memilih dikoreksi daripada membiarkan orang memakai rujukan yang salah.
         </p>
 
         <div class="koreksi-jalur">
-          <a class="koreksi-kartu" href="https://github.com/arnantoakbar/waris/issues/new"
-             target="_blank" rel="noopener noreferrer">
-            <span class="koreksi-ikon">
-              <svg class="ic ic-isi" aria-hidden="true"><use href="#i-github"></use></svg>
-            </span>
+          <a class="koreksi-kartu" href="https://github.com/arnantoakbar/waris/issues/new" target="_blank" rel="noopener noreferrer">
+            <span class="koreksi-ikon"><svg class="fl-icon ic-isi" aria-hidden="true"><use href="#i-github"/></svg></span>
             <span>
               <strong>GitHub Issues</strong>
-              <span class="koreksi-ket">Paling kami sukai — riwayat koreksinya terbuka dan
-                bisa dilihat siapa saja.</span>
+              <span class="koreksi-ket">Paling kami sukai — riwayat koreksinya terbuka dan bisa dilihat siapa saja.</span>
               <span class="koreksi-alamat">arnantoakbar/waris</span>
             </span>
           </a>
-
           <a class="koreksi-kartu" href="mailto:hello@flavida.co?subject=Koreksi%20rujukan%20Waris">
-            <span class="koreksi-ikon">
-              <svg class="ic" aria-hidden="true"><use href="#i-surel"></use></svg>
-            </span>
+            <span class="koreksi-ikon"><svg class="fl-icon" aria-hidden="true"><use href="#i-mail"/></svg></span>
             <span>
               <strong>Email</strong>
-              <span class="koreksi-ket">Tidak punya akun GitHub? Kirim email biasa saja,
-                sebutkan bagian mana yang keliru.</span>
+              <span class="koreksi-ket">Tidak punya akun GitHub? Kirim email biasa saja, sebutkan bagian mana yang keliru.</span>
               <span class="koreksi-alamat">hello@flavida.co</span>
             </span>
           </a>
-
-          <a class="koreksi-kartu" href="https://x.com/FlavidaID"
-             target="_blank" rel="noopener noreferrer">
-            <span class="koreksi-ikon">
-              <svg class="ic ic-isi" aria-hidden="true"><use href="#i-x"></use></svg>
-            </span>
+          <a class="koreksi-kartu" href="https://x.com/FlavidaID" target="_blank" rel="noopener noreferrer">
+            <span class="koreksi-ikon"><svg class="fl-icon ic-isi" aria-hidden="true"><use href="#i-logo-x"/></svg></span>
             <span>
               <strong>X</strong>
               <span class="koreksi-ket">Untuk koreksi singkat atau sekadar menanyakan sesuatu.</span>
@@ -228,7 +214,7 @@
           </a>
         </div>
 
-        <p class="flav-body-sm" style="margin-top: var(--space-6)">
+        <p class="fl-body-s" style="margin-top: var(--space-6)">
           Kalau bisa, sertakan <strong>rujukan pembandingnya</strong> — nomor hadits, nama kitab,
           atau tautan sumbernya. Itu sangat mempercepat kami memastikan dan memperbaikinya.
         </p>
@@ -237,27 +223,42 @@
   </section>
 </main>
 
-<footer class="footer">
-  <div class="wrap footer-inner">
-    <div>
-      <p class="footer-note">
-        Waris adalah alat bantu hitung. Ia menerapkan aturan faraid yang sudah baku, tapi tidak
-        menggantikan fatwa ustadz maupun putusan Pengadilan Agama.
-      </p>
-      <p style="margin-top: var(--space-4)">
-        <a href="index.html">Beranda</a> &nbsp;·&nbsp;
-        <a href="hitung.html">Mulai Hitung</a> &nbsp;·&nbsp;
-        <a href="https://github.com/arnantoakbar/waris" target="_blank" rel="noopener noreferrer">Kode sumber di GitHub</a>
-      </p>
-    </div>
-    <div class="footer-made">
-        Kodenya terbuka — silakan diperiksa dan dikoreksi.<br>
-        Made with 🔥 in Indonesia
+<footer class="fl-footer">
+  <div class="fl-wrap">
+    <div class="fl-footer__grid">
+      <div>
+        <a class="fl-nav__brand" href="index.html"><img src="assets/v4/mark-color.svg" alt="" width="34" height="34"><span>Waris</span><small class="nav-sub">by Flavida</small></a>
+        <p class="fl-footer__lead">Alat bantu hitung pembagian warisan menurut Al-Qur'an dan Sunnah. Dihitung di browser kamu, tidak ada data yang dikirim.</p>
       </div>
+      <nav aria-label="Halaman">
+        <h4>Halaman</h4>
+        <ul>
+          <li><a href="hitung.html">Hitung warisan</a></li>
+          <li><a href="rujukan.html">Rujukan dalil</a></li>
+          <li><a href="tests.html">Uji mesin faraid</a></li>
+        </ul>
+      </nav>
+      <nav aria-label="Kode dan kontak">
+        <h4>Kode dan kontak</h4>
+        <ul>
+          <li><a href="https://github.com/arnantoakbar/waris" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+          <li><a href="https://github.com/arnantoakbar/waris/issues/new" target="_blank" rel="noopener noreferrer">Laporkan kekeliruan</a></li>
+          <li><a href="mailto:hello@flavida.co">hello@flavida.co</a></li>
+        </ul>
+      </nav>
+      <div class="fl-notice fl-footer__notice">
+        <b>Bukan sumber utama</b>
+        Verifikasi dan validasikan hasilnya kepada ustadz atau ulama terdekat, atau ke Pengadilan Agama, sebelum dipakai membagi harta yang sebenarnya.
+      </div>
+    </div>
+    <div class="fl-footer__legal">
+      <span>Waris adalah bagian dari Flavida. Kodenya terbuka untuk diperiksa dan dikoreksi.</span>
+      <span>Dibuat di Indonesia</span>
+    </div>
   </div>
 </footer>
 
-<script src="js/dalil.js?v=23"></script>
+<script src="js/dalil.js?v=24"></script>
 <script>
 (function () {
   'use strict';
@@ -274,21 +275,11 @@
   // supaya pembaca tidak menyangka pemisahan harta bersama berasal dari ayat
   // atau hadits waris.
   var URUT = ['quran', 'hadits', 'atsar', 'ijma', 'hukum'];
-
-  /* Tautan periksa-sendiri. Nomor hadits antar penerbit bisa berbeda, jadi
-     pembaca perlu bisa membuka sumbernya langsung — bukan cuma diberi angka. */
-  function tautanDalil(d) {
-    var semua = (d.tautan ? [d.tautan] : []).concat(d.tautanLain || []);
-    if (!semua.length) return '';
-    return '<div class="dalil-tautan">' + semua.map(function (t) {
-      return '<a href="' + t.url + '" target="_blank" rel="noopener noreferrer">' +
-        '<svg class="ic ic-sm" aria-hidden="true"><use href="#i-tautan"></use></svg>' +
-        t.label + '</a>';
-    }).join('') + '</div>';
-  }
   var data = window.Dalil.DATA;
 
-  var html = URUT.map(function (jenis) {
+  // Ayat tampil utuh tanpa sorotan; sorotan hanya muncul di halaman hasil,
+  // di mana ada orang tertentu yang sedang dibahas.
+  document.getElementById('daftar-rujukan').innerHTML = URUT.map(function (jenis) {
     var isi = Object.keys(data).filter(function (id) { return data[id].jenis === jenis; });
     if (!isi.length) return '';
 
@@ -297,28 +288,17 @@
       '<p class="blok-ket">' + JUDUL[jenis].ket + '</p>' +
       isi.map(function (id) {
         var d = data[id];
-        return '<div class="card" id="' + id + '" style="margin-bottom:var(--space-3)">' +
-          '<div class="dalil-rujukan">' + d.rujukan + '</div>' +
-          '<div class="dalil-penuh">' +
-          (d.arab ? '<div class="dalil-arab" lang="ar" dir="rtl">' + d.arab + '</div>' : '') +
-          '<div class="dalil-terjemah">' + d.terjemah + '</div>' +
-          '</div>' +
-          (d.sumber ? '<div class="dalil-sumber">' + d.sumber + '</div>' : '') +
-          tautanDalil(d) +
-          (d.ringkas ? '<p class="flav-body-sm" style="margin-top:var(--space-4)"><strong>Yang ditetapkan:</strong> ' +
+        return '<div id="' + id + '" style="margin-bottom:var(--space-6)">' + window.Dalil.kutip(id) +
+          (d.ringkas ? '<p class="fl-body-s" style="margin-top:var(--space-4)"><strong>Yang ditetapkan:</strong> ' +
             d.ringkas + '</p>' : '') +
-          (d.detail ? '<p class="flav-body-sm" style="margin-top:var(--space-2)">' + d.detail + '</p>' : '') +
-          /* Satu ayat waris memuat beberapa ketetapan sekaligus. Dirinci di sini
-             supaya pembaca bisa mencocokkan sendiri klausa mana yang dipakai
-             untuk ahli waris mana di halaman hasil. */
-          /* Ayat di atas sudah tampil utuh. Di sini cukup didaftar ketetapan
-             apa saja yang ada di dalamnya, tanpa memenggal teks Arabnya lagi —
-             terjemahan tiap ruas sudah ada di dalam ayat lengkapnya. */
+          (d.detail ? '<p class="fl-body-s" style="margin-top:var(--space-2)">' + d.detail + '</p>' : '') +
+          /* Satu ayat waris memuat beberapa ketetapan sekaligus. Didaftar di
+             sini supaya pembaca bisa mencocokkan klausa mana dipakai untuk
+             ahli waris mana — tanpa memenggal teks Arabnya lagi. */
           (d.potongan
             ? '<div class="klausa-daftar"><div class="klausa-judul">Ketetapan di dalam ayat ini</div>' +
               Object.keys(d.potongan).map(function (kk) {
-                return '<div class="klausa"><div class="klausa-ket">' +
-                  d.potongan[kk].ket + '</div>' +
+                return '<div class="klausa"><div class="klausa-ket">' + d.potongan[kk].ket + '</div>' +
                   '<div class="dalil-terjemah">' +
                   ((d.segmen || []).filter(function (s) { return s.id === kk; })[0] || {}).arti +
                   '</div></div>';
@@ -329,10 +309,9 @@
           '</div>';
       }).join('') + '</div>';
   }).join('');
-
-  document.getElementById('daftar-rujukan').innerHTML = html;
 })();
 </script>
-<script src="js/ui-nav.js?v=23"></script>
+<script src="js/motion.min.js"></script>
+<script src="js/flavida.js?v=24"></script>
 </body>
 </html>

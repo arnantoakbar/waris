@@ -11,10 +11,20 @@
 
   var f = root.Fraction;
 
+  // Palet kategorikal dari design system (--chart-1..8). Dipakai lewat var()
+  // supaya ikut berganti di tema gelap, dan tersusun agar warna yang
+  // berdampingan mudah dibedakan.
   var WARNA = [
-    '#E8391D', '#F5A623', '#A0341A', '#F5760A',
-    '#C7541F', '#7A2E12', '#E0821B', '#5C2A15',
-    '#1B5E3B', '#B8641D'
+    'var(--chart-1)', 'var(--chart-2)', 'var(--chart-3)', 'var(--chart-4)',
+    'var(--chart-5)', 'var(--chart-6)', 'var(--chart-7)', 'var(--chart-8)'
+  ];
+
+  // Padanan hex-nya untuk kanvas PNG. Kanvas tidak mengerti var(), dan berkas
+  // yang dibagikan harus selalu memakai warna tema terang di atas latar krem,
+  // apa pun tema yang sedang dilihat pemakai. Nilainya salinan --chart-1..8
+  // dari colors_and_type.css.
+  var WARNA_CETAK = [
+    '#E8391D', '#2A78D6', '#F5A623', '#1B9E77', '#5B4BB7', '#E87BA4', '#A0341A', '#6B7A8F'
   ];
 
   function rp(n) {
@@ -36,7 +46,7 @@
   }
 
   function ikon(id, kelas) {
-    return '<svg class="ic ' + (kelas || '') + '" aria-hidden="true"><use href="#' + id + '"></use></svg>';
+    return '<svg class="fl-icon ' + (kelas || '') + '" aria-hidden="true"><use href="#' + id + '"></use></svg>';
   }
 
   function ringkasSusunan(hasil) {
@@ -87,7 +97,7 @@
     var segmen = penerima.map(function (a, i) {
       var panjang = (f.toNumber(a.bagian)) * C;
       var s = '<circle class="donut-seg" data-key="' + a.key + '" cx="100" cy="100" r="' + R + '" ' +
-        'fill="none" stroke="' + WARNA[i % WARNA.length] + '" stroke-width="28" ' +
+        'fill="none" style="stroke:' + WARNA[i % WARNA.length] + '" stroke-width="28" ' +
         'stroke-dasharray="' + panjang.toFixed(2) + ' ' + (C - panjang).toFixed(2) + '" ' +
         'stroke-dashoffset="' + (-offset).toFixed(2) + '">' +
         '<title>' + a.label + ' — ' + a.bagianTeks + '</title></circle>';
@@ -97,7 +107,7 @@
 
     if (hasil.sisaTidakTerbagi) {
       var p = f.toNumber(hasil.sisaTidakTerbagi.bagian) * C;
-      segmen += '<circle cx="100" cy="100" r="' + R + '" fill="none" stroke="#CCC4BB" ' +
+      segmen += '<circle cx="100" cy="100" r="' + R + '" fill="none" style="stroke:var(--color-border-hover)" ' +
         'stroke-width="28" stroke-dasharray="' + p.toFixed(2) + ' ' + (C - p).toFixed(2) + '" ' +
         'stroke-dashoffset="' + (-offset).toFixed(2) + '"><title>Belum terbagi</title></circle>';
     }
@@ -134,52 +144,9 @@
     khusus: 'Aturan khusus'
   };
 
-  /* Tautan periksa-sendiri untuk sebuah dalil. */
-  function tautanDalil(d) {
-    var semua = (d.tautan ? [d.tautan] : []).concat(d.tautanLain || []);
-    if (!semua.length) return '';
-    return '<div class="dalil-tautan">' + semua.map(function (t) {
-      return '<a href="' + t.url + '" target="_blank" rel="noopener noreferrer">' +
-        ikon('i-tautan', 'ic-sm') + t.label + '</a>';
-    }).join('') + '</div>';
-  }
-
-  /*
-   * Ayat SELALU ditampilkan utuh — tidak pernah dipenggal.
-   *
-   * Satu ayat waris memuat beberapa ketetapan sekaligus. Kalau hanya klausa
-   * yang sedang dibahas yang ditampilkan, pembaca kehilangan konteks dan
-   * kutipannya berubah jadi potongan. Jadi seluruh ayat dirender, lalu ruas
-   * yang menetapkan bagian orang ini disorot dan sisanya dipudarkan —
-   * kejelasan tanpa memotong firman.
-   */
-  function ayatBersorot(d, idPotongan, kelasTeks, ambil) {
-    if (!d.segmen) return '<div class="' + kelasTeks + '">' + ambil(d) + '</div>';
-    return '<div class="' + kelasTeks + '">' + d.segmen.map(function (s) {
-      var sorot = idPotongan && s.id === idPotongan;
-      return '<span class="' + (sorot ? 'ayat-sorot' : 'ayat-redup') + '">' +
-        ambil(s) + '</span>';
-    }).join(' ') + '</div>';
-  }
-
-  function blokDalil(id, idPotongan) {
-    var d = root.Dalil.ambil(id);
-    if (!d) return '';
-    var pot = (d.potongan && idPotongan) ? d.potongan[idPotongan] : null;
-
-    return '<div class="dalil">' +
-      '<div class="dalil-rujukan">' + d.rujukan +
-      (pot ? '<span class="dalil-klausa">Yang disorot: ' + pot.ket + '</span>' : '') + '</div>' +
-      (d.arab
-        ? ayatBersorot(d, idPotongan, 'dalil-arab" lang="ar" dir="rtl',
-            function (x) { return x.arab; })
-        : '') +
-      ayatBersorot(d, idPotongan, 'dalil-terjemah',
-        function (x) { return x.arti || x.terjemah; }) +
-      (d.sumber ? '<div class="dalil-sumber">' + d.sumber + '</div>' : '') +
-      tautanDalil(d) +
-      '</div>';
-  }
+  // Satu pembuat kutipan dipakai di mana-mana (Dalil.kutip, komponen fl-cite).
+  // Ayat tampil utuh; idPotongan hanya menentukan ruas mana yang disorot.
+  function blokDalil(id, idPotongan) { return root.Dalil.kutip(id, idPotongan); }
 
   function kartuWaris(a, warna) {
     var dalil = a.dalil ? root.Dalil.ambil(a.dalil) : null;
@@ -222,7 +189,7 @@
       '<span class="hasil-info"><span class="hasil-nama">' + a.label +
       (a.jumlah > 1 ? ' <span class="dim">×' + a.jumlah + '</span>' : '') + '</span>' +
       '<span class="hasil-sub">' + sub + '</span></span>' +
-      kanan + ikon('i-chevron', 'ic-sm panah') + '</button>' +
+      kanan + ikon('i-chevron-down', 'ic-sm panah') + '</button>' +
       '<div class="hasil-detail"><p>' + a.alasan + '</p>' + rincianOrang + isiDalil + '</div></div>';
   }
 
@@ -281,7 +248,7 @@
       '" aria-controls="' + id + '">' +
       '<span class="apx-teks"><span class="apx-judul">' + judul + '</span>' +
       '<span class="apx-ringkas">' + ringkas + '</span></span>' +
-      ikon('i-chevron', 'panah') + '</button>' +
+      ikon('i-chevron-down', 'panah') + '</button>' +
       '<div class="apx-isi" id="' + id + '">' + isi + '</div></div>';
   }
 
@@ -295,7 +262,7 @@
 
     if (!hasil.valid) {
       root.UIResult.hasilTerakhir = hasil;
-      wadah.innerHTML = '<div class="wrap wrap-narrow"><div class="kosong">' +
+      wadah.innerHTML = '<div class="fl-wrap fl-wrap--narrow"><div class="kosong">' +
         ikon('i-waspada', 'ic-lg') + '<p style="margin-top:var(--space-3)">' + hasil.pesan + '</p>' +
         '</div></div>';
       return;
@@ -319,10 +286,8 @@
     var html = '';
 
     // ── Kepala ─────────────────────────────────────────────────────
-    html += '<div class="wrap wrap-narrow hasil-kepala-besar">' +
-      '<img class="hitung-flav" src="assets/flav-confident.svg" alt="">' +
-      '<span class="overline">Hasil perhitungan</span>' +
-      '<h2 class="flav-display-l">Beginilah warisannya dibagi</h2>' +
+    html += '<div class="fl-wrap fl-wrap--narrow hasil-kepala-besar">' +
+      '<h2 class="flav-display-l" style="color:var(--color-ember)">Beginilah warisannya <mark class="fl-marker">dibagi</mark></h2>' +
       '<p class="flav-body" style="margin-top:var(--space-4)">' +
       (penerima.length
         ? 'Dari <strong>' + rp(hasil.harta.tirkah) + '</strong> harta yang siap dibagi, ' +
@@ -332,7 +297,7 @@
 
     // Peringatan ditaruh di ATAS, sebelum angkanya dibaca. Kalau hanya di kaki
     // halaman, orang keburu menganggap angka ini final sebelum sampai ke sana.
-    html += '<div class="wrap wrap-narrow"><div class="awas">' +
+    html += '<div class="fl-wrap fl-wrap--narrow"><div class="awas">' +
       '<div class="awas-kepala">' + ikon('i-waspada') +
       '<span>Jangan jadikan ini sumber utama</span></div>' +
       '<p>Verifikasi dan validasikan hasil ini kepada <strong>ustadz atau ulama terdekat</strong> ' +
@@ -340,14 +305,14 @@
       'harta yang sebenarnya. Kalkulator hanya menghitung dari apa yang kamu isikan — ia tidak ' +
       'bisa melihat hibah yang sudah diberikan semasa hidup, status harta bawaan, atau ahli ' +
       'waris yang belum diketahui.</p>' +
-      '<a class="btn btn-ghost btn-sm" href="rujukan.html" target="_blank" rel="noopener">' +
-      ikon('i-kitab', 'ic-sm') + ' Lihat seluruh dalil rujukannya</a>' +
+      '<a class="fl-btn fl-btn--ghost fl-btn--sm" href="rujukan.html" target="_blank" rel="noopener">' +
+      ikon('i-kitab') + ' Lihat seluruh dalil rujukannya</a>' +
       '</div></div>';
 
     // ── Pilihan dasar hukum ────────────────────────────────────────
     // Diletakkan di atas angka, bukan di kaki halaman: dasar yang dipakai
     // mengubah angkanya, jadi user harus tahu sebelum membaca hasilnya.
-    html += '<div class="wrap wrap-narrow"><div class="dasar">' +
+    html += '<div class="fl-wrap fl-wrap--narrow"><div class="dasar">' +
       '<span class="dasar-teks">' +
       '<span class="dasar-judul">Dasar yang dipakai</span>' +
       '<span class="dasar-ket">' +
@@ -374,7 +339,7 @@
       '</div>';
 
     // ── Ledger ─────────────────────────────────────────────────────
-    html += '<div class="wrap wrap-narrow"><div class="blok">' +
+    html += '<div class="fl-wrap fl-wrap--narrow"><div class="blok">' +
       '<h3 class="blok-judul">Harta yang boleh dibagi</h3>' +
       '<p class="blok-ket">Warisan tidak langsung dibagi dari total harta. Biaya pengurusan ' +
       'jenazah, hutang, dan wasiat diselesaikan lebih dulu — urutan ini disebut sendiri dalam ' +
@@ -383,14 +348,14 @@
 
     if (hasil.harta.tirkah > 0 && penerima.length) {
       // ── Donut ────────────────────────────────────────────────────
-      html += '<div class="wrap"><div class="blok" id="area-export">' +
+      html += '<div class="fl-wrap"><div class="blok" id="area-export">' +
         '<h3 class="blok-judul">Pembagiannya</h3>' +
         '<p class="blok-ket">Setiap warna adalah satu pihak. Angka pecahan menunjukkan haknya ' +
         'menurut syariat, dan nominal rupiahnya sudah dihitungkan.</p>' +
         renderDonut(hasil, penerima) + '</div></div>';
 
       // ── Pohon keluarga ───────────────────────────────────────────
-      html += '<div class="wrap"><div class="blok">' +
+      html += '<div class="fl-wrap"><div class="blok">' +
         '<h3 class="blok-judul">Posisinya dalam keluarga</h3>' +
         '<p class="blok-ket">Nama hubungan keluarga dalam faraid sering terdengar mirip ' +
         'padahal orangnya berbeda. Digambar begini, bedanya langsung kelihatan — perhatikan ' +
@@ -411,7 +376,7 @@
         '</div></div>';
 
       // ── Kartu rinci ──────────────────────────────────────────────
-      html += '<div class="wrap wrap-narrow"><div class="blok">' +
+      html += '<div class="fl-wrap fl-wrap--narrow"><div class="blok">' +
         '<h3 class="blok-judul">Kenapa segitu bagiannya?</h3>' +
         '<p class="blok-ket">Ketuk salah satu untuk melihat alasan dan ayat atau haditsnya.</p>' +
         '<div class="hasil-grid">' +
@@ -421,7 +386,7 @@
 
     // ── Sisa tidak terbagi ─────────────────────────────────────────
     if (hasil.sisaTidakTerbagi) {
-      html += '<div class="wrap wrap-narrow"><div class="note" style="margin-bottom:var(--space-12)">' +
+      html += '<div class="fl-wrap fl-wrap--narrow"><div class="note" style="margin-bottom:var(--space-12)">' +
         '<div class="note-title">Sisa ' + hasil.sisaTidakTerbagi.bagianTeks + ' (' +
         rp(hasil.sisaTidakTerbagi.nominal) + ') belum ada yang berhak</div>' +
         hasil.sisaTidakTerbagi.alasan + '</div></div>';
@@ -429,7 +394,7 @@
 
     // ── Yang terhalang ─────────────────────────────────────────────
     if (terhalang.length) {
-      html += '<div class="wrap wrap-narrow"><div class="blok">' +
+      html += '<div class="fl-wrap fl-wrap--narrow"><div class="blok">' +
         '<h3 class="blok-judul">Yang tidak mendapat bagian</h3>' +
         '<p class="blok-ket">Bukan karena dilupakan. Dalam Islam, kerabat yang lebih dekat ' +
         'menutup yang lebih jauh — dan ini justru mencegah harta terpecah terlalu banyak.</p>' +
@@ -439,14 +404,14 @@
 
     // ── Cara menghitung ────────────────────────────────────────────
     if (penerima.length) {
-      html += '<div class="wrap wrap-narrow"><div class="blok">' +
+      html += '<div class="fl-wrap fl-wrap--narrow"><div class="blok">' +
         '<h3 class="blok-judul">Cara menghitungnya</h3>' + renderCara(hasil, penerima) +
         '</div></div>';
     }
 
     // ── Peringatan ─────────────────────────────────────────────────
     if (hasil.peringatan.length || hasil.catatan.length) {
-      html += '<div class="wrap wrap-narrow"><div class="blok">';
+      html += '<div class="fl-wrap fl-wrap--narrow"><div class="blok">';
       hasil.peringatan.forEach(function (p) {
         html += '<div class="pita pita-peringatan" style="margin-bottom:var(--space-3)">' +
           ikon('i-waspada') + '<span>' + p.teks + '</span></div>';
@@ -481,7 +446,7 @@
             ((c.tautan || []).length
               ? '<div class="dalil-tautan">' + c.tautan.map(function (t) {
                   return '<a href="' + t.url + '" target="_blank" rel="noopener noreferrer">' +
-                    ikon('i-tautan', 'ic-sm') + t.label + '</a>';
+                    ikon('i-link', 'ic-sm') + t.label + '</a>';
                 }).join('') + '</div>'
               : '') +
             '</div>';
@@ -494,12 +459,7 @@
       'lengkapnya \u2014 termasuk yang tidak terpakai di kasus ini \u2014 ada di ' +
       '<a href="rujukan.html" target="_blank" rel="noopener">halaman Rujukan</a>.</p>' +
       dalilDipakai.map(function (d) {
-        return '<div class="card" style="margin-bottom:var(--space-3)">' +
-          '<div class="dalil-rujukan">' + d.rujukan + '</div>' +
-          (d.arab ? '<div class="dalil-arab" lang="ar" dir="rtl">' + d.arab + '</div>' : '') +
-          '<div class="dalil-terjemah">' + d.terjemah + '</div>' +
-          (d.sumber ? '<div class="dalil-sumber">' + d.sumber + '</div>' : '') +
-          tautanDalil(d) +
+        return '<div style="margin-bottom:var(--space-5)">' + root.Dalil.kutip(d.id) +
           (d.ringkas ? '<p class="flav-body-sm" style="margin-top:var(--space-3)">' + d.ringkas + '</p>' : '') +
           (d.khilafiyah ? '<div class="note" style="margin-top:var(--space-3)">' + d.khilafiyah + '</div>' : '') +
           '</div>';
@@ -522,7 +482,7 @@
         var tautan = (s.tautan || []).length
           ? '<div class="saran-tautan">' + s.tautan.map(function (t) {
               return '<a href="' + t.url + '" target="_blank" rel="noopener noreferrer">' +
-                ikon('i-tautan', 'ic-sm') + t.label + '</a>';
+                ikon('i-link', 'ic-sm') + t.label + '</a>';
             }).join('') + '</div>'
           : '';
         return '<div class="saran-item" data-tingkat="' + s.tingkat + '">' +
@@ -532,22 +492,19 @@
       }).join('') + '</div>' +
       '<p class="flav-caption" style="margin-top:var(--space-5)">Alamat situs dan prosedur di ' +
       'atas bisa berubah, dan syarat administrasi kadang berbeda antar daerah. Pastikan lagi ' +
-      'ke kantor terkait sebelum berangkat.</p>' +
-      '<p class="flav-caption" style="margin-top:var(--space-5)">Alamat situs dan prosedur di ' +
-      'atas bisa berubah, dan syarat administrasi kadang berbeda antar daerah. Pastikan lagi ' +
       'ke kantor terkait sebelum berangkat.</p>', false);
 
     // Bungkus seluruh appendix beserta kendali buka/tutup semuanya
-    html += '<div class="wrap wrap-narrow"><div class="blok">' +
+    html += '<div class="fl-wrap fl-wrap--narrow"><div class="blok">' +
       '<div class="apx-kepala-blok">' +
       '<h3 class="blok-judul" style="margin:0">Selengkapnya</h3>' +
-      '<button class="btn btn-ghost btn-sm" type="button" id="btn-apx-semua" ' +
+      '<button class="fl-btn fl-btn--ghost fl-btn--sm" type="button" id="btn-apx-semua" ' +
       'data-terbuka="false">Buka semua</button></div>' +
       '<p class="blok-ket">Ketuk bagian yang ingin kamu baca.</p>' +
       apx + '</div></div>';
 
     // ── Penutup ────────────────────────────────────────────────────
-    html += '<div class="wrap wrap-narrow"><div class="note" style="margin-bottom:var(--space-10)">' +
+    html += '<div class="fl-wrap fl-wrap--narrow"><div class="note" style="margin-bottom:var(--space-10)">' +
       '<div class="note-title">Sekali lagi, sebelum dipakai</div>' +
       'Kalkulator ini menerapkan aturan yang sudah baku, dan hitungannya diuji dengan ' +
       'kasus-kasus baku dari kitab faraid. Tapi alat hitung tetaplah alat hitung. ' +
@@ -556,13 +513,13 @@
       'utama dalam membagi harta keluarga.</div></div>';
 
     // ── Bar aksi ───────────────────────────────────────────────────
-    html += '<div class="bar-aksi no-print"><div class="wrap">' +
-      '<button class="btn btn-ghost btn-sm" type="button" id="btn-ubah-input">' +
-      ikon('i-kiri', 'ic-sm') + ' Ubah</button>' +
-      '<button class="btn btn-ghost btn-sm" type="button" id="btn-png">' +
+    html += '<div class="bar-aksi no-print"><div class="fl-wrap">' +
+      '<button class="fl-btn fl-btn--ghost fl-btn--sm" type="button" id="btn-ubah-input">' +
+      ikon('i-arrow-left', 'ic-sm') + ' Ubah</button>' +
+      '<button class="fl-btn fl-btn--ghost fl-btn--sm" type="button" id="btn-png">' +
       ikon('i-gambar', 'ic-sm') + ' PNG</button>' +
-      '<button class="btn btn-dark btn-sm" type="button" id="btn-pdf">' +
-      ikon('i-unduh', 'ic-sm') + ' PDF</button>' +
+      '<button class="fl-btn fl-btn--dark fl-btn--sm" type="button" id="btn-pdf">' +
+      ikon('i-download', 'ic-sm') + ' PDF</button>' +
       '</div></div>';
 
     wadah.innerHTML = html;
@@ -672,5 +629,5 @@
     t.setAttribute('aria-expanded', String(!ket.hidden));
   });
 
-  root.UIResult = { render: render, WARNA: WARNA, rp: rp, rpRingkas: rpRingkas, hasilTerakhir: null };
+  root.UIResult = { render: render, WARNA: WARNA, WARNA_CETAK: WARNA_CETAK, rp: rp, rpRingkas: rpRingkas, hasilTerakhir: null };
 })(typeof window !== 'undefined' ? window : globalThis);

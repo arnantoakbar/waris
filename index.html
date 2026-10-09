@@ -1,58 +1,50 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" data-theme="auto">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Waris — hitung pembagian warisan sesuai Al-Qur'an dan Sunnah</title>
 <meta name="description" content="Aturan waris dalam Islam sudah baku. Isi kondisi keluargamu, lihat pembagiannya dalam bentuk diagram lengkap dengan dalilnya. Gratis, tanpa daftar, dihitung di browser kamu sendiri.">
 <meta name="theme-color" content="#FFF8F0">
-<link rel="icon" href="assets/mark-color.svg">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="css/tokens.css?v=23">
-<link rel="stylesheet" href="css/base.css?v=23">
-<link rel="stylesheet" href="css/app.css?v=23">
+<link rel="icon" href="assets/v4/mark-simple.svg" type="image/svg+xml">
+<link rel="stylesheet" href="colors_and_type.css?v=24">
+<link rel="stylesheet" href="flavida.css?v=24">
+<link rel="stylesheet" href="flavida-extra.css?v=24">
+<link rel="stylesheet" href="flavida-sections.css?v=24">
+<link rel="stylesheet" href="css/waris.css?v=24">
+<link rel="stylesheet" href="css/print.css?v=24" media="print">
 </head>
 <body>
-<a class="skip-link" href="#utama">Lompat ke isi</a>
-
-<script src="js/sprite.js?v=23"></script>
-
-<nav class="nav">
-  <div class="wrap nav-inner">
-    <a class="nav-brand" href="index.html">
-      <img src="assets/mark-color.svg" alt="">
-      <span class="nav-brand-teks">
-        <span class="nav-brand-nama">Waris</span>
-        <span class="nav-brand-sub">by Flavida</span>
-      </span>
-    </a>
-
-    <button class="nav-toggle" type="button" id="nav-toggle"
-            aria-expanded="false" aria-controls="nav-menu" aria-label="Buka menu">
-      <span class="nav-toggle-garis"></span>
-    </button>
-
-    <div class="nav-menu" id="nav-menu">
-      <a href="index.html">Beranda</a>
-      <a href="hitung.html">Hitung</a>
-      <a href="rujukan.html">Rujukan</a>
-      <a class="btn btn-dark btn-sm" href="hitung.html">Mulai Hitung</a>
-    </div>
-  </div>
+<a class="fl-skip" href="#utama">Lompat ke isi</a>
+<script src="assets/v4/icons.sprite.js"></script>
+<script src="js/sprite.js?v=24"></script>
+<nav class="fl-nav" data-autohide aria-label="Utama">
+  <a class="fl-nav__brand" href="index.html" aria-label="Waris by Flavida, ke beranda">
+    <img src="assets/v4/mark-color.svg" alt="" width="34" height="34">
+    <span>Waris</span><small class="nav-sub">by Flavida</small>
+  </a>
+  <ul class="fl-nav__links" role="list">
+    <li><a href="index.html" aria-current="page">Beranda</a></li>
+    <li><a href="hitung.html">Hitung</a></li>
+    <li><a href="rujukan.html">Rujukan</a></li>
+  </ul>
+  <a class="fl-btn fl-btn--sm fl-nav__cta" href="hitung.html">Mulai Hitung</a>
+  <button class="fl-nav__toggle" type="button" aria-label="Menu" aria-controls="menu" aria-expanded="false">
+    <svg class="fl-icon i-open" aria-hidden="true"><use href="#i-menu"/></svg>
+    <svg class="fl-icon i-close" aria-hidden="true"><use href="#i-x"/></svg>
+  </button>
 </nav>
+<div class="fl-menu" id="menu">
+  <nav aria-label="Menu seluler">
+    <a href="index.html">Beranda</a>
+    <a href="hitung.html">Hitung</a>
+    <a href="rujukan.html">Rujukan</a>
+  </nav>
+</div>
 
 <main id="utama">
 
-  <!-- ═══ HERO ═══ -->
-  <section class="hero">
-    <!--
-      Latar pola geometri Islam (bintang delapan / khatim).
-      Dua lapis dengan ukuran dan arah gerak berbeda supaya terasa berlapis,
-      keduanya nyaris transparan agar tidak mengganggu keterbacaan. Selain
-      memperkuat suasana, pola ini menandai sejak layar pertama bahwa aturan
-      yang dipakai di sini adalah aturan waris Islam — berguna bagi pengunjung
-      non-muslim yang mungkin belum tahu.
-    -->
+  <section class="fl-hero hero-waris">
     <div class="hero-pola" aria-hidden="true">
       <svg class="hero-pola-lapis hero-pola-besar" xmlns="http://www.w3.org/2000/svg">
         <defs>
@@ -87,218 +79,138 @@
         <rect width="100%" height="100%" fill="url(#khatim-kecil)"/>
       </svg>
     </div>
-
-    <div class="wrap">
-      <div class="hero-grid">
-        <div>
-          <span class="lencana-syariat">
-            <svg class="ic ic-sm" aria-hidden="true"><use href="#i-kitab"></use></svg>
-            Pembagian waris menurut syariat Islam
-          </span>
-          <h1>Warisan itu sudah ada aturannya.</h1>
-          <p class="hero-lead">
-            Aturannya turun lengkap dalam Al-Qur'an dan dijelaskan Rasulullah, dan
-            <span class="sorot">sejak itu tidak pernah berubah</span>. Yang sulit cuma
-            menghitungnya. Bagian itu kami yang kerjakan.
+    <div class="fl-wrap">
+      <div class="fl-hero__grid">
+        <div class="fl-hero__copy">
+          <h1>Warisan itu sudah ada <mark class="fl-marker">aturannya</mark>.</h1>
+          <p class="fl-lead">
+            Aturannya turun lengkap dalam Al-Qur'an dan dijelaskan Rasulullah, dan sejak itu
+            tidak pernah berubah. Yang sulit cuma menghitungnya. Bagian itu kami yang kerjakan.
           </p>
-          <div class="btn-row">
-            <a class="btn btn-primary" href="hitung.html">
-              Mulai Hitung <svg class="ic ic-sm" aria-hidden="true"><use href="#i-kanan"></use></svg>
-            </a>
-            <a class="btn btn-ghost" href="#cara">Lihat cara kerjanya</a>
+          <div class="fl-hero__actions">
+            <a class="fl-btn fl-btn--lg" href="hitung.html">Mulai Hitung <svg class="fl-icon fl-icon--nudge" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
+            <a class="fl-btn fl-btn--ghost fl-btn--lg" href="#cara">Lihat cara kerjanya</a>
           </div>
-          <p class="flav-caption" style="margin-top: var(--space-5)">
-            Gratis · Tanpa daftar · Tidak ada data yang dikirim ke mana pun
-          </p>
+          <p class="fl-hero__note">Pembagian waris menurut syariat Islam, mazhab Syafi'i. Gratis, tanpa daftar, tidak ada data yang dikirim ke mana pun.</p>
         </div>
 
-        <!-- Animasi demo -->
         <div class="demo" id="demo" aria-label="Contoh simulasi pembagian warisan">
           <div class="demo-tahap" id="demo-tahap"></div>
-          <div id="demo-isi" style="min-height: 268px"></div>
+          <div id="demo-isi" class="demo-isi"></div>
           <div class="demo-titik" id="demo-titik"></div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ═══ MASALAHNYA ═══ -->
-  <section class="section" id="cara" style="background: var(--bg-secondary)">
-    <div class="wrap">
-      <div style="max-width: 62ch; margin-bottom: var(--space-12)">
-        <span class="overline">Kenapa kami membuat ini</span>
-        <h2 class="flav-display-l">Aturannya jelas, tapi hampir tidak ada yang berani menghitung sendiri.</h2>
-        <p class="flav-body" style="margin-top: var(--space-5)">
-          Bagiannya berupa pecahan yang harus dijumlahkan, ada aturan siapa menutup siapa, dan
-          ada belasan kasus khusus yang penyelesaiannya berbeda dari pola biasa. Akibatnya
-          keluarga menunda pembagian bertahun-tahun, atau membaginya dengan cara "yang penting
-          semua rata" — yang justru tidak sesuai aturan. Padahal
-          <span class="sorot">jawabannya pasti, bukan soal selera</span>.
-        </p>
-      </div>
-
-      <div class="grid grid-3">
-        <div class="card card-hover">
-          <div class="card-icon"><svg class="ic" aria-hidden="true" style="color:var(--color-flame)"><use href="#i-kitab"></use></svg></div>
-          <h3 class="flav-heading-m">Satu-satunya sumber: wahyu</h3>
-          <p class="flav-body-sm" style="margin-top: var(--space-3)">
-            Setiap angka yang keluar bisa kamu telusuri ke ayat atau haditsnya, ditampilkan
-            lengkap dengan teks Arab dan terjemahannya. Kami tidak menambahkan satu aturan pun.
+  <section class="fl-section fl-section--tint" id="cara">
+    <div class="fl-wrap">
+      <div class="fl-split" style="--split: 1fr 1fr; align-items: start">
+        <div class="fl-stack" style="--stack: var(--space-5)">
+          <h2 class="fl-display-m">Aturannya jelas, tapi hampir tidak ada yang berani <mark class="fl-marker">menghitung sendiri</mark>.</h2>
+          <p class="fl-body">
+            Bagiannya berupa pecahan yang harus dijumlahkan, ada aturan siapa menutup siapa, dan
+            ada belasan kasus khusus yang penyelesaiannya berbeda dari pola biasa. Akibatnya
+            keluarga menunda pembagian bertahun-tahun, atau membaginya dengan cara "yang penting
+            semua rata", yang justru tidak sesuai aturan. Padahal jawabannya pasti, bukan soal selera.
           </p>
         </div>
-        <div class="card card-hover">
-          <div class="card-icon"><svg class="ic" aria-hidden="true" style="color:var(--color-flame)"><use href="#i-hati"></use></svg></div>
-          <h3 class="flav-heading-m">Tidak ada data yang keluar</h3>
-          <p class="flav-body-sm" style="margin-top: var(--space-3)">
-            Semua perhitungan berjalan di dalam HP atau laptop kamu. Tidak ada server yang
-            menerima jumlah hartamu, tidak ada yang disimpan, tidak ada yang dicatat.
-          </p>
-        </div>
-        <div class="card card-hover">
-          <div class="card-icon"><svg class="ic" aria-hidden="true" style="color:var(--color-flame)"><use href="#i-timbangan"></use></svg></div>
-          <h3 class="flav-heading-m">Sampai kasus yang rumit</h3>
-          <p class="flav-body-sm" style="margin-top: var(--space-3)">
-            23 jenis ahli waris, aturan hijab, 'aul, radd, sampai kasus bernama seperti
-            Umariyyatain dan Akdariyyah. Diuji dengan puluhan kasus baku dari kitab faraid.
-          </p>
-        </div>
+        <ul class="alasan" role="list">
+          <li>
+            <span class="fl-card__icon"><svg class="fl-icon" aria-hidden="true"><use href="#i-kitab"/></svg></span>
+            <div><h3>Satu-satunya sumber: wahyu</h3>
+            <p>Setiap angka bisa kamu telusuri ke ayat atau haditsnya, lengkap dengan teks Arab dan terjemahan. Kami tidak menambahkan satu aturan pun.</p></div>
+          </li>
+          <li>
+            <span class="fl-card__icon"><svg class="fl-icon" aria-hidden="true"><use href="#i-shield-check"/></svg></span>
+            <div><h3>Tidak ada data yang keluar</h3>
+            <p>Semua perhitungan berjalan di HP atau laptop kamu. Tidak ada server yang menerima jumlah hartamu, tidak ada yang disimpan.</p></div>
+          </li>
+          <li>
+            <span class="fl-card__icon"><svg class="fl-icon" aria-hidden="true"><use href="#i-timbangan"/></svg></span>
+            <div><h3>Sampai kasus yang rumit</h3>
+            <p>23 jenis ahli waris, aturan hijab, 'aul, radd, sampai kasus bernama seperti Umariyyatain dan Akdariyyah. Diuji dengan puluhan kasus baku dari kitab faraid.</p></div>
+          </li>
+        </ul>
       </div>
     </div>
   </section>
 
-  <!-- ═══ LANGKAH ═══ -->
-  <section class="section">
-    <div class="wrap">
-      <span class="overline">Tiga langkah</span>
-      <h2 class="flav-display-l" style="max-width: 18ch">Dari bingung ke angka yang jelas dalam dua menit.</h2>
-
-      <div class="grid grid-3" style="margin-top: var(--space-10)">
-        <div class="card">
-          <span class="badge">Langkah 1</span>
-          <h3 class="flav-heading-m" style="margin-top: var(--space-4)">Isi kondisi keluarga</h3>
-          <p class="flav-body-sm" style="margin-top: var(--space-3)">
-            Siapa yang meninggal, berapa hartanya, ada hutang atau tidak, dan siapa saja
-            keluarga yang masih hidup. Cukup ketuk tombol tambah dan kurang.
-          </p>
-        </div>
-        <div class="card">
-          <span class="badge">Langkah 2</span>
-          <h3 class="flav-heading-m" style="margin-top: var(--space-4)">Lihat pembagiannya</h3>
-          <p class="flav-body-sm" style="margin-top: var(--space-3)">
-            Diagram lingkaran, pecahan, dan nominal rupiah per orang. Ketuk siapa pun untuk
-            melihat alasannya dan dalilnya. Ubah isian, hasilnya ikut berubah seketika.
-          </p>
-        </div>
-        <div class="card">
-          <span class="badge">Langkah 3</span>
-          <h3 class="flav-heading-m" style="margin-top: var(--space-4)">Bawa hasilnya</h3>
-          <p class="flav-body-sm" style="margin-top: var(--space-3)">
-            Simpan sebagai PDF atau gambar untuk dibagikan ke keluarga, atau dibawa ke ustadz,
-            notaris, dan Pengadilan Agama sebagai bahan awal.
-          </p>
-        </div>
-      </div>
+  <section class="fl-section">
+    <div class="fl-wrap">
+      <h2 class="fl-display-m" style="max-width: 20ch">Dari bingung ke angka yang jelas dalam dua menit.</h2>
+      <ol class="fl-howto" style="margin-top: var(--space-10)" data-stagger>
+        <li><h3>Isi kondisi keluarga</h3>
+          <p>Siapa yang meninggal, berapa hartanya, ada hutang atau tidak, dan siapa saja keluarga yang masih hidup. Cukup ketuk tombol tambah dan kurang.</p></li>
+        <li><h3>Lihat pembagiannya</h3>
+          <p>Diagram lingkaran, pecahan, dan nominal rupiah per orang. Ketuk siapa pun untuk melihat alasan dan dalilnya. Ubah isian, hasilnya ikut berubah seketika.</p></li>
+        <li><h3>Bawa hasilnya</h3>
+          <p>Simpan sebagai PDF atau gambar untuk dibagikan ke keluarga, atau dibawa ke ustadz, notaris, dan Pengadilan Agama sebagai bahan awal.</p></li>
+      </ol>
     </div>
   </section>
 
-  <!-- ═══ BATASAN — jujur di depan ═══ -->
-  <section class="section" style="padding-top: 0">
-    <div class="wrap">
+  <section class="fl-section" style="padding-top: 0">
+    <div class="fl-wrap">
+      <h2 class="fl-heading-l">Yang perlu kamu tahu sebelum memakai</h2>
       <div class="batasan">
-        <div class="batasan-kepala">
-          <span class="badge badge-muted">Batasan</span>
-          <h2 class="flav-heading-l" style="margin-top: var(--space-3)">Yang perlu kamu tahu
-            sebelum memakai</h2>
-        </div>
-        <div class="batasan-poin">
-          <div class="batasan-item">
-            <span class="batasan-ikon">
-              <svg class="ic" aria-hidden="true"><use href="#i-timbangan"></use></svg>
-            </span>
-            <div>
-              <strong>Memakai fiqh mazhab Syafi'i</strong>
-              <p>Mazhab mayoritas muslim Indonesia. Kalau perkaranya dibawa ke Pengadilan
-                Agama, di beberapa titik hakim bisa memutuskan berbeda karena memakai Kompilasi
-                Hukum Islam — dan bedanya kami tunjukkan langsung di halaman hasil, bukan
-                disembunyikan.</p>
-            </div>
+        <div class="fl-callout" data-tone="note">
+          <span class="fl-callout__icon"><svg class="fl-icon" aria-hidden="true"><use href="#i-timbangan"/></svg></span>
+          <div>
+            <h3>Memakai fiqh mazhab Syafi'i</h3>
+            <p>Mazhab mayoritas muslim Indonesia. Kalau perkaranya dibawa ke Pengadilan Agama, di beberapa titik hakim bisa memutuskan berbeda karena memakai Kompilasi Hukum Islam. Bedanya kami tunjukkan langsung di halaman hasil, bukan disembunyikan.</p>
           </div>
-          <div class="batasan-item">
-            <span class="batasan-ikon">
-              <svg class="ic" aria-hidden="true"><use href="#i-waspada"></use></svg>
-            </span>
-            <div>
-              <strong>Empat keadaan tidak dihitung otomatis</strong>
-              <p>Anak yang masih dalam kandungan, ahli waris yang hilang, kerabat jauh di luar
-                23 ahli waris utama, dan kakek yang berkumpul dengan dua jenis saudara
-                sekaligus. Untuk kasus itu kami bilang terus terang dan mengarahkan ke ustadz
-                atau Pengadilan Agama, bukan menebak-nebak.</p>
-            </div>
+        </div>
+        <div class="fl-callout" data-tone="warn">
+          <span class="fl-callout__icon"><svg class="fl-icon" aria-hidden="true"><use href="#i-waspada"/></svg></span>
+          <div>
+            <h3>Empat keadaan tidak dihitung otomatis</h3>
+            <p>Anak yang masih dalam kandungan, ahli waris yang hilang, kerabat jauh di luar 23 ahli waris utama, dan kakek yang berkumpul dengan dua jenis saudara sekaligus. Untuk kasus itu kami bilang terus terang dan mengarahkan ke ustadz atau Pengadilan Agama, bukan menebak-nebak.</p>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ═══ KODE TERBUKA & KONTRIBUSI ═══ -->
-  <section class="section" style="padding-top: 0" id="kontribusi">
-    <div class="wrap">
-      <div class="terbuka">
-        <div class="terbuka-kiri">
-          <span class="overline">Kodenya terbuka</span>
-          <h2 class="flav-display-m" style="max-width: 16ch">Periksa sendiri, jangan percaya
-            begitu saja.</h2>
-
-          <p class="flav-body" style="margin-top: var(--space-5)">
+  <section class="fl-section fl-section--tint" id="kontribusi">
+    <div class="fl-wrap">
+      <div class="fl-split" style="--split: 1fr 1fr; align-items: start">
+        <div class="fl-stack" style="--stack: var(--space-5)">
+          <h2 class="fl-display-m" style="max-width: 16ch">Periksa sendiri, jangan percaya begitu saja.</h2>
+          <p class="fl-body">
             Ini menyangkut hukum agama dan harta keluarga, jadi kami tidak minta kamu percaya
-            pada kotak hitam. Seluruh kode perhitungannya bisa dibaca siapa pun:
-            <span class="sorot">rumus faraidnya, tabel siapa menghalangi siapa, dan 75 kasus
-            ujinya</span> yang jawabannya diambil dari kitab faraid.
+            pada kotak hitam. Seluruh kode perhitungannya bisa dibaca siapa pun: rumus faraidnya,
+            tabel siapa menghalangi siapa, dan puluhan kasus ujinya yang jawabannya diambil dari
+            kitab faraid.
           </p>
 
-          <div class="dalil" style="margin-top: var(--space-6)">
-            <div class="dalil-rujukan">HR Muslim no. 1631</div>
-            <div class="dalil-arab" lang="ar" dir="rtl">إِذَا مَاتَ الإِنْسَانُ انْقَطَعَ عَنْهُ عَمَلُهُ إِلَّا مِنْ ثَلَاثَةٍ: إِلَّا مِنْ صَدَقَةٍ جَارِيَةٍ، أَوْ عِلْمٍ يُنْتَفَعُ بِهِ، أَوْ وَلَدٍ صَالِحٍ يَدْعُو لَهُ</div>
-            <div class="dalil-terjemah">
-              Apabila manusia meninggal, terputuslah amalnya kecuali tiga perkara: sedekah
-              jariyah, ilmu yang bermanfaat, dan anak saleh yang mendoakannya.
-            </div>
-            <div class="dalil-sumber">Dari Abu Hurairah radhiyallahu anhu. Sahih.</div>
-            <div class="dalil-tautan">
-              <a href="https://www.hadits.id/hadits/muslim/1631" target="_blank" rel="noopener noreferrer">
-                <svg class="ic ic-sm" aria-hidden="true"><use href="#i-tautan"></use></svg>
-                Baca di hadits.id — Muslim 1631
-              </a>
-            </div>
-          </div>
+          <figure class="fl-cite">
+            <p class="fl-arabic" lang="ar" dir="rtl">إِذَا مَاتَ الإِنْسَانُ انْقَطَعَ عَنْهُ عَمَلُهُ إِلَّا مِنْ ثَلَاثَةٍ: إِلَّا مِنْ صَدَقَةٍ جَارِيَةٍ، أَوْ عِلْمٍ يُنْتَفَعُ بِهِ، أَوْ وَلَدٍ صَالِحٍ يَدْعُو لَهُ</p>
+            <p class="fl-cite__tr">Apabila manusia meninggal, terputuslah amalnya kecuali tiga perkara: sedekah jariyah, ilmu yang bermanfaat, dan anak saleh yang mendoakannya.</p>
+            <figcaption class="fl-cite__src">
+              <span class="fl-grade" data-grade="sahih"><svg class="fl-icon" aria-hidden="true"><use href="#i-check"/></svg> Sahih</span>
+              <span>HR Muslim no. 1631, dari Abu Hurairah</span>
+              <a href="https://www.hadits.id/hadits/muslim/1631" target="_blank" rel="noopener noreferrer">Buka sumbernya <svg class="fl-icon" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
+            </figcaption>
+          </figure>
 
-          <p class="flav-body-sm" style="margin-top: var(--space-5)">
+          <p class="fl-body-s" style="color: var(--color-mid)">
             Kalau kamu punya ilmu yang bisa membuat alat ini lebih benar, sumbangkanlah. Bukan
-            untuk kami — untuk keluarga muslim mana pun yang sedang kebingungan membagi
+            untuk kami, tapi untuk keluarga muslim mana pun yang sedang kebingungan membagi
             peninggalan orang tuanya.
           </p>
-
-          <div class="btn-row" style="margin-top: var(--space-6)">
-            <a class="btn btn-dark" href="https://github.com/arnantoakbar/waris"
-               target="_blank" rel="noopener noreferrer">
-              <svg class="ic ic-sm ic-isi" aria-hidden="true"><use href="#i-github"></use></svg>
-              Lihat kodenya di GitHub
+          <div class="fl-cluster">
+            <a class="fl-btn fl-btn--dark" href="https://github.com/arnantoakbar/waris" target="_blank" rel="noopener noreferrer">
+              <svg class="fl-icon ic-isi" aria-hidden="true"><use href="#i-github"/></svg>Lihat kodenya di GitHub
             </a>
-            <a class="btn btn-ghost" href="https://github.com/arnantoakbar/waris/issues/new"
-               target="_blank" rel="noopener noreferrer">
-              Laporkan kekeliruan
-            </a>
+            <a class="fl-btn fl-btn--ghost" href="https://github.com/arnantoakbar/waris/issues/new" target="_blank" rel="noopener noreferrer">Laporkan kekeliruan</a>
           </div>
         </div>
 
-        <div class="terbuka-kanan">
-          <!-- Cuplikan kode sungguhan dari mesin faraid, bukan hiasan. -->
-          <div class="kode-kartu">
-            <div class="kode-bar">
-              <span class="kode-titik"></span><span class="kode-titik"></span><span class="kode-titik"></span>
-              <span class="kode-nama">js/faraid/shares.js</span>
-            </div>
-            <pre class="kode-isi"><code><span class="k-c">// Suami: 1/2 kalau tidak ada anak,</span>
+        <div class="fl-stack" style="--stack: var(--space-5)">
+          <div class="fl-code">
+            <div class="fl-code__bar"><span>js/faraid/shares.js</span></div>
+<pre><code><span class="k-c">// Suami: 1/2 kalau tidak ada anak,</span>
 <span class="k-c">// 1/4 kalau ada. QS An-Nisa: 12</span>
 <span class="k-k">if</span> (ada(<span class="k-s">'suami'</span>)) {
   set(<span class="k-s">'suami'</span>, faru ? F(<span class="k-n">1</span>, <span class="k-n">4</span>) : F(<span class="k-n">1</span>, <span class="k-n">2</span>));
@@ -312,87 +224,81 @@
 }</code></pre>
           </div>
 
-          <div class="kontrib">
-            <div class="kontrib-judul">Yang paling kami butuhkan</div>
-            <ul class="kontrib-daftar">
-              <li>
-                <svg class="ic ic-sm" aria-hidden="true"><use href="#i-kitab"></use></svg>
-                <span><strong>Koreksi dalil</strong> dari yang paham faraid — nomor hadits,
-                  takhrij, atau terjemahan yang keliru.</span>
-              </li>
-              <li>
-                <svg class="ic ic-sm" aria-hidden="true"><use href="#i-timbangan"></use></svg>
-                <span><strong>Kasus uji baru</strong> dari kitab atau putusan Pengadilan Agama,
-                  lengkap dengan jawaban bakunya.</span>
-              </li>
-              <li>
-                <svg class="ic ic-sm" aria-hidden="true"><use href="#i-waspada"></use></svg>
-                <span><strong>Laporan kekeliruan hitungan</strong> beserta susunan ahli
-                  warisnya, supaya bisa kami reproduksi.</span>
-              </li>
+          <div class="fl-card">
+            <h3>Yang paling kami butuhkan</h3>
+            <ul class="kontrib" role="list">
+              <li><svg class="fl-icon" aria-hidden="true"><use href="#i-kitab"/></svg>
+                <span><b>Koreksi dalil</b> dari yang paham faraid: nomor hadits, takhrij, atau terjemahan yang keliru.</span></li>
+              <li><svg class="fl-icon" aria-hidden="true"><use href="#i-timbangan"/></svg>
+                <span><b>Kasus uji baru</b> dari kitab atau putusan Pengadilan Agama, lengkap dengan jawaban bakunya.</span></li>
+              <li><svg class="fl-icon" aria-hidden="true"><use href="#i-waspada"/></svg>
+                <span><b>Laporan kekeliruan hitungan</b> beserta susunan ahli warisnya, supaya bisa kami reproduksi.</span></li>
             </ul>
-            <p class="kontrib-kaki">
-              Tidak bisa ngoding? Tulis saja di <em>Issues</em> dengan bahasa biasa. Yang kami
-              perlukan ilmunya, bukan kodenya.
-            </p>
+            <p class="fl-body-s" style="color: var(--color-mid)">Tidak bisa ngoding? Tulis saja di Issues dengan bahasa biasa. Yang kami perlukan ilmunya, bukan kodenya.</p>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ═══ CTA ═══ -->
-  <section class="section" style="padding-top: 0">
-    <div class="wrap">
-      <div style="background: var(--bg-dark); border-radius: var(--radius-cta); padding: var(--space-12) var(--space-6); text-align: center; position: relative; overflow: hidden">
-        <div style="position:absolute; inset:0; background: radial-gradient(ellipse 60% 80% at 50% 110%, rgba(232,57,29,0.35), transparent 65%)"></div>
-        <div style="position: relative">
-          <h2 class="flav-display-m" style="color: var(--fg-on-dark); max-width: 20ch; margin-inline: auto">
-            Keluarga berhak tahu haknya, bukan menebak-nebak.
-          </h2>
-          <p style="color: var(--fg-on-dark-dim); margin: var(--space-5) auto var(--space-8); max-width: 46ch">
-            Hitung sekarang, gratis. Kalau nanti perlu dibawa ke ustadz atau Pengadilan Agama,
-            hasilnya tinggal disimpan jadi PDF.
-          </p>
-          <a class="btn btn-primary" href="hitung.html">
-            Mulai Hitung <svg class="ic ic-sm" aria-hidden="true"><use href="#i-kanan"></use></svg>
-          </a>
-        </div>
+  <section class="fl-section">
+    <div class="fl-wrap">
+      <div class="fl-cta">
+        <h2>Keluarga berhak tahu haknya, bukan menebak-nebak.</h2>
+        <p>Hitung sekarang, gratis. Kalau nanti perlu dibawa ke ustadz atau Pengadilan Agama, hasilnya tinggal disimpan jadi PDF.</p>
+        <a class="fl-btn fl-btn--light fl-btn--lg" href="hitung.html">Mulai Hitung <svg class="fl-icon fl-icon--nudge" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
       </div>
     </div>
   </section>
 
 </main>
 
-<footer class="footer">
-  <div class="wrap footer-inner">
-    <div>
-      <p class="footer-note">
-        Waris adalah alat bantu hitung, <strong>bukan sumber utama</strong>. Verifikasi dan
-        validasikan hasilnya kepada ustadz atau ulama terdekat, atau ke Pengadilan Agama,
-        sebelum dipakai membagi harta yang sebenarnya.
-      </p>
-      <p style="margin-top: var(--space-4)">
-        <a href="rujukan.html">Rujukan Al-Qur'an &amp; Hadits</a> &nbsp;·&nbsp;
-        <a href="https://github.com/arnantoakbar/waris" target="_blank" rel="noopener noreferrer">Kode sumber di GitHub</a>
-      </p>
-    </div>
-    <div class="footer-made">
-        Kodenya terbuka — silakan diperiksa dan dikoreksi.<br>
-        Made with 🔥 in Indonesia
+<footer class="fl-footer">
+  <div class="fl-wrap">
+    <div class="fl-footer__grid">
+      <div>
+        <a class="fl-nav__brand" href="index.html"><img src="assets/v4/mark-color.svg" alt="" width="34" height="34"><span>Waris</span><small class="nav-sub">by Flavida</small></a>
+        <p class="fl-footer__lead">Alat bantu hitung pembagian warisan menurut Al-Qur'an dan Sunnah. Dihitung di browser kamu, tidak ada data yang dikirim.</p>
       </div>
+      <nav aria-label="Halaman">
+        <h4>Halaman</h4>
+        <ul>
+          <li><a href="hitung.html">Hitung warisan</a></li>
+          <li><a href="rujukan.html">Rujukan dalil</a></li>
+          <li><a href="tests.html">Uji mesin faraid</a></li>
+        </ul>
+      </nav>
+      <nav aria-label="Kode dan kontak">
+        <h4>Kode dan kontak</h4>
+        <ul>
+          <li><a href="https://github.com/arnantoakbar/waris" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+          <li><a href="https://github.com/arnantoakbar/waris/issues/new" target="_blank" rel="noopener noreferrer">Laporkan kekeliruan</a></li>
+          <li><a href="mailto:hello@flavida.co">hello@flavida.co</a></li>
+        </ul>
+      </nav>
+      <div class="fl-notice fl-footer__notice">
+        <b>Bukan sumber utama</b>
+        Verifikasi dan validasikan hasilnya kepada ustadz atau ulama terdekat, atau ke Pengadilan Agama, sebelum dipakai membagi harta yang sebenarnya.
+      </div>
+    </div>
+    <div class="fl-footer__legal">
+      <span>Waris adalah bagian dari Flavida. Kodenya terbuka untuk diperiksa dan dikoreksi.</span>
+      <span>Dibuat di Indonesia</span>
+    </div>
   </div>
 </footer>
 
-<script src="js/faraid/fraction.js?v=23"></script>
-<script src="js/faraid/heirs.js?v=23"></script>
-<script src="js/faraid/hijab.js?v=23"></script>
-<script src="js/faraid/shares.js?v=23"></script>
-<script src="js/faraid/ashabah.js?v=23"></script>
-<script src="js/faraid/special.js?v=23"></script>
-<script src="js/faraid/estate.js?v=23"></script>
-<script src="js/faraid/solve.js?v=23"></script>
-<script src="js/ui-landing.js?v=23"></script>
-<script src="js/ui-nav.js?v=23"></script>
+<script src="js/faraid/fraction.js?v=24"></script>
+<script src="js/faraid/heirs.js?v=24"></script>
+<script src="js/faraid/hijab.js?v=24"></script>
+<script src="js/faraid/shares.js?v=24"></script>
+<script src="js/faraid/ashabah.js?v=24"></script>
+<script src="js/faraid/special.js?v=24"></script>
+<script src="js/faraid/estate.js?v=24"></script>
+<script src="js/faraid/solve.js?v=24"></script>
+<script src="js/dalil.js?v=24"></script>
+<script src="js/ui-landing.js?v=24"></script>
+<script src="js/motion.min.js"></script>
+<script src="js/flavida.js?v=24"></script>
 </body>
 </html>

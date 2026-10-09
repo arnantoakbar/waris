@@ -17,7 +17,8 @@
 
   var hasil = window.Faraid.hitung(CONTOH);
   var penerima = hasil.ahliWaris.filter(function (a) { return a.status === 'menerima'; });
-  var WARNA = ['#E8391D', '#F5A623', '#A0341A', '#F5760A', '#C7541F', '#7A2E12'];
+  // Palet kategorikal design system (--chart-1..8), ikut berganti di tema gelap.
+  var WARNA = ['var(--chart-1)', 'var(--chart-2)', 'var(--chart-3)', 'var(--chart-4)', 'var(--chart-5)', 'var(--chart-6)'];
 
   function rp(n) {
     return 'Rp ' + String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g, '.');
@@ -28,7 +29,7 @@
     return rp(n);
   }
   function ikon(id, gaya) {
-    return '<svg class="ic" aria-hidden="true"' + (gaya ? ' style="' + gaya + '"' : '') +
+    return '<svg class="fl-icon" aria-hidden="true"' + (gaya ? ' style="' + gaya + '"' : '') +
       '><use href="#' + id + '"></use></svg>';
   }
 
@@ -53,7 +54,7 @@
             (i * 170) + 'ms forwards">' +
             ikon(l.tipe === 'hasil' ? 'i-timbangan' : l.tipe === 'awal' ? 'i-kotak' : 'i-dompet') +
             '<span' + (l.tipe === 'hasil' ? ' style="font-weight:600"' : '') + '>' + l.label + '</span>' +
-            '<b style="color:' + (l.nilai < 0 ? 'var(--color-flame)' : 'inherit') + '">' +
+            '<b style="color:' + (l.nilai < 0 ? 'var(--color-flame-ink)' : 'inherit') + '">' +
             (l.nilai < 0 ? '− ' : '') + rpPendek(Math.abs(l.nilai)) + '</b></div>';
         }).join('');
       }
@@ -71,8 +72,7 @@
           penerima.map(function (a, i) {
             return '<div class="demo-baris" style="opacity:0;animation:naik .4s ease ' +
               (600 + i * 150) + 'ms forwards">' +
-              '<span style="width:10px;height:10px;border-radius:2px;background:' +
-              WARNA[i % WARNA.length] + ';flex:none"></span>' +
+              '<i style="background:' + WARNA[i % WARNA.length] + '"></i>' +
               '<span>' + a.label + (a.jumlah > 1 ? ' ×' + a.jumlah : '') + '</span>' +
               '<b>' + rp(a.nominal) + '</b></div>';
           }).join('');
@@ -92,15 +92,20 @@
     },
     {
       judul: 'Langkah 4 — Dasar aturannya',
+      // Menyebut sumbernya saja, bukan mengutip ayatnya: di kotak sekecil ini
+      // ayat hanya bisa ditampilkan terpotong, dan ayat tidak boleh dipenggal.
+      // Teks lengkapnya ada di halaman hasil dan halaman Rujukan.
       isi: function () {
-        return '<div class="dalil" style="margin-top:0">' +
-          '<div class="dalil-rujukan">QS An-Nisa ayat 11</div>' +
-          '<div class="dalil-arab" lang="ar" dir="rtl">يُوصِيكُمُ اللَّهُ فِي أَوْلَادِكُمْ ۖ لِلذَّكَرِ مِثْلُ حَظِّ الْأُنثَيَيْنِ</div>' +
-          '<div class="dalil-terjemah">Allah mensyariatkan kepadamu tentang pembagian warisan ' +
-          'untuk anak-anakmu: bagian anak laki-laki sama dengan bagian dua anak perempuan.</div>' +
-          '</div>' +
-          '<p class="flav-body-sm" style="margin-top:var(--space-4)">Setiap angka di atas ' +
-          'ditelusuri sampai ke ayat atau haditsnya, dan bisa kamu baca sendiri di halaman hasil.</p>';
+        return '<p class="flav-body-sm" style="margin-bottom:var(--space-3)">Tiap bagian punya dasarnya:</p>' +
+          penerima.map(function (a, i) {
+            var d = a.dalil ? window.Dalil.ambil(a.dalil) : null;
+            return '<div class="demo-baris" style="opacity:0;animation:naik .4s ease ' + (i * 150) + 'ms forwards">' +
+              '<i style="background:' + WARNA[i % WARNA.length] + '"></i>' +
+              '<span>' + a.label + '</span>' +
+              '<b>' + (d ? d.rujukan : '') + '</b></div>';
+          }).join('') +
+          '<p class="flav-body-sm" style="margin-top:var(--space-4)">Ayat dan haditsnya ditampilkan ' +
+          'utuh di halaman hasil, lengkap dengan teks Arab dan tautan sumbernya.</p>';
       }
     }
   ];

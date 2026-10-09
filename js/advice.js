@@ -20,7 +20,7 @@
 
   /** Jenis harta untuk rincian opsional di form. */
   var JENIS_HARTA = [
-    { id: 'rumah',     label: 'Rumah',            icon: 'i-rumah',    utuh: true },
+    { id: 'rumah',     label: 'Rumah',            icon: 'i-home',    utuh: true },
     { id: 'tanah',     label: 'Tanah',            icon: 'i-tanah',    utuh: true },
     { id: 'kendaraan', label: 'Kendaraan',        icon: 'i-mobil',    utuh: true },
     { id: 'usaha',     label: 'Usaha',            icon: 'i-toko',     utuh: true },
