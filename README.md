@@ -92,7 +92,7 @@ Buka <http://localhost:8123>. Untuk produksi, unggah folder ini apa adanya ke ho
 
 ```
 index.html              Halaman utama + demo
-hitung.html             Wizard dan hasil
+hitung.html             Wizard dan hasil (?contoh=1 memuat kasus contoh)
 rujukan.html            Semua dalil
 tests.html              Uji mesin faraid
 
@@ -125,7 +125,7 @@ js/
   ui-pohon.js           Diagram pohon
   ui-pohon-edit.js      Penyuntingan pohon
   ui-*.js               Tampilan lain
-  nav-waris.js          Penyesuaian menu seluler
+  nav-waris.js          Navbar: tombol utama hilang saat hero terlihat
   tema.js               Tombol terang/gelap
   export.js             PNG (canvas) dan PDF (dialog cetak)
   tests.js              97 kasus uji
@@ -377,6 +377,7 @@ Mengikuti Flavida Design System v4.1:
   putus, titik) *dan* kata ("terhalang", "bukan ahli waris").
 - **Warna grafik** dari `--chart-1..8`. PNG ekspor memakai salinan heksanya, karena kanvas tidak
   mengerti `var()`, dan selalu terang.
+- **Navbar, menu seluler, dan footer gelap** mengikuti situs Zakat. Navbar menempel di atas menu, dan tombol menu berubah jadi ✕ di tempat yang sama.
 - **Tema gelap** ikut perangkat dan bisa diganti lewat tombol di navbar (`js/tema.js`). Komponen
   buatan sendiri hanya memakai token yang ikut berbalik.
 

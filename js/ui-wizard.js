@@ -32,6 +32,7 @@
 
   var langkahKini = 1;
   var sudahAdaHasil = false;
+  var contoh = false;   // hasil yang tampil adalah kasus contoh (?contoh=1), bukan isian pengguna
   var modeIsian = 'daftar';   // 'daftar' | 'pohon'
   var modeHarta = 'total';    // 'total'  | 'rincian'
 
@@ -443,6 +444,7 @@
     });
     hasil.pakaiHukumIndonesia = state.pakaiHukumIndonesia;
     hasil.hartaBersamaDicentang = !!state.harta.hartaBersama;
+    hasil.contoh = contoh;
 
     // Catatan dari struktur keluarga (cucu lewat anak perempuan, anak angkat,
     // keponakan yang tidak berhak) digabungkan ke catatan hasil.
@@ -501,7 +503,7 @@
   }
 
   document.addEventListener('click', function (e) {
-    if (e.target.closest('#btn-ubah-input')) kembaliKeIsian();
+    if (e.target.closest('#btn-ubah-input')) { contoh = false; kembaliKeIsian(); }
   });
 
   // ── Reset ────────────────────────────────────────────────────────
@@ -513,6 +515,7 @@
       pakaiHukumIndonesia: false
     };
     sudahAdaHasil = false;
+    contoh = false;
     modeHarta = 'total';
     document.getElementById('wizard').hidden = false;
     document.getElementById('hasil').hidden = true;
@@ -538,4 +541,27 @@
   renderAhliWaris();
   renderKondisi();
   renderProgres();
+
+  /*
+   * hitung.html?contoh=1: memuat kasus contoh yang sama dengan demo di beranda,
+   * lalu langsung menampilkan hasilnya. Untuk tautan "begini hasilnya" tanpa
+   * mengetik. Angkanya contoh, bukan data nyata.
+   */
+  function muatContoh() {
+    function isi(id, v) {
+      var e = document.getElementById(id);
+      e.value = String(v);
+      e.dispatchEvent(new Event('input', { bubbles: true }));
+    }
+    $('#pilih-kelamin .pilih[data-nilai="L"]').click();
+    isi('in-total', 640000000); isi('in-biaya', 10000000); isi('in-hutang', 30000000);
+    [['istri', 1], ['anak_lk', 2], ['anak_pr', 1]].forEach(function (a) {
+      for (var i = 0; i < a[1]; i++) $('[data-tambah="' + a[0] + '"]').click();
+    });
+    $('[data-toggle="ibu"]').click();
+    contoh = true;
+    keLangkah(TOTAL_LANGKAH);
+    tampilkanHasil();
+  }
+  if (new URLSearchParams(location.search).has('contoh')) muatContoh();
 })();

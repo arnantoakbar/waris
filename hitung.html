@@ -8,48 +8,48 @@
 <meta name="description" content="Isi data keluargamu. Lihat pembagian waris sesuai Al-Qur'an dan Sunnah, lengkap dengan dalil. Dihitung di browser kamu.">
 <meta name="theme-color" content="#FFF8F0">
 <link rel="icon" href="assets/v4/mark-simple.svg" type="image/svg+xml">
-<link rel="stylesheet" href="colors_and_type.css?v=29">
-<link rel="stylesheet" href="flavida.css?v=29">
-<link rel="stylesheet" href="flavida-extra.css?v=29">
-<link rel="stylesheet" href="flavida-sections.css?v=29">
-<link rel="stylesheet" href="css/waris.css?v=29">
-<link rel="stylesheet" href="css/print.css?v=29" media="print">
+<link rel="stylesheet" href="colors_and_type.css?v=30">
+<link rel="stylesheet" href="flavida.css?v=30">
+<link rel="stylesheet" href="flavida-extra.css?v=30">
+<link rel="stylesheet" href="flavida-sections.css?v=30">
+<link rel="stylesheet" href="css/waris.css?v=30">
+<link rel="stylesheet" href="css/print.css?v=30" media="print">
 </head>
 <body>
 <a class="fl-skip" href="#utama">Lompat ke isi</a>
 <script src="assets/v4/icons.sprite.js"></script>
-<script src="js/sprite.js?v=29"></script>
+<script src="js/sprite.js?v=30"></script>
 
-<nav class="fl-nav" data-autohide aria-label="Utama">
-  <a class="fl-nav__brand" href="index.html" aria-label="Waris by Flavida, ke beranda">
-    <img src="assets/v4/mark-color.svg" alt="" width="34" height="34">
-    <span>Waris</span><small class="nav-sub">by Flavida</small>
-  </a>
-  <ul class="fl-nav__links" role="list">
-    <li><a href="index.html">Beranda</a></li>
-    <li><a href="hitung.html" aria-current="page">Hitung</a></li>
-    <li><a href="rujukan.html">Rujukan</a></li>
-  </ul>
-  <button class="fl-btn fl-btn--sm fl-btn--ghost fl-nav__cta" id="btn-mulai-ulang" type="button" aria-label="Ulangi dari awal"><svg class="fl-icon" aria-hidden="true"><use href="#i-ulang"/></svg><span class="nav-teks">Ulangi dari awal</span></button>
-  <button class="tema-toggle" type="button" data-tema-toggle aria-pressed="false" aria-label="Mode gelap">
-    <svg class="fl-icon i-bulan" aria-hidden="true"><use href="#i-moon"/></svg>
-    <svg class="fl-icon i-matahari" aria-hidden="true"><use href="#i-sun"/></svg>
-  </button>
-  <button class="fl-nav__toggle" type="button" aria-label="Menu" aria-controls="menu" aria-expanded="false">
-    <svg class="fl-icon i-open" aria-hidden="true"><use href="#i-menu"/></svg>
-    <svg class="fl-icon i-close" aria-hidden="true"><use href="#i-x"/></svg>
-  </button>
-</nav>
-<div class="fl-menu" id="menu">
-  <button class="fl-menu__close" type="button" aria-label="Tutup menu">
-    <svg class="fl-icon" aria-hidden="true"><use href="#i-x"/></svg>
-  </button>
-  <nav aria-label="Menu seluler">
-    <a href="index.html">Beranda</a>
-    <a href="hitung.html">Hitung</a>
-    <a href="rujukan.html">Rujukan</a>
+<header>
+  <nav class="fl-nav" data-autohide aria-label="Utama">
+    <a class="fl-nav__brand" href="index.html" aria-label="Waris by Flavida, ke beranda">
+      <img src="assets/v4/mark-color.svg" alt="" width="34" height="34">
+      <span>Waris</span><small class="nav-sub">by Flavida</small>
+    </a>
+    <ul class="fl-nav__links" role="list">
+      <li><a href="index.html">Beranda</a></li>
+      <li><a href="hitung.html" aria-current="page">Hitung</a></li>
+      <li><a href="rujukan.html">Rujukan</a></li>
+    </ul>
+    <button class="fl-btn fl-btn--sm fl-btn--ghost fl-nav__cta" id="btn-mulai-ulang" type="button" aria-label="Ulangi dari awal"><svg class="fl-icon" aria-hidden="true"><use href="#i-ulang"/></svg><span class="nav-teks">Ulangi dari awal</span></button>
+    <button class="fl-iconbtn tema-toggle" type="button" data-tema-toggle aria-pressed="false" aria-label="Mode gelap">
+      <svg class="fl-icon i-bulan" aria-hidden="true"><use href="#i-moon"/></svg>
+      <svg class="fl-icon i-matahari" aria-hidden="true"><use href="#i-sun"/></svg>
+    </button>
+    <button class="fl-nav__toggle" type="button" aria-label="Menu" aria-controls="menu" aria-expanded="false">
+      <svg class="fl-icon i-open" aria-hidden="true"><use href="#i-menu"/></svg>
+      <svg class="fl-icon i-close" aria-hidden="true"><use href="#i-x"/></svg>
+    </button>
   </nav>
-</div>
+  <div class="fl-menu" id="menu">
+    <nav aria-label="Menu seluler">
+      <a href="index.html">Beranda</a>
+      <a href="hitung.html" aria-current="page">Hitung</a>
+      <a href="rujukan.html">Rujukan</a>
+    </nav>
+    <p class="menu__foot"><a class="fl-link" href="https://github.com/arnantoakbar/waris" target="_blank" rel="noopener noreferrer">Kode di GitHub</a></p>
+  </div>
+</header>
 
 <main id="utama">
 
@@ -231,61 +231,40 @@
 
 </main>
 
-<footer class="fl-footer">
+<footer class="fl-footer fl-footer--dark">
   <div class="fl-wrap">
     <div class="fl-footer__grid">
       <div>
-        <a class="fl-nav__brand" href="index.html"><img src="assets/v4/mark-color.svg" alt="" width="34" height="34"><span>Waris</span><small class="nav-sub">by Flavida</small></a>
-        <p class="fl-footer__lead">Alat hitung waris menurut Al-Qur'an dan Sunnah. Dihitung di browser kamu. Tidak ada data yang dikirim.</p>
+        <b class="foot-brand">Waris</b>
+        <p style="margin-top:10px;max-width:38ch">Alat hitung, <b>bukan sumber utama</b>. Tanyakan hasilnya ke ustadz atau ulama, atau ke Pengadilan Agama, sebelum membagi harta.</p>
       </div>
-      <nav aria-label="Halaman">
-        <h4>Halaman</h4>
-        <ul>
-          <li><a href="hitung.html">Hitung warisan</a></li>
-          <li><a href="rujukan.html">Rujukan dalil</a></li>
-          <li><a href="tests.html">Uji mesin faraid</a></li>
-        </ul>
-      </nav>
-      <nav aria-label="Kode dan kontak">
-        <h4>Kode dan kontak</h4>
-        <ul>
-          <li><a href="https://github.com/arnantoakbar/waris" target="_blank" rel="noopener noreferrer">GitHub</a></li>
-          <li><a href="https://github.com/arnantoakbar/waris/issues/new" target="_blank" rel="noopener noreferrer">Laporkan kekeliruan</a></li>
-          <li><a href="mailto:hello@flavida.co">hello@flavida.co</a></li>
-        </ul>
-      </nav>
-      <div class="fl-notice fl-footer__notice">
-        <b>Bukan sumber utama</b>
-        Tanyakan hasilnya ke ustadz atau ulama, atau ke Pengadilan Agama, sebelum membagi harta.
-      </div>
+      <nav aria-label="Halaman"><h3>Halaman</h3><ul><li><a href="hitung.html">Hitung</a></li><li><a href="rujukan.html">Rujukan</a></li><li><a href="tests.html">Uji mesin</a></li></ul></nav>
+      <nav aria-label="Kode dan kontak"><h3>Kode dan kontak</h3><ul><li><a href="https://github.com/arnantoakbar/waris" target="_blank" rel="noopener noreferrer">GitHub</a></li><li><a href="https://github.com/arnantoakbar/waris/issues/new" target="_blank" rel="noopener noreferrer">Laporkan kekeliruan</a></li><li><a href="mailto:hello@flavida.co">hello@flavida.co</a></li></ul></nav>
     </div>
-    <div class="fl-footer__legal">
-      <span>Waris adalah bagian dari Flavida. Kodenya terbuka.</span>
-      <span>Dibuat di Indonesia</span>
-    </div>
+    <div class="fl-footer__legal"><span>Dihitung di browser kamu. Tidak ada data yang dikirim.</span><span>Dibuat oleh Flavida, Jakarta</span></div>
   </div>
 </footer>
 
-<script src="js/faraid/fraction.js?v=29"></script>
-<script src="js/faraid/heirs.js?v=29"></script>
-<script src="js/faraid/hijab.js?v=29"></script>
-<script src="js/faraid/shares.js?v=29"></script>
-<script src="js/faraid/ashabah.js?v=29"></script>
-<script src="js/faraid/special.js?v=29"></script>
-<script src="js/faraid/estate.js?v=29"></script>
-<script src="js/faraid/solve.js?v=29"></script>
-<script src="js/dalil.js?v=29"></script>
-<script src="js/khi.js?v=29"></script>
-<script src="js/advice.js?v=29"></script>
-<script src="js/export.js?v=29"></script>
-<script src="js/keluarga.js?v=29"></script>
-<script src="js/ui-pohon.js?v=29"></script>
-<script src="js/ui-pohon-edit.js?v=29"></script>
-<script src="js/ui-result.js?v=29"></script>
-<script src="js/ui-wizard.js?v=29"></script>
-<script src="js/tema.js?v=29"></script>
+<script src="js/faraid/fraction.js?v=30"></script>
+<script src="js/faraid/heirs.js?v=30"></script>
+<script src="js/faraid/hijab.js?v=30"></script>
+<script src="js/faraid/shares.js?v=30"></script>
+<script src="js/faraid/ashabah.js?v=30"></script>
+<script src="js/faraid/special.js?v=30"></script>
+<script src="js/faraid/estate.js?v=30"></script>
+<script src="js/faraid/solve.js?v=30"></script>
+<script src="js/dalil.js?v=30"></script>
+<script src="js/khi.js?v=30"></script>
+<script src="js/advice.js?v=30"></script>
+<script src="js/export.js?v=30"></script>
+<script src="js/keluarga.js?v=30"></script>
+<script src="js/ui-pohon.js?v=30"></script>
+<script src="js/ui-pohon-edit.js?v=30"></script>
+<script src="js/ui-result.js?v=30"></script>
+<script src="js/ui-wizard.js?v=30"></script>
+<script src="js/tema.js?v=30"></script>
 <script src="js/motion.min.js"></script>
-<script src="js/flavida.js?v=29"></script>
-<script src="js/nav-waris.js?v=29"></script>
+<script src="js/flavida.js?v=30"></script>
+<script src="js/nav-waris.js?v=30"></script>
 </body>
 </html>

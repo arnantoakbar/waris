@@ -293,6 +293,12 @@
         : 'Tidak ada harta yang bisa dibagi.') +
       '</p></div>';
 
+    if (hasil.contoh) {
+      html += '<div class="fl-wrap fl-wrap--narrow"><div class="pita" style="margin-bottom:var(--space-5)">' +
+        ikon('i-info') + '<span><strong>Ini contoh kasus, bukan datamu.</strong> ' +
+        'Ketuk Ubah untuk mengisi sendiri.</span></div></div>';
+    }
+
     // Peringatan ditaruh di ATAS, sebelum angkanya dibaca. Kalau hanya di kaki
     // halaman, orang keburu menganggap angka ini final sebelum sampai ke sana.
     html += '<div class="fl-wrap fl-wrap--narrow"><div class="awas">' +
