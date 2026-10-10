@@ -46,17 +46,17 @@
         label: 'Bagian harta bersama untuk pasangan',
         nilai: -bagianPasangan,
         tipe: 'kurang',
-        ket: 'Separuh harta bersama adalah hak milik pasangan sejak awal, bukan warisan. ' +
+        ket: 'Separuh harta bersama milik pasangan sejak awal, bukan warisan. ' +
              'Yang dibagi hanya separuh milik pewaris. Dasarnya UU Perkawinan No. 1/1974 ' +
-             'Pasal 35 dan KHI Pasal 96 — hukum positif Indonesia, bukan dalil faraid. ' +
-             'Harta bawaan sebelum menikah, serta warisan dan hadiah yang diterima ' +
-             'masing-masing, TIDAK termasuk harta bersama.',
+             'Pasal 35 dan KHI Pasal 96. Ini hukum positif Indonesia, bukan dalil faraid. ' +
+             'Harta bawaan sebelum menikah, serta warisan dan hadiah pribadi, ' +
+             'TIDAK termasuk harta bersama.',
         dalil: 'harta-bersama'
       });
       catatan.push({
         id: 'harta_bersama',
         teks: 'Pasangan menerima ' + bagianPasangan + ' sebagai pemilik separuh harta bersama, ' +
-              'lalu MASIH mendapat bagian warisan lagi dari harta pewaris.'
+              'lalu MASIH mendapat bagian warisan dari harta pewaris.'
       });
     }
 
@@ -78,8 +78,8 @@
       sisa -= hutang;
       langkah.push({
         id: 'hutang', label: 'Pelunasan hutang', nilai: -hutang, tipe: 'kurang',
-        ket: 'Hutang pewaris wajib dilunasi lebih dulu, baik hutang ke sesama manusia ' +
-             'maupun kewajiban yang tertunda seperti zakat.'
+        ket: 'Hutang pewaris dilunasi lebih dulu, baik hutang ke manusia ' +
+             'maupun kewajiban tertunda seperti zakat.'
       });
     }
     if (hutangKurang > 0) {
@@ -87,8 +87,8 @@
         id: 'hutang_lebih_besar',
         tingkat: 'penting',
         teks: 'Hutang pewaris lebih besar dari hartanya, kurang ' + hutangKurang + '. ' +
-              'Tidak ada warisan yang bisa dibagi. Sisa hutang bukan kewajiban ahli waris, ' +
-              'tapi sangat dianjurkan ditanggung keluarga agar pewaris terbebas dari tanggungannya.'
+              'Tidak ada warisan yang bisa dibagi. Sisa hutang bukan kewajiban ahli waris. ' +
+              'Tapi sangat dianjurkan keluarga menanggungnya agar pewaris terbebas dari tanggungan.'
       });
     }
 
@@ -100,7 +100,7 @@
       sisa -= wasiat;
       langkah.push({
         id: 'wasiat', label: 'Pelaksanaan wasiat', nilai: -wasiat, tipe: 'kurang',
-        ket: 'Wasiat dilaksanakan setelah hutang lunas, dan maksimal 1/3 dari sisa harta.'
+        ket: 'Wasiat dilaksanakan setelah hutang lunas, maksimal 1/3 dari sisa harta.'
       });
     }
     if (wasiatDiminta > wasiat) {
@@ -110,7 +110,7 @@
         teks: 'Wasiat yang ditulis (' + wasiatDiminta + ') melebihi batas 1/3 dan dipotong ' +
               'menjadi ' + wasiat + '. Rasulullah membatasi wasiat maksimal sepertiga: ' +
               '"Sepertiga, dan sepertiga itu sudah banyak." (HR Bukhari & Muslim). ' +
-              'Kelebihannya hanya sah kalau seluruh ahli waris merelakan.',
+              'Kelebihannya sah hanya jika semua ahli waris rela.',
         dalil: 'hadits-wasiat-sepertiga'
       });
     }

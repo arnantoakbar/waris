@@ -46,12 +46,12 @@
 
   var KETERANGAN_BIL_GHAIR = {
     anak_lk: 'Aturan ini disebut langsung dalam QS An-Nisa ayat 11 tentang anak.',
-    cucu_lk: 'Cucu lewat anak laki-laki mengambil kedudukan anak ketika pewaris tidak ' +
-      'meninggalkan anak laki-laki, jadi memakai aturan yang sama dengan anak.',
-    sdr_lk_kandung: 'Aturan ini disebut di akhir QS An-Nisa ayat 176, ayat tentang kalalah ' +
-      '— yaitu pewaris yang tidak meninggalkan anak maupun ayah.',
-    sdr_lk_sebapak: 'Saudara seayah mengambil kedudukan saudara kandung ketika saudara ' +
-      'kandung tidak ada, jadi memakai aturan yang sama dalam QS An-Nisa ayat 176.'
+    cucu_lk: 'Cucu lewat anak laki-laki menempati posisi anak saat pewaris tidak ' +
+      'punya anak laki-laki, jadi aturannya sama dengan anak.',
+    sdr_lk_kandung: 'Aturan ini disebut di akhir QS An-Nisa ayat 176, tentang kalalah: ' +
+      'pewaris tanpa anak dan ayah.',
+    sdr_lk_sebapak: 'Saudara seayah menempati posisi saudara kandung saat saudara ' +
+      'kandung tidak ada, jadi memakai aturan QS An-Nisa ayat 176.'
   };
 
   /**
@@ -82,7 +82,7 @@
           tipe: 'bil_ghair',
           penerima: [key, partner],
           alasan: H.label(key) + ' dan ' + H.label(partner).toLowerCase() +
-            ' berbagi sisa harta dengan perbandingan 2 : 1 — bagian laki-laki dua kali ' +
+            ' berbagi sisa harta 2 : 1. Bagian laki-laki dua kali ' +
             'bagian perempuan. ' + KETERANGAN_BIL_GHAIR[key],
           dalil: DALIL_BIL_GHAIR[key],
           potongan: POTONGAN_BIL_GHAIR[key],
@@ -122,8 +122,8 @@
           // untuk saudara perempuan" — lebih tepat daripada hadits ashabah
           // yang sifatnya umum.
           alasan: H.label(kandidat) + ' menjadi ashabah karena pewaris meninggalkan anak/cucu perempuan, ' +
-            'sehingga mengambil sisa harta setelah bagian tetap dibayarkan. Keadaan ini disebut ' +
-            'langsung dalam putusan Ibnu Mas\'ud: "dan sisanya untuk saudara perempuan".',
+            'sehingga mengambil sisa harta setelah bagian tetap. Ini disebut langsung ' +
+            'dalam putusan Ibnu Mas\'ud: "dan sisanya untuk saudara perempuan".',
           dalil: 'hadits-cucu-pr',
           dalilLain: ['qs4-176']
         };

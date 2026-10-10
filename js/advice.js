@@ -34,7 +34,7 @@
     dukcapil:  { label: 'Layanan Dukcapil Kemendagri', url: 'https://dukcapil.kemendagri.go.id' },
     badilag:   { label: 'Ditjen Badan Peradilan Agama (cari pengadilan terdekat)',
                  url: 'https://badilag.mahkamahagung.go.id' },
-    ecourt:    { label: 'e-Court — daftar perkara secara online',
+    ecourt:    { label: 'e-Court — daftar perkara online',
                  url: 'https://ecourt.mahkamahagung.go.id' },
     putusan:   { label: 'Direktori Putusan MA — contoh putusan waris',
                  url: 'https://putusan3.mahkamahagung.go.id' },
@@ -76,18 +76,18 @@
     out.push({
       id: 'dokumen',
       tingkat: 'wajib',
-      judul: 'Urus dokumen dasarnya',
-      teks: 'Tanpa dokumen ini, bank tidak akan mencairkan rekening dan BPN tidak akan ' +
-        'memproses balik nama sertifikat. Urus sekaligus supaya tidak bolak-balik.',
+      judul: 'Urus dokumen dasar',
+      teks: 'Tanpa dokumen ini, bank tidak mencairkan rekening dan BPN tidak memproses ' +
+        'balik nama. Urus sekaligus agar tidak bolak-balik.',
       poin: [
-        { teks: 'Akta kematian dari Dinas Dukcapil kabupaten/kota. Bawa surat keterangan ' +
-          'kematian dari rumah sakit atau kelurahan, KK, dan KTP pelapor. Gratis.' },
-        { teks: 'Kartu Keluarga yang sudah diperbarui — nama almarhum dikeluarkan dari KK.' },
-        { teks: 'Surat Keterangan Ahli Waris. Untuk keluarga muslim biasanya cukup dibuat di ' +
-          'kelurahan lalu dikuatkan camat. Kalau nilainya besar atau ada aset tanah, minta ' +
-          'Penetapan Ahli Waris dari Pengadilan Agama — kekuatannya jauh lebih kuat.' },
-        { teks: 'Fotokopi KTP dan KK seluruh ahli waris yang tercantum di hasil perhitungan ini.' },
-        { teks: 'Buku nikah almarhum, kalau ada pasangan yang masih hidup.' }
+        { teks: 'Akta kematian dari Dinas Dukcapil. Bawa surat kematian dari rumah sakit ' +
+          'atau kelurahan, KK, dan KTP pelapor. Gratis.' },
+        { teks: 'Kartu Keluarga baru. Nama almarhum dikeluarkan dari KK.' },
+        { teks: 'Surat Keterangan Ahli Waris. Biasanya cukup dari kelurahan, dikuatkan ' +
+          'camat. Jika nilainya besar atau ada tanah, minta Penetapan Ahli Waris dari ' +
+          'Pengadilan Agama. Kekuatannya jauh lebih kuat.' },
+        { teks: 'Fotokopi KTP dan KK semua ahli waris di hasil ini.' },
+        { teks: 'Buku nikah almarhum, jika ada pasangan yang masih hidup.' }
       ],
       tautan: [T.dukcapil, T.badilag]
     });
@@ -97,19 +97,18 @@
       id: 'inventaris',
       tingkat: 'wajib',
       judul: 'Catat semua harta dan hutang secara terbuka',
-      teks: 'Lakukan bersama seluruh ahli waris, jangan sendirian. Sebagian besar sengketa ' +
-        'waris berawal dari harta yang tidak pernah dicatat terbuka sejak awal — bukan dari ' +
-        'salah hitung.',
+      teks: 'Lakukan bersama semua ahli waris. Jangan sendirian. Sengketa waris biasanya ' +
+        'berawal dari harta yang tidak dicatat terbuka, bukan dari salah hitung.',
       poin: [
-        { teks: 'Kumpulkan bukti kepemilikan: sertifikat tanah/rumah, BPKB dan STNK, buku ' +
-          'rekening, bilyet deposito, polis asuransi, sertifikat saham atau reksadana.' },
-        { teks: 'Cek saldo rekening per tanggal wafat, bukan tanggal hari ini.' },
-        { teks: 'Daftar hutang piutang lengkap dengan bukti dan nama pihaknya — termasuk ' +
-          'hutang almarhum kepada keluarga sendiri.' },
-        { teks: 'Cek kewajiban yang tertunda: zakat yang belum dibayar, nazar, atau biaya ' +
-          'haji yang sudah didaftarkan.' },
-        { teks: 'Foto atau pindai semuanya, bagikan ke seluruh ahli waris di grup keluarga. ' +
-          'Keterbukaan di tahap ini mencegah banyak masalah nanti.' }
+        { teks: 'Kumpulkan bukti kepemilikan: sertifikat, BPKB dan STNK, buku rekening, ' +
+          'deposito, polis asuransi, saham atau reksadana.' },
+        { teks: 'Cek saldo rekening pada tanggal wafat, bukan hari ini.' },
+        { teks: 'Daftar hutang dan piutang, lengkap dengan bukti dan nama pihaknya. ' +
+          'Termasuk hutang almarhum ke keluarga sendiri.' },
+        { teks: 'Cek kewajiban tertunda: zakat, nazar, atau biaya haji yang sudah ' +
+          'didaftarkan.' },
+        { teks: 'Foto semua dokumen. Bagikan ke semua ahli waris. Keterbukaan mencegah ' +
+          'masalah nanti.' }
       ]
     });
 
@@ -118,15 +117,14 @@
       out.push({
         id: 'hutang',
         tingkat: 'wajib',
-        judul: 'Lunasi hutang sebelum membagi apa pun',
-        teks: 'Hutang sudah dipotong dalam hitungan di atas, tapi pastikan benar-benar ' +
-          'dibayarkan lebih dulu sebelum harta dipindahtangankan. Selama hutang belum lunas, ' +
-          'tanggungan almarhum belum selesai.',
+        judul: 'Lunasi hutang sebelum membagi',
+        teks: 'Hutang sudah dipotong dari hitungan di atas. Pastikan benar-benar dibayar ' +
+          'sebelum harta dipindahkan. Selama hutang belum lunas, tanggungan almarhum belum ' +
+          'selesai.',
         poin: [
-          { teks: 'Bayar dari harta peninggalan, bukan dari kantong pribadi ahli waris.' },
-          { teks: 'Minta bukti lunas tertulis dari setiap pihak pemberi hutang.' },
-          { teks: 'Kalau ada hutang yang baru ketahuan belakangan, perhitungan ini harus ' +
-            'diulang dari awal.' }
+          { teks: 'Bayar dari harta peninggalan, bukan dari uang pribadi ahli waris.' },
+          { teks: 'Minta bukti lunas tertulis dari pemberi hutang.' },
+          { teks: 'Jika ada hutang baru ketahuan, hitung ulang dari awal.' }
         ]
       });
     }
@@ -136,13 +134,13 @@
         id: 'hutang_kurang',
         tingkat: 'wajib',
         judul: 'Hutang lebih besar dari harta',
-        teks: 'Tidak ada warisan yang bisa dibagi. Ahli waris tidak wajib menomboki dari harta ' +
-          'pribadi, tapi sangat dianjurkan membantu melunasi agar almarhum terbebas dari ' +
-          'tanggungannya.',
+        teks: 'Tidak ada warisan yang bisa dibagi. Ahli waris tidak wajib menutup dari ' +
+          'uang pribadi. Tapi sangat dianjurkan membantu melunasi agar almarhum terbebas ' +
+          'dari tanggungan.',
         poin: [
-          { teks: 'Bicarakan baik-baik dengan pihak pemberi hutang. Banyak yang bersedia ' +
-            'membebaskan sisanya setelah tahu keadaannya.' },
-          { teks: 'Kalau ada asuransi jiwa, cek apakah menanggung pelunasan hutang.' }
+          { teks: 'Bicarakan baik-baik dengan pemberi hutang. Banyak yang mau membebaskan ' +
+            'sisanya.' },
+          { teks: 'Jika ada asuransi jiwa, cek apakah menanggung pelunasan hutang.' }
         ]
       });
     }
@@ -153,12 +151,11 @@
         id: 'wasiat',
         tingkat: 'penting',
         judul: 'Laksanakan wasiat sebelum pembagian',
-        teks: 'Wasiat diserahkan kepada penerimanya lebih dulu, setelah hutang lunas.',
+        teks: 'Serahkan wasiat ke penerimanya lebih dulu, setelah hutang lunas.',
         poin: [
-          { teks: 'Maksimal 1/3 dari harta setelah hutang dilunasi. Kelebihannya hanya sah ' +
-            'kalau seluruh ahli waris merelakan secara tertulis.' },
-          { teks: 'Tidak boleh ditujukan kepada orang yang sudah menjadi ahli waris — kecuali ' +
-            'seluruh ahli waris lain menyetujui.' },
+          { teks: 'Maksimal 1/3 dari harta setelah hutang lunas. Kelebihannya sah hanya ' +
+            'jika semua ahli waris rela secara tertulis.' },
+          { teks: 'Tidak boleh untuk ahli waris, kecuali semua ahli waris lain setuju.' },
           { teks: 'Serahkan dengan tanda terima tertulis.' }
         ]
       });
@@ -174,16 +171,16 @@
         id: 'aset_utuh',
         tingkat: 'penting',
         judul: 'Putuskan cara membagi ' + nama,
-        teks: 'Angka di atas adalah nilai, bukan potongan fisik. Rumah dan tanah tidak bisa ' +
-          'dibelah sesuai pecahan. Pilih satu jalan, lalu tuliskan kesepakatannya.',
+        teks: 'Angka di atas adalah nilai, bukan potongan fisik. Rumah dan tanah tidak ' +
+          'bisa dibelah. Pilih satu cara, lalu tulis kesepakatannya.',
         poin: [
-          { teks: 'Dijual, lalu uangnya dibagi sesuai bagian masing-masing. Paling bersih dan ' +
-            'paling sedikit menimbulkan perselisihan di kemudian hari.' },
-          { teks: 'Satu ahli waris mengambil asetnya dan membayar tunai ke yang lain sebesar ' +
-            'bagian mereka. Pakai jasa penilai (appraisal) supaya harganya disepakati bersama.' },
-          { teks: 'Dimiliki bersama, dengan kesepakatan tertulis soal siapa yang menempati, ' +
-            'bagaimana biaya perawatan dan pajaknya dibagi, dan apa yang terjadi kalau salah ' +
-            'satu ingin menjual bagiannya.' }
+          { teks: 'Dijual, lalu uangnya dibagi sesuai bagian. Paling bersih dan paling ' +
+            'kecil risiko sengketa.' },
+          { teks: 'Satu ahli waris mengambil aset dan membayar tunai bagian yang lain. ' +
+            'Pakai penilai (appraisal) agar harga disepakati bersama.' },
+          { teks: 'Dimiliki bersama, dengan kesepakatan tertulis: siapa yang menempati, ' +
+            'bagaimana biaya perawatan dan pajak dibagi, dan apa yang terjadi jika ada ' +
+            'yang ingin menjual bagiannya.' }
         ],
         tautan: [T.bpn]
       });
@@ -194,18 +191,18 @@
       id: 'kesepakatan',
       tingkat: 'penting',
       judul: 'Tuangkan hasilnya dalam akta pembagian warisan',
-      teks: 'Setelah seluruh ahli waris memahami dan menyetujui angkanya, buat akta di hadapan ' +
-        'notaris atau PPAT, ditandatangani semua pihak. Inilah yang dibutuhkan untuk balik ' +
-        'nama dan mencegah perkara terbuka lagi bertahun-tahun kemudian.',
+      teks: 'Setelah semua ahli waris paham dan setuju, buat akta di depan notaris atau ' +
+        'PPAT. Semua pihak menandatangani. Akta ini diperlukan untuk balik nama dan ' +
+        'mencegah sengketa bertahun-tahun kemudian.',
       poin: [
         { teks: 'Bawa: akta kematian, KK, surat keterangan ahli waris, KTP semua ahli waris, ' +
           'dan bukti kepemilikan aset.' },
         { teks: 'Semua ahli waris hadir dan menandatangani. Yang tidak bisa hadir membuat ' +
           'surat kuasa bermeterai.' },
-        { teks: 'Ahli waris yang masih di bawah umur diwakili wali, dan untuk aset besar ' +
-          'sebaiknya lewat penetapan pengadilan.' },
-        { teks: 'Biaya notaris umumnya dihitung dari nilai harta — tanyakan di depan, dan ' +
-          'bandingkan beberapa notaris.' }
+        { teks: 'Ahli waris di bawah umur diwakili wali. Untuk aset besar, sebaiknya lewat ' +
+          'penetapan pengadilan.' },
+        { teks: 'Biaya notaris biasanya dihitung dari nilai harta. Tanyakan di depan. ' +
+          'Bandingkan beberapa notaris.' }
       ],
       tautan: [T.notaris]
     });
@@ -215,17 +212,17 @@
       id: 'balik_nama',
       tingkat: 'penting',
       judul: 'Balik nama aset ke ahli waris',
-      teks: 'Selama masih atas nama almarhum, aset tidak bisa dijual atau dijaminkan, dan ' +
-        'urusannya makin sulit setiap kali ada ahli waris yang ikut wafat.',
+      teks: 'Selama masih atas nama almarhum, aset tidak bisa dijual atau dijaminkan. ' +
+        'Urusan makin sulit jika ada ahli waris yang ikut wafat.',
       poin: [
-        { teks: 'Tanah dan rumah: ajukan peralihan hak karena pewarisan ke Kantor Pertanahan ' +
-          '(BPN) setempat. Ada batas waktu 6 bulan sejak tanggal wafat untuk bebas dari ' +
-          'sebagian biaya — cek ketentuan terbarunya.' },
+        { teks: 'Tanah dan rumah: ajukan peralihan hak karena pewarisan ke Kantor ' +
+          'Pertanahan (BPN). Ada batas 6 bulan sejak wafat untuk bebas sebagian biaya. Cek ' +
+          'ketentuan terbaru.' },
         { teks: 'Rekening bank: bawa akta kematian, surat keterangan ahli waris, dan KTP ' +
-          'seluruh ahli waris ke bank tempat rekening dibuka.' },
+          'semua ahli waris ke bank.' },
         { teks: 'Kendaraan: balik nama BPKB/STNK di Samsat.' },
-        { teks: 'Warisan bukan objek pajak penghasilan, tapi peralihan hak atas tanah tetap ' +
-          'punya komponen biaya sendiri. Tanyakan ke BPN atau notaris.' }
+        { teks: 'Warisan bukan objek pajak penghasilan. Tapi peralihan hak atas tanah ' +
+          'punya biaya sendiri. Tanyakan ke BPN atau notaris.' }
       ],
       tautan: [T.bpn]
     });
@@ -234,16 +231,16 @@
     out.push({
       id: 'tanazul',
       tingkat: 'saran',
-      judul: 'Boleh berdamai, asalkan setelah tahu haknya',
-      teks: 'Ahli waris yang sudah dewasa dan sadar boleh merelakan sebagian atau seluruh ' +
-        'bagiannya untuk yang lain — misalnya untuk ibu yang sudah sepuh atau saudara yang ' +
-        'sedang kesulitan. Ini sah dan sering menjadi jalan terbaik.',
+      judul: 'Boleh berdamai, setelah tahu haknya',
+      teks: 'Ahli waris dewasa boleh merelakan sebagian atau seluruh bagiannya untuk yang ' +
+        'lain, misalnya untuk ibu yang sudah sepuh atau saudara yang kesulitan. Ini sah ' +
+        'dan sering jadi jalan terbaik.',
       poin: [
-        { teks: 'Syaratnya satu: kerelaan diberikan SETELAH ia tahu persis berapa haknya, ' +
-          'bukan sebelumnya. Hitungan di halaman ini justru untuk itu.' },
-        { teks: 'Tuangkan dalam akta perdamaian di notaris, jangan cukup lisan.' },
-        { teks: 'Secara hukum ini adalah hibah dari ahli waris tersebut, bukan pengubahan ' +
-          'bagian waris — jadi tetap catat angka aslinya di akta.' }
+        { teks: 'Syaratnya: rela SETELAH tahu persis berapa haknya. Hitungan di halaman ' +
+          'ini untuk itu.' },
+        { teks: 'Tuangkan dalam akta perdamaian di notaris. Jangan cukup lisan.' },
+        { teks: 'Secara hukum ini hibah dari ahli waris itu, bukan perubahan bagian waris. ' +
+          'Catat angka aslinya di akta.' }
       ]
     });
 
@@ -264,17 +261,17 @@
         id: 'pengadilan',
         tingkat: 'penting',
         judul: 'Bawa perkara ini ke Pengadilan Agama',
-        teks: 'Karena ' + alasanPA.join(', ') + '. Putusan pengadilan mengikat, sehingga ' +
-          'perkaranya benar-benar selesai dan tidak bisa diungkit lagi.',
+        teks: 'Karena ' + alasanPA.join(', ') + '. Putusan pengadilan mengikat, jadi ' +
+          'perkara selesai dan tidak bisa diungkit lagi.',
         poin: [
-          { teks: 'Kalau semua ahli waris sepakat dan hanya butuh kepastian: ajukan ' +
+          { teks: 'Jika semua ahli waris sepakat dan hanya butuh kepastian: ajukan ' +
             'Permohonan Penetapan Ahli Waris (voluntair). Prosesnya relatif singkat.' },
-          { teks: 'Kalau ada yang berselisih: ajukan Gugatan Waris (contentius).' },
-          { teks: 'Daftarkan di Pengadilan Agama tempat almarhum terakhir berdomisili. ' +
-            'Bisa juga mendaftar online lewat e-Court.' },
-          { teks: 'Tidak mampu membayar biaya perkara? Ajukan pembebasan biaya (prodeo), dan ' +
-            'manfaatkan Posbakum — pos bantuan hukum gratis yang ada di gedung pengadilan.' },
-          { teks: 'Bawa hasil perhitungan ini sebagai bahan awal, bukan sebagai keputusan akhir.' }
+          { teks: 'Jika ada yang berselisih: ajukan Gugatan Waris (contentius).' },
+          { teks: 'Daftar di Pengadilan Agama tempat almarhum terakhir tinggal. Bisa juga ' +
+            'online lewat e-Court.' },
+          { teks: 'Tidak mampu membayar biaya perkara? Ajukan pembebasan biaya (prodeo). ' +
+            'Manfaatkan Posbakum, pos bantuan hukum gratis di gedung pengadilan.' },
+          { teks: 'Bawa hasil ini sebagai bahan awal, bukan keputusan akhir.' }
         ],
         tautan: [T.badilag, T.ecourt, T.putusan]
       });
@@ -282,15 +279,15 @@
       out.push({
         id: 'konsultasi',
         tingkat: 'saran',
-        judul: 'Konsultasikan sekali ke ustadz atau Pengadilan Agama',
-        teks: 'Hitungan ini mengikuti aturan baku, tapi kondisi tiap keluarga bisa punya ' +
-          'detail yang tidak tertangkap oleh form sederhana.',
+        judul: 'Tanyakan sekali ke ustadz atau Pengadilan Agama',
+        teks: 'Hitungan ini mengikuti aturan baku. Tapi tiap keluarga punya detail yang ' +
+          'tidak tertangkap form sederhana.',
         poin: [
-          { teks: 'Hal yang sering luput: hibah yang sudah diberikan semasa hidup, status ' +
-            'harta bawaan sebelum menikah, dan ahli waris yang belum diketahui keberadaannya.' },
-          { teks: 'Banyak Pengadilan Agama menyediakan layanan konsultasi gratis lewat Posbakum.' },
-          { teks: 'Kalau semua sudah jelas dan sepakat, kamu bisa langsung ke notaris tanpa ' +
-            'perlu ke pengadilan.' }
+          { teks: 'Yang sering terlewat: hibah semasa hidup, status harta bawaan sebelum ' +
+            'menikah, dan ahli waris yang belum diketahui.' },
+          { teks: 'Banyak Pengadilan Agama menyediakan konsultasi gratis lewat Posbakum.' },
+          { teks: 'Jika semua sudah jelas dan sepakat, kamu bisa langsung ke notaris tanpa ' +
+            'ke pengadilan.' }
         ],
         tautan: [T.badilag]
       });
@@ -301,16 +298,10 @@
     // pemilik hartanya lebih dulu; warisan baru berjalan atas bagian pewaris.
     // Karena itu langkahnya selalu disertai penegasan dan sumber hukumnya.
     var CATATAN_HARTA_BERSAMA =
-      'Perlu ditegaskan: pemisahan harta bersama BUKAN aturan faraid dan tidak ' +
-      'berasal dari Al-Qur\'an maupun hadits waris. Kitab faraid klasik tidak ' +
-      'mengenal istilah ini — harta suami tetap milik suami, harta istri tetap ' +
-      'milik istri. Yang berlaku di Indonesia adalah penetapan KEPEMILIKAN lebih ' +
-      'dulu menurut hukum negara, baru sisanya dibagi menurut syariat. Dasar ' +
-      'fiqihnya disandarkan pada syirkah (perkongsian) dan \'urf, dengan sandaran ' +
-      'QS An-Nisa ayat 32. Angka 50:50 adalah patokan umum, bukan harga mati: ' +
-      'Pengadilan Agama dapat memutus proporsi lain bila kontribusi kedua pihak ' +
-      'terbukti timpang. Untuk kasus nyata, tanyakan ke ustadz dan ke Pengadilan ' +
-      'Agama — jangan bersandar pada halaman ini saja.';
+      'Pemisahan harta bersama bukan aturan faraid dan bukan dari Al-Qur\'an atau hadits ' +
+      'waris. Ini hukum negara: KEPEMILIKAN ditetapkan lebih dulu, sisanya dibagi menurut ' +
+      'syariat. Angka 50:50 adalah patokan umum. Pengadilan Agama dapat memutus proporsi ' +
+      'lain jika kontribusi kedua pihak timpang. Tanyakan ke ustadz dan Pengadilan Agama.';
 
     var SUMBER_HARTA_BERSAMA = [
       { teks: '<strong>UU Perkawinan No. 1/1974 Pasal 35 ayat (1):</strong> harta yang ' +
@@ -320,8 +311,8 @@
       { teks: '<strong>KHI Pasal 96 ayat (1):</strong> "Apabila terjadi cerai mati, maka ' +
         'separoh harta bersama menjadi hak pasangan yang hidup lebih lama."' },
       { teks: '<strong>UU No. 3/2006 Pasal 49:</strong> perkara perkawinan dan waris bagi ' +
-        'orang beragama Islam menjadi kewenangan Pengadilan Agama — inilah yang membuat ' +
-        'aturan di atas relevan bagi keluarga muslim.' }
+        'orang beragama Islam menjadi kewenangan Pengadilan Agama. Karena itu aturan di ' +
+        'atas relevan bagi keluarga muslim.' }
     ];
 
     if (adaPasangan && !harta.hartaBersama) {
@@ -329,17 +320,17 @@
         id: 'cek_harta_bersama',
         tingkat: 'penting',
         hukumIndonesia: true,
-        judul: 'Pastikan dulu status harta bersamanya',
-        teks: 'Kamu tidak menandai harta ini sebagai harta bersama, jadi seluruhnya dihitung ' +
-          'sebagai milik almarhum. Ini perlu dicek ulang karena pengaruhnya besar. ' +
+        judul: 'Pastikan status harta bersama',
+        teks: 'Kamu tidak menandai harta ini sebagai harta bersama, jadi seluruhnya ' +
+          'dihitung milik almarhum. Cek ulang, karena pengaruhnya besar. ' +
           CATATAN_HARTA_BERSAMA,
         poin: [
-          { teks: 'Harta yang diperoleh selama pernikahan umumnya berstatus harta bersama. ' +
-            'Separuhnya milik pasangan yang masih hidup — bukan warisan.' },
+          { teks: 'Harta yang diperoleh selama menikah umumnya harta bersama. Separuhnya ' +
+            'milik pasangan yang masih hidup, bukan warisan.' },
           { teks: 'Harta bawaan sebelum menikah, warisan, dan hadiah pribadi tetap milik ' +
             'masing-masing.' },
-          { teks: 'Kalau ternyata harta bersama, kembali ke form dan aktifkan pilihan itu — ' +
-            'hasilnya akan berubah cukup jauh.' }
+          { teks: 'Jika ternyata harta bersama, kembali ke form dan aktifkan pilihan itu. ' +
+            'Hasilnya akan berubah cukup jauh.' }
         ].concat(SUMBER_HARTA_BERSAMA),
         tautan: tautanHukum('uuKawin35', 'khi', 'peradilanAgama').concat([T.badilag])
       });
@@ -350,20 +341,20 @@
         id: 'pisah_harta_bersama',
         tingkat: 'wajib',
         hukumIndonesia: true,
-        judul: 'Pisahkan dulu harta bersama, sebelum warisan dibagi',
-        teks: 'Separuh harta bersama sudah dikeluarkan dari hitungan karena ia milik pasangan ' +
-          'yang masih hidup sejak semula, bukan warisan. Pemisahan itu perlu disepakati ' +
-          'tertulis dan sebaiknya dikuatkan lewat penetapan pengadilan supaya tidak jadi ' +
+        judul: 'Pisahkan harta bersama sebelum warisan dibagi',
+        teks: 'Separuh harta bersama sudah dikeluarkan dari hitungan, karena milik ' +
+          'pasangan yang masih hidup sejak awal, bukan warisan. Sepakati pemisahan itu ' +
+          'secara tertulis. Sebaiknya kuatkan lewat penetapan pengadilan agar tidak jadi ' +
           'sengketa. ' + CATATAN_HARTA_BERSAMA,
         poin: [
-          { teks: 'Daftarkan mana yang harta bersama dan mana harta bawaan. Cek tanggal ' +
-            'perolehannya lewat sertifikat, BPKB, atau rekening — bukan dari ingatan.' },
-          { teks: 'Kalau ada perjanjian perkawinan (pranikah/pascanikah), isinya yang berlaku, ' +
-            'bukan patokan 50:50.' },
-          { teks: 'Tuangkan hasil pemisahan dalam kesepakatan tertulis yang ditandatangani ' +
-            'seluruh ahli waris, di hadapan notaris kalau nilainya besar.' },
-          { teks: 'Untuk aset bersertifikat, pemisahan ini harus tercermin di dokumen ' +
-            'kepemilikannya — kalau tidak, masalahnya muncul saat balik nama.' }
+          { teks: 'Catat mana harta bersama dan mana harta bawaan. Cek tanggal perolehan ' +
+            'lewat sertifikat, BPKB, atau rekening, bukan dari ingatan.' },
+          { teks: 'Jika ada perjanjian perkawinan (pranikah atau pascanikah), isinya yang ' +
+            'berlaku, bukan patokan 50:50.' },
+          { teks: 'Tulis hasil pemisahan dalam kesepakatan yang ditandatangani semua ahli ' +
+            'waris. Di depan notaris jika nilainya besar.' },
+          { teks: 'Untuk aset bersertifikat, pemisahan harus tercermin di dokumen ' +
+            'kepemilikan. Jika tidak, masalah muncul saat balik nama.' }
         ].concat(SUMBER_HARTA_BERSAMA),
         tautan: tautanHukum('uuKawin35', 'khi', 'peradilanAgama')
           .concat([T.badilag, T.notaris])
@@ -376,11 +367,11 @@
         id: 'sisa',
         tingkat: 'saran',
         judul: 'Putuskan ke mana sisa harta disalurkan',
-        teks: 'Ada bagian harta yang tidak ada ahli warisnya. Secara fiqh klasik diserahkan ke ' +
-          'baitul mal; di Indonesia ada beberapa jalan yang lazim ditempuh.',
+        teks: 'Ada bagian harta yang tidak punya ahli waris. Menurut fiqh klasik, ' +
+          'diserahkan ke baitul mal. Di Indonesia ada beberapa jalan yang lazim.',
         poin: [
-          { teks: 'Pengadilan Agama umumnya menyerahkannya kepada pasangan yang masih hidup.' },
-          { teks: 'Alternatif lain: disalurkan sebagai wakaf atau ke lembaga amil zakat resmi.' }
+          { teks: 'Pengadilan Agama umumnya menyerahkannya ke pasangan yang masih hidup.' },
+          { teks: 'Alternatif: disalurkan sebagai wakaf atau ke lembaga amil zakat resmi.' }
         ],
         tautan: [T.baznas]
       });

@@ -54,13 +54,13 @@
         suami: 'Suami mendapat 1/2 karena pewaris tidak meninggalkan anak.',
         istri: 'Istri mendapat 1/4 karena pewaris tidak meninggalkan anak.',
         ibu: 'Ibu mendapat 1/3 dari SISA setelah bagian ' + H.label(pasangan).toLowerCase() +
-             ' diambil — bukan 1/3 dari seluruh harta.',
+             ' diambil, bukan 1/3 dari seluruh harta.',
         ayah: 'Ayah mendapat sisanya, yaitu dua kali bagian ibu.'
       },
-      penjelasan: 'Kalau ibu diberi 1/3 dari seluruh harta, bagiannya justru lebih besar ' +
-        'daripada ayah. Padahal dalam sistem waris Islam, ketika kedudukan sama, ' +
-        'laki-laki mendapat dua kali bagian perempuan. Umar bin Khattab memutuskan ibu ' +
-        'mendapat 1/3 dari sisa, dan putusan ini diikuti jumhur ulama termasuk Imam Syafi\'i.',
+      penjelasan: 'Jika ibu mendapat 1/3 dari seluruh harta, bagiannya lebih besar dari ayah. ' +
+        'Padahal jika kedudukan sama, laki-laki mendapat dua kali perempuan. ' +
+        'Umar bin Khattab memutuskan ibu mendapat 1/3 dari sisa. ' +
+        'Jumhur ulama, termasuk Imam Syafi\'i, mengikutinya.',
       // Bagian pasangan di sini berasal dari QS An-Nisa 12, bukan ayat 11 —
       // ayat 11 tidak menyinggung suami/istri sama sekali. Yang khas pada
       // Umariyyatain adalah bagian IBU: 1/3 dari sisa, bukan 1/3 harta.
@@ -116,14 +116,14 @@
       nama: 'Kasus Al-Akdariyyah',
       bagian: bagian,
       alasan: alasan,
-      penjelasan: 'Ini kombinasi paling rumit dalam faraid. Kalau aturan biasa dipakai, ' +
-        'saudara perempuan tidak kebagian sama sekali. Zaid bin Tsabit memutuskan: ' +
-        'saudara perempuan tetap diberi 1/2, penyebutnya dinaikkan dari 6 ke 9 (\'aul), ' +
-        'lalu bagian kakek dan saudara perempuan digabung dan dibagi 2:1 — sehingga ' +
-        'penyebut akhirnya menjadi 27. Pendapat ini diikuti mazhab Syafi\'i.',
+      penjelasan: 'Ini kasus paling rumit dalam faraid. Dengan aturan biasa, saudara perempuan ' +
+        'tidak dapat bagian. Zaid bin Tsabit memutuskan: saudara perempuan tetap dapat 1/2, ' +
+        'penyebut naik dari 6 ke 9 (\'aul). Lalu bagian kakek dan saudara perempuan ' +
+        'digabung dan dibagi 2:1, sehingga penyebut akhir menjadi 27. ' +
+        'Mazhab Syafi\'i mengikutinya.',
       dalil: 'atsar-zaid',
-      khilafiyah: 'Ulama berbeda pendapat dalam kasus ini. Angka di atas mengikuti ' +
-        'putusan Zaid bin Tsabit yang dipakai mazhab Syafi\'i dan Maliki.'
+      khilafiyah: 'Ulama berbeda pendapat. Angka di atas mengikuti Zaid bin Tsabit, ' +
+        'yang dipakai mazhab Syafi\'i dan Maliki.'
     };
   }
 
@@ -181,14 +181,13 @@
       nama: 'Kasus Musyarakah',
       bagian: bagian,
       alasan: alasan,
-      penjelasan: 'Setelah suami (1/2), ibu (1/6), dan saudara seibu (1/3), harta sudah ' +
-        'habis persis. Saudara kandung yang seharusnya menerima sisa jadi tidak kebagian ' +
-        'apa-apa. Umar bin Khattab memutuskan mereka ikut berbagi 1/3 bersama saudara ' +
-        'seibu, dengan alasan mereka sama-sama satu ibu dengan pewaris. Ini pendapat ' +
-        'mazhab Syafi\'i dan Maliki.',
+      penjelasan: 'Setelah suami (1/2), ibu (1/6), dan saudara seibu (1/3), harta habis. ' +
+        'Saudara kandung yang seharusnya menerima sisa tidak dapat apa-apa. ' +
+        'Umar bin Khattab memutuskan mereka ikut berbagi 1/3 bersama saudara seibu, ' +
+        'karena sama-sama satu ibu dengan pewaris. Ini pendapat mazhab Syafi\'i dan Maliki.',
       dalil: 'atsar-umar-musyarakah',
-      khilafiyah: 'Mazhab Hanafi dan Hanbali berpendapat lain: saudara kandung tidak ' +
-        'kebagian sama sekali dalam kasus ini. Angka di atas mengikuti mazhab Syafi\'i.'
+      khilafiyah: 'Mazhab Hanafi dan Hanbali berbeda: saudara kandung tidak dapat bagian. ' +
+        'Angka di atas mengikuti mazhab Syafi\'i.'
     };
   }
 
@@ -251,24 +250,20 @@
       nama: 'Kakek bersama saudara',
       bagian: bagian,
       metode: terbaik.nama,
-      alasanKakek: 'Kakek mengambil pilihan yang paling menguntungkan baginya, yaitu ' +
-        terbaik.teks + '.',
+      alasanKakek: 'Kakek memilih opsi yang paling menguntungkan: ' + terbaik.teks + '.',
       alasanSaudara: 'Saudara berbagi sisa setelah bagian kakek, dengan perbandingan ' +
         '2 : 1 antara laki-laki dan perempuan.',
       penjelasan: 'Dalam mazhab Syafi\'i, kakek tidak menggugurkan saudara kandung maupun ' +
-        'saudara seayah — keduanya sama-sama terhubung ke pewaris lewat ayah. Kakek ' +
-        'diberi hak memilih yang terbaik dari tiga kemungkinan: berbagi seperti saudara ' +
-        '(muqasamah), 1/3 dari sisa, atau 1/6 dari seluruh harta. Di sini yang terbaik ' +
-        'adalah ' + terbaik.teks + '.',
+        'seayah. Keduanya terhubung ke pewaris lewat ayah. Kakek boleh memilih yang ' +
+        'terbaik dari tiga opsi: berbagi seperti saudara (muqasamah), 1/3 dari sisa, ' +
+        'atau 1/6 dari seluruh harta. Di sini yang terbaik adalah ' + terbaik.teks + '.',
       dalil: 'atsar-zaid',
-      khilafiyah: 'Mazhab Hanafi berpendapat kakek menggugurkan seluruh saudara, sehingga ' +
-        'saudara tidak kebagian apa pun. Angka di atas mengikuti Zaid bin Tsabit yang ' +
-        'dipakai mazhab Syafi\'i.',
+      khilafiyah: 'Mazhab Hanafi: kakek menggugurkan semua saudara, jadi saudara tidak dapat ' +
+        'apa pun. Angka di atas mengikuti Zaid bin Tsabit (mazhab Syafi\'i).',
       perluKonsultasi: adaKandung && adaSebapak
-        ? 'Di sini kakek berkumpul dengan saudara kandung DAN saudara seayah sekaligus. ' +
-          'Dalam kitab faraid ada aturan tambahan (mu\'addah) untuk kombinasi ini yang ' +
-          'belum diterapkan kalkulator ini. Mohon konsultasikan hasilnya ke ustadz atau ' +
-          'Pengadilan Agama sebelum dipakai.'
+        ? 'Di sini kakek bersama saudara kandung DAN saudara seayah. Kitab faraid punya ' +
+          'aturan tambahan (mu\'addah) untuk kasus ini. Kalkulator ini belum ' +
+          'menerapkannya. Tanyakan hasilnya ke ustadz atau Pengadilan Agama sebelum dipakai.'
         : null
     };
   }

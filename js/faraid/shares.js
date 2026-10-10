@@ -80,7 +80,7 @@
       } else if (jmlSaudaraAsli >= 2) {
         set('ibu', F(1, 6),
           'Ibu mendapat 1/6 karena pewaris punya dua saudara atau lebih. ' +
-          'Ini berlaku walaupun saudara-saudara itu sendiri terhalang oleh ayah.',
+          'Berlaku juga jika saudara itu terhalang oleh ayah.',
           'qs4-11', 'ibuAdaSaudara');
       } else {
         set('ibu', F(1, 3), 'Ibu mendapat 1/3 karena pewaris tidak punya anak, cucu, maupun dua saudara.',
@@ -142,8 +142,8 @@
     if (ada('cucu_pr') && !ada('cucu_lk')) {
       if (n('anak_pr') === 1) {
         set('cucu_pr', F(1, 6),
-          'Cucu perempuan mendapat 1/6 sebagai pelengkap: satu anak perempuan sudah ' +
-          'mengambil 1/2, sisa 1/6 melengkapinya menjadi 2/3.', 'hadits-cucu-pr');
+          'Cucu perempuan mendapat 1/6 sebagai pelengkap. Satu anak perempuan mengambil 1/2. ' +
+          'Sisa 1/6 melengkapinya menjadi 2/3.', 'hadits-cucu-pr');
       } else if (!ada('anak_pr')) {
         if (n('cucu_pr') === 1) {
           set('cucu_pr', F(1, 2), 'Satu cucu perempuan menempati posisi anak perempuan dan mendapat 1/2.',
@@ -161,7 +161,7 @@
       var totalSeibu = seibuTotal === 1 ? F(1, 6) : F(1, 3);
       var teksSeibu = seibuTotal === 1
         ? 'Satu saudara seibu mendapat 1/6.'
-        : seibuTotal + ' saudara seibu berbagi 1/3 sama rata — laki-laki dan perempuan sama besar.';
+        : seibuTotal + ' saudara seibu berbagi 1/3 sama rata, laki-laki dan perempuan sama besar.';
       // dibagi rata per kepala tanpa membedakan laki-laki/perempuan
       if (ada('sdr_lk_seibu')) {
         set('sdr_lk_seibu', f.mul(totalSeibu, F(n('sdr_lk_seibu'), seibuTotal)), teksSeibu,
@@ -193,9 +193,9 @@
         // persis, hanya tingkatannya yang berbeda. Menunjuk ayat 176 di sini
         // menyesatkan, karena pembaca tidak akan menemukan angka 1/6 di sana.
         set('sdr_pr_sebapak', F(1, 6),
-          'Saudara perempuan seayah mendapat 1/6 sebagai pelengkap bagian 2/3, ' +
-          'karena saudara perempuan kandung hanya satu orang. Angka ini diqiyaskan ' +
-          'pada putusan tentang cucu perempuan yang melengkapi bagian anak perempuan.',
+          'Saudara perempuan seayah mendapat 1/6 sebagai pelengkap 2/3, ' +
+          'karena saudara perempuan kandung hanya satu. Angkanya diqiyaskan pada ' +
+          'putusan cucu perempuan yang melengkapi anak perempuan.',
           'hadits-cucu-pr');
         dalilLain['sdr_pr_sebapak'] = ['qs4-176'];
       } else if (!ada('sdr_pr_kandung')) {

@@ -38,8 +38,7 @@
       terjemah: 'Laki-laki punya bagian dari harta peninggalan orang tua dan kerabatnya, ' +
         'dan perempuan juga punya bagian dari harta peninggalan orang tua dan kerabatnya — ' +
         'baik sedikit maupun banyak. Itu bagian yang sudah ditetapkan.',
-      ringkas: 'Perempuan berhak mewarisi. Ayat ini menghapus kebiasaan jahiliah yang hanya ' +
-        'memberi warisan kepada laki-laki dewasa.'
+      ringkas: 'Perempuan berhak mewarisi. Ayat ini menghapus kebiasaan jahiliah yang hanya mewariskan kepada laki-laki dewasa.'
     },
 
     /*
@@ -100,8 +99,7 @@
         ibuAdaSaudara: { ket: 'Ibu ketika pewaris punya dua saudara atau lebih' },
         urutan: { ket: 'Wasiat dan hutang diselesaikan lebih dulu' }
       },
-      ringkas: 'Dasar bagian anak, ayah, dan ibu. Ayat ini juga menetapkan bahwa pembagian ' +
-        'dilakukan setelah wasiat dilaksanakan dan hutang dilunasi.'
+      ringkas: 'Dasar bagian anak, ayah, dan ibu. Warisan dibagi setelah wasiat dan hutang diselesaikan.'
     },
 
     'qs4-12': {
@@ -153,7 +151,7 @@
         seibuTunggal: { ket: 'Satu saudara seibu, dalam keadaan kalalah' },
         seibuBanyak: { ket: 'Dua saudara seibu atau lebih' }
       },
-      ringkas: 'Dasar bagian suami dan istri, serta bagian saudara seibu.'
+      ringkas: 'Dasar bagian suami, istri, dan saudara seibu.'
     },
 
     'qs4-176': {
@@ -192,9 +190,7 @@
         sdrPrBanyak: { ket: 'Dua saudara perempuan atau lebih' },
         saudaraCampur: { ket: 'Saudara laki-laki dan perempuan bersama-sama' }
       },
-      ringkas: 'Dasar bagian saudara kandung dan saudara seayah, dalam keadaan kalalah — ' +
-        'pewaris tidak punya anak maupun ayah. Kalimat menjelang penutupnya adalah dasar ' +
-        'pembagian 2 : 1 antara saudara laki-laki dan saudara perempuan.'
+      ringkas: 'Dasar bagian saudara kandung dan seayah saat kalalah, yaitu pewaris tanpa anak dan ayah. Juga dasar pembagian 2 : 1 antara saudara laki-laki dan perempuan.'
     },
 
     'qs4-13': {
@@ -204,8 +200,7 @@
       arab: 'تِلْكَ حُدُودُ اللَّهِ ۚ وَمَن يُطِعِ اللَّهَ وَرَسُولَهُ يُدْخِلْهُ جَنَّاتٍ تَجْرِي مِن تَحْتِهَا الْأَنْهَارُ',
       terjemah: 'Itulah batas-batas yang ditetapkan Allah. Siapa yang taat kepada Allah dan ' +
         'Rasul-Nya akan dimasukkan ke dalam surga yang mengalir sungai-sungai di bawahnya.',
-      ringkas: 'Penutup ayat-ayat waris: aturan ini bukan saran, tapi batas yang ditetapkan Allah. ' +
-        'Karena itu ia tidak boleh ditambah atau dikurangi.'
+      ringkas: 'Penutup ayat waris. Aturan ini batas dari Allah. Tidak boleh ditambah atau dikurangi.'
     },
 
     // ── Hadits ──────────────────────────────────────────────────────
@@ -218,8 +213,7 @@
       sumber: 'Dari Ibnu Abbas radhiyallahu anhuma. Muttafaq alaih (disepakati Bukhari dan Muslim).',
       tautan: { label: 'Baca di hadits.id — Bukhari 6732', url: 'https://www.hadits.id/hadits/bukhari/6732' },
       tautanLain: [{ label: 'Muslim 1615', url: 'https://www.hadits.id/hadits/muslim/1615' }],
-      ringkas: 'Dasar seluruh sistem ashabah: siapa yang menerima sisa harta setelah bagian ' +
-        'tetap dibayarkan, dan urutan kedekatannya.'
+      ringkas: 'Dasar sistem ashabah: penerima sisa harta setelah bagian tetap, dan urutan kedekatannya.'
     },
 
     'hadits-nenek': {
@@ -230,16 +224,13 @@
         'berkata bahwa ia tidak menemukan ketetapannya, lalu Al-Mughirah bin Syu\'bah bersaksi ' +
         'bahwa Nabi shallallahu alaihi wa sallam memberikan seperenam kepada nenek, dan ' +
         'kesaksian itu dikuatkan Muhammad bin Maslamah.',
-      sumber: 'Dari Qabishah bin Dzu\'aib. Jalur Tirmidzi dinilai sahih (Darussalam), ' +
-        'sedangkan jalur Abu Dawud dinilai dhaif oleh Al-Albani. Pemberlakuan bagian 1/6 ' +
-        'untuk nenek sendiri diamalkan keempat mazhab.',
+      sumber: 'Dari Qabishah bin Dzu\'aib. Jalur Tirmidzi dinilai sahih (Darussalam). Jalur Abu Dawud dinilai dhaif oleh Al-Albani. Keempat mazhab mengamalkan bagian 1/6 untuk nenek.',
       tautan: { label: 'Baca di hadits.id — Tirmidzi 2101', url: 'https://www.hadits.id/hadits/tirmidzi/2101' },
       tautanLain: [
         { label: 'Abu Dawud 2894', url: 'https://www.hadits.id/hadits/abudawud/2894' },
         { label: 'Ibnu Majah 2724', url: 'https://www.hadits.id/hadits/ibnmajah/2724' }
       ],
-      ringkas: 'Bagian nenek 1/6 tidak disebut dalam Al-Qur\'an, melainkan ditetapkan lewat ' +
-        'sunnah. Kalau ada dua nenek yang sama-sama berhak, 1/6 itu dibagi rata.'
+      ringkas: 'Bagian nenek 1/6 ditetapkan sunnah, bukan Al-Qur\'an. Jika dua nenek sama-sama berhak, 1/6 dibagi rata.'
     },
 
     'hadits-cucu-pr': {
@@ -248,11 +239,9 @@
       arab: 'لِلِابْنَةِ النِّصْفُ، وَلِابْنَةِ الِابْنِ السُّدُسُ تَكْمِلَةَ الثُّلُثَيْنِ، وَمَا بَقِيَ فَلِلْأُخْتِ',
       terjemah: 'Untuk anak perempuan setengah, untuk cucu perempuan dari anak laki-laki ' +
         'seperenam sebagai pelengkap dua pertiga, dan sisanya untuk saudara perempuan.',
-      sumber: 'Putusan Abdullah bin Mas\'ud radhiyallahu anhu, yang menyatakan bahwa beliau ' +
-        'memutuskan sesuai putusan Nabi shallallahu alaihi wa sallam. Sahih.',
+      sumber: 'Putusan Abdullah bin Mas\'ud radhiyallahu anhu. Ia menyatakan memutuskan sesuai putusan Nabi shallallahu alaihi wa sallam. Sahih.',
       tautan: { label: 'Baca di hadits.id — Bukhari 6736', url: 'https://www.hadits.id/hadits/bukhari/6736' },
-      ringkas: 'Dasar bagian 1/6 untuk cucu perempuan sebagai pelengkap ketika hanya ada satu ' +
-        'anak perempuan. Juga dasar saudara perempuan menjadi ashabah bersama anak perempuan.'
+      ringkas: 'Dasar bagian 1/6 cucu perempuan saat hanya ada satu anak perempuan. Juga dasar saudara perempuan menjadi ashabah bersama anak perempuan.'
     },
 
     'hadits-wasiat-sepertiga': {
@@ -265,8 +254,7 @@
       sumber: 'Dari Sa\'ad bin Abi Waqqash radhiyallahu anhu. Muttafaq alaih.',
       tautan: { label: 'Baca di hadits.id — Muslim 1628', url: 'https://www.hadits.id/hadits/muslim/1628' },
       tautanLain: [{ label: 'Bukhari 2742', url: 'https://www.hadits.id/hadits/bukhari/2742' }],
-      ringkas: 'Batas maksimal wasiat adalah 1/3 harta. Lebih dari itu hanya sah kalau seluruh ' +
-        'ahli waris merelakan.'
+      ringkas: 'Wasiat maksimal 1/3 harta. Lebih dari itu sah hanya jika semua ahli waris rela.'
     },
 
     'hadits-wasiat-ahli-waris': {
@@ -275,15 +263,13 @@
       arab: 'إِنَّ اللَّهَ قَدْ أَعْطَى كُلَّ ذِي حَقٍّ حَقَّهُ، فَلَا وَصِيَّةَ لِوَارِثٍ',
       terjemah: 'Sesungguhnya Allah telah memberikan hak kepada setiap yang berhak, maka tidak ' +
         'ada wasiat untuk ahli waris.',
-      sumber: 'Dari Abu Umamah al-Bahili radhiyallahu anhu, dari khutbah Nabi saat Haji Wada. ' +
-        'Dinilai hasan (Al-Albani dan Darussalam); Imam Tirmidzi sendiri menilainya hasan sahih.',
+      sumber: 'Dari Abu Umamah al-Bahili radhiyallahu anhu, dari khutbah Nabi saat Haji Wada. Dinilai hasan (Al-Albani dan Darussalam). Tirmidzi menilainya hasan sahih.',
       tautan: { label: 'Baca di hadits.id — Tirmidzi 2120', url: 'https://www.hadits.id/hadits/tirmidzi/2120' },
       tautanLain: [
         { label: 'Abu Dawud 2870', url: 'https://www.hadits.id/hadits/abudawud/2870' },
         { label: 'Ibnu Majah 2713', url: 'https://www.hadits.id/hadits/ibnmajah/2713' }
       ],
-      ringkas: 'Wasiat tidak boleh diberikan kepada orang yang sudah menjadi ahli waris — ' +
-        'bagiannya sudah diatur. Kecuali kalau seluruh ahli waris lain merelakan.'
+      ringkas: 'Ahli waris tidak boleh menerima wasiat, karena bagiannya sudah diatur. Boleh jika semua ahli waris lain rela.'
     },
 
     'hadits-beda-agama': {
@@ -294,8 +280,7 @@
       sumber: 'Dari Usamah bin Zaid radhiyallahu anhuma. Muttafaq alaih.',
       tautan: { label: 'Baca di hadits.id — Bukhari 6764', url: 'https://www.hadits.id/hadits/bukhari/6764' },
       tautanLain: [{ label: 'Muslim 1614', url: 'https://www.hadits.id/hadits/muslim/1614' }],
-      ringkas: 'Perbedaan agama menggugurkan hak waris — dari kedua arah. Tapi pemberian lewat ' +
-        'hibah semasa hidup atau wasiat (maksimal 1/3) tetap boleh.'
+      ringkas: 'Beda agama menggugurkan hak waris, dari kedua arah. Hibah semasa hidup atau wasiat (maksimal 1/3) tetap boleh.'
     },
 
     'hadits-pembunuh': {
@@ -303,13 +288,12 @@
       rujukan: 'HR Abu Dawud no. 4564 & Ibnu Majah no. 2735',
       arab: 'لَيْسَ لِلْقَاتِلِ شَىْءٌ ... وَلاَ يَرِثُ الْقَاتِلُ شَيْئًا',
       terjemah: 'Pembunuh tidak mendapat apa pun, dan pembunuh tidak mewarisi sedikit pun.',
-      sumber: 'Riwayat Abu Dawud dalam Kitab Diyat, dinilai hasan oleh Al-Albani. Ibnu Majah ' +
+      sumber: 'Riwayat Abu Dawud, Kitab Diyat. Dinilai hasan oleh Al-Albani. Ibnu Majah ' +
         'meriwayatkan dari Abu Hurairah dengan lafal "الْقَاتِلُ لَا يَرِثُ" (pembunuh tidak ' +
         'mewarisi), dinilai hasan oleh Darussalam.',
       tautan: { label: 'Baca di hadits.id — Abu Dawud 4564', url: 'https://www.hadits.id/hadits/abudawud/4564' },
       tautanLain: [{ label: 'Ibnu Majah 2735', url: 'https://www.hadits.id/hadits/ibnmajah/2735' }],
-      ringkas: 'Membunuh pewaris menggugurkan hak waris. Ini mencegah orang mempercepat kematian ' +
-        'demi harta.'
+      ringkas: 'Membunuh pewaris menggugurkan hak waris. Agar tidak ada yang mempercepat kematian demi harta.'
     },
 
     // ── Atsar sahabat & ijma ────────────────────────────────────────
@@ -320,10 +304,9 @@
         'memutuskan bahwa kakek tidak menggugurkan saudara kandung maupun saudara seayah, ' +
         'melainkan berbagi dengan mereka dan mengambil pilihan yang paling menguntungkan baginya.',
       sumber: 'Diriwayatkan dalam Al-Muwaththa\' Imam Malik dan As-Sunan Al-Kubra Al-Baihaqi. ' +
-        'Menjadi pegangan mazhab Syafi\'i dan Maliki.',
-      ringkas: 'Dasar aturan kakek bersama saudara, dan dasar penyelesaian kasus Al-Akdariyyah.',
-      khilafiyah: 'Abu Hanifah berpendapat sebaliknya: kakek menggugurkan seluruh saudara. ' +
-        'Kalkulator ini mengikuti Zaid bin Tsabit sesuai mazhab Syafi\'i.'
+        'Pegangan mazhab Syafi\'i dan Maliki.',
+      ringkas: 'Dasar aturan kakek bersama saudara, dan penyelesaian Al-Akdariyyah.',
+      khilafiyah: 'Abu Hanifah berpendapat sebaliknya: kakek menggugurkan semua saudara. Kalkulator ini mengikuti Zaid bin Tsabit (mazhab Syafi\'i).'
     },
 
     'atsar-umar-musyarakah': {
@@ -334,10 +317,9 @@
         'kandung ikut berbagi sepertiga bersama saudara seibu — karena mereka sama-sama satu ibu ' +
         'dengan pewaris.',
       sumber: 'Diriwayatkan dalam Al-Muwaththa\' Imam Malik dan As-Sunan Al-Kubra Al-Baihaqi. ' +
-        'Menjadi pegangan mazhab Syafi\'i dan Maliki.',
-      ringkas: 'Dasar penyelesaian kasus Musyarakah.',
-      khilafiyah: 'Mazhab Hanafi dan Hanbali berpendapat saudara kandung tidak kebagian sama ' +
-        'sekali dalam kasus ini.'
+        'Pegangan mazhab Syafi\'i dan Maliki.',
+      ringkas: 'Dasar penyelesaian Musyarakah.',
+      khilafiyah: 'Mazhab Hanafi dan Hanbali: saudara kandung tidak dapat bagian dalam kasus ini.'
     },
 
     'ijma-kakek': {
@@ -346,7 +328,7 @@
       terjemah: 'Ketika ayah sudah tidak ada, kakek dari pihak ayah menempati posisi ayah dalam ' +
         'pembagian warisan — dengan beberapa pengecualian, terutama saat ia berkumpul bersama ' +
         'saudara-saudara pewaris.',
-      sumber: 'Kesepakatan ulama mazhab yang empat, bersandar pada keumuman ayat waris.',
+      sumber: 'Kesepakatan ulama empat mazhab, berdasarkan keumuman ayat waris.',
       ringkas: 'Dasar bagian kakek 1/6 dan statusnya sebagai ashabah.'
     },
 
@@ -364,19 +346,13 @@
         'yang diperoleh sebagai hadiah atau warisan, tetap di bawah penguasaan masing-masing. ' +
         'Kompilasi Hukum Islam Pasal 96 ayat (1): "Apabila terjadi cerai mati, maka separoh ' +
         'harta bersama menjadi hak pasangan yang hidup lebih lama."',
-      sumber: 'Ini hukum positif Indonesia, bukan dalil faraid. Separuh harta bersama bukan ' +
-        'warisan — ia sudah menjadi milik pasangan sejak semula, jadi dikeluarkan lebih dulu ' +
-        'sebelum harta pewaris dibagi. Dasar fiqihnya disandarkan pada syirkah (perkongsian) ' +
-        'dan \'urf, dengan sandaran QS An-Nisa ayat 32: "Bagi laki-laki ada bagian dari apa ' +
-        'yang mereka usahakan, dan bagi perempuan ada bagian dari apa yang mereka usahakan." ' +
-        'Perlu dicatat: kitab faraid klasik tidak mengenal harta bersama, dan pembagian 50:50 ' +
-        'adalah patokan umum — Pengadilan Agama dapat memutus proporsi lain bila kontribusi ' +
-        'kedua pihak terbukti timpang.',
-      khilafiyah: 'Aturan negara ini dicantumkan karena ia memang berlaku bagi umat Islam: ' +
-        'UU No. 3/2006 Pasal 49 menetapkan bahwa perkara perkawinan, waris, wasiat, dan hibah ' +
-        'bagi <strong>orang-orang yang beragama Islam</strong> menjadi kewenangan Pengadilan ' +
-        'Agama, yang memutus dengan hukum Islam. Kalkulator ini tidak memakai hukum waris ' +
-        'perdata umum (KUHPerdata) maupun hukum adat sama sekali.',
+      sumber: 'Ini hukum positif Indonesia, bukan dalil faraid. Separuh harta bersama milik pasangan ' +
+        'sejak awal, jadi dikeluarkan sebelum warisan dibagi. Dasar fiqihnya syirkah (perkongsian) ' +
+        'dan \'urf, dengan sandaran QS An-Nisa ayat 32: "Bagi laki-laki ada bagian dari apa yang ' +
+        'mereka usahakan, dan bagi perempuan ada bagian dari apa yang mereka usahakan." Pembagian ' +
+        '50:50 adalah patokan umum. Pengadilan Agama dapat memutus proporsi lain jika kontribusi ' +
+        'kedua pihak timpang.',
+      khilafiyah: 'Aturan negara ini dicantumkan karena berlaku bagi umat Islam. UU No. 3/2006 Pasal 49 menetapkan perkara perkawinan, waris, wasiat, dan hibah bagi <strong>orang-orang yang beragama Islam</strong> menjadi kewenangan Pengadilan Agama, yang memutus dengan hukum Islam. Kalkulator ini tidak memakai hukum waris perdata (KUHPerdata) maupun hukum adat.',
       tautan: { label: 'UU 1/1974 Pasal 35', url: 'https://pasal.id/peraturan/uu/uu-no-1-tahun-1974#pasal-35' },
       tautanLain: [
         { label: 'UU 3/2006 Pasal 49 — kewenangan Pengadilan Agama',
@@ -385,8 +361,7 @@
           url: 'https://peraturan.bpk.go.id/Details/293351/inpres-no-1-tahun-1991' },
         { label: 'QS An-Nisa ayat 32', url: 'https://quran.com/4/32' }
       ],
-      ringkas: 'Dasar pemisahan separuh harta bersama sebelum warisan dibagi. Bukan dalil ' +
-        'faraid — dan bukan pula pengganti dalil.'
+      ringkas: 'Dasar pemisahan separuh harta bersama sebelum warisan dibagi. Bukan dalil faraid dan bukan pengganti dalil.'
     },
 
     'hadits-hutang': {
@@ -395,10 +370,9 @@
       arab: 'قَضَى بِالدَّيْنِ قَبْلَ الْوَصِيَّةِ',
       terjemah: 'Nabi shallallahu alaihi wa sallam memutuskan hutang dilunasi sebelum wasiat ' +
         'dilaksanakan, padahal kalian membaca wasiat disebut sebelum hutang.',
-      sumber: 'Dari Ali bin Abi Thalib radhiyallahu anhu. Dinilai hasan oleh Darussalam, dan ' +
-        'para ulama sepakat mengamalkan urutan ini.',
+      sumber: 'Dari Ali bin Abi Thalib radhiyallahu anhu. Dinilai hasan oleh Darussalam. Para ulama sepakat mengamalkan urutan ini.',
       tautan: { label: 'Baca di hadits.id — Tirmidzi 2122', url: 'https://www.hadits.id/hadits/tirmidzi/2122' },
-      ringkas: 'Urutan yang benar: biaya pengurusan jenazah, lalu hutang, lalu wasiat, baru warisan.'
+      ringkas: 'Urutan benar: biaya jenazah, hutang, wasiat, lalu warisan.'
     }
   };
 

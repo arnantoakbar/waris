@@ -7,10 +7,10 @@
 <meta name="robots" content="noindex">
 <title>Uji mesin faraid — Waris</title>
 <link rel="icon" href="assets/v4/mark-simple.svg" type="image/svg+xml">
-<link rel="stylesheet" href="colors_and_type.css?v=27">
-<link rel="stylesheet" href="flavida.css?v=27">
-<link rel="stylesheet" href="flavida-extra.css?v=27">
-<link rel="stylesheet" href="css/waris.css?v=27">
+<link rel="stylesheet" href="colors_and_type.css?v=29">
+<link rel="stylesheet" href="flavida.css?v=29">
+<link rel="stylesheet" href="flavida-extra.css?v=29">
+<link rel="stylesheet" href="css/waris.css?v=29">
 </head>
 <body>
 <a class="fl-skip" href="#utama">Lompat ke isi</a>
@@ -20,8 +20,8 @@
     <nav aria-label="Navigasi halaman"><a class="fl-link" href="index.html">&larr; Kembali ke Waris</a></nav>
     <h1 class="fl-display-l" style="color: var(--color-ember); margin-top: var(--space-4)">Uji mesin faraid</h1>
     <p class="fl-lead" style="margin: var(--space-4) 0 var(--space-8)">
-      Setiap kasus di bawah punya jawaban baku dalam kitab faraid. Kalau ada satu saja yang
-      gagal, hasil kalkulator tidak boleh dipercaya.
+      Setiap kasus di bawah punya jawaban baku di kitab faraid. Jika satu saja gagal,
+      jangan percaya hasil kalkulator.
     </p>
 
     <div id="ringkas" class="ringkas" role="status"></div>
@@ -29,17 +29,17 @@
   </div>
 </main>
 
-<script src="js/faraid/fraction.js?v=27"></script>
-<script src="js/faraid/heirs.js?v=27"></script>
-<script src="js/faraid/hijab.js?v=27"></script>
-<script src="js/faraid/shares.js?v=27"></script>
-<script src="js/faraid/ashabah.js?v=27"></script>
-<script src="js/faraid/special.js?v=27"></script>
-<script src="js/faraid/estate.js?v=27"></script>
-<script src="js/faraid/solve.js?v=27"></script>
-<script src="js/dalil.js?v=27"></script>
-<script src="js/keluarga.js?v=27"></script>
-<script src="js/tests.js?v=27"></script>
+<script src="js/faraid/fraction.js?v=29"></script>
+<script src="js/faraid/heirs.js?v=29"></script>
+<script src="js/faraid/hijab.js?v=29"></script>
+<script src="js/faraid/shares.js?v=29"></script>
+<script src="js/faraid/ashabah.js?v=29"></script>
+<script src="js/faraid/special.js?v=29"></script>
+<script src="js/faraid/estate.js?v=29"></script>
+<script src="js/faraid/solve.js?v=29"></script>
+<script src="js/dalil.js?v=29"></script>
+<script src="js/keluarga.js?v=29"></script>
+<script src="js/tests.js?v=29"></script>
 <script>
 (function () {
   var mulai = performance.now();
@@ -51,7 +51,7 @@
   var r = document.getElementById('ringkas');
   r.className = 'ringkas ' + (lulus === semua ? 'ok' : 'no');
   r.innerHTML = '<span class="angka">' + lulus + '/' + semua + '</span><span>' +
-    (lulus === semua ? 'Semua kasus lulus.' : (semua - lulus) + ' kasus gagal — jangan pakai hasilnya.') +
+    (lulus === semua ? 'Semua kasus lulus.' : (semua - lulus) + ' kasus gagal. Jangan pakai hasilnya.') +
     ' <small style="font-weight:400;color:var(--color-mid)">(' + ms + ' ms)</small></span>';
 
   function esc(t) { return String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;'); }
@@ -68,8 +68,8 @@
   }).join('');
 })();
 </script>
-<script src="js/tema.js?v=27"></script>
+<script src="js/tema.js?v=29"></script>
 <script src="js/motion.min.js"></script>
-<script src="js/flavida.js?v=27"></script>
+<script src="js/flavida.js?v=29"></script>
 </body>
 </html>

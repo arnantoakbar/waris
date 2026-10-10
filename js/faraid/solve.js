@@ -150,14 +150,14 @@
           final[k] = f.div(fardh[k], totalFardh);
         });
         out.perhitungan.langkah.push(
-          'Jumlah semua bagian tetap melebihi harta yang ada (' + totalSiham + '/' + am +
-          '). Dalam keadaan ini penyebutnya dinaikkan menjadi ' + totalSiham +
-          ' — disebut \'aul — sehingga semua ahli waris menyusut secara proporsional dan ' +
+          'Jumlah semua bagian tetap melebihi harta (' + totalSiham + '/' + am +
+          '). Penyebut dinaikkan menjadi ' + totalSiham +
+          ' (\'aul), sehingga semua ahli waris menyusut proporsional dan ' +
           'tidak ada yang dikorbankan.');
         catatan.push({
           id: 'aul', tingkat: 'info',
-          teks: 'Terjadi \'aul: bagian semua ahli waris disusutkan proporsional karena total ' +
-                'bagian tetap melebihi harta yang tersedia.'
+          teks: 'Terjadi \'aul: bagian semua ahli waris menyusut proporsional karena total ' +
+                'bagian tetap melebihi harta.'
         });
       } else {
         var sisa = f.sub(f.ONE, totalFardh);
@@ -210,9 +210,8 @@
               out.sisaTidakTerbagi = {
                 bagian: sisa,
                 alasan: 'Tidak ada ahli waris lain selain pasangan. Menurut fiqh klasik, sisa ' +
-                        'harta diserahkan ke baitul mal (kas negara/lembaga sosial Islam). ' +
-                        'Dalam praktik Pengadilan Agama di Indonesia, sisa ini biasanya ' +
-                        'diberikan kepada pasangan.'
+                        'harta diserahkan ke baitul mal (kas negara atau lembaga sosial Islam). ' +
+                        'Di Pengadilan Agama Indonesia, sisa ini biasanya diberikan kepada pasangan.'
               };
             } else {
               out.perhitungan.radd = true;
@@ -221,21 +220,20 @@
                 var tambahan = f.mul(sisa, f.div(fardh[k], totalLain));
                 final[k] = f.add(final[k], tambahan);
                 jenis[k] = 'radd';
-                alasan[k] = alasan[k] + ' Karena masih ada sisa harta dan tidak ada ahli ' +
-                  'waris penerima sisa (ashabah), sisa itu dikembalikan lagi kepada ahli waris ' +
-                  'sesuai besar bagiannya — disebut radd.';
+                alasan[k] = alasan[k] + ' Masih ada sisa harta dan tidak ada penerima sisa ' +
+                  '(ashabah). Sisa dikembalikan ke ahli waris sesuai besar bagiannya (radd).';
               });
               var teksPasangan = pasanganKeys.length
-                ? ' ' + H.label(pasanganKeys[0]) + ' tidak ikut menerima radd menurut pendapat jumhur ulama.'
+                ? ' ' + H.label(pasanganKeys[0]) + ' tidak ikut menerima radd menurut jumhur ulama.'
                 : '';
               out.perhitungan.langkah.push(
-                'Masih ada sisa ' + f.toText(sisa) + ' dan tidak ada ahli waris penerima sisa. ' +
+                'Masih ada sisa ' + f.toText(sisa) + ' dan tidak ada penerima sisa. ' +
                 'Sisa dikembalikan proporsional kepada ahli waris yang punya bagian tetap (radd).' +
                 teksPasangan);
               catatan.push({
                 id: 'radd', tingkat: 'info',
-                teks: 'Terjadi radd: sisa harta dikembalikan kepada ahli waris yang ada, bukan ' +
-                      'dibiarkan menganggur.' + teksPasangan
+                teks: 'Terjadi radd: sisa harta dikembalikan kepada ahli waris yang ada, ' +
+                      'bukan dibiarkan.' + teksPasangan
               });
             }
           }
@@ -277,11 +275,9 @@
       // penjelasan ini, kartunya tampil kosong dan terlihat seperti bug.
       if (f.isZero(b) && !alasan[def.key]) {
         alasan[def.key] = out.perhitungan.aul
-          ? 'Berhak menerima sisa harta, tapi bagian tetap ahli waris lain sudah ' +
-            'menghabiskan seluruh harta sehingga tidak ada sisa yang tertinggal. ' +
-            'Ini konsekuensi wajar dari \'aul, bukan karena terhalang.'
-          : 'Berhak menerima sisa harta, tapi tidak ada sisa yang tertinggal setelah ' +
-            'semua bagian tetap dibayarkan.';
+          ? 'Berhak menerima sisa, tapi bagian tetap ahli waris lain sudah menghabiskan ' +
+            'harta. Ini akibat wajar dari \'aul, bukan karena terhalang.'
+          : 'Berhak menerima sisa, tapi tidak ada sisa setelah semua bagian tetap dibayar.';
         dalilKey[def.key] = dalilKey[def.key] || 'hadits-ashabah';
       }
 
@@ -336,9 +332,9 @@
     if (kondisi.istriHamil) {
       peringatan.push({
         id: 'hamil',
-        teks: 'Ada istri yang sedang hamil. Anak dalam kandungan sudah punya hak waris, tapi ' +
-              'bagiannya baru bisa dipastikan setelah lahir dan diketahui jenis kelaminnya. ' +
-              'Tahan dulu bagian yang setara dengan satu anak laki-laki, lalu hitung ulang setelah kelahiran.'
+        teks: 'Ada istri yang sedang hamil. Anak dalam kandungan sudah berhak waris, tapi ' +
+              'bagiannya baru pasti setelah lahir dan diketahui jenis kelaminnya. ' +
+              'Tahan dulu bagian satu anak laki-laki, lalu hitung ulang setelah lahir.'
       });
     }
     if (kondisi.bedaAgama) {
@@ -346,7 +342,7 @@
         id: 'beda_agama',
         teks: 'Ada anggota keluarga yang berbeda agama. Rasulullah bersabda: "Orang muslim tidak ' +
               'mewarisi orang kafir, dan orang kafir tidak mewarisi orang muslim." (HR Bukhari & Muslim). ' +
-              'Jangan masukkan mereka ke dalam hitungan di atas. Tapi mereka bisa diberi lewat ' +
+              'Jangan masukkan mereka ke hitungan di atas. Mereka bisa diberi lewat ' +
               'hibah semasa hidup atau wasiat maksimal 1/3.',
         dalil: 'hadits-beda-agama'
       });
@@ -355,8 +351,8 @@
       peringatan.push({
         id: 'pembunuh',
         teks: 'Ada ahli waris yang terlibat dalam kematian pewaris. Rasulullah bersabda: ' +
-              '"Pembunuh tidak mendapat warisan." Orang tersebut gugur haknya dan tidak boleh ' +
-              'dimasukkan ke dalam hitungan. Status ini sebaiknya ditetapkan lewat putusan pengadilan.',
+              '"Pembunuh tidak mendapat warisan." Hak orang itu gugur. Jangan masukkan ke ' +
+              'hitungan. Sebaiknya status ini ditetapkan lewat putusan pengadilan.',
         dalil: 'hadits-pembunuh'
       });
     }

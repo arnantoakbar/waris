@@ -201,20 +201,19 @@
     var baris = [];
 
     if (p.asalMasalahAkhir) {
-      baris.push('<p class="blok-ket">Supaya tidak berurusan dengan banyak pecahan sekaligus, ' +
-        'harta dibayangkan dipotong menjadi <strong>' + p.asalMasalahAkhir + ' bagian sama besar</strong>. ' +
-        'Masing-masing ahli waris lalu mengambil sejumlah potongan berikut.</p>');
+      baris.push('<p class="blok-ket">Supaya tidak repot dengan banyak pecahan, harta dipotong menjadi <strong>' + p.asalMasalahAkhir + ' bagian sama besar</strong>. ' +
+        'Tiap ahli waris mengambil sejumlah potongan berikut.</p>');
       baris.push('<div class="rumus">' + penerima.map(function (a) {
         return a.label + ' = ' + a.siham + '/' + p.asalMasalahAkhir;
       }).join('  ·  ') + '</div>');
     }
 
     if (p.aul) {
-      baris.push('<p class="blok-ket" style="margin-top:var(--space-4)">Semula asal masalahnya ' +
-        p.asalMasalah + ', tapi jumlah semua bagian tetap mencapai ' + p.totalSiham +
-        ' — melebihi harta yang ada. Dalam keadaan ini penyebutnya dinaikkan menjadi ' +
-        p.totalSiham + ', disebut <strong>’aul</strong>. Semua ahli waris menyusut ' +
-        'proporsional, tidak ada yang dikorbankan.</p>');
+      baris.push('<p class="blok-ket" style="margin-top:var(--space-4)">Asal masalahnya semula ' +
+        p.asalMasalah + ', tapi total bagian tetap mencapai ' + p.totalSiham +
+        ', melebihi harta. Penyebut dinaikkan menjadi ' +
+        p.totalSiham + ' (<strong>’aul</strong>). Semua ahli waris menyusut ' +
+        'proporsional.</p>');
     }
 
     p.langkah.forEach(function (l) {
@@ -223,9 +222,8 @@
 
     if (hasil.pembulatan > 0) {
       baris.push('<div class="pita" style="margin-top:var(--space-5)">' + ikon('i-info') +
-        '<span>Ada sisa <strong>' + rp(hasil.pembulatan) + '</strong> dari pembulatan ke rupiah ' +
-        'penuh. Jumlahnya kecil — sepakati saja bersama mau diberikan ke siapa atau ' +
-        'disedekahkan.</span></div>');
+        '<span>Ada sisa <strong>' + rp(hasil.pembulatan) + '</strong> dari pembulatan rupiah. ' +
+        'Jumlahnya kecil. Sepakati bersama: diberikan ke siapa atau disedekahkan.</span></div>');
     }
 
     return baris.join('');
@@ -291,7 +289,7 @@
       '<p class="flav-body" style="margin-top:var(--space-4)">' +
       (penerima.length
         ? 'Dari <strong>' + rp(hasil.harta.tirkah) + '</strong> harta yang siap dibagi, ' +
-          ringkasSusunan(hasil) + ' mendapat bagian sesuai ketetapan Al-Qur’an dan Sunnah.'
+          ringkasSusunan(hasil) + ' mendapat bagian sesuai Al-Qur’an dan Sunnah.'
         : 'Tidak ada harta yang bisa dibagi.') +
       '</p></div>';
 
@@ -299,14 +297,13 @@
     // halaman, orang keburu menganggap angka ini final sebelum sampai ke sana.
     html += '<div class="fl-wrap fl-wrap--narrow"><div class="awas">' +
       '<div class="awas-kepala">' + ikon('i-waspada') +
-      '<span>Jangan jadikan ini sumber utama</span></div>' +
-      '<p>Verifikasi dan validasikan hasil ini kepada <strong>ustadz atau ulama terdekat</strong> ' +
-      'yang kamu percaya, atau ke <strong>Pengadilan Agama</strong>, sebelum dipakai membagi ' +
-      'harta yang sebenarnya. Kalkulator hanya menghitung dari apa yang kamu isikan — ia tidak ' +
-      'bisa melihat hibah yang sudah diberikan semasa hidup, status harta bawaan, atau ahli ' +
-      'waris yang belum diketahui.</p>' +
+      '<span>Bukan sumber utama</span></div>' +
+      '<p>Tanyakan hasil ini ke <strong>ustadz atau ulama</strong> yang kamu percaya, atau ke ' +
+      '<strong>Pengadilan Agama</strong>, sebelum membagi harta. Kalkulator hanya menghitung ' +
+      'isianmu. Ia tidak tahu hibah semasa hidup, status harta bawaan, atau ahli waris yang ' +
+      'belum diketahui.</p>' +
       '<a class="fl-btn fl-btn--ghost fl-btn--sm" href="rujukan.html" target="_blank" rel="noopener">' +
-      ikon('i-kitab') + ' Lihat seluruh dalil rujukannya</a>' +
+      ikon('i-kitab') + ' Lihat semua dalil</a>' +
       '</div></div>';
 
     // ── Pilihan dasar hukum ────────────────────────────────────────
@@ -317,10 +314,10 @@
       '<span class="dasar-judul">Dasar yang dipakai</span>' +
       '<span class="dasar-ket">' +
       (pakaiHukum
-        ? 'Al-Qur\u2019an dan Sunnah, ditambah aturan negara yang berlaku bagi umat Islam \u2014 ' +
-          'pemisahan harta bersama dan catatan Pengadilan Agama.'
-        : 'Murni Al-Qur\u2019an dan Sunnah. Aturan negara seperti harta bersama, ahli waris ' +
-          'pengganti, dan wasiat wajibah tidak diterapkan.') +
+        ? 'Al-Qur’an dan Sunnah, ditambah aturan negara untuk umat Islam: pemisahan harta ' +
+          'bersama dan catatan Pengadilan Agama.'
+        : 'Hanya Al-Qur’an dan Sunnah. Aturan negara (harta bersama, ahli waris pengganti, ' +
+          'wasiat wajibah) tidak dipakai.') +
       '</span></span>' +
       '<span class="dasar-pilih" role="group" aria-label="Dasar hukum yang dipakai">' +
       '<button type="button" data-dasar="syariat" aria-pressed="' + (!pakaiHukum) + '">' +
@@ -332,17 +329,16 @@
         ? '<div class="pita pita-hukum" style="margin-bottom:var(--space-6);align-items:flex-start">' +
           ikon('i-info') +
           '<span>Kamu mencentang <strong>harta bersama</strong> di langkah 3, tapi mode ini ' +
-          'tidak memakainya \u2014 pemisahan harta bersama berasal dari hukum negara, bukan dari ' +
-          'ayat atau hadits waris. Pilih <strong>+ Hukum Indonesia</strong> untuk ' +
-          'memberlakukannya.</span></div>'
+          'tidak memakainya. Pemisahan harta bersama berasal dari hukum negara, bukan dari ' +
+          'ayat atau hadits. Pilih <strong>+ Hukum Indonesia</strong> untuk memakainya.</span></div>'
         : '') +
       '</div>';
 
     // ── Ledger ─────────────────────────────────────────────────────
     html += '<div class="fl-wrap fl-wrap--narrow"><div class="blok">' +
       '<h3 class="blok-judul">Harta yang boleh dibagi</h3>' +
-      '<p class="blok-ket">Warisan tidak langsung dibagi dari total harta. Biaya pengurusan ' +
-      'jenazah, hutang, dan wasiat diselesaikan lebih dulu — urutan ini disebut sendiri dalam ' +
+      '<p class="blok-ket">Warisan tidak langsung dibagi dari total harta. Biaya jenazah, ' +
+      'hutang, dan wasiat diselesaikan lebih dulu. Urutan ini disebut di ' +
       'QS An-Nisa ayat 11 dan 12.</p>' +
       renderLedger(hasil, opts.diam) + '</div></div>';
 
@@ -350,17 +346,16 @@
       // ── Donut ────────────────────────────────────────────────────
       html += '<div class="fl-wrap"><div class="blok" id="area-export">' +
         '<h3 class="blok-judul">Pembagiannya</h3>' +
-        '<p class="blok-ket">Setiap warna adalah satu pihak. Angka pecahan menunjukkan haknya ' +
-        'menurut syariat, dan nominal rupiahnya sudah dihitungkan.</p>' +
+        '<p class="blok-ket">Satu warna untuk satu pihak. Pecahan menunjukkan hak menurut ' +
+        'syariat. Rupiah sudah dihitung.</p>' +
         renderDonut(hasil, penerima) + '</div></div>';
 
       // ── Pohon keluarga ───────────────────────────────────────────
       html += '<div class="fl-wrap"><div class="blok">' +
         '<h3 class="blok-judul">Posisinya dalam keluarga</h3>' +
-        '<p class="blok-ket">Nama hubungan keluarga dalam faraid sering terdengar mirip ' +
-        'padahal orangnya berbeda. Digambar begini, bedanya langsung kelihatan — perhatikan ' +
-        'dari siapa masing-masing orang menurun. <strong>Ketuk siapa pun untuk mengubahnya</strong>, ' +
-        'dan seluruh perhitungan di halaman ini ikut menyesuaikan.</p>' +
+        '<p class="blok-ket">Nama hubungan keluarga dalam faraid sering mirip padahal ' +
+        'orangnya berbeda. Diagram ini menunjukkan bedanya. ' +
+        '<strong>Ketuk seseorang untuk mengubahnya.</strong> Hitungan di halaman ini ikut berubah.</p>' +
         // Keterangan warna ditaruh di ATAS pohon supaya bisa dibaca sambil
         // melihat gambarnya, tanpa perlu menggulir ke bawah dulu.
         '<div class="pohon-legenda">' +
@@ -396,8 +391,8 @@
     if (terhalang.length) {
       html += '<div class="fl-wrap fl-wrap--narrow"><div class="blok">' +
         '<h3 class="blok-judul">Yang tidak mendapat bagian</h3>' +
-        '<p class="blok-ket">Bukan karena dilupakan. Dalam Islam, kerabat yang lebih dekat ' +
-        'menutup yang lebih jauh — dan ini justru mencegah harta terpecah terlalu banyak.</p>' +
+        '<p class="blok-ket">Bukan karena dilupakan. Kerabat yang lebih dekat menutup yang ' +
+        'lebih jauh. Ini mencegah harta terpecah terlalu banyak.</p>' +
         '<div class="hasil-grid">' + terhalang.map(function (a) { return kartuWaris(a); }).join('') +
         '</div></div></div>';
     }
@@ -429,16 +424,16 @@
     if (catatanKHI.length) {
       apx += appendix('Kalau dibawa ke Pengadilan Agama',
         catatanKHI.length + ' hal yang bisa diputuskan berbeda oleh hakim',
-        '<p class="blok-ket">Hasil di atas mengikuti fiqh mazhab Syafi\u2019i. Pengadilan Agama ' +
-        'memakai Kompilasi Hukum Islam, yang di beberapa titik memutuskan berbeda. Ini bukan ' +
-        'pertentangan \u2014 keduanya sah ditempuh, dan yang perlu kamu tahu adalah bedanya di mana.</p>' +
+        '<p class="blok-ket">Hasil di atas memakai fiqh mazhab Syafi’i. Pengadilan Agama memakai ' +
+        'Kompilasi Hukum Islam, yang di beberapa titik berbeda. Keduanya sah ditempuh. ' +
+        'Yang perlu kamu tahu: bedanya di mana.</p>' +
         '<div class="pita" style="margin-bottom:var(--space-5)">' + ikon('i-info') +
         '<span><strong>Yang di bawah ini aturan negara, bukan dalil.</strong> Rujukan utama ' +
-        'kalkulator ini tetap Al-Qur\u2019an dan sunnah. Aturan negara dicantumkan hanya karena ' +
-        'ia berlaku bagi umat Islam dan dipakai hakim Pengadilan Agama \u2014 yang kewenangannya ' +
-        'memang dibatasi pada perkara orang beragama Islam. Kalau keduanya berbeda, yang mengikat ' +
-        'secara hukum adalah putusan pengadilan, dan yang mengikat secara agama adalah dalilnya. ' +
-        'Tanyakan ke ustadz atau hakim yang berwenang sebelum memutuskan.</span></div>' +
+        'tetap Al-Qur’an dan sunnah. Aturan negara dicantumkan karena berlaku bagi umat Islam ' +
+        'dan dipakai hakim Pengadilan Agama, yang kewenangannya terbatas pada perkara orang ' +
+        'beragama Islam. Jika keduanya berbeda, yang mengikat secara hukum adalah putusan ' +
+        'pengadilan. Yang mengikat secara agama adalah dalil. Tanyakan ke ustadz atau hakim ' +
+        'sebelum memutuskan.</span></div>' +
         catatanKHI.map(function (c) {
           return '<div class="note note-green" style="margin-bottom:var(--space-3)">' +
             '<div class="note-title">' + c.judul + '</div>' + c.teks +
@@ -455,8 +450,8 @@
 
     apx += appendix('Sumber aturannya',
       dalilDipakai.length + ' ayat, hadits, dan putusan sahabat yang dipakai di kasus ini',
-      '<p class="blok-ket">Tidak ada satu pun aturan yang kami tambahkan sendiri. Daftar ' +
-      'lengkapnya \u2014 termasuk yang tidak terpakai di kasus ini \u2014 ada di ' +
+      '<p class="blok-ket">Kami tidak menambah aturan sendiri. Daftar lengkap, termasuk yang ' +
+      'tidak terpakai di kasus ini, ada di ' +
       '<a href="rujukan.html" target="_blank" rel="noopener">halaman Rujukan</a>.</p>' +
       dalilDipakai.map(function (d) {
         return '<div style="margin-bottom:var(--space-5)">' + root.Dalil.kutip(d.id) +
@@ -469,10 +464,10 @@
     var totalPoin = saran.reduce(function (t, x) { return t + (x.poin || []).length; }, 0);
 
     apx += appendix('Langkah selanjutnya',
-      saran.length + ' langkah, ' + totalPoin + ' hal yang perlu dikerjakan \u2014 ' +
-      wajib + ' di antaranya wajib didahulukan',
-      '<p class="blok-ket">Tahu angkanya baru setengah jalan. Ini yang perlu dilakukan supaya ' +
-      'pembagiannya benar-benar tuntas dan tidak jadi perkara di kemudian hari.</p>' +
+      saran.length + ' langkah, ' + totalPoin + ' hal yang perlu dikerjakan, ' +
+      wajib + ' wajib didahulukan',
+      '<p class="blok-ket">Angka baru setengah jalan. Lakukan langkah ini agar pembagian ' +
+      'tuntas dan tidak jadi sengketa nanti.</p>' +
       '<div class="saran">' + saran.map(function (s, i) {
         var poin = (s.poin || []).length
           ? '<ul class="saran-poin">' + s.poin.map(function (p) {
@@ -490,9 +485,9 @@
           '<span><span class="saran-judul">' + s.judul + '</span>' +
           '<span class="saran-teks">' + s.teks + '</span>' + poin + tautan + '</span></div>';
       }).join('') + '</div>' +
-      '<p class="flav-caption" style="margin-top:var(--space-5)">Alamat situs dan prosedur di ' +
-      'atas bisa berubah, dan syarat administrasi kadang berbeda antar daerah. Pastikan lagi ' +
-      'ke kantor terkait sebelum berangkat.</p>', false);
+      '<p class="flav-caption" style="margin-top:var(--space-5)">Alamat situs dan prosedur ' +
+      'bisa berubah. Syarat administrasi bisa berbeda antar daerah. Cek lagi ke kantor ' +
+      'terkait sebelum berangkat.</p>', false);
 
     // Bungkus seluruh appendix beserta kendali buka/tutup semuanya
     html += '<div class="fl-wrap fl-wrap--narrow"><div class="blok">' +
@@ -505,12 +500,11 @@
 
     // ── Penutup ────────────────────────────────────────────────────
     html += '<div class="fl-wrap fl-wrap--narrow"><div class="note" style="margin-bottom:var(--space-10)">' +
-      '<div class="note-title">Sekali lagi, sebelum dipakai</div>' +
-      'Kalkulator ini menerapkan aturan yang sudah baku, dan hitungannya diuji dengan ' +
-      'kasus-kasus baku dari kitab faraid. Tapi alat hitung tetaplah alat hitung. ' +
-      '<strong>Bawa hasil ini ke ustadz atau ulama terdekat untuk diverifikasi</strong>, dan ke ' +
-      'Pengadilan Agama kalau butuh putusan yang mengikat. Jangan jadikan halaman ini sumber ' +
-      'utama dalam membagi harta keluarga.</div></div>';
+      '<div class="note-title">Sebelum dipakai</div>' +
+      'Kalkulator ini memakai aturan baku dan diuji dengan kasus baku dari kitab faraid. ' +
+      'Tapi ia tetap alat hitung. <strong>Tanyakan hasil ini ke ustadz atau ulama.</strong> ' +
+      'Ke Pengadilan Agama jika butuh putusan yang mengikat. Jangan jadikan ini sumber ' +
+      'utama.</div></div>';
 
     // ── Bar aksi ───────────────────────────────────────────────────
     html += '<div class="bar-aksi no-print"><div class="fl-wrap">' +

@@ -100,10 +100,10 @@
 
     if (!o) {
       // Simpul bayangan — belum ada di model, tawarkan menambahkannya.
-      h += '<p class="lembar-ket">Kerabat ini digambar samar karena diperlukan untuk ' +
-        'menyambungkan keluarga, tapi belum kamu masukkan.</p>' +
-        '<div class="lembar-aksi"><button type="button" class="fl-btn fl-btn--dark fl-btn--sm fl-btn--block" ' +
-        'data-hidupkan="' + esc(idOrang) + '">Tambahkan sebagai ahli waris yang masih hidup</button></div>';
+      h += '<p class="lembar-ket">Kerabat ini digambar samar karena dibutuhkan untuk ' +
+        'menyambung keluarga, tapi belum kamu masukkan.</p><div ' +
+        'class="lembar-aksi"><button type="button" class="fl-btn fl-btn--dark fl-btn--sm ' +
+        'fl-btn--block" data-hidupkan="' + esc(idOrang) + '">Tambahkan sebagai ahli waris yang masih hidup</button></div>';
       buka(h);
       return;
     }
@@ -134,8 +134,8 @@
     }
     if (tipe === 'pasangan' && o.hidup === false) {
       h += '<p class="lembar-ket lembar-catat">Pasangan yang wafat lebih dulu bukan ahli ' +
-        'waris. Tapi anak dari pernikahan itu tetap mewarisi penuh — tandai anaknya di ' +
-        'bawah pewaris seperti biasa.</p>';
+        'waris. Anak dari pernikahan itu tetap mewarisi penuh. Tandai anaknya di bawah ' +
+        'pewaris seperti biasa.</p>';
     }
 
     // ── Kandung, tiri, atau angkat ─────────────────────────────────
@@ -145,15 +145,14 @@
         ['kandung', 'Anak kandung'], ['tiri', 'Anak tiri'], ['angkat', 'Anak angkat']
       ], statusAnak));
       if (o.angkat) {
-        h += '<p class="lembar-ket lembar-catat">Anak angkat bukan ahli waris. Tapi KHI ' +
-          'Pasal 209 memberinya hak wasiat wajibah maksimal 1/3 harta, ditetapkan lewat ' +
-          'Pengadilan Agama.</p>';
+        h += '<p class="lembar-ket lembar-catat">Anak angkat bukan ahli waris. KHI Pasal ' +
+          '209 memberinya wasiat wajibah maksimal 1/3 harta, lewat Pengadilan Agama.</p>';
       }
       if (o.tiri) {
-        h += '<p class="lembar-ket lembar-catat">Anak tiri — anak bawaan pasangan dari ' +
-          'pernikahan sebelumnya. Bukan ahli waris, dan berbeda dari anak angkat: wasiat ' +
-          'wajibah KHI Pasal 209 tidak berlaku untuknya. Ia mewarisi dari orang tua ' +
-          'kandungnya sendiri.</p>';
+        h += '<p class="lembar-ket lembar-catat">Anak tiri adalah anak bawaan pasangan ' +
+          'dari pernikahan sebelumnya. Bukan ahli waris, dan berbeda dari anak angkat: ' +
+          'wasiat wajibah KHI Pasal 209 tidak berlaku untuknya. Ia mewarisi dari orang tua ' +
+          'kandungnya.</p>';
       }
     }
 
@@ -178,12 +177,14 @@
 
       // Peringatan spesifik: inilah sumber kesalahan yang paling sering.
       if (tipe === 'anak' && o.gender === 'P' && jml) {
-        h += '<p class="lembar-ket lembar-catat">Cucu lewat anak perempuan BUKAN ahli waris ' +
-          '(disebut dzawil arham). Selama ibunya masih hidup, ibunyalah yang menerima bagian.</p>';
+        h += '<p class="lembar-ket lembar-catat">Cucu lewat anak perempuan BUKAN ahli ' +
+          'waris (disebut dzawil arham). Selama ibunya masih hidup, ibunya yang menerima ' +
+          'bagian.</p>';
       }
       if (tipe === 'saudara' && jml && (o.gender === 'P' || o.jenis === 'seibu')) {
-        h += '<p class="lembar-ket lembar-catat">Yang mewarisi hanya keponakan laki-laki dari ' +
-          'saudara laki-laki kandung atau seayah. Anak dari saudara ini tidak mendapat bagian.</p>';
+        h += '<p class="lembar-ket lembar-catat">Yang mewarisi hanya keponakan laki-laki ' +
+          'dari saudara laki-laki kandung atau seayah. Anak dari saudara ini tidak ' +
+          'mendapat bagian.</p>';
       }
       h += '</div>';
     }
@@ -227,10 +228,10 @@
         break;
 
       case 'anak_angkat':
-        h += '<p class="lembar-ket">Keduanya bukan ahli waris, tapi tetap digambar supaya ' +
-          'susunan keluarganya utuh. Bedanya: <strong>anak tiri</strong> adalah anak bawaan ' +
-          'pasangan dari pernikahan sebelumnya dan mewarisi dari orang tua kandungnya, ' +
-          'sedangkan <strong>anak angkat</strong> berhak atas wasiat wajibah KHI Pasal 209.</p>' +
+        h += '<p class="lembar-ket">Keduanya bukan ahli waris, tapi tetap digambar agar ' +
+          'susunan keluarga utuh. Bedanya: <strong>anak tiri</strong> adalah anak bawaan ' +
+          'pasangan dari pernikahan sebelumnya dan mewarisi dari orang tua kandungnya. ' +
+          '<strong>Anak angkat</strong> berhak atas wasiat wajibah KHI Pasal 209.</p>' +
           tombol('tiri_L', 'Anak tiri laki-laki') + tombol('tiri_P', 'Anak tiri perempuan') +
           tombol('angkat_L', 'Anak angkat laki-laki') + tombol('angkat_P', 'Anak angkat perempuan');
         break;
@@ -249,17 +250,17 @@
       case 'saudara':
         h += '<p class="lembar-ket">Pilih hubungannya dengan pewaris. Ini menentukan besar ' +
           'bagiannya, jadi periksa baik-baik.</p>' +
-          tombol('sdr_kandung_L', 'Saudara laki-laki kandung', 'Satu ayah satu ibu') +
-          tombol('sdr_kandung_P', 'Saudara perempuan kandung', 'Satu ayah satu ibu') +
-          tombol('sdr_seayah_L', 'Saudara laki-laki seayah', 'Satu ayah, lain ibu') +
-          tombol('sdr_seayah_P', 'Saudara perempuan seayah', 'Satu ayah, lain ibu') +
-          tombol('sdr_seibu_L', 'Saudara laki-laki seibu', 'Satu ibu, lain ayah') +
-          tombol('sdr_seibu_P', 'Saudara perempuan seibu', 'Satu ibu, lain ayah');
+          tombol('sdr_kandung_L', 'Saudara laki-laki kandung', 'Satu ayah dan ibu') +
+          tombol('sdr_kandung_P', 'Saudara perempuan kandung', 'Satu ayah dan ibu') +
+          tombol('sdr_seayah_L', 'Saudara laki-laki seayah', 'Satu ayah, beda ibu') +
+          tombol('sdr_seayah_P', 'Saudara perempuan seayah', 'Satu ayah, beda ibu') +
+          tombol('sdr_seibu_L', 'Saudara laki-laki seibu', 'Satu ibu, beda ayah') +
+          tombol('sdr_seibu_P', 'Saudara perempuan seibu', 'Satu ibu, beda ayah');
         break;
 
       case 'paman':
-        h += tombol('paman_kandung', 'Paman kandung', 'Saudara ayah, satu ayah satu ibu dengan ayah') +
-          tombol('paman_seayah', 'Paman seayah', 'Satu kakek, lain nenek');
+        h += tombol('paman_kandung', 'Paman kandung', 'Saudara kandung ayah') +
+          tombol('paman_seayah', 'Paman seayah', 'Satu kakek, beda nenek');
         break;
     }
 

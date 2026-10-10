@@ -32,7 +32,7 @@
       key: 'istri', label: 'Istri', group: 'pasangan', gender: 'P', max: 4,
       icon: 'i-wanita', hanyaJika: 'L',
       panggilan: 'Istri', jalur: 'pasangan pewaris',
-      ket: 'Istri yang ditinggalkan. Kalau lebih dari satu, bagiannya dibagi rata.'
+      ket: 'Istri yang ditinggalkan. Jika lebih dari satu, bagian dibagi rata.'
     },
 
     {
@@ -96,63 +96,63 @@
     {
       key: 'sdr_lk_kandung', label: 'Saudara laki-laki kandung', group: 'saudara', gender: 'L', max: 20,
       icon: 'i-pria', panggilan: 'Saudara', jalur: 'seayah seibu',
-      ket: 'Kakak atau adik laki-laki, satu ayah satu ibu dengan pewaris.'
+      ket: 'Kakak atau adik laki-laki, satu ayah dan ibu dengan pewaris.'
     },
     {
       key: 'sdr_pr_kandung', label: 'Saudara perempuan kandung', group: 'saudara', gender: 'P', max: 20,
       icon: 'i-wanita', panggilan: 'Saudara', jalur: 'seayah seibu',
-      ket: 'Kakak atau adik perempuan, satu ayah satu ibu dengan pewaris.'
+      ket: 'Kakak atau adik perempuan, satu ayah dan ibu dengan pewaris.'
     },
     {
       key: 'sdr_lk_sebapak', label: 'Saudara laki-laki seayah', group: 'saudara', gender: 'L', max: 20,
       icon: 'i-pria', panggilan: 'Saudara', jalur: 'beda ibu',
-      ket: 'Satu ayah, lain ibu — misalnya dari pernikahan ayah yang lain.'
+      ket: 'Satu ayah, beda ibu.'
     },
     {
       key: 'sdr_pr_sebapak', label: 'Saudara perempuan seayah', group: 'saudara', gender: 'P', max: 20,
       icon: 'i-wanita', panggilan: 'Saudara', jalur: 'beda ibu',
-      ket: 'Satu ayah, lain ibu — misalnya dari pernikahan ayah yang lain.'
+      ket: 'Satu ayah, beda ibu.'
     },
     {
       key: 'sdr_lk_seibu', label: 'Saudara laki-laki seibu', group: 'saudara', gender: 'L', max: 20,
       icon: 'i-pria', panggilan: 'Saudara', jalur: 'beda ayah',
-      ket: 'Satu ibu, lain ayah — misalnya dari pernikahan ibu yang lain.'
+      ket: 'Satu ibu, beda ayah.'
     },
     {
       key: 'sdr_pr_seibu', label: 'Saudara perempuan seibu', group: 'saudara', gender: 'P', max: 20,
       icon: 'i-wanita', panggilan: 'Saudara', jalur: 'beda ayah',
-      ket: 'Satu ibu, lain ayah — misalnya dari pernikahan ibu yang lain.'
+      ket: 'Satu ibu, beda ayah.'
     },
 
     {
       key: 'keponakan_kandung', label: 'Keponakan dari saudara kandung', group: 'kerabat', gender: 'L', max: 20,
       icon: 'i-pria', panggilan: 'Keponakan', jalur: 'anak saudara kandung',
-      ket: 'Anak laki-laki dari saudara laki-laki kandung. Kalau kakak laki-lakimu punya anak laki-laki, itulah keponakan ini.'
+      ket: 'Anak laki-laki dari saudara laki-laki kandung.'
     },
     {
       key: 'keponakan_sebapak', label: 'Keponakan dari saudara seayah', group: 'kerabat', gender: 'L', max: 20,
       icon: 'i-pria', panggilan: 'Keponakan', jalur: 'anak saudara beda ibu',
-      ket: 'Anak laki-laki dari saudara laki-laki yang seayah tapi beda ibu.'
+      ket: 'Anak laki-laki dari saudara laki-laki seayah, beda ibu.'
     },
     {
       key: 'paman_kandung', label: 'Paman kandung', group: 'kerabat', gender: 'L', max: 20,
       icon: 'i-lansia-pria', panggilan: 'Paman', jalur: 'saudara kandung ayah',
-      ket: 'Kakak atau adik laki-laki ayah, satu ayah satu ibu dengan ayah.'
+      ket: 'Saudara laki-laki kandung ayah.'
     },
     {
       key: 'paman_sebapak', label: 'Paman seayah', group: 'kerabat', gender: 'L', max: 20,
       icon: 'i-lansia-pria', panggilan: 'Paman', jalur: 'saudara ayah beda nenek',
-      ket: 'Saudara laki-laki ayah yang satu kakek tapi lain nenek.'
+      ket: 'Saudara laki-laki ayah, satu kakek beda nenek.'
     },
     {
       key: 'sepupu_kandung', label: 'Sepupu dari paman kandung', group: 'kerabat', gender: 'L', max: 20,
       icon: 'i-pria', panggilan: 'Sepupu', jalur: 'anak paman kandung',
-      ket: 'Anak laki-laki dari paman kandung. Inilah yang sehari-hari disebut sepupu.'
+      ket: 'Anak laki-laki dari paman kandung (sepupu laki-laki).'
     },
     {
       key: 'sepupu_sebapak', label: 'Sepupu dari paman seayah', group: 'kerabat', gender: 'L', max: 20,
       icon: 'i-pria', panggilan: 'Sepupu', jalur: 'anak paman beda nenek',
-      ket: 'Anak laki-laki dari paman yang seayah dengan ayah pewaris.'
+      ket: 'Anak laki-laki dari paman seayah.'
     }
   ];
 

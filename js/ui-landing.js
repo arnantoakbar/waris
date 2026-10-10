@@ -104,8 +104,8 @@
               '<span>' + a.label + '</span>' +
               '<b>' + (d ? d.rujukan : '') + '</b></div>';
           }).join('') +
-          '<p class="flav-body-sm" style="margin-top:var(--space-4)">Ayat dan haditsnya ditampilkan ' +
-          'utuh di halaman hasil, lengkap dengan teks Arab dan tautan sumbernya.</p>';
+          '<p class="flav-body-sm" style="margin-top:var(--space-4)">Ayat dan hadits tampil ' +
+          'utuh di halaman hasil, dengan teks Arab dan tautan sumber.</p>';
       }
     }
   ];

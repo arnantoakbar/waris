@@ -186,15 +186,14 @@
         id: 'pasangan_wafat',
         tingkat: 'penting',
         teks: 'Ada ' + pasanganWafat + ' pasangan yang wafat lebih dulu. Pasangan yang sudah ' +
-          'wafat bukan ahli waris — yang mewarisi hanya pasangan yang masih hidup saat pewaris ' +
+          'wafat bukan ahli waris. Yang mewarisi hanya pasangan yang masih hidup saat pewaris ' +
           'wafat. ' +
           (adaAnakKandung
-            ? 'Anak kandung dari pernikahan itu tetap mewarisi penuh; nasabnya ke pewaris ' +
-              'tidak terputus oleh wafatnya sang ibu/ayah, dan bagiannya sama saja dengan ' +
-              'anak dari pernikahan mana pun. '
+            ? 'Anak kandung dari pernikahan itu tetap mewarisi penuh. Nasabnya ke pewaris ' +
+              'tidak terputus. '
             : '') +
-          'Kalau pewaris dulu sempat mewarisi harta dari pasangan yang wafat itu, harta ' +
-          'tersebut sudah menjadi milik pewaris dan ikut masuk ke total harta peninggalan.'
+          'Jika pewaris pernah mewarisi harta dari pasangan itu, harta tersebut sudah milik ' +
+          'pewaris dan masuk ke total harta peninggalan.'
       });
     }
 
@@ -234,10 +233,10 @@
         id: 'cucu_lewat_anak_pr',
         tingkat: 'penting',
         teks: 'Ada ' + adaCucuLewatAnakPr + ' cucu lewat anak perempuan. Mereka TIDAK ' +
-          'termasuk ahli waris dalam pembagian ini — dalam faraid, hanya cucu lewat anak ' +
+          'menjadi ahli waris di pembagian ini. Dalam faraid, hanya cucu lewat anak ' +
           'laki-laki yang mewarisi. Cucu lewat anak perempuan disebut dzawil arham. ' +
-          'Selama ibu mereka (anak perempuan pewaris) masih hidup, ibunyalah yang menerima ' +
-          'bagian, dan harta itu nantinya mengalir ke mereka lewat jalur warisan ibunya.'
+          'Selama ibu mereka (anak perempuan pewaris) masih hidup, ibunya yang menerima ' +
+          'bagian. Harta itu nanti mengalir ke mereka lewat warisan ibunya.'
       });
     }
 
@@ -245,9 +244,9 @@
       catatan.push({
         id: 'anak_angkat',
         tingkat: 'penting',
-        teks: 'Ada ' + adaAnakAngkat + ' anak angkat. Anak angkat bukan ahli waris karena ' +
-          'pengangkatan tidak memindahkan hubungan nasab. Tapi KHI Pasal 209 memberinya hak ' +
-          'wasiat wajibah maksimal 1/3 harta, dan itu ditetapkan lewat Pengadilan Agama.'
+        teks: 'Ada ' + adaAnakAngkat + ' anak angkat. Anak angkat bukan ahli waris, karena ' +
+          'pengangkatan tidak memindahkan nasab. KHI Pasal 209 memberinya wasiat wajibah ' +
+          'maksimal 1/3 harta, lewat Pengadilan Agama.'
       });
     }
 
@@ -255,13 +254,12 @@
       catatan.push({
         id: 'anak_tiri',
         tingkat: 'penting',
-        teks: 'Ada ' + adaAnakTiri + ' anak tiri — anak bawaan pasangan dari pernikahan ' +
+        teks: 'Ada ' + adaAnakTiri + ' anak tiri, yaitu anak bawaan pasangan dari pernikahan ' +
           'sebelumnya. Anak tiri bukan ahli waris karena tidak ada hubungan nasab dengan ' +
-          'pewaris; ia mewarisi dari orang tua kandungnya sendiri. Perlu dicatat: anak tiri ' +
-          'BERBEDA dari anak angkat. Wasiat wajibah KHI Pasal 209 hanya untuk anak angkat, ' +
-          'tidak untuk anak tiri. Kalau pewaris ingin memberi sesuatu kepada anak tirinya, ' +
-          'jalurnya adalah hibah semasa hidup atau wasiat biasa maksimal 1/3 — dan wasiat itu ' +
-          'sah justru karena anak tiri bukan ahli waris.'
+          'pewaris. Ia mewarisi dari orang tua kandungnya. Anak tiri BERBEDA dari anak ' +
+          'angkat. Wasiat wajibah KHI Pasal 209 hanya untuk anak angkat. Untuk memberi ' +
+          'anak tiri, pewaris bisa memakai hibah semasa hidup atau wasiat biasa maksimal ' +
+          '1/3. Wasiat itu sah karena anak tiri bukan ahli waris.'
       });
     }
 
@@ -298,7 +296,7 @@
       catatan.push({
         id: 'keponakan_tak_berhak',
         tingkat: 'info',
-        teks: 'Ada ' + keponakanTakBerhak + ' keponakan yang tidak termasuk ahli waris. ' +
+        teks: 'Ada ' + keponakanTakBerhak + ' keponakan yang bukan ahli waris. ' +
           'Yang mewarisi hanya keponakan laki-laki dari saudara laki-laki kandung atau seayah. ' +
           'Keponakan dari saudara perempuan, keponakan perempuan, dan keponakan dari saudara ' +
           'seibu tidak mendapat bagian.'
@@ -321,7 +319,7 @@
       catatan.push({
         id: 'sepupu_tak_berhak',
         tingkat: 'info',
-        teks: 'Sepupu perempuan tidak termasuk ahli waris. Hanya sepupu laki-laki dari ' +
+        teks: 'Sepupu perempuan bukan ahli waris. Hanya sepupu laki-laki dari ' +
           'paman kandung atau paman seayah yang bisa mendapat bagian.'
       });
     }

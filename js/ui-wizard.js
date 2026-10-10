@@ -322,17 +322,17 @@
   function daftarKondisi() {
     var list = [
       { id: 'cucuDariAnakWafat', judul: 'Ada cucu dari anak yang meninggal lebih dulu',
-        ket: 'Penting. Fiqh klasik dan Pengadilan Agama bisa memutuskan berbeda soal ini.' },
+        ket: 'Penting. Fiqh klasik dan Pengadilan Agama bisa berbeda soal ini.' },
       { id: 'bedaAgama', judul: 'Ada anggota keluarga yang berbeda agama',
-        ket: 'Perbedaan agama menggugurkan hak waris, tapi masih bisa diberi lewat hibah atau wasiat.' },
+        ket: 'Beda agama menggugurkan hak waris, tapi bisa diberi lewat hibah atau wasiat.' },
       { id: 'pembunuh', judul: 'Ada yang terlibat dalam kematian pewaris',
         ket: 'Menggugurkan hak waris orang tersebut.' },
       { id: 'adaSengketa', judul: 'Ahli waris belum sepakat atau sedang berselisih',
-        ket: 'Kami akan menyarankan jalur Pengadilan Agama.' }
+        ket: 'Kami sarankan jalur Pengadilan Agama.' }
     ];
     if (state.keluarga.jenisKelamin === 'L' && K.jumlahPasanganHidup(state.keluarga)) {
       list.splice(1, 0, { id: 'istriHamil', judul: 'Ada istri yang sedang hamil',
-        ket: 'Bagian anak dalam kandungan harus ditahan dulu sampai ia lahir.' });
+        ket: 'Bagian anak dalam kandungan ditahan sampai ia lahir.' });
     }
     return list;
   }
@@ -401,7 +401,7 @@
   function validasi() {
     if (langkahKini === 1 && !state.keluarga.jenisKelamin) return 'Pilih dulu jenis kelamin pewaris.';
     if (langkahKini === 4 && !Object.keys(turunan().counts).length) {
-      return 'Belum ada ahli waris yang berhak. Tambahkan minimal satu kerabat yang masih hidup.';
+      return 'Belum ada ahli waris. Tambahkan minimal satu kerabat yang masih hidup.';
     }
     return null;
   }

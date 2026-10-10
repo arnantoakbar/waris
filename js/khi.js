@@ -69,12 +69,12 @@
         pasal: 'KHI Pasal 185',
         tautan: [SUMBER.khi, SUMBER.peradilanAgama],
         teks: 'Menurut fiqh klasik, cucu dari anak yang wafat lebih dulu TERHALANG selama ' +
-          'masih ada anak pewaris yang hidup — jadi mereka tidak masuk hitungan di atas. ' +
-          'KHI Pasal 185 mengatur lain: cucu itu bisa menggantikan posisi orang tuanya sebagai ' +
-          '"ahli waris pengganti", dengan catatan bagiannya tidak boleh melebihi bagian ahli ' +
-          'waris sederajat yang masih hidup. Kalau perkara ini dibawa ke Pengadilan Agama, ' +
-          'kemungkinan besar cucu tersebut akan diberi bagian. Banyak keluarga juga memilih ' +
-          'jalan tengah: memberi cucu itu lewat hibah atau kesepakatan damai antar ahli waris.'
+          'masih ada anak pewaris yang hidup. Jadi mereka tidak masuk hitungan di atas. ' +
+          'KHI Pasal 185 mengatur lain: cucu itu menggantikan orang tuanya sebagai "ahli ' +
+          'waris pengganti". Bagiannya tidak boleh melebihi bagian ahli waris sederajat ' +
+          'yang masih hidup. Di Pengadilan Agama, cucu itu kemungkinan besar diberi ' +
+          'bagian. Banyak keluarga memilih jalan tengah: memberi cucu lewat hibah atau ' +
+          'kesepakatan damai.'
       });
     }
 
@@ -85,10 +85,10 @@
         judul: 'Anak angkat',
         pasal: 'KHI Pasal 209',
         tautan: [SUMBER.khi, SUMBER.peradilanAgama],
-        teks: 'Anak angkat bukan ahli waris, karena hubungan nasab tidak berpindah lewat ' +
-          'pengangkatan. Tapi KHI Pasal 209 memberi anak angkat hak "wasiat wajibah" maksimal ' +
-          '1/3 dari harta warisan orang tua angkatnya, meskipun wasiat itu tidak pernah ' +
-          'dituliskan. Aturan yang sama berlaku sebaliknya untuk orang tua angkat.'
+        teks: 'Anak angkat bukan ahli waris, karena nasab tidak berpindah lewat ' +
+          'pengangkatan. Tapi KHI Pasal 209 memberi anak angkat "wasiat wajibah" maksimal ' +
+          '1/3 dari harta orang tua angkatnya, meski tidak pernah ditulis. Aturan yang ' +
+          'sama berlaku sebaliknya untuk orang tua angkat.'
       });
     }
 
@@ -98,11 +98,11 @@
         judul: 'Anggota keluarga yang berbeda agama',
         pasal: 'Yurisprudensi Mahkamah Agung',
         tautan: [SUMBER.putusan, SUMBER.khi],
-        teks: 'Secara fiqh, perbedaan agama menggugurkan hak waris — dan KHI juga mensyaratkan ' +
-          'ahli waris beragama Islam. Namun dalam beberapa putusannya, Mahkamah Agung memberikan ' +
-          '"wasiat wajibah" kepada ahli waris non-muslim, besarnya tidak melebihi bagian yang ' +
-          'akan ia terima seandainya ia berhak, dan maksimal 1/3. Ini bukan warisan, melainkan ' +
-          'pemberian. Kalau keluarga ingin menempuh jalan ini, putusannya ada di Pengadilan Agama.'
+        teks: 'Menurut fiqh, beda agama menggugurkan hak waris. KHI juga mensyaratkan ahli ' +
+          'waris beragama Islam. Tapi dalam beberapa putusan, Mahkamah Agung memberi ' +
+          '"wasiat wajibah" kepada ahli waris non-muslim. Besarnya tidak melebihi bagian ' +
+          'yang akan ia terima jika berhak, maksimal 1/3. Ini bukan warisan, tapi ' +
+          'pemberian. Putusannya ada di Pengadilan Agama.'
       });
     }
 
@@ -113,12 +113,12 @@
         judul: 'Harta bersama belum dipisahkan',
         pasal: 'KHI Pasal 96 & UU Perkawinan Pasal 35',
         tautan: [SUMBER.uuKawin35, SUMBER.khi],
-        teks: 'Kamu tidak menandai harta ini sebagai harta bersama, jadi seluruhnya dihitung ' +
-          'sebagai milik pewaris. Perlu dicek lagi: harta yang diperoleh selama pernikahan ' +
-          'umumnya berstatus harta bersama, dan separuhnya adalah hak milik pasangan yang masih ' +
-          'hidup — bukan warisan. Yang dibagi hanya separuh milik pewaris. Harta bawaan sebelum ' +
-          'menikah, warisan, dan hadiah pribadi tetap milik masing-masing. Kalau statusnya harta ' +
-          'bersama, aktifkan pilihan itu di form supaya hasilnya benar.'
+        teks: 'Kamu tidak menandai harta ini sebagai harta bersama, jadi seluruhnya ' +
+          'dihitung milik pewaris. Cek ulang: harta yang diperoleh selama menikah umumnya ' +
+          'harta bersama. Separuhnya milik pasangan yang masih hidup, bukan warisan. Yang ' +
+          'dibagi hanya separuh milik pewaris. Harta bawaan sebelum menikah, warisan, dan ' +
+          'hadiah pribadi tetap milik masing-masing. Jika statusnya harta bersama, ' +
+          'aktifkan pilihan itu di form.'
       });
     }
 
@@ -129,10 +129,10 @@
         judul: 'Pasangan tidak ikut menerima sisa (radd)',
         pasal: 'Praktik Pengadilan Agama',
         tautan: [SUMBER.putusan, SUMBER.peradilanAgama],
-        teks: 'Dalam hitungan di atas, sisa harta dikembalikan hanya kepada ahli waris selain ' +
-          'suami/istri — ini pendapat jumhur ulama. Sebagian hakim Pengadilan Agama di Indonesia ' +
-          'mengikuti pendapat lain yang juga mengikutsertakan pasangan dalam radd, sehingga ' +
-          'bagian pasangan menjadi lebih besar. Kalau ahli waris sepakat, keduanya sah ditempuh.'
+        teks: 'Pada hitungan di atas, sisa harta dikembalikan hanya ke ahli waris selain ' +
+          'suami atau istri. Ini pendapat jumhur ulama. Sebagian hakim Pengadilan Agama ' +
+          'mengikuti pendapat lain: pasangan ikut menerima radd, sehingga bagiannya lebih ' +
+          'besar. Jika ahli waris sepakat, keduanya sah ditempuh.'
       });
     }
 
@@ -142,10 +142,10 @@
         judul: 'Sisa harta setelah bagian pasangan',
         pasal: 'Praktik Pengadilan Agama',
         tautan: [SUMBER.putusan, SUMBER.peradilanAgama],
-        teks: 'Karena tidak ada ahli waris lain, secara fiqh klasik sisa harta diserahkan ke ' +
-          'baitul mal. Di Indonesia lembaga baitul mal tidak berjalan seperti dulu, sehingga ' +
-          'Pengadilan Agama pada umumnya menyerahkan sisa itu kepada suami/istri yang masih ' +
-          'hidup. Alternatif lain yang lazim: menyalurkannya ke lembaga sosial atau wakaf.'
+        teks: 'Karena tidak ada ahli waris lain, fiqh klasik menyerahkan sisa harta ke ' +
+          'baitul mal. Di Indonesia baitul mal tidak berjalan seperti dulu. Karena itu ' +
+          'Pengadilan Agama umumnya menyerahkan sisa ke suami atau istri yang masih hidup. ' +
+          'Alternatif lain: disalurkan ke lembaga sosial atau wakaf.'
       });
     }
 

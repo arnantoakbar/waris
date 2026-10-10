@@ -1,93 +1,76 @@
-# Waris — kalkulator pembagian warisan Islam
+# Waris — kalkulator waris Islam
 
-Website statis untuk menghitung pembagian warisan menurut syariat Islam, dalam bahasa
-Indonesia sehari-hari. Dibangun di atas Flavida Design System v4.1 ("Flame-tree clay"), tanpa maskot.
+Hitung pembagian waris menurut syariat Islam. Gratis, tanpa daftar, dalam bahasa Indonesia sehari-hari.
+Live di **[waris.flavida.co](https://waris.flavida.co)**. Memakai Flavida Design System v4.1, tanpa maskot.
 
-Aturan waris dalam Islam sudah baku dan tertutup — ditetapkan dalam QS An-Nisa ayat 11, 12,
-dan 176 serta sejumlah hadits sahih, dan tidak pernah berubah sejak diturunkan. Yang membuat
-orang awam tidak bisa memakainya bukan ketidakjelasan aturannya, tapi aritmatikanya: pecahan
-yang harus dijumlahkan, tabel hijab (siapa menggugurkan siapa), dan belasan kasus khusus.
-Website ini menutup celah itu.
+Aturan waris sudah baku: QS An-Nisa ayat 11, 12, dan 176, serta hadits sahih. Yang sulit adalah
+hitungannya: pecahan, aturan penghalang (hijab), dan belasan kasus khusus. Situs ini menghitungnya untukmu.
 
 ---
 
-## Tampilannya
+## Tampilan
 
-Semua tangkapan layar di bawah diambil dari aplikasi yang berjalan, bukan mockup.
+Semua gambar diambil dari aplikasi yang berjalan.
 
 ### Halaman utama
 
-Animasi demo berjalan sendiri di hero — satu kasus contoh dihitung dari nol sampai selesai,
-supaya pengunjung paham cara kerjanya tanpa membaca teks panjang. Latar geometri Islami
-menandakan bahwa aturan yang dipakai di sini khusus untuk muslim.
+Demo berjalan sendiri di hero. Satu kasus dihitung dari awal sampai selesai.
 
 ![Halaman utama](docs/gambar/01-beranda.png)
 
 ### Dua cara mengisi ahli waris
 
-Cara cepat: daftar centang dan tombol +/−. Cocok untuk keluarga yang sederhana susunannya.
+**Daftar.** Tombol +/−. Cepat, cocok untuk keluarga sederhana.
 
 ![Isian daftar](docs/gambar/02-isian-daftar.png)
 
-Cara akurat: susun pohon keluarganya seperti aslinya. Cucu ditambahkan dari dalam kartu
-anaknya, keponakan dari dalam kartu saudaranya — jadi hubungan antar orang tidak perlu
-ditebak oleh mesinnya. Ini yang membedakan cucu lewat anak laki-laki (mewarisi) dari cucu
-lewat anak perempuan (tidak mewarisi).
+**Pohon keluarga.** Susun keluarga seperti aslinya. Cucu ditambah dari kartu anaknya. Keponakan dari
+kartu saudaranya. Hubungan tidak perlu ditebak. Ini membedakan cucu lewat anak laki-laki (mewarisi)
+dari cucu lewat anak perempuan (tidak mewarisi).
 
 ![Isian pohon keluarga](docs/gambar/03-pohon-isian.png)
 
-### Hasil perhitungan
+### Hasil
 
-Harta dipotong dulu sesuai urutan dalam QS An-Nisa: biaya pengurusan jenazah, hutang, lalu
-wasiat. Baru sisanya dibagi. Donutnya menampilkan proporsi tiap pihak beserta nominal
-rupiahnya.
+Urutannya: biaya jenazah, hutang, wasiat, lalu pembagian. Donut menunjukkan bagian tiap pihak dan rupiahnya.
 
 ![Rincian harta dan pembagian](docs/gambar/04-hasil.png)
 
-### Pohon keluarga dengan hasilnya
-
-Pecahan dan nominal ditempelkan langsung ke orangnya. Yang tidak kebagian tetap ditampilkan
-lengkap dengan alasannya — anak angkat dan cucu lewat anak perempuan bukan ahli waris,
-dan itu terlihat jelas alih-alih hilang diam-diam.
+Pecahan dan rupiah tampil di pohon. Yang tidak dapat bagian tetap tampil, lengkap dengan alasannya.
 
 ![Pohon keluarga dengan pembagian](docs/gambar/05-pohon-hasil.png)
 
-Ketuk siapa pun untuk mengubah jenis kelamin, keadaan, status, atau menambahkan anak di
-bawahnya. Seluruh perhitungan di halaman langsung dihitung ulang.
+Ketuk seseorang untuk mengubahnya. Semua hitungan ikut berubah.
 
 ![Edit anggota keluarga](docs/gambar/11-edit-pohon.png)
 
-### Dalil untuk setiap angka
+### Dalil tiap angka
 
-Tiap bagian bisa dibuka untuk melihat alasannya, teks Arab ayat atau haditsnya, terjemahan,
-derajat kesahihan, dan tautan ke sumber daring yang bisa diperiksa sendiri.
+Buka satu bagian untuk melihat alasan, teks Arab, terjemahan, derajat hadits, dan tautan sumber.
 
 ![Dalil per ahli waris](docs/gambar/06-dalil.png)
 
 ### Langkah selanjutnya
 
-Angka saja belum menyelesaikan urusan. Ada checklist yang menyesuaikan kondisi keluarganya —
-dokumen yang perlu diurus, lembaga yang perlu didatangi, dan mana yang wajib didahulukan.
+Checklist sesuai kondisi keluarga: dokumen, lembaga, dan mana yang wajib didahulukan.
 
 ![Checklist langkah selanjutnya](docs/gambar/07-langkah.png)
 
-### Halaman rujukan
+### Rujukan
 
-Seluruh ayat dan hadits yang dipakai kalkulator ini dikumpulkan di satu halaman, lengkap
-dengan takhrij dan tautan ke hadits.id serta Qur'an digital.
+Semua ayat dan hadits yang dipakai, dengan takhrij dan tautan ke hadits.id dan Qur'an digital.
 
 ![Halaman rujukan](docs/gambar/08-rujukan.png)
 
 ### Mobile
 
-Dirancang mobile-first — inilah tampilan yang dipakai sebagian besar pengunjung.
+Mobile-first.
 
 <img src="docs/gambar/09-mobile.png" width="360" alt="Tampilan mobile">
 
 ### Uji mesin faraid
 
-`tests.html` menjalankan 97 kasus yang jawabannya sudah baku dalam kitab faraid. Kalau ada
-satu saja yang merah, hasil kalkulator tidak boleh dipercaya.
+`tests.html` menjalankan 97 kasus dengan jawaban baku dari kitab faraid. Jika satu saja merah, jangan percaya hasilnya.
 
 ![Hasil uji 97/97](docs/gambar/10-uji.png)
 
@@ -95,101 +78,94 @@ satu saja yang merah, hasil kalkulator tidak boleh dipercaya.
 
 ## Menjalankan
 
-Tidak ada build step, tidak ada dependency, tidak ada npm.
+Tanpa build, tanpa dependency, tanpa npm.
 
 ```bash
 python3 -m http.server 8123
 ```
 
-Lalu buka <http://localhost:8123>. Untuk produksi, unggah seluruh folder ini apa adanya ke
-hosting statis mana pun (GitHub Pages, Netlify, Vercel, cPanel).
+Buka <http://localhost:8123>. Untuk produksi, unggah folder ini apa adanya ke hosting statis mana pun.
 
 ---
 
 ## Struktur
 
 ```
-index.html              Halaman utama + animasi demo
-hitung.html             Wizard input dan hasil
-rujukan.html            Appendix — seluruh dalil Al-Qur'an & Hadits
-tests.html              Penguji mesin faraid — buka di browser
+index.html              Halaman utama + demo
+hitung.html             Wizard dan hasil
+rujukan.html            Semua dalil
+tests.html              Uji mesin faraid
 
-colors_and_type.css     ┐ Kit Flavida Design System — salinan dari repo flavida-design-system
-flavida.css             │ (token + font self-hosted, komponen .fl-*, bagian marketing).
-flavida-extra.css       │ Jangan disunting di sini; perbarui lewat tools/export-kit.sh.
-flavida-sections.css    ┘
-fonts/                  Gabarito, Figtree, Noto Naskh Arabic (OFL), self-hosted
-assets/v4/              Bloom mark, sprite ikon Lucide (+ lisensinya)
+colors_and_type.css     ┐ Kit Flavida Design System (salinan dari repo flavida-design-system).
+flavida.css             │ Token, font self-hosted, komponen .fl-*.
+flavida-extra.css       │ Jangan disunting di sini.
+flavida-sections.css    ┘ Perbarui lewat tools/export-kit.sh.
+fonts/                  Gabarito, Figtree, Noto Naskh Arabic (OFL)
+assets/v4/              Bloom mark, ikon Lucide (+ lisensi)
 
 css/
-  waris.css             Yang TIDAK ada di design system: wizard, ledger, donut, pohon
-                        keluarga, lembar ubah. Hanya memakai token Flavida.
-  print.css             Tata letak cetak / Simpan sebagai PDF
+  waris.css             Yang tidak ada di design system: wizard, ledger, donut, pohon, lembar ubah
+  print.css             Tata letak cetak / PDF
 
-js/faraid/              Mesin perhitungan — murni, tanpa sentuhan DOM
-  fraction.js           Aritmatika pecahan bilangan bulat
-  heirs.js              Definisi 23 ahli waris
+js/faraid/              Mesin perhitungan. Murni, tanpa DOM.
+  fraction.js           Pecahan bilangan bulat
+  heirs.js              23 ahli waris
   hijab.js              Aturan penghalang
   shares.js             Bagian tetap (ashabul furudh)
-  ashabah.js            Pembagian sisa harta
-  special.js            Umariyyatain, Akdariyyah, Musyarakah, kakek-vs-saudara
+  ashabah.js            Pembagian sisa
+  special.js            Umariyyatain, Akdariyyah, Musyarakah, kakek bersama saudara
   estate.js             Tirkah: harta bersama, biaya jenazah, hutang, wasiat
-  solve.js              Orkestrator + 'aul + radd + konversi rupiah
+  solve.js              Orkestrator, 'aul, radd, rupiah
 
 js/
-  dalil.js              Dataset ayat & hadits (statis, dianalisa sekali)
+  dalil.js              Data ayat dan hadits (statis)
   khi.js                Catatan Kompilasi Hukum Islam
-  advice.js             Langkah selanjutnya untuk keluarga
-  keluarga.js           Model struktur keluarga + penurunan ahli waris
-  ui-pohon.js           Diagram pohon keluarga
-  ui-pohon-edit.js      Penyuntingan pohon (bilah tambah + lembar ubah)
-  ui-*.js               Lapisan tampilan lainnya
-  tema.js               Tombol terang/gelap (bawaan: ikut perangkat)
-  export.js             PNG (canvas) & PDF (dialog cetak)
+  advice.js             Langkah selanjutnya
+  keluarga.js           Model keluarga dan penurunan ahli waris
+  ui-pohon.js           Diagram pohon
+  ui-pohon-edit.js      Penyuntingan pohon
+  ui-*.js               Tampilan lain
+  nav-waris.js          Penyesuaian menu seluler
+  tema.js               Tombol terang/gelap
+  export.js             PNG (canvas) dan PDF (dialog cetak)
   tests.js              97 kasus uji
 ```
 
-## Model susunan keluarga
+---
 
-`js/keluarga.js` menyimpan **struktur** keluarga, bukan angka: cucu menempel pada anak
-tertentu, keponakan pada saudara tertentu, sepupu pada paman tertentu. Daftar ahli waris
-diturunkan dari struktur itu lewat `keAhliWaris()`.
+## Model keluarga
 
-Ini bukan sekadar kerapian. Contoh nyata yang memicu perubahan ini: seorang ibu wafat
-meninggalkan 3 anak perempuan yang masing-masing sudah punya anak. Kalau cucu-cucu itu diisi
-ke kolom "cucu", kalkulator menganggapnya cucu lewat anak laki-laki — satu-satunya cucu yang
-mewarisi — lalu menyimpulkan almarhumah pernah punya anak laki-laki yang wafat lebih dulu.
-Hasilnya salah: cucu kebagian 1/13 dan saudara perempuan tidak kebagian apa-apa, padahal yang
-benar cucu tidak berhak sama sekali dan saudara perempuan mendapat 1/12.
+`js/keluarga.js` menyimpan **struktur** keluarga, bukan angka. Cucu menempel pada anak tertentu.
+Keponakan pada saudara tertentu. Sepupu pada paman tertentu. Daftar ahli waris diturunkan dari struktur itu.
 
-Dengan model struktur, cucu lewat anak perempuan digambar apa adanya dan ditandai **bukan
-ahli waris**. Hal yang sama berlaku untuk anak angkat, keponakan dari saudara perempuan,
-keponakan dari saudara seibu, dan sepupu perempuan.
+Alasannya: seorang ibu wafat meninggalkan 3 anak perempuan yang sudah punya anak. Jika cucu diisi
+di kolom "cucu", kalkulator mengira mereka cucu lewat anak laki-laki, lalu menyimpulkan ibu pernah
+punya anak laki-laki. Hasilnya salah. Yang benar: cucu tidak berhak, saudara perempuan mendapat 1/12.
 
-### Anak tiri, anak angkat, anak kandung
+Dengan struktur, cucu lewat anak perempuan ditandai **bukan ahli waris**. Sama untuk anak angkat,
+keponakan dari saudara perempuan, keponakan dari saudara seibu, dan sepupu perempuan.
 
-Ketiganya berbeda dan tidak boleh disamakan, karena akibat hukumnya di Indonesia berbeda:
+### Anak kandung, tiri, angkat
+
+Ketiganya berbeda. Akibat hukumnya di Indonesia juga berbeda.
 
 | Status | Mewarisi? | Catatan |
 |---|---|---|
-| Anak kandung | Ya | Termasuk anak dari pernikahan sebelumnya — nasabnya tidak terputus. |
-| Anak tiri | Tidak | Anak bawaan pasangan. Mewarisi dari orang tua kandungnya sendiri. Wasiat wajibah KHI Pasal 209 **tidak** berlaku; jalurnya hibah semasa hidup atau wasiat biasa maksimal 1/3. |
-| Anak angkat | Tidak | Pengangkatan tidak memindahkan nasab, tapi KHI Pasal 209 memberi wasiat wajibah maksimal 1/3 lewat Pengadilan Agama. |
+| Anak kandung | Ya | Termasuk dari pernikahan sebelumnya. Nasab tidak terputus. |
+| Anak tiri | Tidak | Mewarisi dari orang tua kandungnya. Wasiat wajibah KHI Pasal 209 **tidak** berlaku. Jalurnya hibah semasa hidup atau wasiat biasa maksimal 1/3. |
+| Anak angkat | Tidak | Nasab tidak berpindah. KHI Pasal 209 memberi wasiat wajibah maksimal 1/3, lewat Pengadilan Agama. |
 
-### Ayat ditampilkan utuh, klausanya disorot
+### Ayat tampil utuh
 
-Satu ayat waris memuat beberapa ketetapan sekaligus. QS An-Nisa 11 mengatur anak, ayah, dan
-ibu dalam satu ayat; QS An-Nisa 12 mengatur suami, istri, dan saudara seibu sekaligus.
+Satu ayat waris memuat beberapa ketetapan. QS An-Nisa 11 mengatur anak, ayah, dan ibu. QS An-Nisa 12
+mengatur suami, istri, dan saudara seibu.
 
-Aturannya di sini: **ayat tidak pernah dipenggal.** Seluruh ayat selalu ditampilkan sampai
-kalimat penutupnya, lalu ruas yang menetapkan bagian orang yang sedang dibaca disorot dan
-sisanya dipudarkan. Pembaca tetap melihat firman selengkapnya, tanpa kehilangan petunjuk
-bagian mana yang sedang dibicarakan.
+**Ayat tidak pernah dipenggal.** Seluruh ayat tampil sampai kalimat penutup. Ruas yang menetapkan
+bagian orang yang sedang dibaca disorot. Sisanya dipudarkan.
 
-Ayat disimpan sebagai deretan ruas di `js/dalil.js`, dan `arab` serta `terjemah` utuhnya
-diturunkan dari gabungan ruas itu — jadi tidak mungkin ada dua versi teks yang berbeda.
-Ruas yang bukan ketetapan bagian (kalimat penghubung dan penutup ayat) memakai `id: null`:
-tetap tampil, tapi tidak pernah menjadi sorotan.
+Ayat disimpan sebagai deretan ruas di `js/dalil.js`. `arab` dan `terjemah` utuh diturunkan dari
+gabungan ruas, jadi tidak mungkin ada dua versi teks. Ruas yang bukan ketetapan bagian memakai
+`id: null`: tetap tampil, tidak pernah disorot. Satu kasus uji menjaga aturan ini.
 
 | Ahli waris | Ayat | Ruas yang disorot |
 |---|---|---|
@@ -201,120 +177,93 @@ tetap tampil, tapi tidak pernah menjadi sorotan.
 | Anak lk + pr | An-Nisa 11 | "…bagian laki-laki sama dengan dua perempuan" |
 | Saudara lk + pr | An-Nisa 176 | "…jika mereka saudara laki-laki dan perempuan…" |
 
-Sebagian bagian bersandar pada **lebih dari satu sumber**, dan keduanya ditampilkan: ayat
-menetapkan besarannya, hadits menetapkan mekanismenya. Anak yang mengambil sisa harta
-merujuk An-Nisa 11 (perbandingan 2 : 1) **dan** HR Bukhari 6732 (siapa yang mengambil sisa).
+Sebagian bagian punya **lebih dari satu sumber**. Ayat menetapkan besarnya, hadits menetapkan
+mekanismenya. Contoh: anak yang mengambil sisa merujuk An-Nisa 11 (perbandingan 2 : 1) **dan**
+HR Bukhari 6732 (siapa yang mengambil sisa).
 
-Ada juga angka yang memang tidak ada di ayat mana pun dan dinyatakan terus terang sebagai
-qiyas — misalnya 1/6 untuk saudara perempuan seayah yang melengkapi 2/3, yang diqiyaskan
-pada putusan Ibnu Mas'ud tentang cucu perempuan (HR Bukhari 6736).
+Angka yang tidak ada di ayat mana pun dinyatakan sebagai qiyas. Contoh: 1/6 untuk saudara perempuan
+seayah yang melengkapi 2/3, diqiyaskan pada putusan Ibnu Mas'ud tentang cucu perempuan (HR Bukhari 6736).
 
-Ada kasus uji khusus yang menjaga aturan ini: teks utuh tiap ayat harus benar-benar sama
-dengan gabungan seluruh ruasnya, sehingga tidak ada ruas yang bisa hilang diam-diam.
+### Dua dasar hukum
 
-### Dua dasar hukum, dipilih pemakai
-
-Halaman hasil punya pemilih **"Qur'an & Sunnah"** atau **"+ Hukum Indonesia"**. Bawaannya
-syariat murni; mencentang harta bersama di langkah 3 otomatis menyalakan mode Indonesia,
-karena centang itu memang permintaan eksplisit.
+Halaman hasil punya pilihan **"Qur'an & Sunnah"** atau **"+ Hukum Indonesia"**. Bawaannya syariat
+murni. Mencentang harta bersama di langkah 3 menyalakan mode Indonesia, karena itu permintaan eksplisit.
 
 | | Qur'an & Sunnah | + Hukum Indonesia |
 |---|---|---|
-| Pemisahan harta bersama | Tidak diterapkan | Separuh dikeluarkan lebih dulu |
-| Catatan Pengadilan Agama | Disembunyikan | Ditampilkan dengan tautan pasalnya |
-| Checklist harta bersama | Disembunyikan | Muncul dengan disclaimer dan sumber |
-| Ekspor PNG dan PDF | Ikut mode yang dipilih | Ikut mode yang dipilih |
+| Pemisahan harta bersama | Tidak dipakai | Separuh dikeluarkan lebih dulu |
+| Catatan Pengadilan Agama | Disembunyikan | Tampil, dengan tautan pasal |
+| Checklist harta bersama | Disembunyikan | Tampil, dengan disclaimer dan sumber |
+| Ekspor PNG dan PDF | Ikut pilihan | Ikut pilihan |
 
-Angkanya benar-benar berubah, bukan sekadar menyembunyikan teks — itulah gunanya: pemakai
-bisa melihat persis apa yang ditambahkan aturan negara.
+Angkanya benar-benar berubah. Pemakai bisa melihat persis apa yang ditambah aturan negara.
 
-### Aturan negara: hanya yang berlaku bagi umat Islam
+### Aturan negara: hanya untuk umat Islam
 
-Rujukan utama tetap Al-Qur'an dan sunnah. Aturan negara dicantumkan hanya bila ia memang
-aturan bagi umat Islam, dan setiap penyebutannya membawa tautan ke sumber yang bisa dibuka:
+Rujukan utama tetap Al-Qur'an dan sunnah. Aturan negara dicantumkan hanya jika berlaku bagi umat
+Islam, dengan tautan ke sumber:
 
 | Rujukan | Dipakai untuk |
 |---|---|
-| [UU 1/1974 Pasal 35](https://pasal.id/peraturan/uu/uu-no-1-tahun-1974#pasal-35) | Definisi harta bersama dan harta bawaan |
+| [UU 1/1974 Pasal 35](https://pasal.id/peraturan/uu/uu-no-1-tahun-1974#pasal-35) | Harta bersama dan harta bawaan |
 | [KHI Pasal 96, 185, 209](https://peraturan.bpk.go.id/Details/293351/inpres-no-1-tahun-1991) | Separuh harta bersama, ahli waris pengganti, wasiat wajibah |
-| [UU 3/2006 Pasal 49](https://pasal.id/peraturan/uu/uu-no-3-tahun-2006#pasal-49) | Kewenangan Pengadilan Agama atas perkara waris orang Islam |
+| [UU 3/2006 Pasal 49](https://pasal.id/peraturan/uu/uu-no-3-tahun-2006#pasal-49) | Kewenangan Pengadilan Agama atas waris orang Islam |
 
-Teks pasalnya diverifikasi lewat basis data peraturan resmi, bukan dari ingatan. KHI adalah
-lampiran Inpres 1/1991 sehingga tidak terindeks per pasal — kutipannya dicocokkan ke sumber
-Ditjen Badilag Mahkamah Agung. **KUHPerdata dan hukum adat tidak dipakai sama sekali.**
+Teks pasal diverifikasi lewat basis data peraturan resmi, bukan dari ingatan. KHI adalah lampiran
+Inpres 1/1991 dan tidak terindeks per pasal. Kutipannya dicocokkan ke sumber Ditjen Badilag Mahkamah
+Agung. **KUHPerdata dan hukum adat tidak dipakai.**
 
-### Kerabat yang sudah wafat lebih dulu
+### Kerabat yang wafat lebih dulu
 
-Syarat mewarisi adalah ahli warisnya **masih hidup saat pewaris wafat**. Kerabat yang wafat
-lebih dulu tidak mewarisi apa pun — tapi ia tidak dihapus dari bagan, karena posisinya masih
-menentukan siapa yang naik menggantikannya dalam antrean ashabah:
+Ahli waris harus **masih hidup saat pewaris wafat**. Kerabat yang wafat lebih dulu tidak mewarisi.
+Tapi ia tetap digambar, karena posisinya menentukan siapa naik menggantikannya di antrean ashabah.
 
 | Yang wafat lebih dulu | Akibatnya |
 |---|---|
-| Pasangan | Bukan ahli waris. Anak dari pernikahan itu tetap mewarisi penuh. Yang wafat juga tidak memakan jatah batas 4 istri. |
-| Anak laki-laki | Bukan ahli waris, tapi anaknya (cucu lewat anak laki-laki) naik menggantikan posisinya. |
-| Anak perempuan | Bukan ahli waris, dan anaknya tetap bukan ahli waris — cucu lewat anak perempuan adalah dzawil arham. |
-| Saudara laki-laki | Bukan ahli waris, tapi anak laki-lakinya masuk antrean ashabah sebagai keponakan. |
-| Saudara perempuan | Bukan ahli waris, dan anaknya juga bukan — keponakan hanya mewarisi lewat saudara laki-laki. |
+| Pasangan | Bukan ahli waris. Anak dari pernikahan itu tetap mewarisi penuh. Tidak memakan jatah batas 4 istri. |
+| Anak laki-laki | Bukan ahli waris. Anaknya (cucu lewat anak laki-laki) naik menggantikan. |
+| Anak perempuan | Bukan ahli waris. Anaknya juga bukan: cucu lewat anak perempuan adalah dzawil arham. |
+| Saudara laki-laki | Bukan ahli waris. Anak laki-lakinya masuk antrean ashabah sebagai keponakan. |
+| Saudara perempuan | Bukan ahli waris. Anaknya juga bukan: keponakan hanya mewarisi lewat saudara laki-laki. |
 
-Perlu ditegaskan: ini **bukan** ahli waris pengganti. Dalam fiqh, keponakan dan cucu masuk
-karena haknya sendiri sebagai ashabah, dan bisa tetap terhalang oleh kerabat yang lebih
-dekat. Contoh yang mudah keliru: kalau pewaris meninggalkan anak perempuan, saudara
-perempuan kandung menjadi ashabah ma'al ghair dan justru **menghalangi** keponakan.
-Ahli waris pengganti yang sebenarnya diatur KHI Pasal 185 dan hanya berlaku lewat
-Pengadilan Agama — perbedaannya ditampilkan sebagai catatan, bukan diterapkan diam-diam.
+Ini **bukan** ahli waris pengganti. Dalam fiqh, keponakan dan cucu masuk karena haknya sendiri sebagai
+ashabah, dan bisa terhalang kerabat yang lebih dekat. Contoh: jika pewaris punya anak perempuan,
+saudara perempuan kandung menjadi ashabah ma'al ghair dan **menghalangi** keponakan.
 
-Daftar penghitung (+/−) dan pohon keluarga menyunting model yang **sama**, jadi keduanya
-tidak mungkin bertentangan. Kalau lewat daftar user menambah cucu padahal belum ada anak
-laki-laki, kerabat penghubung dibuatkan otomatis dan user langsung diberi peringatan —
-bukan diam-diam seperti sebelumnya.
+Ahli waris pengganti yang sebenarnya diatur KHI Pasal 185 dan hanya berlaku lewat Pengadilan Agama.
+Perbedaannya tampil sebagai catatan, tidak diterapkan diam-diam.
+
+Daftar (+/−) dan pohon menyunting model yang **sama**, jadi tidak mungkin bertentangan. Jika lewat
+daftar kamu menambah cucu padahal belum ada anak laki-laki, kerabat penghubung dibuat otomatis dan
+kamu diberi peringatan.
 
 ## Pohon keluarga
 
-Istilah kekerabatan dalam faraid terdengar mirip padahal orangnya berbeda —
-"keponakan dari saudara kandung" dan "keponakan dari saudara seayah" cuma beda satu kata.
-Pohon keluarga menjawab ini dengan menggambar posisinya: yang satu turun dari saudara yang
-seibu dengan pewaris, yang satu lagi tidak.
+Pohon muncul di langkah 4 (alternatif daftar) dan di halaman hasil. **Keduanya bisa disunting.** Ubah
+susunan, hitungan langsung menyesuaikan. Di lembar ubah, "Tambah anak" menambah cucu dari kartu anak
+tertentu, dan keponakan dari kartu saudara tertentu.
 
-Muncul di dua tempat, dan **keduanya bisa disunting langsung**: di langkah 4 sebagai cara
-mengisi alternatif selain daftar penghitung, dan di halaman hasil lengkap dengan bagian
-masing-masing — ubah susunan keluarganya di sana, seluruh perhitungan langsung menyesuaikan
-tanpa perlu kembali ke form.
+Status simpul: pewaris · dapat bagian · terhalang · berhak tapi tidak kebagian ('aul) · bukan ahli
+waris · sudah wafat · belum diisi.
 
-Kuncinya ada pada "Tambah anak" di dalam lembar ubah: cucu ditambahkan dari dalam kartu anak
-tertentu, keponakan dari dalam kartu saudara tertentu. Hubungannya tidak pernah perlu ditebak.
+Simpul disusun per generasi sebagai HTML biasa. Garis digambar ke `<svg>` di belakangnya, dari posisi
+asli elemen setelah browser menata. Dua hal untuk diingat:
 
-Status simpul: pewaris · dapat bagian · terhalang · berhak tapi tidak kebagian ('aul) ·
-bukan ahli waris · sudah wafat · belum diisi.
+- **Jangan ubah ukuran simpul lewat CSS cetak.** Garis dihitung dari posisi di layar. Untuk cetak,
+  seluruh pohon diperkecil dengan `transform: scale()` (lihat `siapkanCetak`).
+- **Urutan simpul dalam satu baris menentukan garis menyilang.** Urutan keponakan harus mengikuti
+  urutan saudara di atasnya.
 
-Cara kerjanya: simpul disusun per generasi sebagai elemen HTML biasa, lalu garis
-penghubungnya digambar ke `<svg>` di belakangnya berdasarkan posisi asli elemen setelah
-browser selesai menata — jadi tata letaknya tetap responsif tanpa koordinat yang dipatok mati.
-
-Dua hal yang perlu diketahui kalau nanti diubah:
-
-- **Jangan mengubah ukuran simpul lewat CSS cetak.** Garisnya dihitung dari posisi di layar,
-  jadi kalau ukurannya berubah saat dicetak, garisnya meleset. Untuk cetak, seluruh pohon
-  diperkecil sebagai satu kesatuan dengan `transform: scale()` (lihat `siapkanCetak`).
-- **Urutan simpul dalam satu baris menentukan ada tidaknya garis menyilang.** Urutan keponakan
-  harus mengikuti urutan saudara di baris atasnya.
-
-Kerabat yang sudah wafat tetap digambar samar kalau ia diperlukan untuk menyambungkan
-seseorang ke pewaris — tanpa itu keponakan menggantung tanpa penjelasan. Yang tidak
-menyambungkan siapa pun tidak dimunculkan (lihat `PENGHUBUNG` di `ui-pohon.js`).
+Kerabat yang wafat digambar samar hanya jika menyambung seseorang ke pewaris (lihat `PENGHUBUNG`
+di `ui-pohon.js`).
 
 ## Penamaan
 
-Kartu isian memakai sebutan sehari-hari di depan dan istilah resmi faraid dalam kurung —
-"Keponakan (keponakan dari saudara kandung)". Orang mencari kata "keponakan", tapi istilah
-resminya tetap perlu ada supaya cocok dengan yang tertulis di kitab dan putusan pengadilan.
+Kartu isian memakai sebutan sehari-hari dulu, lalu istilah faraid dalam kurung: "Keponakan (keponakan
+dari saudara kandung)". Mudah keliru: **anak dari saudara = keponakan**, **sepupu = anak dari paman**.
+Keduanya ahli waris berbeda.
 
-Catatan yang mudah keliru: **anak dari saudara = keponakan**, sedangkan **sepupu = anak dari
-paman**. Keduanya ahli waris yang berbeda dengan urutan prioritas berbeda, jadi tidak boleh
-disamakan.
-
-Mesin faraid tidak menyentuh DOM sama sekali, jadi bisa diuji terpisah dan dipakai ulang di
-tempat lain.
+Mesin faraid tidak menyentuh DOM, jadi bisa diuji sendiri.
 
 ---
 
@@ -322,148 +271,132 @@ tempat lain.
 
 Buka <http://localhost:8123/tests.html>. Semua kasus harus hijau.
 
-Bisa juga dari terminal:
+Dari terminal:
 
 ```bash
 node -e "['faraid/fraction','faraid/heirs','faraid/hijab','faraid/shares','faraid/ashabah','faraid/special','faraid/estate','faraid/solve','keluarga','tests'].forEach(m=>require('./js/'+m+'.js'));const h=Tests.jalankan();const g=h.filter(x=>!x.lulus);g.forEach(x=>console.log('GAGAL',x.nama,x.pesan));console.log(h.length-g.length+'/'+h.length+' lulus')"
 ```
 
-97 kasus, mencakup: setiap tingkat 'aul (6→7/8/9/10, 12→13/15/17, 24→27), radd dengan dan
-tanpa pasangan, seluruh kasus khusus bernama, aturan hijab, perhitungan tirkah, dan
-penurunan susunan keluarga menjadi daftar ahli waris — termasuk siapa yang gugur karena
-sudah wafat lebih dulu, keluarga sambung dengan anak tiri, dan pemeriksaan bahwa dalil
-yang ditempelkan ke sebuah bagian benar-benar membicarakan ahli waris itu. Jawabannya diambil dari kasus-kasus baku dalam kitab faraid.
+97 kasus. Isinya: tiap tingkat 'aul (6→7/8/9/10, 12→13/15/17, 24→27), radd dengan dan tanpa pasangan,
+semua kasus khusus bernama, aturan hijab, hitungan tirkah, penurunan keluarga menjadi ahli waris
+(termasuk yang gugur karena wafat lebih dulu dan keluarga sambung dengan anak tiri), dan pemeriksaan
+bahwa dalil yang menempel pada satu bagian memang membahas ahli waris itu. Jawabannya dari kasus baku
+kitab faraid.
 
 ---
 
 ## Dasar hukum
 
-Hasil utama mengikuti **fiqh mazhab Syafi'i**, mazhab mayoritas muslim Indonesia. Kalau
-susunan ahli warisnya menyentuh titik di mana **Kompilasi Hukum Islam** (Inpres 1/1991)
-memutuskan berbeda, halaman hasil menampilkan kotak catatan tersendiri — bukan
-menyembunyikannya. Titik-titik itu: ahli waris pengganti (Pasal 185), wasiat wajibah untuk
-anak angkat (Pasal 209), harta bersama (Pasal 96), dan praktik radd kepada pasangan.
+Hasil utama mengikuti **fiqh mazhab Syafi'i**, mazhab mayoritas muslim Indonesia. Jika susunan ahli
+waris menyentuh titik di mana **Kompilasi Hukum Islam** (Inpres 1/1991) memutuskan berbeda, halaman
+hasil menampilkan kotak catatan. Titik-titiknya: ahli waris pengganti (Pasal 185), wasiat wajibah
+untuk anak angkat (Pasal 209), harta bersama (Pasal 96), dan radd kepada pasangan.
 
-Untuk kasus yang ulamanya berbeda pendapat (Musyarakah, Akdariyyah, kakek bersama saudara),
-pendapat yang dipakai disebutkan terang-terangan beserta pendapat yang berbeda.
+Untuk kasus yang ulamanya berbeda (Musyarakah, Akdariyyah, kakek bersama saudara), pendapat yang
+dipakai disebut terang, bersama pendapat lainnya.
 
-## Yang TIDAK dihitung
+## Yang tidak dihitung
 
-Sengaja tidak ditebak, karena butuh penilaian manusia. Untuk kasus berikut website akan
-bilang terus terang dan mengarahkan ke ustadz atau Pengadilan Agama:
+Sengaja tidak ditebak, karena butuh penilaian manusia. Situs akan memberi tahu dan mengarahkan ke
+ustadz atau Pengadilan Agama:
 
-- Anak yang masih dalam kandungan
+- Anak dalam kandungan
 - Ahli waris yang hilang (mafqud) dan khuntsa musykil
-- Dzawil arham (kerabat jauh di luar 23 ahli waris)
-- Kakek yang berkumpul dengan saudara kandung **dan** saudara seayah sekaligus — aturan
-  mu'āddah belum diterapkan, dan kasus ini ditandai perlu konsultasi
+- Dzawil arham (kerabat di luar 23 ahli waris)
+- Kakek bersama saudara kandung **dan** saudara seayah. Aturan mu'āddah belum diterapkan. Kasus ini
+  ditandai perlu konsultasi.
 
 ## Privasi
 
-**Nol permintaan jaringan** saat halaman dimuat: semua font, ikon, dan skrip self-hosted.
-Tidak ada `fetch`, `XMLHttpRequest`, atau cookie di seluruh kode, dan isian pengguna tidak
-pernah disimpan. Semua perhitungan berjalan di browser pengguna. Export PNG digambar langsung
-ke `<canvas>`, export PDF lewat dialog cetak browser — keduanya tanpa pustaka pihak ketiga
-dan tanpa mengirim apa pun ke luar.
+**Nol permintaan jaringan** saat halaman dimuat. Font, ikon, dan skrip self-hosted. Tidak ada `fetch`,
+`XMLHttpRequest`, atau cookie di seluruh kode. Isian tidak pernah disimpan. Semua dihitung di browser.
+PNG digambar ke `<canvas>`. PDF lewat dialog cetak browser. Tanpa pustaka pihak ketiga, tanpa mengirim
+apa pun ke luar.
 
-Satu-satunya yang diingat adalah pilihan tema: tombol terang/gelap di navbar menyimpan kata
-`light` atau `dark` di `localStorage` (kunci `waris-tema`) supaya pilihannya terbawa antar
-halaman. Selama tombol belum pernah ditekan, tampilan mengikuti pengaturan perangkat
-(`data-theme="auto"`). Saat mencetak atau mengekspor, tampilan selalu dipaksa terang.
+Satu-satunya yang diingat: pilihan tema. Tombol terang/gelap di navbar menyimpan `light` atau `dark`
+di `localStorage` (kunci `waris-tema`) agar terbawa antar halaman. Sebelum tombol ditekan, tampilan
+mengikuti perangkat (`data-theme="auto"`). Saat cetak atau ekspor, tampilan selalu terang.
 
 ---
 
-## Sebelum dipublikasikan
+## Pemeriksaan dalil
 
-**`js/dalil.js` perlu diperiksa satu kali oleh ustadz yang kompeten di bidang faraid** —
-teks Arab, terjemahan, nomor hadits, dan status kesahihannya. Logika perhitungan bisa
-dibuktikan dengan test suite; keabsahan kutipan tidak bisa, dan ini menyangkut hukum agama.
+**`js/dalil.js` perlu diperiksa satu kali oleh ustadz yang paham faraid**: teks Arab, terjemahan,
+nomor hadits, dan derajatnya. Logika hitungan bisa dibuktikan dengan test. Keabsahan kutipan tidak
+bisa. Ini menyangkut hukum agama.
 
-Setiap kutipan sudah dicocokkan satu per satu dengan [hadits.id](https://www.hadits.id) dan
-[Quran.com](https://quran.com) (Agustus 2026), dan tiap entri menyimpan `tautan` ke sumbernya
-supaya pembaca bisa memeriksa sendiri. Pencocokan ini memastikan nomor dan teksnya benar,
-tapi bukan pengganti pemeriksaan ahli — terutama untuk penilaian derajat hadits, yang antar
-ulama pun bisa berbeda.
+Tiap kutipan sudah dicocokkan dengan [hadits.id](https://www.hadits.id) dan
+[Quran.com](https://quran.com) (Agustus 2026). Tiap entri punya `tautan` ke sumbernya. Pencocokan
+ini memastikan nomor dan teks benar. Ia bukan pengganti ahli, terutama untuk derajat hadits yang
+antar ulama bisa berbeda.
 
-Catatan penting kalau nanti menambah dalil: **nomor hadits berbeda antar penerbit** karena
-mengikuti cetakan masing-masing. Selalu sertakan tautan ke sumbernya, jangan cukup nomor.
+Saat menambah dalil: **nomor hadits berbeda antar penerbit**. Selalu sertakan tautan, jangan cukup nomor.
 
 ---
 
 ## Berkontribusi
 
-Alat ini menyangkut hukum agama dan harta keluarga, jadi kodenya sengaja dibuka supaya bisa
-diperiksa siapa pun — bukan untuk dipercaya begitu saja.
+Ini menyangkut hukum agama dan harta keluarga. Kodenya dibuka agar siapa pun bisa memeriksa.
 
 **Yang paling dibutuhkan:**
 
-1. **Koreksi dalil** dari yang paham faraid — nomor hadits, takhrij, terjemahan, atau kutipan
-   yang keliru di `js/dalil.js` dan `rujukan.html`. Ini yang paling berharga, karena logika
-   bisa diuji dengan test suite sementara keabsahan kutipan tidak bisa.
-2. **Kasus uji baru** dari kitab faraid atau putusan Pengadilan Agama. Tambahkan ke
-   `js/tests.js` beserta jawaban bakunya dan sebutkan sumbernya.
-3. **Laporan kekeliruan hitungan** — sertakan susunan ahli waris lengkapnya supaya bisa
-   direproduksi.
-4. **Aturan yang belum ditangani**, terutama mu'āddah (kakek bersama saudara kandung dan
-   seayah sekaligus) yang saat ini sengaja hanya ditandai, bukan dihitung.
+1. **Koreksi dalil**: nomor hadits, takhrij, terjemahan, atau kutipan yang keliru di `js/dalil.js`
+   dan `rujukan.html`. Paling berharga, karena keabsahan kutipan tidak bisa diuji dengan test.
+2. **Kasus uji baru** dari kitab faraid atau putusan Pengadilan Agama. Tambahkan ke `js/tests.js`
+   beserta jawaban baku dan sumbernya.
+3. **Laporan hitungan yang salah**, dengan susunan ahli waris lengkap agar bisa direproduksi.
+4. **Aturan yang belum ditangani**, terutama mu'āddah. Saat ini hanya ditandai, belum dihitung.
 
-Tidak perlu bisa ngoding. Buka *Issues* dan tulis dengan bahasa biasa — yang diperlukan
-ilmunya, bukan kodenya. Tidak punya akun GitHub pun tidak apa-apa:
+Tidak perlu bisa ngoding. Tulis di *Issues* dengan bahasa biasa. Tidak punya GitHub juga boleh:
 
-- **GitHub Issues** — <https://github.com/arnantoakbar/waris/issues>
-- **Email** — <hello@flavida.co>
-- **X** — [@FlavidaID](https://x.com/FlavidaID)
+- **GitHub Issues**: <https://github.com/arnantoakbar/waris/issues>
+- **Email**: <hello@flavida.co>
+- **X**: [@FlavidaID](https://x.com/FlavidaID)
 
-Kalau bisa, sertakan rujukan pembandingnya (nomor hadits, nama kitab, atau tautan sumbernya)
-supaya lebih cepat dipastikan.
+Sertakan rujukan pembanding jika ada (nomor hadits, nama kitab, atau tautan).
 
-**Sebelum mengirim perubahan pada mesin faraid:** jalankan test suite dan pastikan semua
-kasus tetap lulus. Kalau mengubah perilaku hitungan, tambahkan kasus uji yang membuktikan
-perubahannya benar.
+**Sebelum mengubah mesin faraid:** jalankan test dan pastikan semua lulus. Jika perilaku hitungan
+berubah, tambahkan kasus uji yang membuktikannya.
 
-**Catatan versi aset:** rujukan css dan js memakai penanda `?v=N`. Naikkan angkanya setiap
-kali merilis perubahan pada css atau js, supaya pengunjung lama tidak mendapat berkas basi
-dari cache.
+**Versi aset:** rujukan css dan js memakai `?v=N`. Naikkan angkanya tiap merilis perubahan, agar
+pengunjung lama tidak mendapat berkas basi dari cache.
 
 ---
 
-## Lisensi & aset merek
-
-Kit di root (`colors_and_type.css`, `flavida*.css`, `fonts/`, `assets/v4/`, `js/flavida.js`,
-`js/motion.min.js`) berasal dari **Flavida Design System** dan bloom mark adalah aset merek
-**Flavida**; keduanya tidak dimaksudkan untuk dipakai ulang di luar proyek ini. Font memakai
-lisensi OFL (`fonts/OFL-*.txt`), ikon Lucide berlisensi ISC (`assets/v4/ICONS-LICENSE.txt`),
-dan Motion berlisensi MIT. Kalau kamu ingin memakai kode kalkulator faraidnya, ganti dulu aset
-dan penamaannya.
-
-Belum ada berkas LICENSE — artinya hak cipta masih sepenuhnya pada pemilik repositori. Kalau
-memang ingin dibuka untuk umum, tambahkan lisensi yang sesuai (misalnya MIT untuk kodenya,
-dengan pengecualian aset merek).
-
 ## Desain
 
-Tampilan mengikuti Flavida Design System v4.1:
+Mengikuti Flavida Design System v4.1:
 
-- **Gaya clay**: bentuk timbul memakai `--shadow-clay-*`, yang cekung (isian, trek, kartu
+- **Gaya clay.** Bentuk timbul memakai `--shadow-clay-*`. Bentuk cekung (isian, trek, kartu
   "terhalang") memakai `--shadow-inset`. Radius kartu 20px, isian 12px, tombol bulat penuh.
-- **Tanpa maskot.** Ini situs keagamaan, jadi Flav sengaja tidak dipakai di mana pun.
-- **Tanpa kicker** di atas judul, tanpa teks bergradien, tanpa emoji; ikon dari sprite Lucide.
-- **Kutipan** memakai komponen `fl-cite` + `fl-arabic` (Noto Naskh Arabic) dengan lencana
-  derajat hadits (`fl-grade`) yang selalu berupa kata, bukan hanya warna.
-- **Status tidak bergantung pada warna**: tiap status di pohon keluarga punya bentuk berbeda
-  (timbul, cekung, bergaris putus, bertitik) *dan* kata ("terhalang", "bukan ahli waris").
-- **Warna grafik** dari `--chart-1..8`; PNG ekspor memakai salinan heksanya karena kanvas
-  tidak mengerti `var()`, dan selalu bertema terang.
-- **Tema gelap** otomatis mengikuti perangkat dan bisa diganti lewat tombol di navbar (`js/tema.js`); semua komponen buatan sendiri hanya memakai
-  token yang ikut berbalik, jadi tidak ada aturan khusus tema gelap di `css/waris.css`.
+- **Tanpa maskot.** Ini situs keagamaan, jadi Flav tidak dipakai.
+- **Tanpa kicker** di atas judul, tanpa teks gradien, tanpa emoji. Ikon dari sprite Lucide.
+- **Kutipan** memakai `fl-cite` + `fl-arabic` (Noto Naskh Arabic), dengan lencana derajat hadits
+  (`fl-grade`) berupa kata, bukan hanya warna.
+- **Status tidak hanya warna.** Tiap status di pohon punya bentuk berbeda (timbul, cekung, garis
+  putus, titik) *dan* kata ("terhalang", "bukan ahli waris").
+- **Warna grafik** dari `--chart-1..8`. PNG ekspor memakai salinan heksanya, karena kanvas tidak
+  mengerti `var()`, dan selalu terang.
+- **Tema gelap** ikut perangkat dan bisa diganti lewat tombol di navbar (`js/tema.js`). Komponen
+  buatan sendiri hanya memakai token yang ikut berbalik.
 
-Memperbarui kit: jalankan `tools/export-kit.sh <folder-waris>` dari repo design system, lalu
-hapus berkas yang tidak dipakai (`themes/`, `flavida-app.css`, `js/flavida-ui.js`,
-`js/flavida-charts.js`, logo selain bloom mark).
+Perbarui kit: jalankan `tools/export-kit.sh <folder-waris>` dari repo design system. Lalu hapus
+berkas yang tidak dipakai (`themes/`, `flavida-app.css`, `js/flavida-ui.js`, `js/flavida-charts.js`,
+logo selain bloom mark).
+
+## Lisensi dan aset merek
+
+Kit di root (`colors_and_type.css`, `flavida*.css`, `fonts/`, `assets/v4/`, `js/flavida.js`,
+`js/motion.min.js`) berasal dari **Flavida Design System**. Bloom mark adalah aset merek **Flavida**.
+Keduanya tidak untuk dipakai ulang di luar proyek ini. Font berlisensi OFL (`fonts/OFL-*.txt`), ikon
+Lucide berlisensi ISC (`assets/v4/ICONS-LICENSE.txt`), Motion berlisensi MIT. Jika kamu memakai kode
+kalkulatornya, ganti aset dan penamaannya.
+
+Belum ada berkas LICENSE, jadi hak cipta sepenuhnya pada pemilik repositori. Jika ingin dibuka untuk
+umum, tambahkan lisensi (misalnya MIT untuk kode, kecuali aset merek).
 
 ## Penafian
 
-Ini alat bantu hitung, **bukan sumber utama**. Verifikasi dan validasikan hasilnya kepada
-ustadz atau ulama terdekat, atau ke Pengadilan Agama, sebelum dipakai membagi harta yang
-sebenarnya. Isi `js/dalil.js` dan `rujukan.html` perlu diperiksa satu kali oleh ahli faraid
-sebelum situs dipublikasikan.
+Ini alat bantu hitung, **bukan sumber utama**. Tanyakan hasilnya ke ustadz atau ulama, atau ke
+Pengadilan Agama, sebelum membagi harta. Isi `js/dalil.js` dan `rujukan.html` perlu diperiksa ahli
+faraid.

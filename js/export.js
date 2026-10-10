@@ -494,8 +494,8 @@
     if (penerima.length && hasil.perhitungan.asalMasalahAkhir) {
       y += 24;
       y = judulBagian(ctx, 'Cara menghitungnya', y);
-      y = paragraf(ctx, 'Harta dibayangkan dipotong menjadi ' +
-        hasil.perhitungan.asalMasalahAkhir + ' bagian sama besar, lalu dibagikan begini:', y);
+      y = paragraf(ctx, 'Harta dipotong menjadi ' +
+        hasil.perhitungan.asalMasalahAkhir + 'bagian sama besar, lalu dibagi begini:', y);
       y += 8;
       ctx.fillStyle = CHARCOAL;
       ctx.font = '600 17px "Figtree", sans-serif';
@@ -586,8 +586,8 @@
         }
         y += 10;
       });
-      y = paragraf(ctx, 'Teks Arab dan terjemahan lengkapnya ada di halaman Rujukan ' +
-        '(rujukan.html) pada situs ini.', y, { font: '400 15px "Figtree", sans-serif', warna: LIGHT });
+      y = paragraf(ctx, 'Teks Arab dan terjemahan lengkap ada di halaman Rujukan ' +
+        '(rujukan.html).', y, { font: '400 15px "Figtree", sans-serif', warna: LIGHT });
       y += 20;
     }
 
@@ -614,14 +614,13 @@
 
     ctx.fillStyle = FLAME;
     ctx.font = '800 20px "Gabarito", "Arial Black", sans-serif';
-    ctx.fillText('Jangan jadikan ini sumber utama', PAD + 24, y + 34);
+    ctx.fillText('Bukan sumber utama', PAD + 24, y + 34);
 
     ctx.fillStyle = CHARCOAL;
     ctx.font = '400 16px "Figtree", sans-serif';
-    var awas = 'Verifikasi dan validasikan hasil ini kepada ustadz atau ulama terdekat, atau ke ' +
-      'Pengadilan Agama, sebelum dipakai membagi harta yang sebenarnya. Kalkulator tidak bisa ' +
-      'melihat hal yang tidak diisikan — hibah semasa hidup, status harta bawaan, atau ahli ' +
-      'waris yang belum diketahui.';
+    var awas = 'Tanyakan hasil ini ke ustadz atau ulama, atau ke Pengadilan Agama, sebelum ' +
+      'membagi harta. Kalkulator tidak tahu hal yang tidak diisi: hibah semasa hidup, ' +
+      'status harta bawaan, atau ahli waris yang belum diketahui.';
     var yy = y + 60;
     pecahBaris(ctx, awas, W - PAD * 2 - 48).forEach(function (b) {
       ctx.fillText(b, PAD + 24, yy);
@@ -631,9 +630,9 @@
 
     ctx.fillStyle = MID;
     ctx.font = '400 16px "Figtree", sans-serif';
-    var kaki = 'Dihitung menurut ketetapan QS An-Nisa ayat 11, 12, dan 176 serta hadits-hadits ' +
-      'sahih tentang waris, mengikuti fiqh mazhab Syafi\'i. Rujukan lengkapnya ada di halaman ' +
-      'Rujukan (rujukan.html) pada situs ini.';
+    var kaki = 'Dihitung menurut QS An-Nisa ayat 11, 12, dan 176 serta hadits sahih ' +
+      'tentang waris, dengan fiqh mazhab Syafi\'i. Rujukan lengkap ada di halaman Rujukan ' +
+      '(rujukan.html).';
     pecahBaris(ctx, kaki, W - PAD * 2).forEach(function (b) {
       ctx.fillText(b, PAD, y);
       y += 24;
